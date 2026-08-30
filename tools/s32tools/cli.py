@@ -88,6 +88,14 @@ def _build_parser() -> argparse.ArgumentParser:
     explain.add_argument("storylet")
     explain.set_defaults(handler=_cmd_explain)
 
+    compare = sub.add_parser("compare", help="compare two simulation reports")
+    compare.add_argument("before", type=Path, help="baseline simulation.json")
+    compare.add_argument("after", type=Path, help="current simulation.json")
+    compare.add_argument("--label-before", default="before")
+    compare.add_argument("--label-after", default="after")
+    compare.add_argument("--out", type=Path, help="write the comparison here")
+    compare.set_defaults(handler=_cmd_compare)
+
     report_cmd = sub.add_parser("report", help="regenerate every report at once")
     report_cmd.add_argument("--runs", type=int, default=500)
     report_cmd.set_defaults(handler=_cmd_report)
@@ -329,6 +337,24 @@ def _cmd_explain(args: argparse.Namespace) -> int:
         print(f"  grants:     {', '.join(storylet.grants)}")
     if storylet.summary:
         print(f"\n  {storylet.summary}")
+    return 0
+
+
+def _cmd_compare(args: argparse.Namespace) -> int:
+    from s32tools.simulation.compare import load, to_markdown
+
+    text = to_markdown(
+        load(args.before),
+        load(args.after),
+        label_before=args.label_before,
+        label_after=args.label_after,
+    )
+    if args.out:
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(text, encoding="utf-8")
+        print(f"wrote {args.out}")
+    else:
+        print(text)
     return 0
 
 

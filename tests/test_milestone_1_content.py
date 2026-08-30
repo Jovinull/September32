@@ -348,3 +348,21 @@ def test_a_long_run_never_selects_an_ineligible_storylet(real_library):
             assert director.evaluate(selection.storylet, state, rng).eligible
             director.play(selection.storylet, state)
             advance_time(state, 1)
+
+
+def test_noahs_callback_line_is_guarded():
+    """Noah's scene does not require the facts his dialogue refers back to.
+
+    `noah_evening_layout` only gates on `noah_is_writing_about_the_archive`, so
+    about a third of runs reach it having heard of no other year-long gap. The
+    line that calls back to one has to check first.
+    """
+    from s32tools import paths
+
+    text = (paths.game_dir() / "story" / "storylets" / "noah.rpy").read_text(encoding="utf-8")
+    line = "That's the second gap about a year long"
+    assert line in text
+
+    guard = text.rindex('if knows("school_history_skips_a_year")', 0, text.index(line))
+    between = text[guard : text.index(line)]
+    assert "else:" not in between, "the callback must sit in the positive branch"

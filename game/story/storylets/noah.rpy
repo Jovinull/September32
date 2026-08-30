@@ -151,11 +151,24 @@ label s32_st_noah_evening_layout:
 
             c_noah "Yeah, about a year."
 
-            c_me "That's the second gap about a year long I've heard about this week."
+            # Guarded: the player has only heard of another year-long gap if
+            # June's booklet or Mara's road walk actually happened. Roughly a
+            # third of runs reach this scene without either.
+            if knows("school_history_skips_a_year") or knows("mara_knows_the_older_story"):
 
-            c_noah "Is it?"
+                c_me "That's the second gap about a year long I've heard about this week."
 
-            narrator "He considers this for exactly as long as it deserves."
+                c_noah "Is it?"
+
+                narrator "He considers this for exactly as long as it deserves."
+
+            else:
+
+                c_me "A year is a strange amount to lose."
+
+                c_noah "Is it?"
+
+                narrator "He considers this for exactly as long as it deserves."
 
             c_noah "It's a small school and it's had one bad flood and about six reorganisations. If you go looking for missing years you'll find missing years."
 

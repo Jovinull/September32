@@ -67,9 +67,9 @@ label s32_st_dorm_message:
                 $ trait("curious", 2)
                 $ rel("iris", "familiarity", 2)
 
-                narrator "Forty-odd faces. Three rows. The back row is standing on a bench, and it is the same bench that is still in the courtyard, which you had not noticed."
+                narrator "Forty-odd faces. Three rows. The print has been trimmed with scissors rather than cut, and not very straight, by somebody who wanted it to fit something."
 
-                narrator "Nobody in it is looking at the camera in the same way. That is true of every group photograph ever taken and you sit with it anyway."
+                narrator "Nobody in it is looking at the camera in quite the same way. That is true of every group photograph ever taken and you sit with it anyway."
 
             "Put it somewhere safe.":
                 $ trait("reserved")

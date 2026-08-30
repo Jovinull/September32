@@ -118,7 +118,9 @@ label s32_anchor_the_date:
 
     narrator "You read the stamp twice, which is once more than a date needs."
 
-    $ learn("photo_dated_sept_32", source="back_of_the_photo")
+    # The knowledge grant is declared in data/anchors/the_date.json and applied
+    # by s32_finish_anchor. Duplicating it here would put the change somewhere
+    # the reachability tooling cannot see it.
     $ s32_finish_anchor("the_date")
 
     return

@@ -10,12 +10,10 @@
     "day >= 2"
   ],
   "effects": [
+    "know(photo_dated_sept_32, back_of_the_photo)",
     "event(the_date)",
     "anchor_done(the_date)",
     "phase = odd"
   ],
-  "summary": "PROVISIONAL. The first thing that does not fit. Deliberately small: a stamp, read twice. The phase advances here and not before.",
-  "grants": [
-    "photo_dated_sept_32"
-  ]
+  "summary": "PROVISIONAL. The first thing that does not fit. Deliberately small: a stamp, read twice. The phase advances here and not before."
 }

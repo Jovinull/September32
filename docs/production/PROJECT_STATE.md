@@ -55,7 +55,7 @@ a photograph, a promise, an ending note. Marked PROTOTYPE / NON-FINAL in-game.
 | `s32 validate` | **0 errors, 0 warnings**, 6 info |
 | `s32 renpy lint` | **clean** |
 | `s32 renpy test` | **5/5 testcases passed** |
-| `s32 simulate --runs 1000` | **7/7 storylets reachable, 0 dead ends**, ~16s |
+| `s32 simulate --runs 5000` | **7/7 storylets reachable, 0 dead ends** |
 | `s32 doctor` | **0 failures, 0 warnings** |
 
 ## Content
@@ -86,6 +86,20 @@ important interface in the game — is unbuilt. So is the calendar.
 
 **Canon.** Deliberately open. The nature of September 32 is undecided, and
 `PHENOMENON_RULES.md` exists so that writing can proceed without it.
+
+**The content mix is wrong, and the report says so.** Across 5000 runs, 90% of
+played scenes are tagged `slice_of_life` against a `normal`-phase target of 65%
+(`docs/narrative-design/PACING.md`). The cause is arithmetic rather than
+authorial: there is one repeatable ambient storylet and six once-only ones, so
+the repeatable one fills every gap — 15 of the average 21 scenes in a run are
+repeats of it. This is what a seven-storylet library looks like and it is
+expected to resolve as content is written, but it should be re-checked at
+fifteen rather than assumed.
+
+**Three knowledge facts are never acquired by the player**, correctly. One
+(`theo_checks_the_ledger`) is NPC-side only by design. Two
+(`mara_knows_the_older_story`, `photo_is_a_forgery`) are defined for content
+that has not been written yet.
 
 **`purp`.** One source expression token is unmapped because its meaning cannot be
 determined from the filename. Two minutes and a human. `ASSET_NAMING.md`.

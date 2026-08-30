@@ -374,8 +374,71 @@ def _cmd_assets_fetch(args: argparse.Namespace) -> int:
     return 0
 
 
+def _record_new_downloads() -> list[str]:
+    """Hash any archive not yet in the acquisition log, and report on it.
+
+    An archive that is already recorded and still matches is left alone. One
+    that no longer matches is reported loudly rather than quietly re-recorded:
+    a changed hash means the file on disk is not the one that was reviewed, and
+    silently updating the record would erase the only evidence of that.
+    """
+    from s32tools.assets.fetch import sha256_of
+    from s32tools.assets.manifest import load
+    from s32tools.assets.verify import record_download
+
+    downloads = paths.downloads_dir()
+    if not downloads.is_dir():
+        return []
+
+    manifest = load(paths.catalog_path())
+    messages: list[str] = []
+
+    for pack_dir in sorted(p for p in downloads.iterdir() if p.is_dir()):
+        if pack_dir.name.startswith("_"):
+            continue
+        archives = sorted(p for p in pack_dir.iterdir() if p.suffix.lower() == ".zip")
+        if not archives:
+            continue
+
+        entry = manifest.entries.get(pack_dir.name)
+        archive = archives[0]
+
+        if entry is None:
+            messages.append(
+                f"{pack_dir.name:<26} on disk but not in assets.toml — add an entry with its "
+                "licence before using it"
+            )
+            continue
+
+        if not entry.original_sha256:
+            record = record_download(paths.catalog_path().parent, pack_dir.name, archive)
+            messages.append(f"{pack_dir.name:<26} recorded sha256 {record.original_sha256[:16]}")
+        elif sha256_of(archive) != entry.original_sha256:
+            messages.append(
+                f"{pack_dir.name:<26} SHA-256 MISMATCH — {archive.name} is not the file the "
+                "manifest records. Do not use it; re-fetch or investigate."
+            )
+    return messages
+
+
 def _cmd_assets_install(args: argparse.Namespace) -> int:
+    from s32tools.assets.import_pack import extract_downloads
     from s32tools.assets.install import counts_by_kind, install_all, write_log
+
+    # Record any archive that is on disk but not yet in the acquisition log.
+    # This is what makes a manual download a first-class citizen: however the
+    # file arrived, its hash ends up recorded the same way.
+    for line in _record_new_downloads():
+        print(line)
+
+    # Extract next. `fetch` deliberately only downloads, so that re-running the
+    # pipeline after a naming change does not re-download 90 MB — which means
+    # this is the step that turns archives into a vendor tree.
+    extracted = extract_downloads(paths.downloads_dir(), paths.vendor_dir())
+    for asset_id, extraction in sorted(extracted.items()):
+        print(f"{asset_id:<26} extracted {extraction.count} file(s)")
+    if extracted:
+        print()
 
     asset_ids = (
         sorted(p.name for p in paths.vendor_dir().iterdir() if p.is_dir())
@@ -383,7 +446,9 @@ def _cmd_assets_install(args: argparse.Namespace) -> int:
         else []
     )
     if not asset_ids:
-        print("nothing in assets/vendor — run `s32 assets fetch` first")
+        print("nothing to install.")
+        print("  assets/.downloads/ is empty — run `s32 assets fetch` first,")
+        print("  or follow the MANUAL DOWNLOAD REQUIRED instructions it printed.")
         return 1
 
     report = install_all(

@@ -57,8 +57,7 @@ Everything under `assets/vendor/`, `assets/processed/`, `game/images/vendor/`,
    written and `license_verified` set to today.
 4. **Add a `Source`** to `tools/s32tools/assets/sources.py`, with a
    `variant_rationale` explaining why that file and not the others on the page.
-5. `s32 assets fetch --asset <id>` — hashes the download into
-   `acquisition.toml`.
+5. `s32 assets fetch --asset <id>` — downloads it and records its SHA-256.
 6. `s32 assets evidence` — generates the evidence file. **Read it.** A generated
    record is only evidence once a human has confirmed it matches the page.
 7. `s32 assets install` — extract, process, copy into the game.
@@ -75,6 +74,16 @@ When a fetch cannot proceed, `s32 assets fetch` prints a `MANUAL DOWNLOAD
 REQUIRED` block naming the page, the exact file, and the destination — and then
 **continues with the next source**. A blocked download must never take the rest
 of the pipeline with it.
+
+A manually-downloaded file is a first-class citizen. Put it in
+`assets/.downloads/<asset id>/` and run `s32 assets install`: it hashes the
+archive, writes the hash to `acquisition.toml`, extracts, processes and copies
+into the game. However the file arrived, the record ends up the same.
+
+If an archive is already recorded and no longer matches its hash, `install`
+refuses to update the record and says so. A changed hash means the file on disk
+is not the one that was reviewed, and quietly re-recording it would erase the
+only evidence of that.
 
 The itch.io downloads that *do* work use the public, no-account flow — precisely
 the three requests a browser makes when a visitor clicks "Download Now" and then

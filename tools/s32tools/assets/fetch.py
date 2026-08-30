@@ -158,15 +158,17 @@ def manual_block(source: Source) -> str:
         f"  file to pick : {source.target or '(the 1080p WebP archive)'}",
         f"  save to      : assets/.downloads/{source.id}/",
         "",
-        "  Then run:",
-        f"      s32 assets verify --asset {source.id}",
+        "  Then carry on exactly as if it had been fetched:",
+        "      s32 assets install     extracts it, records its SHA-256, and",
+        "                             copies the result into the game",
+        "      s32 assets images      regenerates the Ren'Py image definitions",
+        "      s32 doctor             confirms the result",
         "",
-        "  `verify` computes the SHA-256 and writes it into",
-        "  assets/catalog/assets.toml, so the archive you reviewed is the one",
-        "  the manifest records.",
+        "  The game runs without this pack; every missing image becomes a",
+        "  labelled MISSING ASSET placeholder until it is installed.",
         "",
         "  Do NOT commit the archive or anything extracted from it unless the",
-        "  entry's redistribution_allowed is true.",
+        "  entry's redistribution_allowed is true. It almost certainly is not.",
     ]
     if source.manual_steps:
         lines += ["", "  Extra steps:", *[f"      - {s}" for s in source.manual_steps]]

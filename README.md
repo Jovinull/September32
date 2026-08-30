@@ -68,10 +68,23 @@ SHA-256. Already have one? Set `S32_RENPY_SDK` to its path instead.
 ```bash
 uv run s32 assets fetch      # ~90 MB from official sources, hashes recorded
 uv run s32 assets install    # extract, process, copy into game/
+uv run s32 assets images     # regenerate the Ren'Py image definitions
 ```
 
-The game **runs without this** — it just has no art. If a source is unavailable,
-the fetcher prints exactly what to download by hand and carries on with the rest.
+Automatic, from each creator's own page. No account, no mirrors, no scraping
+around anything — `fetch` uses the public download flow and verifies every file
+against the SHA-256 recorded in `assets/catalog/acquisition.toml`.
+
+**The game runs without any of this.** Every missing image becomes a labelled
+`MISSING ASSET` placeholder, missing music is silent, and missing fonts fall
+back to a bundled face. Lint and all six testcases pass in that state, which is
+also how CI runs.
+
+**If a download fails** — a page moved, a pack went behind a purchase — `fetch`
+prints the exact page, the exact file to pick and where to save it, then carries
+on with the rest. Drop the file in `assets/.downloads/<asset id>/` and run
+`s32 assets install`: it records the hash and proceeds exactly as if it had been
+fetched.
 
 ### 5. Check everything
 
@@ -139,7 +152,7 @@ uv run s32 assets sheets        # contact sheets
 
 ```bash
 uv run s32 renpy lint
-uv run s32 renpy test           # five smoke testcases
+uv run s32 renpy test           # six smoke testcases
 uv run s32 renpy run
 ```
 

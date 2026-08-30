@@ -443,3 +443,144 @@ init python:
         if config.developer:
             s32_devlog.block("narrative", "anchor {}".format(anchor_id), changes)
         return changes
+
+
+# ---------------------------------------------------------------------------
+# Missing-asset placeholders
+#
+# Third-party assets are not committed (ADR-0003), so a fresh clone has none of
+# them. The game must still run, lint and test in that state — it is how every
+# new contributor first sees it, and it is the state CI runs in.
+#
+# So generated image definitions do not name a file directly. They call these
+# helpers, which return the file when it is there and a clearly-labelled
+# placeholder when it is not. Naming the file directly would make `renpy lint`
+# report several hundred unloadable images on a fresh checkout, which is both
+# useless noise and a permanently red CI job.
+#
+# A release build must NOT ship placeholders. `s32 doctor` reports how many
+# would be substituted, and `s32 assets verify --release` fails on any.
+# ---------------------------------------------------------------------------
+
+init offset = -5
+
+init python:
+
+    # Populated at init by the helpers below, for the dev log and the debug
+    # screens. Not game state: it describes the build, not the run.
+    s32_missing_assets = []
+
+    def s32_placeholder(label, width, height):
+        """Return a visibly wrong stand-in for an asset that is not installed.
+
+        Deliberately ugly and deliberately legible. A silent fallback — a blank
+        or a neutral box — would let a missing asset reach a screenshot.
+        """
+        return Fixed(
+            Solid("#2a1a1a"),
+            Text(
+                "MISSING ASSET\n{size=-10}" + label + "{/size}",
+                color="#d08a7a",
+                size=28,
+                text_align=0.5,
+                xalign=0.5,
+                yalign=0.5,
+            ),
+            xysize=(width, height),
+        )
+
+    def s32_asset(path, label, width, height):
+        """Return `path` if it is loadable, else a labelled placeholder."""
+        if renpy.loadable(path):
+            return path
+        s32_missing_assets.append(label)
+        return s32_placeholder(label, width, height)
+
+    def s32_sprite(path, label):
+        """A character sprite, at the source packs' 720x1080 canvas."""
+        return s32_asset(path, label, 720, 1080)
+
+    def s32_bg(path, label):
+        """A background, at the project's full 1920x1080 design size."""
+        return s32_asset(path, label, 1920, 1080)
+
+
+init 1 python:
+
+    # Reported once, after every image has been defined. Loud in development
+    # and absent from a release build, which must have no placeholders at all.
+    if config.developer and s32_missing_assets:
+        s32_devlog.log(
+            "assets",
+            "{} image(s) are placeholders — run `s32 assets fetch && s32 assets install`".format(
+                len(s32_missing_assets)
+            ),
+        )
+
+
+init offset = -5
+
+init python:
+
+    #: Where imported music lands. One constant, so a path change is one edit.
+    S32_MUSIC_DIR = "audio/vendor"
+
+    def s32_music_path(name):
+        """Return the runtime path for a track name, without the extension."""
+        return "{}/bgm_{}.ogg".format(S32_MUSIC_DIR, name)
+
+    def s32_music(name, fadein=1.0, loop=True):
+        """Play a track if it is installed; do nothing, loudly, if it is not.
+
+        Audio has no equivalent of a visible placeholder — silence is silence —
+        so a missing track is a dev-log line rather than a crash or a lint
+        error. Without this, a checkout with no assets fails `renpy lint` on
+        every `play music`, which is how a CI job ends up permanently red.
+        """
+        path = s32_music_path(name)
+        if not renpy.loadable(path):
+            s32_missing_assets.append("music / " + name)
+            s32_devlog.log("assets", "music not installed: {}".format(path))
+            return
+        renpy.music.play(path, fadein=fadein, loop=loop)
+
+
+init 1 python:
+
+    # Set here rather than as a `define`, because `define` is evaluated before
+    # any import and cannot ask whether the file exists.
+    if renpy.loadable(s32_music_path("hope")):
+        config.main_menu_music = s32_music_path("hope")
+
+
+# ---------------------------------------------------------------------------
+# Fonts
+#
+# The project's faces (Source Sans 3, Source Serif 4, both OFL) are fetched
+# per-developer like every other asset, so a fresh checkout does not have them
+# — and Ren'Py raises on a missing font rather than substituting one. That took
+# out three screens and three testcases on a clean clone.
+#
+# These resolve once at init: the real face when installed, Ren'Py's bundled
+# DejaVuSans when not. Screens name the constant, never a path.
+# ---------------------------------------------------------------------------
+
+init offset = -5
+
+init python:
+
+    #: Ren'Py bundles this, so it is always loadable.
+    S32_FALLBACK_FONT = "DejaVuSans.ttf"
+
+    def s32_font(filename):
+        """Return the project font if installed, else the bundled fallback."""
+        path = "gui/vendor/fonts/{}".format(filename)
+        if renpy.loadable(path):
+            return path
+        s32_missing_assets.append("font / " + filename)
+        return S32_FALLBACK_FONT
+
+    S32_SANS = s32_font("SourceSans3-Regular.ttf")
+    S32_SANS_SEMIBOLD = s32_font("SourceSans3-Semibold.ttf")
+    S32_SERIF = s32_font("SourceSerif4-Regular.ttf")
+    S32_SERIF_SEMIBOLD = s32_font("SourceSerif4-Semibold.ttf")

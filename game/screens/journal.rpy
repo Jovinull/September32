@@ -162,24 +162,24 @@ style s32_journal_frame is empty:
 style s32_journal_heading is text:
     size 48
     color "#e8e2d4"
-    font "gui/vendor/fonts/SourceSerif4-Semibold.ttf"
+    font S32_SERIF_SEMIBOLD
 
 style s32_journal_section is text:
     size 24
     color "#d8b978"
-    font "gui/vendor/fonts/SourceSans3-Semibold.ttf"
+    font S32_SANS_SEMIBOLD
 
 style s32_journal_entry is text:
     size 20
     color "#ddd6c6"
-    font "gui/vendor/fonts/SourceSerif4-Regular.ttf"
+    font S32_SERIF
 
 style s32_journal_muted is text:
     size 19
     color "#8f887a"
-    font "gui/vendor/fonts/SourceSans3-Regular.ttf"
+    font S32_SANS
 
 style s32_journal_warning is text:
     size 24
     color "#d08a7a"
-    font "gui/vendor/fonts/SourceSans3-Semibold.ttf"
+    font S32_SANS_SEMIBOLD

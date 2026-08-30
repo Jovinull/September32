@@ -64,22 +64,22 @@ style s32_credits_frame is empty:
 style s32_credits_heading is text:
     size 54
     color "#e8e2d4"
-    font "gui/vendor/fonts/SourceSerif4-Semibold.ttf"
+    font S32_SERIF_SEMIBOLD
 
 
 style s32_credits_section is text:
     size 28
     color "#d8b978"
-    font "gui/vendor/fonts/SourceSans3-Semibold.ttf"
+    font S32_SANS_SEMIBOLD
 
 
 style s32_credits_line is text:
     size 22
     color "#ddd6c6"
-    font "gui/vendor/fonts/SourceSans3-Regular.ttf"
+    font S32_SANS
 
 
 style s32_credits_sub is text:
     size 18
     color "#8f887a"
-    font "gui/vendor/fonts/SourceSans3-Regular.ttf"
+    font S32_SANS

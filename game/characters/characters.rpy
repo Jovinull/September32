@@ -32,7 +32,7 @@ define narrator = Character(None, what_italic=False)
 # unreliable. Styled in game/screens/archive.rpy.
 define c_document = Character(
     None,
-    what_font="gui/vendor/fonts/SourceSerif4-Regular.ttf",
+    what_font=S32_SERIF,
     what_italic=True,
     what_color="#4a4640",
 )

@@ -17,7 +17,7 @@ label start:
     $ s32_new_run()
 
     scene bg school_gate day with fade
-    play music "audio/vendor/bgm_hope.ogg" fadein 2.0
+    $ s32_music("hope", fadein=2.0)
 
     narrator "The bus leaves before you have finished getting your bag off it."
 

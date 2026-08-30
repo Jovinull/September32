@@ -51,12 +51,12 @@ screen s32_debug_frame(title):
 style s32_debug_title is text:
     size 26
     color "#e8e2d4"
-    font "gui/vendor/fonts/SourceSans3-Semibold.ttf"
+    font S32_SANS_SEMIBOLD
 
 style s32_debug_text is text:
     size 19
     color "#cfc8b8"
-    font "gui/vendor/fonts/SourceSans3-Regular.ttf"
+    font S32_SANS
 
 style s32_debug_pass is text:
     size 19

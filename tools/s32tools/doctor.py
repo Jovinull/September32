@@ -52,6 +52,7 @@ def run_checks() -> list[Check]:
     checks.extend(_check_assets())
     checks.append(_check_credits())
     checks.append(_check_schemas())
+    checks.append(_check_placeholders())
     return checks
 
 
@@ -162,6 +163,34 @@ def _check_assets() -> list[Check]:
             )
         )
     return checks
+
+
+def _check_placeholders() -> Check:
+    """How many image definitions would fall back to a placeholder.
+
+    A development checkout with placeholders is fine and expected. A release
+    build with even one is not, so this is reported rather than left to be
+    discovered in a screenshot.
+    """
+    import re
+
+    from s32tools import paths
+
+    generated = paths.game_dir() / "engine" / "01_s32_images.rpy"
+    if not generated.exists():
+        return Check("game images", "warn", "not generated", "s32 assets images")
+
+    referenced = re.findall(r's32_(?:sprite|bg)\("([^"]+)"', generated.read_text(encoding="utf-8"))
+    missing = [p for p in referenced if not (paths.game_dir() / p).exists()]
+
+    if not missing:
+        return Check("game images", "ok", f"all {len(referenced)} resolve to real files")
+    return Check(
+        "game images",
+        "warn",
+        f"{len(missing)}/{len(referenced)} would show a MISSING ASSET placeholder",
+        "s32 assets fetch && s32 assets install — fine in development, not in a release",
+    )
 
 
 def _check_credits() -> Check:

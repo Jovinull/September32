@@ -36,10 +36,10 @@ define config.has_sound = True
 define config.has_music = True
 define config.has_voice = False
 
-## The main menu track. Guarded so the project still launches with no audio
-## installed — the assets are fetched per-developer and a missing file must not
-## be the reason a new contributor cannot start the game.
-define config.main_menu_music = "audio/vendor/bgm_hope.ogg"
+## The main menu track is set in game/engine/00_s32_engine.rpy, not here:
+## `define` is evaluated before any import and so cannot ask whether the file
+## exists. Assets are fetched per-developer, and a missing one must never be the
+## reason a new contributor cannot start the game.
 
 
 ## Transitions #################################################################

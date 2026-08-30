@@ -84,6 +84,12 @@ No sound effects.
 **UI.** Kenney scaffolding. The archive document viewer — the second most
 important interface in the game — is unbuilt. So is the calendar.
 
+**Assets are not versioned, by design (ADR-0003).** A clone is 2.7 MB and has
+none of them; the same checkout on a working machine is around 1.1 GB. The game
+lints, tests and runs in the empty state, showing labelled `MISSING ASSET`
+placeholders, and `s32 assets fetch && s32 assets install` reconstructs
+everything from official sources against the recorded hashes.
+
 **Canon.** Deliberately open. The nature of September 32 is undecided, and
 `PHENOMENON_RULES.md` exists so that writing can proceed without it.
 
@@ -135,6 +141,15 @@ Recorded because they are the strongest evidence that the tooling earns its keep
    the fact as never acquired. The same class of problem as (3), arriving by a
    different route. Fixed by declaring it as an effect, where both the analyser
    and the simulator can see it.
+6. **A fresh clone failed `renpy lint` with 311 errors.** The claim that the
+   game works without assets was true at runtime and false everywhere else:
+   generated image definitions named files directly, music was played by path,
+   and three screens named font files, so a checkout with no assets — which is
+   what CI runs, and what every new contributor starts from — could not lint and
+   lost three testcases. Found by actually cloning the repository and running
+   the gates in it. Fixed with `s32_sprite` / `s32_bg` / `s32_music` / `s32_font`
+   helpers that fall back to a labelled placeholder, and `s32 doctor` now
+   reports how many placeholders a build would ship.
 
 ## Next milestone
 

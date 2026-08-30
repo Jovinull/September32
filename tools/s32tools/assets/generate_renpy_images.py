@@ -100,6 +100,11 @@ def generate(
         "# Images are declared under the CANON name and point at ASSET files.",
         "# Recasting a character is a one-line edit to their JSON, not a rename",
         "# across the project. See docs/decisions/ADR-0005-character-art-consistency.md.",
+        "#",
+        "# Paths go through s32_sprite / s32_bg rather than being named directly,",
+        "# so a checkout with no assets installed still lints, tests and runs —",
+        "# each missing file becomes a labelled placeholder. See the helpers in",
+        "# game/engine/00_s32_engine.rpy.",
         "",
         f"# Generated {datetime.now(UTC).isoformat(timespec='seconds')}",
         "",
@@ -132,14 +137,18 @@ def generate(
                     missing.setdefault(char_id, []).append(f"{outfit}/{wanted}")
                 filename = f"char_{asset_key}_{outfit}_{resolved}.webp"
                 lines.append(
-                    f'image {char_id} {outfit} {wanted} = "{VENDOR_IMAGE_DIR}/{filename}"'
+                    f"image {char_id} {outfit} {wanted} = "
+                    f's32_sprite("{VENDOR_IMAGE_DIR}/{filename}", '
+                    f'"{char_id} / {outfit} / {wanted}")'
                 )
             # An outfit with no expression named is the common case in a
             # scene: `show iris school_summer` means the neutral pose.
             if "neutral" in available:
                 lines.append(
-                    f'image {char_id} {outfit} = '
-                    f'"{VENDOR_IMAGE_DIR}/char_{asset_key}_{outfit}_neutral.webp"'
+                    f"image {char_id} {outfit} = "
+                    f's32_sprite("{VENDOR_IMAGE_DIR}/'
+                    f'char_{asset_key}_{outfit}_neutral.webp", '
+                    f'"{char_id} / {outfit}")'
                 )
         lines.append("")
 
@@ -258,8 +267,9 @@ def _background_definitions(library: ContentLibrary, game_root: Path) -> list[st
             if candidates:
                 chosen = candidates[0]
                 lines.append(
-                    f'image bg {location_id} {time} = '
-                    f'"{VENDOR_BG_DIR}/{chosen}{installed[chosen]}"'
+                    f"image bg {location_id} {time} = "
+                    f's32_bg("{VENDOR_BG_DIR}/{chosen}{installed[chosen]}", '
+                    f'"bg {location_id} {time}")'
                 )
 
         # The bare `bg <location>` form every scene uses when the time of day
@@ -267,7 +277,9 @@ def _background_definitions(library: ContentLibrary, game_root: Path) -> list[st
         default = by_time.get("day") or by_time.get("evening") or by_time.get("night")
         if default:
             lines.append(
-                f'image bg {location_id} = "{VENDOR_BG_DIR}/{default[0]}{installed[default[0]]}"'
+                f"image bg {location_id} = "
+                f's32_bg("{VENDOR_BG_DIR}/{default[0]}{installed[default[0]]}", '
+                f'"bg {location_id}")'
             )
     lines.append("")
     return lines

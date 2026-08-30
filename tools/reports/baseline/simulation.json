@@ -1,0 +1,288 @@
+{
+  "generated_at": "2026-08-30T22:23:22+00:00",
+  "runs": 5000,
+  "seed": 1234,
+  "profiles": [
+    "random",
+    "altruistic",
+    "curious",
+    "romantic",
+    "paranoid",
+    "completionist",
+    "investigator",
+    "selfish",
+    "impulsive"
+  ],
+  "storylets": {
+    "total": 7,
+    "reachable": [
+      "archive_intro",
+      "courtyard_small_talk",
+      "hallway_encounter",
+      "message_after_class",
+      "old_photo_glimpse",
+      "rain_after_school",
+      "theo_ledger_question"
+    ],
+    "unreachable": [],
+    "play_counts": {
+      "archive_intro": 5000,
+      "courtyard_small_talk": 75000,
+      "hallway_encounter": 9488,
+      "message_after_class": 4998,
+      "old_photo_glimpse": 5000,
+      "rain_after_school": 109,
+      "theo_ledger_question": 4998
+    }
+  },
+  "anchors": {
+    "total": 3,
+    "reached": {
+      "arrival": 5000,
+      "first_shift": 5000,
+      "the_date": 5000
+    },
+    "unreached": []
+  },
+  "knowledge": {
+    "acquisition_rate": {
+      "attendance_sheet_anomaly": 0.9996,
+      "iris_keeps_a_second_index": 0.0218,
+      "old_photo_exists": 1.0,
+      "photo_dated_sept_32": 1.0
+    },
+    "never_acquired": [
+      "mara_knows_the_older_story",
+      "photo_is_a_forgery",
+      "theo_checks_the_ledger"
+    ]
+  },
+  "characters": {
+    "encounter_rate": {
+      "iris": 2.0218,
+      "theo": 1.9088
+    }
+  },
+  "content_mix": {
+    "archive": 0.1434,
+    "character": 0.0488,
+    "friendship": 0.1385,
+    "investigation": 0.0956,
+    "mystery": 0.0956,
+    "romance": 0.001,
+    "school": 0.8556,
+    "slice_of_life": 0.9044
+  },
+  "phases_reached": {
+    "consequences": 0,
+    "impossible": 0,
+    "normal": 0,
+    "odd": 5000,
+    "unsettling": 0
+  },
+  "averages": {
+    "scenes_per_run": 20.92,
+    "days_per_run": 15.0,
+    "repeats_per_run": 14.99
+  },
+  "dead_ends": {
+    "count": 0,
+    "rate": 0.0,
+    "examples": []
+  },
+  "rare_states": [],
+  "relationship_ranges": {
+    "player->ellery.attraction": [
+      0,
+      0
+    ],
+    "player->ellery.dependency": [
+      0,
+      0
+    ],
+    "player->ellery.familiarity": [
+      0,
+      0
+    ],
+    "player->ellery.fear": [
+      0,
+      0
+    ],
+    "player->ellery.resentment": [
+      0,
+      0
+    ],
+    "player->ellery.respect": [
+      0,
+      0
+    ],
+    "player->ellery.suspicion": [
+      0,
+      0
+    ],
+    "player->ellery.trust": [
+      0,
+      0
+    ],
+    "player->iris.attraction": [
+      0,
+      8
+    ],
+    "player->iris.dependency": [
+      0,
+      0
+    ],
+    "player->iris.familiarity": [
+      8,
+      15
+    ],
+    "player->iris.fear": [
+      0,
+      0
+    ],
+    "player->iris.resentment": [
+      0,
+      0
+    ],
+    "player->iris.respect": [
+      0,
+      3
+    ],
+    "player->iris.suspicion": [
+      0,
+      0
+    ],
+    "player->iris.trust": [
+      2,
+      19
+    ],
+    "player->june.attraction": [
+      0,
+      0
+    ],
+    "player->june.dependency": [
+      0,
+      0
+    ],
+    "player->june.familiarity": [
+      0,
+      0
+    ],
+    "player->june.fear": [
+      0,
+      0
+    ],
+    "player->june.resentment": [
+      0,
+      0
+    ],
+    "player->june.respect": [
+      0,
+      0
+    ],
+    "player->june.suspicion": [
+      0,
+      0
+    ],
+    "player->june.trust": [
+      0,
+      0
+    ],
+    "player->mara.attraction": [
+      0,
+      0
+    ],
+    "player->mara.dependency": [
+      0,
+      0
+    ],
+    "player->mara.familiarity": [
+      2,
+      4
+    ],
+    "player->mara.fear": [
+      0,
+      0
+    ],
+    "player->mara.resentment": [
+      0,
+      0
+    ],
+    "player->mara.respect": [
+      0,
+      2
+    ],
+    "player->mara.suspicion": [
+      0,
+      3
+    ],
+    "player->mara.trust": [
+      0,
+      0
+    ],
+    "player->noah.attraction": [
+      0,
+      0
+    ],
+    "player->noah.dependency": [
+      0,
+      0
+    ],
+    "player->noah.familiarity": [
+      0,
+      0
+    ],
+    "player->noah.fear": [
+      0,
+      0
+    ],
+    "player->noah.resentment": [
+      0,
+      0
+    ],
+    "player->noah.respect": [
+      0,
+      0
+    ],
+    "player->noah.suspicion": [
+      0,
+      0
+    ],
+    "player->noah.trust": [
+      0,
+      0
+    ],
+    "player->theo.attraction": [
+      0,
+      0
+    ],
+    "player->theo.dependency": [
+      0,
+      0
+    ],
+    "player->theo.familiarity": [
+      0,
+      25
+    ],
+    "player->theo.fear": [
+      0,
+      0
+    ],
+    "player->theo.resentment": [
+      0,
+      0
+    ],
+    "player->theo.respect": [
+      0,
+      5
+    ],
+    "player->theo.suspicion": [
+      0,
+      2
+    ],
+    "player->theo.trust": [
+      0,
+      9
+    ]
+  }
+}

@@ -90,6 +90,62 @@ player may not notice for days.
 **Never say.** Anything that makes scepticism look silly. Her arguments must be
 the good ones.
 
+## Writing constraints
+
+Added for Milestone 1, when June first had to hold real dialogue. The full
+speech fingerprint is in `VOICES.md`; this is what a scene needs.
+
+**Speech rhythm.** Fast, fluent, complete. Sentences arrive already finished.
+Two or three short ones, then a longer one that changes the subject.
+
+**How she evades.** Answers the easy half of a question, warmly and fully, then
+asks you something. It reads as interest, not evasion. That is why it works.
+
+**How she lies.** Rarely and badly, by over-specifying. A true June answer is
+short; a false one acquires detail.
+
+**What she notices.** People's comfort. Who went quiet. Who is being left out.
+First to register a mood, last to name it.
+
+**What she ignores.** Anything institutional — dates, records, the noticeboard.
+A settled decision that it is not interesting, not an inability.
+
+**What embarrasses her.** Being thanked sincerely. Deflected with a joke inside
+two seconds.
+
+**What makes her angry.** Being told she is in denial. She agrees pleasantly,
+finishes the conversation properly, and does not come back.
+
+**Under stress.** Funnier and faster. The jokes get closer together.
+
+## Ordinary life
+
+**She is not a device.** June has a Tuesday. She has a group presentation she is
+trying to get out of, a person she is avoiding in the east corridor for reasons
+that are entirely social, and opinions about the vending machine.
+
+At least one June storylet contains **no supernatural content of any kind**. Not
+as restraint — because a character who only appears when the plot needs her is
+not a character.
+
+**What she wants today**, and it has nothing to do with September 32: to not be
+the person who organises things. She is good at it, everyone knows she is good
+at it, and she is tired of being asked.
+
+## A note on local history
+
+June is **not** the town-lore character; that is Mara, and the knowledge fact
+`mara_knows_the_older_story` is hers by name.
+
+What June has instead is an **outsider's observation**. She transferred in two
+years ago and was handed the school's own account of itself — a welcome pack, a
+printed history — and she read it the way a new person reads things, once,
+properly, and then never again. She noticed something in it. She has a mundane
+explanation and has never revisited it.
+
+That is a different kind of knowledge from Mara's and it should stay different:
+Mara has a story she was told; June has a document she skimmed.
+
 ## Presentation
 
 **Visual asset.** `pm_a01_kanako`. Placeholder; cast on outfit availability, not

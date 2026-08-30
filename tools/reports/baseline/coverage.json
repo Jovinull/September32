@@ -1,0 +1,103 @@
+{
+  "generated_at": "2026-08-30T22:23:33+00:00",
+  "totals": {
+    "storylets": 7,
+    "anchors": 3,
+    "characters": 6,
+    "locations": 8,
+    "knowledge": 7,
+    "items": 3
+  },
+  "by_status": {
+    "active": 0,
+    "draft": 0,
+    "prototype": 7,
+    "retired": 0
+  },
+  "by_category": {
+    "ambient": 2,
+    "conversation": 2,
+    "interstitial": 1,
+    "investigation": 2
+  },
+  "by_tag": {
+    "archive": 3,
+    "character": 2,
+    "friendship": 2,
+    "investigation": 2,
+    "mystery": 2,
+    "romance": 1,
+    "school": 3,
+    "slice_of_life": 5
+  },
+  "requirements_coverage": {
+    "with_requirements": 5,
+    "with_blockers": 1,
+    "with_effects": 7,
+    "condition_forms": {
+      "anchor_done()": 1,
+      "commitment()": 1,
+      "flag": 1,
+      "knows()": 3,
+      "not_seen()": 2,
+      "rel": 2,
+      "seen()": 1,
+      "weather": 1
+    },
+    "effect_forms": {
+      "commit()": 1,
+      "event()": 4,
+      "flag": 1,
+      "fulfil()": 1,
+      "item()": 2,
+      "know()": 3,
+      "npc_stance()": 2,
+      "rel": 8
+    }
+  },
+  "knowledge_coverage": {
+    "defined": 7,
+    "granted_by_content": [
+      "attendance_sheet_anomaly",
+      "iris_keeps_a_second_index",
+      "old_photo_exists"
+    ],
+    "required_by_content": [
+      "old_photo_exists"
+    ],
+    "defined_but_unused": [
+      "mara_knows_the_older_story",
+      "photo_dated_sept_32",
+      "photo_is_a_forgery",
+      "theo_checks_the_ledger"
+    ]
+  },
+  "cast_coverage": {
+    "characters_in_content": [
+      "iris",
+      "theo"
+    ],
+    "characters_without_content": [
+      "ellery",
+      "june",
+      "mara",
+      "noah"
+    ],
+    "locations_in_content": [
+      "archive_room",
+      "classroom_2b",
+      "courtyard",
+      "hallway_east",
+      "rooftop"
+    ],
+    "locations_without_content": [
+      "dorm_room",
+      "school_gate",
+      "town_road"
+    ]
+  },
+  "exercise": {
+    "unreachable": [],
+    "untested": []
+  }
+}

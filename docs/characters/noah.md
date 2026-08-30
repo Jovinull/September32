@@ -89,6 +89,57 @@ publishes. That is all it takes.
 **Never do.** Lie about what he will do with information. He tells you.
 **Never say.** Anything that makes him a schemer. His danger is sincerity.
 
+## Writing constraints
+
+**Speech rhythm.** Fast and forward. He talks through the gap where you would
+have answered — not rudely; he has the next sentence ready. Prone to a phrase he
+rehearsed on the walk over.
+
+**Vocabulary.** Journalistic, slightly overreached for four pages. "Sources."
+"The piece." "We're running it." The *we* is him.
+
+**How he evades.** He does not. He tells you what he wants and what he will do
+with it. That is what makes him dangerous: the player keeps waiting for a catch
+that is not coming.
+
+**How he lies.** By omission of scale. "Someone mentioned it" when it was one
+person, once, in passing.
+
+**What he notices.** Whether a thing is printable. He sorts the world into
+material and not-material, continuously, and does not hide it.
+
+**What he ignores.** Whether people want to be written about. It does not occur
+to him as a question separate from whether it is true.
+
+**What embarrasses him.** The size of the paper. Do not mention the circulation.
+
+**What makes him angry.** Being told a story is not his to tell.
+
+**Under stress.** Talks more.
+
+## The three readings
+
+**This is the hardest constraint in the cast, and it is not optional.**
+
+When Noah is calm about something strange, a player must be able to come away
+with any of:
+
+1. Noah knows something.
+2. Noah does not care.
+3. The protagonist is reading too much into him.
+
+All three stay viable until the story deliberately closes one. A scene that
+resolves it — a knowing pause, a line the narration flags as significant, a beat
+held a fraction too long — has spent something the game has not earned yet.
+
+**The failure mode to avoid** is "mysterious boy who obviously knows". It would
+make the central mystery predictable, and it is what every draft will reach for.
+
+**The correction.** Whenever Noah is unbothered, the scene must supply an
+*ordinary* reason he might be: he is thinking about the layout, he has heard
+four rumours this month, he genuinely finds the archive boring. The ordinary
+reason must be as available as the sinister one, and the prose must not choose.
+
 ## Presentation
 
 **Visual asset.** `pm_a01_ume`. Placeholder; cast on outfit availability.

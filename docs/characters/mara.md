@@ -103,6 +103,67 @@ dramatically — she just stops being where you are.
 **Never say.** Anything that frames the town as quaint, sinister, or a setting.
 It is where she lives.
 
+## Writing constraints
+
+**Speech rhythm.** Flat declaratives, mostly short. She uses pauses the way
+others use adjectives — stopping exactly long enough for you to notice, then
+continuing as though she had not.
+
+**Vocabulary.** Plain, never ornamental. Says "here" where others would name the
+town. Uses full names when she is being careful.
+
+**How she evades.** States a fact adjacent to the question and stops. Not a
+deflection — an offer. Take the adjacent fact, or push.
+
+**How she lies.** She does not, quite. She omits, and will tell you she is
+omitting.
+
+**What she notices.** Who is talking to whom, and who stopped. She has a map of
+the school's social weather.
+
+**What she ignores.** Documents. Anything written down. Her town is oral and she
+has never had cause to check it.
+
+**What embarrasses her.** Being caught being kind.
+
+**What makes her angry.** An outsider being clever about the town. She goes
+quiet, and the quiet is the last warning.
+
+**Under stress.** Shorter sentences, longer pauses.
+
+## The cost of her competence
+
+Mara is **not a generic extrovert**, and her social fluency is not a superpower.
+She reads people well and she *trusts the reading*, which is a different thing
+from being right.
+
+Her information network must produce all four of these, and a writer should know
+which one they are writing:
+
+| | |
+| --- | --- |
+| **Accurate** | She saw it, or someone reliable told her directly. |
+| **Partial** | True as far as it goes, missing the half that changes it. |
+| **Distorted** | True once, then passed through four people. |
+| **False confidence** | She is certain, and she is wrong, and she will not check. |
+
+The last one is the important one and the one to use sparingly. Being
+contradicted about *people* is what she takes worst — not because she is proud,
+but because reading people is the thing she is for.
+
+## The older story
+
+`mara_knows_the_older_story` is her fact. A family account of why the school
+stopped printing yearbooks for one year.
+
+**Constraints on writing it.** She has not verified it and has no way to. She
+knows it is a version. She will say so. She has not decided whether telling it
+to an outsider is a betrayal, and that indecision is the scene, not the story.
+
+The account itself is **still `IDEA`** — see `docs/canon/OPEN_QUESTIONS.md`. A
+scene may establish that she has one and what it costs her to share it. A scene
+may **not** invent its contents as fact.
+
 ## Presentation
 
 **Visual asset.** `pm_a01_chinatsu`. Placeholder; casting by outfit availability.

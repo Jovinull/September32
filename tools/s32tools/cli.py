@@ -129,6 +129,9 @@ def _add_assets(sub: SubParsers) -> None:
     audit.add_argument("--out", type=Path, help="output file")
     audit.set_defaults(handler=_cmd_assets_audit)
 
+    paper = asub.add_parser("paper", help="regenerate the deterministic document textures")
+    paper.set_defaults(handler=_cmd_assets_paper)
+
     sheets = asub.add_parser("sheets", help="build contact sheets")
     sheets.add_argument("--out", type=Path, help="output directory")
     sheets.set_defaults(handler=_cmd_assets_sheets)
@@ -557,6 +560,21 @@ def _cmd_assets_audit(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_assets_paper(_args: argparse.Namespace) -> int:
+    from s32tools.assets.paper import build, digest
+
+    target = paths.game_dir() / "images" / "documents"
+    for path in build(target):
+        print(f"wrote {path.relative_to(paths.repo_root())}")
+    print()
+    print("sha256:")
+    for name, value in digest(target).items():
+        print(f"  {name:16} {value}")
+    print()
+    print("First-party and deterministic, so these ARE committed.")
+    return 0
+
+
 def _cmd_assets_sheets(args: argparse.Namespace) -> int:
     from s32tools.assets.contact_sheet import build_all
 
@@ -634,6 +652,11 @@ def _cmd_renpy_test(args: argparse.Namespace) -> int:
         "smoke_rollback",
         "smoke_debug_screens",
         "smoke_journal",
+        "archive_opens_and_closes",
+        "archive_pages_with_the_keyboard",
+        "archive_effects_apply_once",
+        "archive_index_hides_locked_documents",
+        "archive_survives_rollback",
     ]
     env = {**headless_env(), "S32_SEED": str(args.seed)}
 

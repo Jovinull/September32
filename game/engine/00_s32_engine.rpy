@@ -34,6 +34,7 @@ init python:
         knowledge as s32_knowledge,
         meta as s32_meta,
         relationships as s32_relationships,
+        documents as s32_documents,
         state as s32_state,
         traits as s32_traits,
         world as s32_world,
@@ -83,6 +84,10 @@ init 1 python:
     s32_library = s32_definitions.load_library(_s32_data_dir())
     s32_director = NarrativeDirector(s32_library)
 
+    # Documents load alongside the storylets and are static for the process in
+    # the same way. What the player has READ is run state; what exists is not.
+    s32_library_documents = s32_documents.load_documents(_s32_data_dir())
+
     s32_devlog.log(
         "content",
         "loaded {} storylets, {} anchors, {} characters, {} facts".format(
@@ -92,6 +97,7 @@ init 1 python:
             len(s32_library.knowledge),
         ),
     )
+    s32_devlog.log("content", "loaded {} archive documents".format(len(s32_library_documents.documents)))
 
 
 # ---------------------------------------------------------------------------

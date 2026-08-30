@@ -330,6 +330,10 @@ screen navigation():
         if not main_menu:
             textbutton _("Journal") action ShowMenu("s32_journal")
 
+            ## The archive index: everything the player has been able to look
+            ## at properly, reopenable at any time.
+            textbutton _("Archive") action ShowMenu("s32_archive_index")
+
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Help isn't necessary or relevant to mobile devices.

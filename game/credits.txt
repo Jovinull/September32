@@ -1,0 +1,45 @@
+SEPTEMBER 32
+Credits
+========================================
+
+DEVELOPMENT
+  Design, writing, engineering - the September 32 project authors
+
+CHARACTER ART
+  Character sprites by Potat0Master (potat0master.itch.io)
+    https://potat0master.itch.io/free-characters-for-visual-novels-set-a01
+  Character sprites by Potat0Master (potat0master.itch.io)
+    https://potat0master.itch.io/characters-set-a02
+
+BACKGROUND ART
+  Backgrounds by Potat0Master (potat0master.itch.io)
+    https://potat0master.itch.io/free-visual-novel-backgrounds-personal-rooms-pack-1
+  Backgrounds by Potat0Master (potat0master.itch.io)
+    https://potat0master.itch.io/free-visual-novel-backgrounds-school-mini-pack-1
+  Backgrounds by Potat0Master (potat0master.itch.io)
+    https://potat0master.itch.io/free-visual-novel-backgrounds-school-mini-pack-2
+  Backgrounds by Potat0Master (potat0master.itch.io)
+    https://potat0master.itch.io/free-visual-novel-backgrounds-starter-pack
+
+MUSIC
+  Music by Potat0Master (potat0master.itch.io)
+    https://potat0master.itch.io/free-background-music-for-visual-novels-bgm-pack-1
+
+UI AND ICONS
+  UI Pack by Kenney (kenney.nl) — CC0
+    https://kenney.nl/assets/ui-pack
+  Generic Items by Kenney (kenney.nl) — CC0
+    https://kenney.nl/assets/generic-items
+
+FONTS
+  Source Sans 3 by Adobe, SIL Open Font License 1.1
+    https://github.com/adobe-fonts/source-sans
+  Source Serif 4 by Adobe, SIL Open Font License 1.1
+    https://github.com/adobe-fonts/source-serif
+
+THIRD-PARTY SOFTWARE
+  Made with Ren'Py — https://www.renpy.org/
+    https://www.renpy.org/latest.html
+
+Full terms for every item above are recorded in
+THIRD_PARTY_NOTICES.md, distributed with this game.

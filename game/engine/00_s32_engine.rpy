@@ -1,0 +1,445 @@
+# September 32 — the bridge between Ren'Py and the narrative engine.
+#
+# `init offset = -5` puts this before everything except gui.rpy, because every
+# other file in the project assumes `s32` and `S32State` already exist.
+#
+# The division of labour, which the rest of the project depends on:
+#
+#   s32_engine (pure Python, game/python-packages/)
+#       Content loading, eligibility, effects, selection. Knows nothing about
+#       Ren'Py. Testable headless. Holds NO mutable state.
+#
+#   this file
+#       Owns the state, as plain dicts in the Ren'Py store so that rollback,
+#       save and load work without help. Exposes a small verb vocabulary that
+#       reads well inside a scene.
+#
+# Why the state is dicts and not objects: Ren'Py's rollback only reverts changes
+# to containers it controls. A class instance defined in a pure-Python package
+# would save and load correctly and then silently fail to roll back — the worst
+# possible bug in a visual novel, because it only appears when the player
+# scrolls up. See docs/decisions/ADR-0007-save-and-persistent-state.md.
+
+init offset = -5
+
+init python:
+
+    import s32_engine as s32
+    from s32_engine import (
+        commitments as s32_commitments,
+        conditions as s32_conditions,
+        definitions as s32_definitions,
+        devlog as s32_devlog,
+        effects as s32_effects,
+        knowledge as s32_knowledge,
+        meta as s32_meta,
+        relationships as s32_relationships,
+        state as s32_state,
+        traits as s32_traits,
+        world as s32_world,
+    )
+    from s32_engine.director import NarrativeDirector
+    from s32_engine.rng import Rng
+    from s32_engine.version import GAME_VERSION, META_SCHEMA_VERSION, SAVE_SCHEMA_VERSION
+
+    s32_devlog.configure(active=config.developer)
+
+    # Point the engine's container factories at Ren'Py's revertable types.
+    #
+    # This is the single most important line in the bridge. Without it the run
+    # state is built from ordinary dicts and lists, which Ren'Py will happily
+    # save and load and will NOT roll back — the text rewinds, the world does
+    # not, and nothing reports an error. The smoke test `smoke_rollback` exists
+    # to catch a regression here.
+    from renpy.revertable import RevertableDict, RevertableList
+
+    s32.configure_containers(RevertableDict, RevertableList)
+
+
+# `init 1` (i.e. -4 after the file offset) so this runs AFTER the imports above.
+# A negative literal here would run *earlier* than the unadorned block, which is
+# the kind of ordering bug that only shows up as a NameError at launch.
+init 1 python:
+
+    def _s32_data_dir():
+        """Return the directory holding authored content JSON.
+
+        In development the repository's `data/` sits beside `game/`. In a built
+        game there is no repository, so the content is mirrored into
+        `game/data/` by the build step. Checking both keeps one code path.
+        """
+        candidates = [
+            os.path.join(config.gamedir, "data"),
+            os.path.join(config.basedir, "data"),
+        ]
+        for path in candidates:
+            if os.path.isdir(path):
+                return path
+        return candidates[0]
+
+    # The content library is static for the life of the process and is NOT part
+    # of the save. Rebuilding it every launch is what lets content be edited
+    # without invalidating existing saves.
+    s32_library = s32_definitions.load_library(_s32_data_dir())
+    s32_director = NarrativeDirector(s32_library)
+
+    s32_devlog.log(
+        "content",
+        "loaded {} storylets, {} anchors, {} characters, {} facts".format(
+            len(s32_library.storylets),
+            len(s32_library.anchors),
+            len(s32_library.characters),
+            len(s32_library.knowledge),
+        ),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Run state
+# ---------------------------------------------------------------------------
+
+# `default` rather than `define`: this is per-run state, it belongs in the save,
+# and it must be re-created for a new game.
+default S32State = {}
+
+# The last director decision, kept for the debug inspector. Not gameplay state,
+# but it lives in the store anyway so rollback shows the trace that matched the
+# scene the player is looking at.
+default S32LastSelection = None
+
+
+init python:
+
+    def s32_new_run(seed=None):
+        """Start a fresh run.
+
+        Args:
+            seed: Deterministic seed. Defaults to one derived from the number of
+                runs played, so successive playthroughs differ but any single
+                one is reproducible from its save.
+        """
+        global S32State
+
+        if seed is None:
+            # S32_SEED pins the run for automated tests and for reproducing a
+            # reported bug: the whole engine is deterministic given a seed, so
+            # "it happened on seed 4211" is a complete repro.
+            override = os.environ.get("S32_SEED")
+            if override:
+                seed = int(override)
+            else:
+                seed = (persistent.s32_meta or {}).get("runs_started", 0) * 7919 + 17
+
+        S32State = s32_state.new_state(s32_library, seed=seed)
+
+        # Everyone starts present. Storylets gate on *location* and time, which
+        # is what actually decides who the player runs into; `present` is
+        # reserved for a character being genuinely away — ill, suspended, gone.
+        # A per-character timetable would be a simulation of a system this game
+        # does not have, and the headless simulator makes the same assumption so
+        # that its reachability numbers mean something.
+        for _char in S32State["characters"].values():
+            _char["present"] = True
+
+        meta = s32_get_meta()
+        s32_meta.start_run(meta)
+        s32_set_meta(meta)
+
+        s32_devlog.log("run", "new run, seed={}".format(seed))
+        return S32State
+
+    def s32_after_load():
+        """Bring a loaded save up to the current build.
+
+        Called from the `after_load` label. Two jobs, in order: migrate the
+        state's shape, then reconcile it with content authored since the save
+        was written. Neither is allowed to throw for anything short of a save
+        from a *newer* build, which genuinely cannot be read.
+        """
+        global S32State
+
+        S32State = s32_state.migrate_state(S32State)
+        added = s32_state.sync_with_library(S32State, s32_library)
+        if added:
+            s32_devlog.log("save", "added state for new characters: {}".format(", ".join(added)))
+
+    def s32_rng():
+        """Return a rollback-safe RNG bound to the current state.
+
+        Cheap to construct and holds nothing, so callers make one per use rather
+        than caching a reference across an interaction.
+        """
+        return Rng(S32State)
+
+
+# ---------------------------------------------------------------------------
+# Cross-run meta state
+# ---------------------------------------------------------------------------
+
+default persistent.s32_meta = None
+default persistent.s32_meta_schema_version = META_SCHEMA_VERSION
+
+
+init python:
+
+    def s32_get_meta():
+        """Return the persistent meta-state, migrated to the current schema."""
+        return s32_meta.migrate_meta(persistent.s32_meta)
+
+    def s32_set_meta(meta):
+        """Store the meta-state back into `persistent`."""
+        persistent.s32_meta = meta
+        persistent.s32_meta_schema_version = meta["schema_version"]
+
+    def s32_remember(clue_id):
+        """Return whether the PLAYER has earned a cross-run clue.
+
+        Deliberately not "does the protagonist remember". They do not. See
+        docs/narrative-design/META.md — this gates the rare `[You remember.]`
+        option and nothing else.
+        """
+        return s32_meta.remembers(s32_get_meta(), clue_id)
+
+    def s32_unlock_meta(clue_id):
+        """Record that the player has earned a cross-run clue."""
+        meta = s32_get_meta()
+        changed = s32_meta.unlock_meta_clue(meta, clue_id)
+        s32_set_meta(meta)
+        return changed
+
+    def s32_record_discovery(discovery_id):
+        """Record something seen at least once, across all runs."""
+        meta = s32_get_meta()
+        novel = s32_meta.record_discovery(meta, discovery_id)
+        s32_set_meta(meta)
+        return novel
+
+
+# ---------------------------------------------------------------------------
+# The verb vocabulary used inside scenes
+#
+# These exist so a scene reads as prose with a few annotations, rather than as
+# state manipulation with prose in between. Each one is a thin wrapper; the
+# logic lives in the engine where it is tested.
+# ---------------------------------------------------------------------------
+
+init python:
+
+    def rel(target, axis, delta, source="player"):
+        """Adjust one relationship axis.
+
+        Example:
+            $ rel("iris", "trust", 3)
+        """
+        return s32_relationships.change(S32State, target, axis, delta, source=source)
+
+    def rel_get(target, axis, source="player"):
+        """Read one relationship axis."""
+        return s32_relationships.get(S32State, target, axis, source=source)
+
+    def learn(fact_id, source=""):
+        """The player now knows something.
+
+        Example:
+            $ learn("photo_dated_sept_32", source="back_of_the_photo")
+        """
+        return s32_knowledge.grant(S32State, fact_id, source=source)
+
+    def suspect(fact_id, source=""):
+        """The player suspects something without being sure of it."""
+        return s32_knowledge.suspect(S32State, fact_id, source=source)
+
+    def knows(fact_id, who="player"):
+        """Return whether an agent holds a fact as known."""
+        return s32_knowledge.knows(S32State, fact_id, who)
+
+    def npc_learns(who, fact_id, stance="known"):
+        """Change what a character believes.
+
+        Characters hold their own stances, and they can be wrong. That is the
+        point: an archive that everyone agrees about has no story in it.
+        """
+        return s32_knowledge.set_stance(S32State, fact_id, stance, agent=who)
+
+    def trait(axis, delta=1):
+        """Nudge a player tendency.
+
+        Traits are accumulated by behaving a certain way, never chosen. See
+        s32_engine.traits.
+        """
+        return s32_traits.change(S32State, axis, delta)
+
+    def has_trait(axis, threshold=None):
+        """Return whether a tendency is established enough to be noticed."""
+        if threshold is None:
+            return s32_traits.has(S32State, axis)
+        return s32_traits.has(S32State, axis, threshold)
+
+    def trait_label(axis):
+        """Return the bracketed label for a trait-gated choice."""
+        return s32_traits.label(axis)
+
+    def promise(commitment_id, who, in_days=1, importance=50, kind="meeting"):
+        """Record a promise the player just made."""
+        return s32_commitments.make(
+            S32State,
+            commitment_id,
+            kind=kind,
+            participants=[who],
+            due_day=S32State["world"]["day"] + in_days,
+            importance=importance,
+        )
+
+    def kept(commitment_id):
+        """Mark a promise kept."""
+        return s32_commitments.fulfil(S32State, commitment_id)
+
+    def broke(commitment_id):
+        """Mark a promise broken by the player's own choice."""
+        return s32_commitments.break_(S32State, commitment_id)
+
+    def flag(name, default=0):
+        """Read a world flag."""
+        return s32_state.flag(S32State, name, default)
+
+    def set_flag(name, value):
+        """Set a world flag."""
+        s32_state.set_flag(S32State, name, value)
+
+    def bump(name, delta=1):
+        """Increment a world flag and return the new value."""
+        return s32_state.bump_flag(S32State, name, delta)
+
+    def take(item_id):
+        """Put an item in the player's hands."""
+        if item_id not in S32State["inventory"]:
+            S32State["inventory"].append(item_id)
+        return item_id
+
+    def has_item(item_id):
+        """Return whether the player is carrying something."""
+        return item_id in S32State["inventory"]
+
+    def go(location_id):
+        """Move the player."""
+        s32_state.set_location(S32State, location_id)
+
+    def advance(slots=1):
+        """Let time pass.
+
+        Rolls the weather and expires overdue promises when the day changes.
+        Weather is deliberately a daily, not hourly, event: something the player
+        can plan around rather than noise.
+        """
+        before = S32State["world"]["day"]
+        s32_state.advance_time(S32State, slots)
+        if S32State["world"]["day"] != before:
+            s32_world.roll_weather(S32State, s32_rng())
+
+    def s32_places_with_content():
+        """Return locations where something is currently eligible.
+
+        Used by the prototype's wander step so the player is not sent to an
+        empty corridor. In the finished game this feeds a map screen: the point
+        of a storylet system is lost if the player cannot find the storylets.
+        """
+        return s32_world.locations_with_content(
+            S32State, s32_library, s32_director, s32_rng()
+        )
+
+    def phase():
+        """Return the current escalation phase."""
+        return S32State["world"]["phase"]
+
+    def set_phase(new_phase):
+        """Advance the escalation phase. Cannot move backwards."""
+        s32_effects.apply_effect("phase = {}".format(new_phase), S32State)
+
+
+# ---------------------------------------------------------------------------
+# Director access
+# ---------------------------------------------------------------------------
+
+init python:
+
+    def s32_select(category=None, tags=None):
+        """Ask the director for the next storylet.
+
+        Returns the `StoryletDef` or None. Selection happens at defined moments
+        — a time-slot change, a location change, an explicit request — never on
+        a frame timer. See docs/decisions/ADR-0002.
+        """
+        global S32LastSelection
+
+        selection = s32_director.select(
+            S32State, s32_rng(), category=category, tags=tags, keep_trace=config.developer
+        )
+        S32LastSelection = selection
+
+        if config.developer:
+            chosen = selection.storylet.id if selection.storylet else "<none>"
+            s32_devlog.log(
+                "narrative",
+                "selected {} eligible={}/{}".format(
+                    chosen, len(selection.eligible), len(selection.evaluations)
+                ),
+            )
+        return selection.storylet
+
+    def s32_play_effects(storylet):
+        """Apply a storylet's effects and record it as played.
+
+        Called AFTER the scene's label returns, so that rolling back past the
+        scene also rolls back its consequences.
+        """
+        changes = s32_director.play(storylet, S32State)
+        if config.developer and changes:
+            s32_devlog.block("narrative", "{} effects".format(storylet.id), changes)
+        return changes
+
+    def s32_explain(storylet_id):
+        """Return the full eligibility trace for one storylet, as text.
+
+        The answer to "why didn't that scene fire?", which is the question a
+        writer asks every day once there are more than a few dozen scenes.
+        """
+        storylet = s32_library.storylets.get(storylet_id)
+        if storylet is None:
+            return "no such storylet: {}".format(storylet_id)
+        return s32_director.evaluate(storylet, S32State, s32_rng()).format()
+
+    def s32_check(condition):
+        """Evaluate one condition string against the current state.
+
+        Lets a scene reuse the same requirement language its metadata uses,
+        instead of restating the logic in Python:
+
+            if s32_check("rel iris.trust >= 30"):
+        """
+        ctx = s32_conditions.ConditionContext(S32State, s32_rng())
+        return s32_conditions.evaluate(condition, ctx).passed
+
+
+init python:
+
+    def s32_finish_anchor(anchor_id):
+        """Close out an anchor scene: apply its effects and record it.
+
+        Anchors are `call`ed directly rather than selected, so nothing else
+        applies their post-conditions. Recording the anchor in `persistent` as
+        well as in the run is what lets a later playthrough know the player has
+        already witnessed a beat, without the protagonist knowing anything.
+        """
+        anchor = s32_library.anchors.get(anchor_id)
+        if anchor is None:
+            raise Exception("unknown anchor: {}".format(anchor_id))
+
+        changes = s32_effects.apply_all(anchor.effects, S32State)
+
+        meta = s32_get_meta()
+        s32_meta.record_anchor(meta, anchor_id)
+        s32_set_meta(meta)
+
+        if config.developer:
+            s32_devlog.block("narrative", "anchor {}".format(anchor_id), changes)
+        return changes

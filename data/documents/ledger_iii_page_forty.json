@@ -1,0 +1,97 @@
+{
+  "id": "ledger_iii_page_forty",
+  "type": "ledger_page",
+  "title": "Attendance ledger, vol. III — p. 40",
+  "archive_reference": "NF/ARC/LDG/III",
+  "fictional_source": "Northfield School Archive, Box 17",
+  "source_location": "archive_room",
+  "tags": [
+    "archive",
+    "mystery"
+  ],
+  "unlock_conditions": [
+    "knows(attendance_sheet_anomaly)"
+  ],
+  "view_effects": [],
+  "summary": "The document Theo has been describing. Two pages so the interface has to page, and so that the reader sees a NORMAL column before the odd one — the anomaly is only legible against the pattern. Grants nothing: the player already holds attendance_sheet_anomaly by the time they can open it, and a document that re-grants what a scene gave is a document that made the scene redundant.",
+  "pages": [
+    {
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "ATTENDANCE — VOLUME III"
+        },
+        {
+          "kind": "field",
+          "label": "Page",
+          "text": "40"
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "date",
+          "text": "14 SEPTEMBER"
+        },
+        {
+          "kind": "text",
+          "text": "Abbott · Ainsworth · Bell · Bright · Callow · Chase · Dell · Fenn · Garrow · Hale · Ives · Larkin · Mead · Noyes"
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "date",
+          "text": "15 SEPTEMBER"
+        },
+        {
+          "kind": "text",
+          "text": "Abbott · Ainsworth · Bell · Bright · Callow · Chase · Dell · Fenn · Garrow · Hale · Ives · Larkin · Mead · Noyes"
+        },
+        {
+          "kind": "note",
+          "text": "Every column on this page carries a date."
+        }
+      ]
+    },
+    {
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "ATTENDANCE — VOLUME III"
+        },
+        {
+          "kind": "field",
+          "label": "Page",
+          "text": "40 (verso)"
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "date",
+          "text": ""
+        },
+        {
+          "kind": "text",
+          "text": "Abbott · Ainsworth · Bell · Bright · Callow · Chase · Dell · Fenn · Garrow · Hale · Ives · Larkin · Mead · Noyes"
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "date",
+          "text": "17 SEPTEMBER"
+        },
+        {
+          "kind": "text",
+          "text": "Abbott · Ainsworth · Bell · Bright · Callow · Chase · Dell · Fenn · Garrow · Hale · Ives · Larkin · Mead · Noyes"
+        },
+        {
+          "kind": "note",
+          "text": "ruled and filled in the same hand as the rest. checked vols I & II — 91pp, no other omission. — T."
+        }
+      ]
+    }
+  ]
+}

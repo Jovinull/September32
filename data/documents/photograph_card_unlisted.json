@@ -1,0 +1,72 @@
+{
+  "id": "photograph_card_unlisted",
+  "type": "photograph_card",
+  "title": "Photograph card — unlisted class group",
+  "archive_reference": "NF/ARC/PH/—",
+  "fictional_source": "Northfield School Archive, Box 17 (loose)",
+  "source_location": "archive_room",
+  "tags": [
+    "archive",
+    "mystery"
+  ],
+  "unlock_conditions": [
+    "has_item(old_photo)"
+  ],
+  "view_effects": [
+    "know(old_photo_exists, catalogue_card)"
+  ],
+  "summary": "The catalogue card for the photograph, not the photograph. The image itself is NEEDS COMMISSION and stays that way: an image_placeholder block sits in a plausible archival mount and says so. The card's own content is real prototype content, and it is the one document that grants knowledge — harmlessly, since a player holding the item almost certainly has the fact.",
+  "pages": [
+    {
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "PHOTOGRAPH — CATALOGUE CARD"
+        },
+        {
+          "kind": "field",
+          "label": "Reference",
+          "text": "not assigned"
+        },
+        {
+          "kind": "field",
+          "label": "Box",
+          "text": "17"
+        },
+        {
+          "kind": "field",
+          "label": "Format",
+          "text": "Gelatin silver print, mounted"
+        },
+        {
+          "kind": "field",
+          "label": "Subjects",
+          "text": "Approx. 40, unidentified"
+        },
+        {
+          "kind": "field",
+          "label": "Date",
+          "text": "See reverse"
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "image_placeholder",
+          "text": "CLASS PHOTOGRAPH — ART PENDING"
+        },
+        {
+          "kind": "text",
+          "text": "Three rows. Back row standing, on a bench. No names to the reverse. Mount trimmed on one edge, not squarely."
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "note",
+          "text": "not on the 1998 list. not on the typed list. not on the pencil corrections. — I."
+        }
+      ]
+    }
+  ]
+}

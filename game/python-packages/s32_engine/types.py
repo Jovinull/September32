@@ -397,3 +397,7 @@ class GameState(TypedDict):
     seen_counts: dict[str, int]
     last_seen_day: dict[str, int]
     anchors_done: list[str]
+    #: Archive documents the player has read, in order. Separate from
+    #: ``seen_counts`` on purpose: a document is not a scene, and mixing them
+    #: would pollute the storylet history and the coverage reports.
+    documents_read: list[str]

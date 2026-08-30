@@ -94,6 +94,7 @@ def new_state(library: ContentLibrary, *, seed: int = 0) -> GameState:
                 "seen_counts": new_dict(),
                 "last_seen_day": new_dict(),
                 "anchors_done": new_list(),
+                "documents_read": new_list(),
             }
         ),
     )
@@ -267,14 +268,24 @@ def migrate_state(raw: dict[str, Any]) -> GameState:
             "update the game to load it"
         )
 
-    # No migrations exist yet: v1 is the first published schema. When v2 lands,
-    # add `if version < 2: _migrate_1_to_2(raw)` here, in order.
+    # Ordered, forward-only steps. Each must leave the dict valid for the next.
+    if version < 2:
+        _migrate_1_to_2(raw)
 
     raw["save_schema_version"] = SAVE_SCHEMA_VERSION
     # Rebuild through the configured factories. A save written by a build with a
     # different container seam — or unpickled as plain dicts — would otherwise
     # load fine and then fail to roll back.
     return cast("GameState", adopt(raw))
+
+
+def _migrate_1_to_2(raw: dict[str, Any]) -> None:
+    """v1 -> v2: the archive viewer needs to know what has already been read.
+
+    A save from before the viewer existed has read nothing, so the empty list is
+    the correct answer rather than a lossy default.
+    """
+    raw.setdefault("documents_read", [])
 
 
 def sync_with_library(state: GameState, library: ContentLibrary) -> list[str]:

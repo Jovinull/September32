@@ -1,0 +1,68 @@
+{
+  "id": "accession_record_box_17",
+  "type": "catalogue_record",
+  "title": "Accession record — Box 17",
+  "archive_reference": "NF/ARC/ACC/17",
+  "fictional_source": "Northfield School Archive, accession file",
+  "source_location": "archive_room",
+  "tags": [
+    "archive"
+  ],
+  "unlock_conditions": [
+    "anchor_done(arrival)"
+  ],
+  "view_effects": [],
+  "summary": "The teaching document. Completely ordinary, and its job is to be: it establishes the interface, the register and the typography on something with nothing wrong with it, so that the ledger page later has a norm to depart from. Grants no knowledge, deliberately.",
+  "pages": [
+    {
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "ACCESSION RECORD"
+        },
+        {
+          "kind": "field",
+          "label": "Reference",
+          "text": "NF/ARC/ACC/17"
+        },
+        {
+          "kind": "field",
+          "label": "Box",
+          "text": "17"
+        },
+        {
+          "kind": "field",
+          "label": "Received",
+          "text": "From the school office"
+        },
+        {
+          "kind": "field",
+          "label": "Condition",
+          "text": "Fair. Some water damage to the underside."
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "text",
+          "text": "Contents as received: sports day programmes (bundled), class photographs (loose), attendance ledgers vols. I-III, assorted correspondence, one tin."
+        },
+        {
+          "kind": "text",
+          "text": "Numbering to be completed on cataloguing. Items not listed individually at time of receipt."
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "note",
+          "text": "tin is biscuits. actual biscuits. binned. — I."
+        },
+        {
+          "kind": "stamp",
+          "text": "RECEIVED"
+        }
+      ]
+    }
+  ]
+}

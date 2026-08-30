@@ -52,9 +52,9 @@ a photograph, a promise, an ending note. Marked PROTOTYPE / NON-FINAL in-game.
 | `uv run ruff check .` | **clean** |
 | `uv run ruff format --check .` | **clean** |
 | `uv run mypy` | **clean, 61 files, strict** |
-| `s32 validate` | **0 errors, 0 warnings**, 6 info |
+| `s32 validate` | **0 errors, 0 warnings**, 5 info |
 | `s32 renpy lint` | **clean** |
-| `s32 renpy test` | **5/5 testcases passed** |
+| `s32 renpy test` | **6/6 testcases passed** |
 | `s32 simulate --runs 5000` | **7/7 storylets reachable, 0 dead ends** |
 | `s32 doctor` | **0 failures, 0 warnings** |
 
@@ -130,6 +130,11 @@ Recorded because they are the strongest evidence that the tooling earns its keep
    random. Fixed by modelling what a player actually does — go where something is
    happening — which turned out to be a real design requirement, not a
    simulation artefact.
+5. **An anchor's knowledge grant living only in prose.** `the_date` granted
+   `photo_dated_sept_32` inside its `.rpy` label, so a 5000-run sweep reported
+   the fact as never acquired. The same class of problem as (3), arriving by a
+   different route. Fixed by declaring it as an effect, where both the analyser
+   and the simulator can see it.
 
 ## Next milestone
 

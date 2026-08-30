@@ -23,6 +23,12 @@ label s32_st_archive_intro:
 
     c_iris "Anyway. You take the left wall, I'll keep fighting with this."
 
+    show iris school_summer talk
+
+    c_iris "Here — this is what a finished one looks like. Box twelve. Somebody did it properly in about 1990 and then everybody stopped."
+
+    $ s32_open_document("accession_record_box_17")
+
     hide iris with dissolve
 
     narrator "The left wall smells like paper that has been warm for a long time."
@@ -93,6 +99,24 @@ label s32_st_old_photo_glimpse:
             c_iris "No idea. That's the problem with the good ones."
             c_iris "Forty people and not one of them wrote anything down."
             narrator "She looks at it a moment longer than the sentence needed."
+
+    show iris school_summer talk
+
+    c_iris "Card first. Everything gets a card, even the things that shouldn't exist yet."
+
+    narrator "She writes the card while you hold the photograph, and she writes it properly, which takes four minutes you had not budgeted for."
+
+    # The photograph is in the player's hands right now, in the prose. The
+    # storylet declares `item(old_photo)` too and the director applies it after
+    # this label returns; taking it here as well is idempotent and makes the
+    # state true at the moment the writing says it is, which is what the
+    # document's unlock condition asks about.
+    $ take("old_photo")
+
+    # The card's own effects are declared in
+    # data/documents/photograph_card_unlisted.json and applied by the engine on
+    # first reading — not by this call, and not by a screen action.
+    $ s32_open_document("photograph_card_unlisted")
 
     hide iris with dissolve
 
@@ -253,6 +277,14 @@ label s32_st_theo_ledger_question:
             $ npc_learns("iris", "attendance_sheet_anomaly", "suspected")
 
     c_theo "I'm not saying it's anything. I'm saying it's not nothing, and those are different."
+
+    c_theo "Look at it yourself. I'd rather you didn't take my word for it."
+
+    # Same reason as above: the ledger is open on the desk in front of the
+    # player before the storylet's declared effects run.
+    $ learn("attendance_sheet_anomaly", source="theo_showed_me")
+
+    $ s32_open_document("ledger_iii_page_forty")
 
     hide theo with dissolve
 

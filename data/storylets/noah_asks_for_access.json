@@ -1,0 +1,51 @@
+{
+  "id": "noah_asks_for_access",
+  "label": "s32_st_noah_asks_for_access",
+  "title": "Noah Wants Twenty Minutes",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "noah"
+  ],
+  "location": "courtyard",
+  "time_slots": [
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "character",
+    "investigation"
+  ],
+  "priority": 60,
+  "weight": 1.2,
+  "requirements": [
+    "seen(archive_intro)",
+    "not_seen(noah_asks_for_access)"
+  ],
+  "effects": [
+    "know(noah_is_writing_about_the_archive, he_told_me)",
+    "rel noah.familiarity += 5",
+    "event(noah_asked_for_access)"
+  ],
+  "outcomes": [
+    [
+      "rel noah.familiarity += 3",
+      "commit(noah_access, noah, 2, 55)"
+    ],
+    [
+      "trait direct += 1",
+      "rel noah.respect += 4",
+      "rel noah.resentment += 2"
+    ],
+    [
+      "trait curious += 1",
+      "rel noah.trust += 4",
+      "rel iris->noah.suspicion += 3",
+      "rel iris.trust -= 2"
+    ]
+  ],
+  "repeat_policy": "once",
+  "summary": "Noah tells you exactly what he wants and what he will do with it, which is what makes him difficult. Second commitment, and the first NPC-to-NPC consequence the player can see coming and take anyway."
+}

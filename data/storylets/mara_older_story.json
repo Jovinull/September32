@@ -1,0 +1,54 @@
+{
+  "id": "mara_older_story",
+  "label": "s32_st_mara_older_story",
+  "title": "The Road Into Town",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "mara"
+  ],
+  "location": "town_road",
+  "time_slots": [
+    "afternoon",
+    "evening"
+  ],
+  "tags": [
+    "slice_of_life",
+    "mystery",
+    "character"
+  ],
+  "priority": 68,
+  "weight": 1.0,
+  "requirements": [
+    "knows(old_photo_exists)",
+    "seen(mara_reads_the_room)",
+    "not_seen(mara_older_story)"
+  ],
+  "effects": [
+    "know(mara_knows_the_older_story, mara_on_the_road)",
+    "npc_stance(mara, old_photo_exists, suspected)",
+    "rel mara.familiarity += 3",
+    "event(walked_with_mara)"
+  ],
+  "outcomes": [
+    [
+      "trait curious += 1",
+      "rel mara.trust += 2",
+      "rel mara.resentment += 3",
+      "suspect(photo_is_a_forgery, mara_thinks_someone_faked_it)"
+    ],
+    [
+      "trait gentle += 1",
+      "rel mara.trust += 5",
+      "rel mara.respect += 3",
+      "suspect(photo_is_a_forgery, mara_thinks_someone_faked_it)"
+    ],
+    [
+      "trait direct += 1",
+      "rel mara.suspicion += 4",
+      "rel mara.trust -= 1"
+    ]
+  ],
+  "repeat_policy": "once",
+  "summary": "Delayed callback on knowing the photograph exists. Mara offers an interpretation — that someone faked it — as an interpretation. Granted as SUSPECTED, never known: it contradicts photo_dated_sept_32 and the player may end up holding both, which is the point (rule R8)."
+}

@@ -9,6 +9,7 @@
   ],
   "location": "rooftop",
   "time_slots": [
+    "afternoon",
     "evening"
   ],
   "tags": [
@@ -20,7 +21,7 @@
   "weight": 1.0,
   "requirements": [
     "weather == rain",
-    "rel iris.trust >= 10",
+    "rel iris.trust >= 7",
     "knows(old_photo_exists)"
   ],
   "effects": [
@@ -30,7 +31,7 @@
     "npc_stance(iris, old_photo_exists, known)"
   ],
   "repeat_policy": "once",
-  "summary": "The quiet one. Iris admits to the private index. Exercises: weather gate, relationship threshold, knowledge on both sides. Trust 10 is the maximum a run can reach, and only by being warm to Iris at the first shift AND curious about the photograph — so this scene is the payoff for two earlier decisions the player had no reason to think were connected.",
+  "summary": "The quiet one. Iris admits to the private index. Exercises: weather gate, relationship threshold, knowledge on both sides, and delayed branching — trust 7 needs the warm answer at the first shift, hours earlier, for a reason the player had no way to see coming. The threshold was 12 and then 10; both required the best branch of TWO separate scenes, which put it at 1/9 of runs before the weather and the time of day were even considered. Milestone 1 then added evening content at four other locations, the wander diluted, and 2000 runs reached it zero times. Gating on a near-maximum is fragile: one new scene can strand it.",
   "outcomes": [
     [
       "trait empathetic += 1",

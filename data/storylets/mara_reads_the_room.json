@@ -1,0 +1,50 @@
+{
+  "id": "mara_reads_the_room",
+  "label": "s32_st_mara_reads_the_room",
+  "title": "Who Is Talking to Whom",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "mara"
+  ],
+  "location": "hallway_east",
+  "time_slots": [
+    "morning",
+    "midday"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "character",
+    "friendship"
+  ],
+  "priority": 56,
+  "weight": 1.5,
+  "requirements": [
+    "not_seen(mara_reads_the_room)"
+  ],
+  "effects": [
+    "rel mara.familiarity += 4",
+    "npc_stance(mara, theo_checks_the_ledger, known)",
+    "event(mara_read_the_room)"
+  ],
+  "outcomes": [
+    [
+      "rel mara.familiarity += 3",
+      "rel mara->june.suspicion += 2"
+    ],
+    [
+      "trait empathetic += 1",
+      "rel mara.respect += 4",
+      "rel mara.suspicion += 2",
+      "rel mara->june.suspicion += 2"
+    ],
+    [
+      "trait curious += 1",
+      "rel mara.trust += 3",
+      "rel mara->theo.respect += 2"
+    ]
+  ],
+  "repeat_policy": "once",
+  "summary": "Mara's competence and its cost. She is accurate about Theo and confidently wrong about June, and the scene does not signal which is which. Establishes her as a reliable source, which is what makes her being wrong worth anything."
+}

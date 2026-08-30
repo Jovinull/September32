@@ -1,0 +1,49 @@
+{
+  "id": "noah_evening_layout",
+  "label": "s32_st_noah_evening_layout",
+  "title": "Four Pages, Badly Filed",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "noah"
+  ],
+  "location": "classroom_2b",
+  "time_slots": [
+    "evening",
+    "night"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "character",
+    "mystery"
+  ],
+  "priority": 64,
+  "weight": 1.0,
+  "requirements": [
+    "knows(noah_is_writing_about_the_archive)",
+    "not_seen(noah_evening_layout)"
+  ],
+  "effects": [
+    "rel noah.familiarity += 3",
+    "event(helped_with_the_paper)"
+  ],
+  "outcomes": [
+    [
+      "trait skeptical += 1",
+      "rel noah.respect += 2"
+    ],
+    [
+      "trait gentle += 1",
+      "rel noah.familiarity += 4",
+      "rel noah.dependency += 2"
+    ],
+    [
+      "trait curious += 2",
+      "rel noah.trust += 2",
+      "rel noah.suspicion += 1"
+    ]
+  ],
+  "repeat_policy": "once",
+  "summary": "Noah unbothered by a third absence, with an ordinary reason available and the prose declining to choose. Delayed callback on knowing what he is writing. The test is whether all three readings of Noah survive it."
+}

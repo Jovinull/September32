@@ -1,0 +1,25 @@
+{
+  "id": "town_road_evening_walk",
+  "label": "s32_st_town_road_evening_walk",
+  "title": "The Road, Ordinary",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "town_road",
+  "time_slots": [
+    "afternoon",
+    "evening"
+  ],
+  "tags": [
+    "slice_of_life"
+  ],
+  "priority": 22,
+  "weight": 2.5,
+  "requirements": [],
+  "effects": [
+    "event(walked_into_town)"
+  ],
+  "cooldown": 1,
+  "repeat_policy": "repeatable",
+  "summary": "Ambient content that is not the courtyard — the direct answer to one ambient storylet accounting for 72% of played scenes. Three mundane variants. The road's ordinariness is an asset the story spends later, so no variant may end on an ominous line."
+}

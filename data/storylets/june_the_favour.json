@@ -1,0 +1,49 @@
+{
+  "id": "june_the_favour",
+  "label": "s32_st_june_the_favour",
+  "title": "A Favour, in the Courtyard",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "june"
+  ],
+  "location": "courtyard",
+  "time_slots": [
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "friendship",
+    "character"
+  ],
+  "priority": 58,
+  "weight": 1.5,
+  "requirements": [
+    "not_seen(june_the_favour)"
+  ],
+  "effects": [
+    "rel june.familiarity += 5",
+    "event(met_june)"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel june.familiarity += 4",
+      "commit(june_favour, june, 1, 45)"
+    ],
+    [
+      "trait skeptical += 1",
+      "rel june.respect += 3",
+      "commit(june_favour, june, 1, 45)"
+    ],
+    [
+      "trait direct += 1",
+      "rel june.respect += 4",
+      "rel june.familiarity += 1"
+    ]
+  ],
+  "repeat_policy": "once",
+  "summary": "June wants something today and it has nothing to do with the archive. Zero supernatural content, deliberately: a character who only appears when the plot needs her is not a character. Creates the first commitment whose cost is purely social."
+}

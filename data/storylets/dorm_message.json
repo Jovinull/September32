@@ -1,0 +1,46 @@
+{
+  "id": "dorm_message",
+  "label": "s32_st_dorm_message",
+  "title": "Your Room, After",
+  "category": "interstitial",
+  "status": "prototype",
+  "characters": [],
+  "location": "dorm_room",
+  "time_slots": [
+    "evening",
+    "night"
+  ],
+  "tags": [
+    "slice_of_life",
+    "character",
+    "friendship"
+  ],
+  "priority": 66,
+  "weight": 1.4,
+  "requirements": [
+    "day >= 1"
+  ],
+  "effects": [
+    "event(settled_the_day)"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "fulfil(june_favour)",
+      "rel june.trust += 4"
+    ],
+    [
+      "trait reserved += 1",
+      "break(june_favour)",
+      "rel june.resentment += 3"
+    ],
+    [
+      "trait curious += 2",
+      "rel iris.familiarity += 2",
+      "rel iris.trust += 2"
+    ]
+  ],
+  "cooldown": 2,
+  "repeat_policy": "cooldown",
+  "summary": "The main delayed callback. Reads commitment and relationship state and produces a different scene from one file. Makes the dorm mechanically and emotionally useful: the room where a promise is kept, or is not."
+}

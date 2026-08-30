@@ -1,0 +1,48 @@
+{
+  "id": "june_welcome_pack",
+  "label": "s32_st_june_welcome_pack",
+  "title": "The Booklet They Give You",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "june"
+  ],
+  "location": "classroom_2b",
+  "tags": [
+    "slice_of_life",
+    "school",
+    "mystery",
+    "character"
+  ],
+  "priority": 62,
+  "weight": 1.0,
+  "requirements": [
+    "seen(june_the_favour)",
+    "not_seen(june_welcome_pack)"
+  ],
+  "effects": [
+    "rel june.familiarity += 3",
+    "event(june_mentioned_the_booklet)"
+  ],
+  "outcomes": [
+    [
+      "trait curious += 1",
+      "know(school_history_skips_a_year, junes_welcome_pack)",
+      "npc_stance(june, school_history_skips_a_year, known)",
+      "rel june.familiarity += 3"
+    ],
+    [
+      "trait skeptical += 1",
+      "know(school_history_skips_a_year, junes_welcome_pack)",
+      "npc_stance(june, school_history_skips_a_year, known)",
+      "rel june.respect += 2"
+    ],
+    [
+      "trait gentle += 1",
+      "rel june.familiarity += 4",
+      "rel june.attraction += 2"
+    ]
+  ],
+  "repeat_policy": "once",
+  "summary": "June's kind of local knowledge: an outsider's, from a document she skimmed once and found boring. The first inconsistency that is not in the archive, delivered at the correct temperature — by someone who does not care."
+}

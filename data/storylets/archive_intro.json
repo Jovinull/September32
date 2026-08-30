@@ -1,0 +1,38 @@
+{
+  "id": "archive_intro",
+  "label": "s32_st_archive_intro",
+  "title": "The Archive Room",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "iris"
+  ],
+  "location": "archive_room",
+  "time_slots": [
+    "midday",
+    "afternoon"
+  ],
+  "phases": [
+    "normal",
+    "odd"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "archive",
+    "character"
+  ],
+  "priority": 70,
+  "weight": 1.0,
+  "requirements": [
+    "anchor_done(arrival)",
+    "not_seen(archive_intro)"
+  ],
+  "effects": [
+    "rel iris.familiarity += 8",
+    "flag archive_visits += 1",
+    "event(met_iris_in_archive)"
+  ],
+  "repeat_policy": "once",
+  "summary": "Iris explains the digitisation job. Ordinary, warm, slightly overwhelming. Exercises: location gate, anchor gate, relationship effect."
+}

@@ -1,0 +1,46 @@
+{
+  "id": "old_photo_glimpse",
+  "label": "s32_st_old_photo_glimpse",
+  "title": "Box Seventeen",
+  "category": "investigation",
+  "status": "prototype",
+  "characters": [
+    "iris"
+  ],
+  "location": "archive_room",
+  "tags": [
+    "mystery",
+    "archive",
+    "investigation"
+  ],
+  "priority": 75,
+  "weight": 1.0,
+  "requirements": [
+    "seen(archive_intro)",
+    "flag archive_visits >= 1",
+    "not_seen(old_photo_glimpse)"
+  ],
+  "effects": [
+    "know(old_photo_exists, archive_box_17)",
+    "item(old_photo)",
+    "rel iris.trust += 2",
+    "event(found_the_photo)"
+  ],
+  "repeat_policy": "once",
+  "summary": "The photograph surfaces. The player is not told the date yet; only that it is out of sequence. Exercises: knowledge grant, inventory, requirement on a prior storylet.",
+  "outcomes": [
+    [
+      "trait curious += 2",
+      "rel iris.trust += 3",
+      "suspect(photo_dated_sept_32, a_glance_at_the_stamp)"
+    ],
+    [
+      "trait reserved += 1",
+      "rel iris.respect += 3"
+    ],
+    [
+      "trait empathetic += 1",
+      "rel iris.familiarity += 4"
+    ]
+  ]
+}

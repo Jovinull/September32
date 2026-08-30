@@ -1,0 +1,11 @@
+{
+  "id": "courtyard",
+  "display_name": "Courtyard",
+  "area": "school",
+  "indoor": false,
+  "background": "bg_school_a_s1",
+  "tags": [
+    "exterior",
+    "social"
+  ]
+}

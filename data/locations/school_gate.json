@@ -1,0 +1,11 @@
+{
+  "id": "school_gate",
+  "display_name": "School Gate",
+  "area": "school",
+  "indoor": false,
+  "background": "bg_school_entrance",
+  "tags": [
+    "exterior",
+    "arrival"
+  ]
+}

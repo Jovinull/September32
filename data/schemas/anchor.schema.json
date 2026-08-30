@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://september32.invalid/schemas/anchor.schema.json",
+  "title": "Anchor scene",
+  "description": "A dramatic beat that must happen, in order. Anchors carry structure; storylets fill the space between them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "label",
+    "order",
+    "phase"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Stable anchor id, used by anchor_done()."
+    },
+    "label": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Strict ordering key."
+    },
+    "phase": {
+      "enum": [
+        "normal",
+        "odd",
+        "unsettling",
+        "impossible",
+        "consequences"
+      ]
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Conditions for this anchor to become ready."
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Applied when the anchor plays."
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": "One choice's effects."
+      },
+      "description": "Per-choice effect sets, as on a storylet. Anchors carry most of the early relationship movement; leaving these undeclared makes later thresholds look unreachable."
+    },
+    "grants": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "uniqueItems": true,
+      "description": "Knowledge granted. Derived from `effects` when omitted."
+    },
+    "summary": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://september32.invalid/schemas/location.schema.json",
+  "title": "Location",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "display_name",
+    "area"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Stable location id, used by `location ==` conditions."
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "area": {
+      "type": "string",
+      "minLength": 1
+    },
+    "indoor": {
+      "type": "boolean",
+      "default": true
+    },
+    "background": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Ren'Py image name. May reference an asset not yet installed."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "archive_key",
+  "display_name": "Archive room key",
+  "kind": "object",
+  "description": "Brass, worn smooth, on a loop of green cord.",
+  "tags": [
+    "access"
+  ]
+}

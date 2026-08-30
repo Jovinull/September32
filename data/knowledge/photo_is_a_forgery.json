@@ -1,0 +1,11 @@
+{
+  "id": "photo_is_a_forgery",
+  "summary": "The stamp on the photograph was faked, most likely as a student prank.",
+  "category": "phenomenon",
+  "contradicts": [
+    "photo_dated_sept_32"
+  ],
+  "tags": [
+    "mystery"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "attendance_sheet_anomaly",
+  "summary": "One attendance sheet in the same box carries a column with no date header.",
+  "category": "archive",
+  "tags": [
+    "mystery",
+    "archive"
+  ]
+}

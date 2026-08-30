@@ -1,0 +1,12 @@
+{
+  "id": "mara",
+  "display_name": "Mara",
+  "role": "Student, third generation in the town.",
+  "asset_id": "pm_a01_chinatsu",
+  "romanceable": true,
+  "tags": [
+    "town",
+    "tradition"
+  ],
+  "notes": "Perspective: the town's own account of itself. Not superstitious; loyal. Those look similar from outside and are not the same."
+}

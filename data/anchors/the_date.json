@@ -1,0 +1,21 @@
+{
+  "id": "the_date",
+  "label": "s32_anchor_the_date",
+  "title": "The Date",
+  "order": 3,
+  "phase": "odd",
+  "requirements": [
+    "anchor_done(first_shift)",
+    "knows(old_photo_exists)",
+    "day >= 2"
+  ],
+  "effects": [
+    "event(the_date)",
+    "anchor_done(the_date)",
+    "phase = odd"
+  ],
+  "summary": "PROVISIONAL. The first thing that does not fit. Deliberately small: a stamp, read twice. The phase advances here and not before.",
+  "grants": [
+    "photo_dated_sept_32"
+  ]
+}

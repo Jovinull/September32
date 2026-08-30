@@ -1,0 +1,22 @@
+{
+  "id": "courtyard_small_talk",
+  "label": "s32_st_courtyard_small_talk",
+  "title": "Courtyard, Between Things",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "courtyard",
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 20,
+  "weight": 3.0,
+  "requirements": [],
+  "effects": [
+    "event(idled_in_courtyard)"
+  ],
+  "cooldown": 1,
+  "repeat_policy": "repeatable",
+  "summary": "Deliberate filler with the lowest priority in the set. Its job is to make ordinary days feel like days rather than a queue of plot. Exercises: repeatable policy and weight damping."
+}

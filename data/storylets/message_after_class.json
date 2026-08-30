@@ -1,0 +1,40 @@
+{
+  "id": "message_after_class",
+  "label": "s32_st_message_after_class",
+  "title": "A Message After Class",
+  "category": "interstitial",
+  "status": "prototype",
+  "characters": [],
+  "location": "classroom_2b",
+  "time_slots": [
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "friendship"
+  ],
+  "priority": 50,
+  "weight": 1.5,
+  "requirements": [
+    "knows(old_photo_exists)"
+  ],
+  "effects": [
+    "commit(meet_theo_archive, theo, 1, 60)",
+    "rel theo.familiarity += 2",
+    "event(theo_asked_to_meet)"
+  ],
+  "repeat_policy": "once",
+  "summary": "Theo asks to compare the photo against the ledger tomorrow. Exercises: commitments, and the causality they enable when the player skips it.",
+  "outcomes": [
+    [
+      "trait curious += 1",
+      "rel theo.familiarity += 2"
+    ],
+    [
+      "trait sarcastic += 1",
+      "rel theo.respect -= 1",
+      "rel theo.familiarity += 2"
+    ]
+  ]
+}

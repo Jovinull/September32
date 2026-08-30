@@ -1,0 +1,11 @@
+{
+  "id": "archive_room",
+  "display_name": "Archive Room",
+  "area": "school",
+  "indoor": true,
+  "background": "bg_school_clubroom_c",
+  "tags": [
+    "archive",
+    "quiet"
+  ]
+}

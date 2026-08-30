@@ -1,0 +1,11 @@
+{
+  "id": "dorm_room",
+  "display_name": "Your Room",
+  "area": "residence",
+  "indoor": true,
+  "background": "bg_room_a_view1",
+  "tags": [
+    "private",
+    "rest"
+  ]
+}

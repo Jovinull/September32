@@ -1,0 +1,13 @@
+{
+  "id": "attendance_ledger",
+  "display_name": "Attendance ledger, volume III",
+  "kind": "document",
+  "description": "Ruled columns, faded pencil, one column with nothing written above it.",
+  "grants": [
+    "attendance_sheet_anomaly"
+  ],
+  "tags": [
+    "archive",
+    "evidence"
+  ]
+}

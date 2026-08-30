@@ -1,0 +1,13 @@
+{
+  "id": "old_photo",
+  "display_name": "Unlabelled class photograph",
+  "kind": "document",
+  "description": "Black and white, forty-odd faces, no names on the back. Something is stamped in the corner.",
+  "grants": [
+    "old_photo_exists"
+  ],
+  "tags": [
+    "archive",
+    "evidence"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "noah",
+  "display_name": "Noah",
+  "role": "Student, runs the school paper.",
+  "asset_id": "pm_a01_ume",
+  "romanceable": false,
+  "tags": [
+    "press",
+    "opportunism"
+  ],
+  "notes": "Perspective: this is a story. He is not cynical about it; he genuinely believes the truth should be printed, which is its own kind of problem."
+}

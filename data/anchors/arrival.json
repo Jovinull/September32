@@ -1,0 +1,29 @@
+{
+  "id": "arrival",
+  "label": "s32_anchor_arrival",
+  "title": "Arrival",
+  "order": 1,
+  "phase": "normal",
+  "requirements": [],
+  "effects": [
+    "event(arrived)",
+    "anchor_done(arrival)"
+  ],
+  "summary": "The protagonist reaches the school and is assigned to the digitisation project. Establishes ordinary life; nothing is wrong yet, and it must be allowed to be genuinely pleasant.",
+  "outcomes": [
+    [
+      "trait curious += 1",
+      "rel mara.familiarity += 4"
+    ],
+    [
+      "trait reserved += 1",
+      "rel mara.familiarity += 3",
+      "rel mara.respect += 2"
+    ],
+    [
+      "trait direct += 1",
+      "rel mara.familiarity += 2",
+      "rel mara.suspicion += 3"
+    ]
+  ]
+}

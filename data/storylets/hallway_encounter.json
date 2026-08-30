@@ -1,0 +1,33 @@
+{
+  "id": "hallway_encounter",
+  "label": "s32_st_hallway_encounter",
+  "title": "Passing Theo in the Hall",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [
+    "theo"
+  ],
+  "location": "hallway_east",
+  "time_slots": [
+    "morning",
+    "midday"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "friendship"
+  ],
+  "priority": 40,
+  "weight": 2.0,
+  "requirements": [],
+  "blockers": [
+    "rel theo.resentment >= 40"
+  ],
+  "effects": [
+    "rel theo.familiarity += 3",
+    "npc_stance(theo, theo_checks_the_ledger, known)"
+  ],
+  "cooldown": 2,
+  "repeat_policy": "cooldown",
+  "summary": "Short, repeatable, low priority. Exercises: cooldown, repeat damping, blockers, NPC-side knowledge."
+}

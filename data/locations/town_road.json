@@ -1,0 +1,11 @@
+{
+  "id": "town_road",
+  "display_name": "Road into Town",
+  "area": "town",
+  "indoor": false,
+  "background": "bg_house_a",
+  "tags": [
+    "exterior",
+    "town"
+  ]
+}

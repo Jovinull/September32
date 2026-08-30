@@ -1,0 +1,12 @@
+{
+  "id": "theo",
+  "display_name": "Theo",
+  "role": "Student, keeps the digitisation spreadsheet.",
+  "asset_id": "pm_a01_tomomi",
+  "romanceable": true,
+  "tags": [
+    "records",
+    "rationalism"
+  ],
+  "notes": "Perspective: records as data. Believes any contradiction is a filing error until it demonstrably is not."
+}

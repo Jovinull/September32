@@ -1,0 +1,12 @@
+{
+  "id": "ellery",
+  "display_name": "Ms. Ellery",
+  "role": "Faculty archivist supervising the digitisation.",
+  "asset_id": null,
+  "romanceable": false,
+  "tags": [
+    "faculty",
+    "gatekeeper"
+  ],
+  "notes": "Perspective: the institution. Decides what gets catalogued and what gets a box in the back. ART GAP: no compatible sprite selected yet."
+}

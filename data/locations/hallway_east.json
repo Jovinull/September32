@@ -1,0 +1,10 @@
+{
+  "id": "hallway_east",
+  "display_name": "East Hallway",
+  "area": "school",
+  "indoor": true,
+  "background": "bg_school_hall_2",
+  "tags": [
+    "transit"
+  ]
+}

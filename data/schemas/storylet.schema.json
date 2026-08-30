@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://september32.invalid/schemas/storylet.schema.json",
+  "title": "Storylet",
+  "description": "Metadata for one pre-written scene. Contains no prose: `label` names the Ren'Py label that holds the writing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "label",
+    "category"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Stable id. Once a storylet is `active`, this must not change."
+    },
+    "label": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Ren'Py label holding the scene. Convention: s32_st_<id>."
+    },
+    "title": {
+      "type": "string",
+      "description": "Human title for reports and debug screens."
+    },
+    "category": {
+      "enum": [
+        "anchor",
+        "conversation",
+        "investigation",
+        "ambient",
+        "interstitial"
+      ]
+    },
+    "status": {
+      "enum": [
+        "prototype",
+        "draft",
+        "active",
+        "retired"
+      ],
+      "default": "prototype"
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "uniqueItems": true,
+      "description": "Characters who must be present for this to fire."
+    },
+    "location": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Required location, or null for anywhere."
+    },
+    "time_slots": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "early_morning",
+          "morning",
+          "midday",
+          "afternoon",
+          "evening",
+          "night",
+          "late_night"
+        ]
+      },
+      "uniqueItems": true,
+      "description": "Allowed slots. Empty means any."
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "normal",
+          "odd",
+          "unsettling",
+          "impossible",
+          "consequences"
+        ]
+      },
+      "uniqueItems": true,
+      "description": "Allowed escalation phases. Empty means any."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "slice_of_life",
+          "romance",
+          "friendship",
+          "mystery",
+          "investigation",
+          "horror",
+          "school",
+          "archive",
+          "character",
+          "meta",
+          "anchor"
+        ]
+      },
+      "uniqueItems": true,
+      "description": "Content tags, used for the pacing budget report."
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 50,
+      "description": "Hard tier. Only the highest-priority eligible storylets compete."
+    },
+    "weight": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "default": 1.0,
+      "description": "Relative likelihood within a priority tier, damped by repeats."
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "All must pass. See s32_engine.conditions."
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Any that passes blocks the storylet."
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Applied after the scene plays. See s32_engine.effects."
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": "One choice's effects."
+      },
+      "description": "Alternative effect sets the scene's own choices produce, in the order the choices appear. Declare these: a state change that exists only inside .rpy prose is invisible to validation, reachability analysis and simulation, which will then report any content depending on it as unreachable."
+    },
+    "grants": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "uniqueItems": true,
+      "description": "Knowledge granted. Derived from `effects` when omitted; set it explicitly only when the grant happens inside the .rpy label."
+    },
+    "cooldown": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0,
+      "description": "Minimum days between repeats. Requires repeat_policy != once."
+    },
+    "repeat_policy": {
+      "enum": [
+        "once",
+        "cooldown",
+        "repeatable"
+      ],
+      "default": "once"
+    },
+    "anchor": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Anchor this storylet belongs to, if any."
+    },
+    "summary": {
+      "type": "string",
+      "description": "What this scene is for. Write it."
+    }
+  }
+}

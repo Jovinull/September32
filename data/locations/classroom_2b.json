@@ -1,0 +1,10 @@
+{
+  "id": "classroom_2b",
+  "display_name": "Classroom 2-B",
+  "area": "school",
+  "indoor": true,
+  "background": "bg_school_classroom_a",
+  "tags": [
+    "class"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "rooftop",
+  "display_name": "Rooftop",
+  "area": "school",
+  "indoor": false,
+  "background": "bg_school_rooftop",
+  "tags": [
+    "exterior",
+    "private"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "rain_after_school",
+  "label": "s32_st_rain_after_school",
+  "title": "Rain, After School",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "iris"
+  ],
+  "location": "rooftop",
+  "time_slots": [
+    "evening"
+  ],
+  "tags": [
+    "slice_of_life",
+    "romance",
+    "character"
+  ],
+  "priority": 65,
+  "weight": 1.0,
+  "requirements": [
+    "weather == rain",
+    "rel iris.trust >= 10",
+    "knows(old_photo_exists)"
+  ],
+  "effects": [
+    "rel iris.trust += 5",
+    "rel iris.attraction += 4",
+    "know(iris_keeps_a_second_index, iris_told_me)",
+    "npc_stance(iris, old_photo_exists, known)"
+  ],
+  "repeat_policy": "once",
+  "summary": "The quiet one. Iris admits to the private index. Exercises: weather gate, relationship threshold, knowledge on both sides. Trust 10 is the maximum a run can reach, and only by being warm to Iris at the first shift AND curious about the photograph — so this scene is the payoff for two earlier decisions the player had no reason to think were connected.",
+  "outcomes": [
+    [
+      "trait empathetic += 1",
+      "rel iris.trust += 4"
+    ],
+    [
+      "trait sarcastic += 1",
+      "rel iris.familiarity += 4",
+      "rel iris.attraction += 2"
+    ]
+  ]
+}

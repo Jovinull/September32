@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://september32.invalid/schemas/knowledge.schema.json",
+  "title": "Knowledge fact",
+  "description": "One discrete fact agents may hold differing beliefs about. Stances: unknown, suspected, known, false_belief, disproven.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "summary"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Stable fact id, used by knows()/suspects()/know()."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string"
+    },
+    "contradicts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "uniqueItems": true,
+      "description": "Facts that cannot be true at the same time as this one."
+    },
+    "reveals_phase": {
+      "oneOf": [
+        {
+          "enum": [
+            "normal",
+            "odd",
+            "unsettling",
+            "impossible",
+            "consequences"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  }
+}

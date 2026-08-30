@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://september32.invalid/schemas/character.schema.json",
+  "title": "Character",
+  "description": "A character's narrative identity. Deliberately separate from any art asset: `asset_id` points at whichever sprite currently represents them, and changing it must never require touching the story.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "display_name",
+    "role"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Stable id used in conditions, effects and save files."
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string"
+    },
+    "asset_id": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Asset identity from assets/catalog/assets.toml, or null for an art gap."
+    },
+    "romanceable": {
+      "type": "boolean",
+      "default": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

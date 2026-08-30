@@ -4,11 +4,14 @@
 
 ## Summary
 
-Bootstrap complete. The game runs, the engine works, the tooling works, and every
-quality gate is green. There is a five-to-fifteen-minute vertical slice that
-exercises every system end to end.
+Milestone 1 complete. Fifteen storylets, an archive document viewer, and three
+characters who now have written voices. Every quality gate is green.
 
-What exists is infrastructure and a proof. What does not exist is a game.
+The milestone was a content proof, not an infrastructure one, and it answered
+its question: the architecture supports varied hand-written content, and the
+thing holding the game back is no longer the engine. It is that half the map has
+nothing authored in it at any hour. See
+[`MILESTONE_1_PACING.md`](MILESTONE_1_PACING.md).
 
 ## Engine
 
@@ -48,31 +51,42 @@ a photograph, a promise, an ending note. Marked PROTOTYPE / NON-FINAL in-game.
 
 | Gate | Result |
 | --- | --- |
-| `uv run pytest` | **131 passed** |
+| `uv run pytest` | **175 passed** |
 | `uv run ruff check .` | **clean** |
 | `uv run ruff format --check .` | **clean** |
-| `uv run mypy` | **clean, 61 files, strict** |
-| `s32 validate` | **0 errors, 0 warnings**, 5 info |
+| `uv run mypy` | **clean, 66 files, strict** |
+| `s32 validate` | **0 errors, 0 warnings**, 9 info |
 | `s32 renpy lint` | **clean** |
-| `s32 renpy test` | **6/6 testcases passed** |
-| `s32 simulate --runs 5000` | **7/7 storylets reachable, 0 dead ends** |
+| `s32 renpy test` | **11/11 testcases passed** |
+| `s32 simulate --runs 5000` | **15/15 storylets reachable, 0 dead ends** |
 | `s32 doctor` | **0 failures, 0 warnings** |
 
 ## Content
 
 | | |
 | --- | --- |
-| Storylets | 7 (all `prototype`) |
+| Storylets | 15 (all `prototype`) |
 | Anchors | 3 |
 | Characters | 6 (5 with art) |
 | Locations | 8 |
-| Knowledge facts | 7 |
+| Knowledge facts | 9 |
+| Documents | 3 |
 | Items | 3 |
+
+Unique scenes in an average run: **13.6**, up from 5.9. June, Mara and Noah
+appear in 100%, 94% and 100% of runs respectively, having previously appeared in
+none.
 
 ## Known gaps
 
-**Content.** Seven storylets is a demonstration, not a game. Four characters have
-no storylet of their own; three locations have none.
+**Content density, which is now the main constraint.** Fifteen storylets is
+still not a game, but the shape of the shortfall has changed and is worth being
+precise about. Of the 56 (location, time slot) cells, **half are empty** and a
+quarter hold exactly one storylet. `school_gate` has nothing authored at any
+hour of any day. In **92.7%** of moments the director has exactly one eligible
+candidate, so it is not selecting; it is reporting. Everything downstream --
+repetition, content mix, the inert player profiles -- follows from that one
+number. [`MILESTONE_1_PACING.md`](MILESTONE_1_PACING.md).
 
 **Art.** Three characters have no casual outfit; one has no sprite; there is no
 male-presenting sprite in a compatible style; the archive room is played by a
@@ -81,8 +95,9 @@ club room; the class photograph does not exist. See `ART_GAP_ANALYSIS.md`.
 **Audio.** Five tracks. Nothing for investigation, romance, or the later phases.
 No sound effects.
 
-**UI.** Kenney scaffolding. The archive document viewer — the second most
-important interface in the game — is unbuilt. So is the calendar.
+**UI.** Kenney scaffolding. The archive document viewer is **built** — three
+documents, real text on deterministic generated paper, keyboard paging, effects
+applied exactly once and unwound by rollback. The calendar is still unbuilt.
 
 **Assets are not versioned, by design (ADR-0003).** A clone is 2.7 MB and has
 none of them; the same checkout on a working machine is around 1.1 GB. The game
@@ -93,22 +108,42 @@ everything from official sources against the recorded hashes.
 **Canon.** Deliberately open. The nature of September 32 is undecided, and
 `PHENOMENON_RULES.md` exists so that writing can proceed without it.
 
-**The content mix is wrong, and the report says so.** Across 5000 runs, 90% of
-played scenes are tagged `slice_of_life` against a `normal`-phase target of 65%
-(`docs/narrative-design/PACING.md`). The cause is arithmetic rather than
-authorial: there is one repeatable ambient storylet and six once-only ones, so
-the repeatable one fills every gap — 15 of the average 21 scenes in a run are
-repeats of it. This is what a seven-storylet library looks like and it is
-expected to resolve as content is written, but it should be re-checked at
-fifteen rather than assumed.
+**The content mix did not resolve at fifteen, and the reason is now understood.**
+It was re-checked rather than assumed, which was the point. `slice_of_life` is
+94.3%, up from 90.4%. The single most played scene fell from 71.7% to 42.1% of
+everything played, but repeats per run *rose* from 15.0 to 21.5: adding a second
+ambient repeatable added capacity beside the first rather than diluting it. A
+run offers 98 slots against about a dozen once-only scenes, so whatever repeats
+absorbs the remainder.
 
-**Three knowledge facts are never acquired by the player**, correctly. One
-(`theo_checks_the_ledger`) is NPC-side only by design. Two
-(`mara_knows_the_older_story`, `photo_is_a_forgery`) are defined for content
-that has not been written yet.
+**No repeat, cooldown or weight value was changed.** Suppressing
+`courtyard_small_talk` would yield an empty slot rather than a different scene,
+because 92.7% of the time it is the only thing eligible. The fix is authored
+content in the empty cells, and it belongs to the next milestone.
 
-**`purp`.** One source expression token is unmapped because its meaning cannot be
-determined from the filename. Two minutes and a human. `ASSET_NAMING.md`.
+**One knowledge fact is never acquired by the player**, correctly:
+`theo_checks_the_ledger` is NPC-side only by design, and a test now holds it
+that way. The two that were waiting for content
+(`mara_knows_the_older_story`, `photo_is_a_forgery`) are both in play --
+the first in 94.2% of runs, the second offered as a *suspicion* by Mara and
+never as a fact, which is also asserted by a test.
+
+**`purp` is resolved.** It maps to `gloom`. It was settled by measuring the
+files locally -- it edits the same facial region as the other expressions, but
+in violet (268-279 deg) rather than skin tones (7-31 deg) -- not by looking at
+the artwork, which [ADR-0003](../decisions/ADR-0003-asset-licensing.md) forbids.
+Evidence in [`ASSET_NAMING.md`](ASSET_NAMING.md). A human should still confirm
+the word choice before a scene depends on the gloom/sad distinction:
+[`HUMAN_ART_REVIEW.md`](HUMAN_ART_REVIEW.md).
+
+**The player profiles are inert.** All six produce byte-identical runs.
+`_apply_profile` only re-picks within the top priority tier, and every storylet
+carries a distinct integer priority, so that tier holds one storylet in 100% of
+selections and the scoring code never executes. Recorded rather than fixed:
+with one eligible candidate in 92.7% of moments there is nothing for a profile
+to express a preference over, so changing the tier logic now would prove
+nothing. Any past claim of "swept six kinds of player" should be read as one
+player, six times.
 
 ## Blocked
 
@@ -151,17 +186,56 @@ Recorded because they are the strongest evidence that the tooling earns its keep
    helpers that fall back to a labelled placeholder, and `s32 doctor` now
    reports how many placeholders a build would ship.
 
+## Bugs found during Milestone 1
+
+Same reason as above: they are the evidence the tooling earns its keep.
+
+7. **A scene became unreachable because other scenes were added.**
+   `rain_after_school` needed `iris.trust >= 12` against a reachable ceiling of
+   exactly 10, and the eight new scenes gave the player model somewhere else to
+   be in the evening. Baseline data showed it was already marginal at 2.18%, so
+   this was an existing fault surfacing rather than a regression. Fixed by
+   raising the ceiling to 14 through a declared outcome, lowering the threshold
+   to 7, and widening it to the afternoon -- which the title supported anyway.
+   Now reached in 23.7% of runs.
+8. **Two generated paper textures were byte-identical.**
+   `Image.composite` with a mask averaging 128 blends two colours evenly at
+   every pixel, producing a flat fill. Caught by the determinism check hashing
+   two supposedly different tiles to the same value.
+9. **Documents were refused inside the scene that unlocked them.** The director
+   applies a storylet's declared effects *after* its label returns, so a
+   document gated on `has_item(old_photo)` could not be opened in the scene
+   where the player picks the photograph up. Fixed by making the precondition
+   true inline where the prose says it is true; the declared effects still run
+   afterwards and the tooling's view is unchanged.
+10. **Noah referred back to something the player might never have heard.**
+    His scene gates only on `noah_is_writing_about_the_archive`, but a line
+    called back to "the second gap about a year long" -- and about a third of
+    runs arrive without having met either June's booklet or Mara's road walk.
+    Found by reading the prose against the requirements rather than by a tool.
+    Guarded, and now held by a test.
+11. **The same discovery happened twice.** `dorm_message` is repeatable and two
+    of its branches both described noticing the courtyard bench in the
+    photograph for the first time. Each visit now observes something different.
+
 ## Next milestone
 
-**Fifteen storylets and the archive document viewer.**
+**Fill the empty cells, then decide about priority banding.**
 
-Not more systems. The systems work and are over-built relative to the content.
-What the project needs next is to find out whether the *writing* works at volume:
+The architecture question is answered and the writing works. The next milestone
+is not a systems milestone either:
 
-1. Storylets for june, noah and mara — the three characters with no content.
-2. Content for dorm_room and town_road.
-3. The archive document viewer, with procedurally-generated paper. It is the
-   game's most distinctive interface and it can be built without an artist.
-4. Then re-run `s32 simulate` and read the content mix against
-   `docs/narrative-design/PACING.md`. If fifteen storylets produce a sensible
-   ordinary phase, the architecture is proven and the answer is more writing.
+1. Author for the empty (location, time slot) cells rather than for the library
+   as a whole. `school_gate` at any hour; `hallway_east` outside the morning;
+   `courtyard` outside the afternoon.
+2. Target **three or more** eligible candidates in the common cells. That is the
+   threshold at which the director starts making decisions and below which no
+   amount of tuning matters.
+3. Then, and only then, revisit whether priority should band into tiers rather
+   than be a unique integer per storylet
+   ([ADR-0002](../decisions/ADR-0002-storylet-architecture.md)). That decision
+   needs content dense enough to test it, and it is the thing standing between
+   the player profiles and doing anything at all.
+4. The calendar interface.
+5. The items in [`HUMAN_ART_REVIEW.md`](HUMAN_ART_REVIEW.md), which need a
+   person and about ten minutes.

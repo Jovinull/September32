@@ -95,11 +95,11 @@ uv run s32 doctor
 ```
 [  ok  ] python                     3.12.10 on Windows
 [  ok  ] ren'py sdk                 8.5.3.26051504
-[  ok  ] content                    7 storylets, 3 anchors, 6 characters, 7 facts
+[  ok  ] content                    15 storylets, 3 anchors, 6 characters, 9 facts, 8 locations, 3 items
 [  ok  ] content validation         no findings
 [  ok  ] asset manifest             12 entries, 11 installed
 [  ok  ] asset licensing            evidence and terms recorded for every entry
-[  ok  ] installed assets           audio: 6, background: 282, character: 425, ...
+[  ok  ] installed assets           audio: 6, background: 282, character: 720, ...
 [  ok  ] credits                    CREDITS, NOTICES, game credits all current
 [  ok  ] json schemas               generated schemas match the engine's enums
 ```

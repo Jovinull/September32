@@ -63,7 +63,7 @@ This is the category that matters most, and the one with the least support.
 | Buttons, sliders, checkboxes | **FREE ASSET SUFFICIENT** | Kenney, CC0, 82 neutral greys — scaffolding only. |
 | Inventory and clue icons | **NEEDS EDIT** | 163 Kenney items with archival treatment applied. Adequate; not distinctive. |
 | The project's own interface | **NEEDS COMMISSION** | The shipped game must not read as "Kenney UI". `docs/style/VISUAL_DESIGN_SYSTEM.md` has the direction. |
-| The archive viewer | **NEEDS COMMISSION** | The second most important interface in the game and currently unbuilt. |
+| The archive viewer | **BUILT IN-HOUSE** | Three documents on four deterministic generated paper textures, real Ren'Py text throughout. `game/screens/archive.rpy`, `tools/s32tools/assets/paper.py`. An artist could still improve the paper; nothing is blocked on one. |
 | The calendar | **CAN BUILD IN-HOUSE** | And it is the best idea the project has: a calendar that quietly accepts `30 31 32`. |
 
 ---
@@ -99,7 +99,7 @@ This is the category that matters most, and the one with the least support.
    be off-duty.
 4. **Ms. Ellery.** A named character with no face.
 5. **A male-presenting sprite.** Removes a constraint the design did not choose.
-6. **The archive document viewer.** More important than any CG.
+6. ~~**The archive document viewer.**~~ Built. See above.
 7. **Music for the later phases.**
 
 ## Priority with no budget

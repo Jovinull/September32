@@ -61,15 +61,58 @@ generator reports every substitution.
 | `poutangry` | `pout_angry` |
 | `talk`, `happy`, `blush`, `pout`, `angry`, `angrytalk`, `disgusted` | unchanged |
 
-### The unmapped one
+### `purp`, resolved
 
-**`purp` is deliberately not mapped.** Its meaning cannot be determined from the
-filename, and inventing one would put a wrong label in front of a writer who
-trusts it. It passes through unchanged.
+**`purp` maps to `gloom`.** For a long time it was deliberately left unmapped:
+the filename does not say what it means, and inventing a label would have put a
+wrong word in front of a writer who trusts it.
 
-Resolving it requires a human looking at the contact sheets. It is a two-minute
-job that has not been done, and leaving it visibly unmapped is more honest than
-guessing.
+It was settled by measuring the images locally rather than by looking at them.
+No artwork was sent anywhere; the whole check is `PIL.ImageChops.difference`
+over files already on disk.
+
+The evidence, in the order it narrows:
+
+1. **It is an expression, not an outfit colour.** The pack's filename grammar is
+   `<character>_<outfit>_<token>`, and the token slot holds `angry`, `blush`,
+   `concerned`, `crying`, `disgusted`, `happy`, `neutral`, `pout`, `sad`,
+   `smirk`, `surprised`, `talk` -- and `purp`. It appears 25 times, exactly as
+   often as `neutral`, across both packs and every outfit.
+
+2. **The artist wrote it that way.** The name inside the source archive is
+   already `chinatsu_schsum_purp.webp`. Our importer did not truncate anything.
+   The pack abbreviates elsewhere too (`schsum`, `schwin`), and ships no
+   documentation of its own -- the archives contain images and nothing else.
+
+3. **It changes the same part of the drawing the other expressions change.**
+   Comparing each variant against `neutral` and keeping only pixels differing by
+   more than 90/255, the changed region is the face in every case:
+
+   | variant | changed px | region (of 720x1080) | median hue |
+   | --- | ---: | --- | ---: |
+   | `happy` | 253 | x292-388, y382-512 | 8 deg |
+   | `angry` | 35 | x267-400, y382-503 | 29 deg |
+   | `blush` | 126 | x288-405, y382-509 | 31 deg |
+   | **`purp`** | **361** | **x273-434, y366-503** | **268 deg** |
+
+   (`char_ayumi_casual_shirt_*`; `char_kohaku_casual_shirt_*` gives 266/59/176
+   px at hues 7/26/27 against `purp` at 435 px and 279 deg.)
+
+4. **The hue is the whole point.** Every other expression edits the face in skin
+   and blush tones, 7-31 degrees. `purp` edits it at 268-279 degrees -- violet --
+   and reaches higher up the forehead than any of the others. That is the anime
+   convention for gloom or dread: a purple shadow cast over the upper face.
+   `purp` is short for purple, and it names a mood, not a colourway.
+
+Consistent across two characters, two outfits and both packs.
+
+The reading is strong but it has never been confirmed by human eyes, because
+[ADR-0003](../decisions/ADR-0003-asset-licensing.md) forbids sending third-party
+artwork to a vision service and no exception was made for convenience. A
+one-line confirmation is listed in
+[`HUMAN_ART_REVIEW.md`](HUMAN_ART_REVIEW.md). Until someone ticks it, treat
+`gloom` as measured rather than seen, and do not write a scene that depends on
+the distinction between gloom and sadness.
 
 ## Backgrounds
 

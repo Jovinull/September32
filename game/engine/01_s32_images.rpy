@@ -12,7 +12,7 @@
 # each missing file becomes a labelled placeholder. See the helpers in
 # game/engine/00_s32_engine.rpy.
 
-# Generated 2026-08-30T21:29:47+00:00
+# Generated 2026-08-30T23:44:27+00:00
 
 init offset = -1
 
@@ -33,6 +33,7 @@ image iris casual_offshoulder pout = s32_sprite("images/vendor/characters/char_k
 image iris casual_offshoulder pout_angry = s32_sprite("images/vendor/characters/char_kohaku_casual_offshoulder_pout_angry.webp", "iris / casual_offshoulder / pout_angry")
 image iris casual_offshoulder crying = s32_sprite("images/vendor/characters/char_kohaku_casual_offshoulder_crying.webp", "iris / casual_offshoulder / crying")
 image iris casual_offshoulder disgusted = s32_sprite("images/vendor/characters/char_kohaku_casual_offshoulder_disgusted.webp", "iris / casual_offshoulder / disgusted")
+image iris casual_offshoulder gloom = s32_sprite("images/vendor/characters/char_kohaku_casual_offshoulder_gloom.webp", "iris / casual_offshoulder / gloom")
 image iris casual_offshoulder = s32_sprite("images/vendor/characters/char_kohaku_casual_offshoulder_neutral.webp", "iris / casual_offshoulder")
 image iris casual_shirt neutral = s32_sprite("images/vendor/characters/char_kohaku_casual_shirt_neutral.webp", "iris / casual_shirt / neutral")
 image iris casual_shirt neutral_blush = s32_sprite("images/vendor/characters/char_kohaku_casual_shirt_neutral_blush.webp", "iris / casual_shirt / neutral_blush")
@@ -50,6 +51,7 @@ image iris casual_shirt pout = s32_sprite("images/vendor/characters/char_kohaku_
 image iris casual_shirt pout_angry = s32_sprite("images/vendor/characters/char_kohaku_casual_shirt_pout_angry.webp", "iris / casual_shirt / pout_angry")
 image iris casual_shirt crying = s32_sprite("images/vendor/characters/char_kohaku_casual_shirt_crying.webp", "iris / casual_shirt / crying")
 image iris casual_shirt disgusted = s32_sprite("images/vendor/characters/char_kohaku_casual_shirt_disgusted.webp", "iris / casual_shirt / disgusted")
+image iris casual_shirt gloom = s32_sprite("images/vendor/characters/char_kohaku_casual_shirt_gloom.webp", "iris / casual_shirt / gloom")
 image iris casual_shirt = s32_sprite("images/vendor/characters/char_kohaku_casual_shirt_neutral.webp", "iris / casual_shirt")
 image iris casual_white neutral = s32_sprite("images/vendor/characters/char_kohaku_casual_white_neutral.webp", "iris / casual_white / neutral")
 image iris casual_white neutral_blush = s32_sprite("images/vendor/characters/char_kohaku_casual_white_neutral_blush.webp", "iris / casual_white / neutral_blush")
@@ -67,6 +69,7 @@ image iris casual_white pout = s32_sprite("images/vendor/characters/char_kohaku_
 image iris casual_white pout_angry = s32_sprite("images/vendor/characters/char_kohaku_casual_white_pout_angry.webp", "iris / casual_white / pout_angry")
 image iris casual_white crying = s32_sprite("images/vendor/characters/char_kohaku_casual_white_crying.webp", "iris / casual_white / crying")
 image iris casual_white disgusted = s32_sprite("images/vendor/characters/char_kohaku_casual_white_disgusted.webp", "iris / casual_white / disgusted")
+image iris casual_white gloom = s32_sprite("images/vendor/characters/char_kohaku_casual_white_gloom.webp", "iris / casual_white / gloom")
 image iris casual_white = s32_sprite("images/vendor/characters/char_kohaku_casual_white_neutral.webp", "iris / casual_white")
 image iris school_summer neutral = s32_sprite("images/vendor/characters/char_kohaku_school_summer_neutral.webp", "iris / school_summer / neutral")
 image iris school_summer neutral_blush = s32_sprite("images/vendor/characters/char_kohaku_school_summer_neutral_blush.webp", "iris / school_summer / neutral_blush")
@@ -84,6 +87,7 @@ image iris school_summer pout = s32_sprite("images/vendor/characters/char_kohaku
 image iris school_summer pout_angry = s32_sprite("images/vendor/characters/char_kohaku_school_summer_pout_angry.webp", "iris / school_summer / pout_angry")
 image iris school_summer crying = s32_sprite("images/vendor/characters/char_kohaku_school_summer_crying.webp", "iris / school_summer / crying")
 image iris school_summer disgusted = s32_sprite("images/vendor/characters/char_kohaku_school_summer_disgusted.webp", "iris / school_summer / disgusted")
+image iris school_summer gloom = s32_sprite("images/vendor/characters/char_kohaku_school_summer_gloom.webp", "iris / school_summer / gloom")
 image iris school_summer = s32_sprite("images/vendor/characters/char_kohaku_school_summer_neutral.webp", "iris / school_summer")
 image iris school_winter neutral = s32_sprite("images/vendor/characters/char_kohaku_school_winter_neutral.webp", "iris / school_winter / neutral")
 image iris school_winter neutral_blush = s32_sprite("images/vendor/characters/char_kohaku_school_winter_neutral_blush.webp", "iris / school_winter / neutral_blush")
@@ -101,6 +105,7 @@ image iris school_winter pout = s32_sprite("images/vendor/characters/char_kohaku
 image iris school_winter pout_angry = s32_sprite("images/vendor/characters/char_kohaku_school_winter_pout_angry.webp", "iris / school_winter / pout_angry")
 image iris school_winter crying = s32_sprite("images/vendor/characters/char_kohaku_school_winter_crying.webp", "iris / school_winter / crying")
 image iris school_winter disgusted = s32_sprite("images/vendor/characters/char_kohaku_school_winter_disgusted.webp", "iris / school_winter / disgusted")
+image iris school_winter gloom = s32_sprite("images/vendor/characters/char_kohaku_school_winter_gloom.webp", "iris / school_winter / gloom")
 image iris school_winter = s32_sprite("images/vendor/characters/char_kohaku_school_winter_neutral.webp", "iris / school_winter")
 
 # June — played by asset `kanako`
@@ -120,6 +125,7 @@ image june school_summer pout = s32_sprite("images/vendor/characters/char_kanako
 image june school_summer pout_angry = s32_sprite("images/vendor/characters/char_kanako_school_summer_pout_angry.webp", "june / school_summer / pout_angry")
 image june school_summer crying = s32_sprite("images/vendor/characters/char_kanako_school_summer_crying.webp", "june / school_summer / crying")
 image june school_summer disgusted = s32_sprite("images/vendor/characters/char_kanako_school_summer_disgusted.webp", "june / school_summer / disgusted")
+image june school_summer gloom = s32_sprite("images/vendor/characters/char_kanako_school_summer_gloom.webp", "june / school_summer / gloom")
 image june school_summer = s32_sprite("images/vendor/characters/char_kanako_school_summer_neutral.webp", "june / school_summer")
 image june school_winter neutral = s32_sprite("images/vendor/characters/char_kanako_school_winter_neutral.webp", "june / school_winter / neutral")
 image june school_winter neutral_blush = s32_sprite("images/vendor/characters/char_kanako_school_winter_neutral_blush.webp", "june / school_winter / neutral_blush")
@@ -137,6 +143,7 @@ image june school_winter pout = s32_sprite("images/vendor/characters/char_kanako
 image june school_winter pout_angry = s32_sprite("images/vendor/characters/char_kanako_school_winter_pout_angry.webp", "june / school_winter / pout_angry")
 image june school_winter crying = s32_sprite("images/vendor/characters/char_kanako_school_winter_crying.webp", "june / school_winter / crying")
 image june school_winter disgusted = s32_sprite("images/vendor/characters/char_kanako_school_winter_disgusted.webp", "june / school_winter / disgusted")
+image june school_winter gloom = s32_sprite("images/vendor/characters/char_kanako_school_winter_gloom.webp", "june / school_winter / gloom")
 image june school_winter = s32_sprite("images/vendor/characters/char_kanako_school_winter_neutral.webp", "june / school_winter")
 
 # Mara — played by asset `chinatsu`
@@ -156,6 +163,7 @@ image mara school_summer pout = s32_sprite("images/vendor/characters/char_chinat
 image mara school_summer pout_angry = s32_sprite("images/vendor/characters/char_chinatsu_school_summer_pout_angry.webp", "mara / school_summer / pout_angry")
 image mara school_summer crying = s32_sprite("images/vendor/characters/char_chinatsu_school_summer_crying.webp", "mara / school_summer / crying")
 image mara school_summer disgusted = s32_sprite("images/vendor/characters/char_chinatsu_school_summer_disgusted.webp", "mara / school_summer / disgusted")
+image mara school_summer gloom = s32_sprite("images/vendor/characters/char_chinatsu_school_summer_gloom.webp", "mara / school_summer / gloom")
 image mara school_summer = s32_sprite("images/vendor/characters/char_chinatsu_school_summer_neutral.webp", "mara / school_summer")
 image mara school_winter neutral = s32_sprite("images/vendor/characters/char_chinatsu_school_winter_neutral.webp", "mara / school_winter / neutral")
 image mara school_winter neutral_blush = s32_sprite("images/vendor/characters/char_chinatsu_school_winter_neutral_blush.webp", "mara / school_winter / neutral_blush")
@@ -173,6 +181,7 @@ image mara school_winter pout = s32_sprite("images/vendor/characters/char_chinat
 image mara school_winter pout_angry = s32_sprite("images/vendor/characters/char_chinatsu_school_winter_pout_angry.webp", "mara / school_winter / pout_angry")
 image mara school_winter crying = s32_sprite("images/vendor/characters/char_chinatsu_school_winter_crying.webp", "mara / school_winter / crying")
 image mara school_winter disgusted = s32_sprite("images/vendor/characters/char_chinatsu_school_winter_disgusted.webp", "mara / school_winter / disgusted")
+image mara school_winter gloom = s32_sprite("images/vendor/characters/char_chinatsu_school_winter_gloom.webp", "mara / school_winter / gloom")
 image mara school_winter = s32_sprite("images/vendor/characters/char_chinatsu_school_winter_neutral.webp", "mara / school_winter")
 
 # Noah — played by asset `ume`
@@ -192,6 +201,7 @@ image noah school_summer pout = s32_sprite("images/vendor/characters/char_ume_sc
 image noah school_summer pout_angry = s32_sprite("images/vendor/characters/char_ume_school_summer_pout_angry.webp", "noah / school_summer / pout_angry")
 image noah school_summer crying = s32_sprite("images/vendor/characters/char_ume_school_summer_crying.webp", "noah / school_summer / crying")
 image noah school_summer disgusted = s32_sprite("images/vendor/characters/char_ume_school_summer_disgusted.webp", "noah / school_summer / disgusted")
+image noah school_summer gloom = s32_sprite("images/vendor/characters/char_ume_school_summer_gloom.webp", "noah / school_summer / gloom")
 image noah school_summer = s32_sprite("images/vendor/characters/char_ume_school_summer_neutral.webp", "noah / school_summer")
 image noah school_winter neutral = s32_sprite("images/vendor/characters/char_ume_school_winter_neutral.webp", "noah / school_winter / neutral")
 image noah school_winter neutral_blush = s32_sprite("images/vendor/characters/char_ume_school_winter_neutral_blush.webp", "noah / school_winter / neutral_blush")
@@ -209,6 +219,7 @@ image noah school_winter pout = s32_sprite("images/vendor/characters/char_ume_sc
 image noah school_winter pout_angry = s32_sprite("images/vendor/characters/char_ume_school_winter_pout_angry.webp", "noah / school_winter / pout_angry")
 image noah school_winter crying = s32_sprite("images/vendor/characters/char_ume_school_winter_crying.webp", "noah / school_winter / crying")
 image noah school_winter disgusted = s32_sprite("images/vendor/characters/char_ume_school_winter_disgusted.webp", "noah / school_winter / disgusted")
+image noah school_winter gloom = s32_sprite("images/vendor/characters/char_ume_school_winter_gloom.webp", "noah / school_winter / gloom")
 image noah school_winter = s32_sprite("images/vendor/characters/char_ume_school_winter_neutral.webp", "noah / school_winter")
 
 # Theo — played by asset `tomomi`
@@ -228,6 +239,7 @@ image theo casual_offshoulder pout = s32_sprite("images/vendor/characters/char_t
 image theo casual_offshoulder pout_angry = s32_sprite("images/vendor/characters/char_tomomi_casual_offshoulder_pout_angry.webp", "theo / casual_offshoulder / pout_angry")
 image theo casual_offshoulder crying = s32_sprite("images/vendor/characters/char_tomomi_casual_offshoulder_crying.webp", "theo / casual_offshoulder / crying")
 image theo casual_offshoulder disgusted = s32_sprite("images/vendor/characters/char_tomomi_casual_offshoulder_disgusted.webp", "theo / casual_offshoulder / disgusted")
+image theo casual_offshoulder gloom = s32_sprite("images/vendor/characters/char_tomomi_casual_offshoulder_gloom.webp", "theo / casual_offshoulder / gloom")
 image theo casual_offshoulder = s32_sprite("images/vendor/characters/char_tomomi_casual_offshoulder_neutral.webp", "theo / casual_offshoulder")
 image theo casual_shirt neutral = s32_sprite("images/vendor/characters/char_tomomi_casual_shirt_neutral.webp", "theo / casual_shirt / neutral")
 image theo casual_shirt neutral_blush = s32_sprite("images/vendor/characters/char_tomomi_casual_shirt_neutral_blush.webp", "theo / casual_shirt / neutral_blush")
@@ -245,6 +257,7 @@ image theo casual_shirt pout = s32_sprite("images/vendor/characters/char_tomomi_
 image theo casual_shirt pout_angry = s32_sprite("images/vendor/characters/char_tomomi_casual_shirt_pout_angry.webp", "theo / casual_shirt / pout_angry")
 image theo casual_shirt crying = s32_sprite("images/vendor/characters/char_tomomi_casual_shirt_crying.webp", "theo / casual_shirt / crying")
 image theo casual_shirt disgusted = s32_sprite("images/vendor/characters/char_tomomi_casual_shirt_disgusted.webp", "theo / casual_shirt / disgusted")
+image theo casual_shirt gloom = s32_sprite("images/vendor/characters/char_tomomi_casual_shirt_gloom.webp", "theo / casual_shirt / gloom")
 image theo casual_shirt = s32_sprite("images/vendor/characters/char_tomomi_casual_shirt_neutral.webp", "theo / casual_shirt")
 image theo casual_white neutral = s32_sprite("images/vendor/characters/char_tomomi_casual_white_neutral.webp", "theo / casual_white / neutral")
 image theo casual_white neutral_blush = s32_sprite("images/vendor/characters/char_tomomi_casual_white_neutral_blush.webp", "theo / casual_white / neutral_blush")
@@ -262,6 +275,7 @@ image theo casual_white pout = s32_sprite("images/vendor/characters/char_tomomi_
 image theo casual_white pout_angry = s32_sprite("images/vendor/characters/char_tomomi_casual_white_pout_angry.webp", "theo / casual_white / pout_angry")
 image theo casual_white crying = s32_sprite("images/vendor/characters/char_tomomi_casual_white_crying.webp", "theo / casual_white / crying")
 image theo casual_white disgusted = s32_sprite("images/vendor/characters/char_tomomi_casual_white_disgusted.webp", "theo / casual_white / disgusted")
+image theo casual_white gloom = s32_sprite("images/vendor/characters/char_tomomi_casual_white_gloom.webp", "theo / casual_white / gloom")
 image theo casual_white = s32_sprite("images/vendor/characters/char_tomomi_casual_white_neutral.webp", "theo / casual_white")
 image theo school_summer neutral = s32_sprite("images/vendor/characters/char_tomomi_school_summer_neutral.webp", "theo / school_summer / neutral")
 image theo school_summer neutral_blush = s32_sprite("images/vendor/characters/char_tomomi_school_summer_neutral_blush.webp", "theo / school_summer / neutral_blush")
@@ -279,6 +293,7 @@ image theo school_summer pout = s32_sprite("images/vendor/characters/char_tomomi
 image theo school_summer pout_angry = s32_sprite("images/vendor/characters/char_tomomi_school_summer_pout_angry.webp", "theo / school_summer / pout_angry")
 image theo school_summer crying = s32_sprite("images/vendor/characters/char_tomomi_school_summer_crying.webp", "theo / school_summer / crying")
 image theo school_summer disgusted = s32_sprite("images/vendor/characters/char_tomomi_school_summer_disgusted.webp", "theo / school_summer / disgusted")
+image theo school_summer gloom = s32_sprite("images/vendor/characters/char_tomomi_school_summer_gloom.webp", "theo / school_summer / gloom")
 image theo school_summer = s32_sprite("images/vendor/characters/char_tomomi_school_summer_neutral.webp", "theo / school_summer")
 image theo school_winter neutral = s32_sprite("images/vendor/characters/char_tomomi_school_winter_neutral.webp", "theo / school_winter / neutral")
 image theo school_winter neutral_blush = s32_sprite("images/vendor/characters/char_tomomi_school_winter_neutral_blush.webp", "theo / school_winter / neutral_blush")
@@ -296,6 +311,7 @@ image theo school_winter pout = s32_sprite("images/vendor/characters/char_tomomi
 image theo school_winter pout_angry = s32_sprite("images/vendor/characters/char_tomomi_school_winter_pout_angry.webp", "theo / school_winter / pout_angry")
 image theo school_winter crying = s32_sprite("images/vendor/characters/char_tomomi_school_winter_crying.webp", "theo / school_winter / crying")
 image theo school_winter disgusted = s32_sprite("images/vendor/characters/char_tomomi_school_winter_disgusted.webp", "theo / school_winter / disgusted")
+image theo school_winter gloom = s32_sprite("images/vendor/characters/char_tomomi_school_winter_gloom.webp", "theo / school_winter / gloom")
 image theo school_winter = s32_sprite("images/vendor/characters/char_tomomi_school_winter_neutral.webp", "theo / school_winter")
 
 

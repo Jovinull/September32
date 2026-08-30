@@ -57,10 +57,10 @@ OUTFITS: dict[str, str] = {
 
 #: Source expression token -> the project's semantic vocabulary.
 #:
-#: Only confident mappings are listed. ``purp`` is deliberately absent: its
-#: meaning cannot be determined from the filename, and inventing one would put a
-#: wrong label in front of a writer. It passes through unchanged and is listed
-#: as an open item in docs/production/ASSET_NAMING.md.
+#: ``purp`` was unmapped for a long time because the filename does not say what
+#: it means. It was resolved by local measurement rather than by guessing --
+#: see docs/production/ASSET_NAMING.md for the evidence. Still worth a human
+#: glance before a scene leans on it; docs/production/HUMAN_ART_REVIEW.md.
 EXPRESSIONS: dict[str, str] = {
     "normal": "neutral",
     "normalblush": "neutral_blush",
@@ -78,6 +78,7 @@ EXPRESSIONS: dict[str, str] = {
     "frown": "concerned",
     "disgusted": "disgusted",
     "evilsmirk": "smirk",
+    "purp": "gloom",
 }
 
 #: The semantic expression set scenes may rely on. A character is not required
@@ -100,6 +101,7 @@ CANONICAL_EXPRESSIONS: tuple[str, ...] = (
     "pout_angry",
     "crying",
     "disgusted",
+    "gloom",
 )
 
 # ---------------------------------------------------------------------------

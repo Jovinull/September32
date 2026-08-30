@@ -56,6 +56,7 @@ EXPRESSION_FALLBACKS: dict[str, tuple[str, ...]] = {
     "disgusted": ("angry", "neutral"),
     "surprised": ("neutral",),
     "concerned": ("sad", "neutral"),
+    "gloom": ("sad", "concerned", "neutral"),
 }
 
 VENDOR_IMAGE_DIR = "images/vendor/characters"

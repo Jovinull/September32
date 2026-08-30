@@ -51,9 +51,19 @@ game/gui/vendor/
 .cache/
 assets/.downloads/
 
+# --- Ren'Py runtime output --------------------------------------------------
+# Written next to the project when the game or lint runs.
+/log.txt
+/errors.txt
+/traceback.txt
+
 # --- Generated reports ------------------------------------------------------
+# Cheap to regenerate, and they would otherwise produce a diff on every run.
+# The character audit is the exception: its numbers back a decision document,
+# so it is committed.
 tools/reports/contact-sheets/
 tools/reports/simulation/
+tools/reports/coverage/
 tools/reports/graph/
 
 # --- Editor / OS ------------------------------------------------------------

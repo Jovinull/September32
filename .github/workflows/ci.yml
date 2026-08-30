@@ -1,0 +1,135 @@
+name: CI
+
+# Two jobs, split by what they need.
+#
+#   code — everything checkable without third-party assets. Runs on every push.
+#          This is the gate that must always be green.
+#   renpy — needs the SDK. Slower, cached, and allowed to be the long pole.
+#
+# Third-party assets are deliberately NOT fetched in CI. They are not committed
+# (ADR-0003), several are behind a per-visitor download flow, and fetching them
+# on every push would be both fragile and impolite to the creators. The game and
+# every test are designed to work without them.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Deterministic simulation and testcases, so a CI failure is reproducible
+  # locally by copying the seed.
+  S32_SEED: "4211"
+
+jobs:
+  code:
+    name: Code and content
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Install Python 3.12
+        run: uv python install 3.12
+
+      - name: Sync dependencies
+        run: uv sync --locked
+
+      - name: Format
+        run: uv run ruff format --check .
+
+      - name: Lint
+        run: uv run ruff check --output-format=github .
+
+      - name: Type check
+        run: uv run mypy
+
+      - name: Tests
+        run: uv run pytest -q
+
+      # Generated files must not drift from their sources. A stale schema means
+      # the validator would accept content the engine rejects.
+      - name: Generated schemas are current
+        run: uv run s32 schemas --check
+
+      - name: Generated credits are current
+        run: uv run s32 assets credits --check
+
+      - name: Content validation
+        run: uv run s32 validate
+
+      - name: Asset licensing
+        run: uv run s32 assets verify
+
+      # Fails if any storylet is unreachable or any run dead-ends.
+      - name: Narrative reachability
+        run: uv run s32 simulate --runs 1000 --seed 1234 --quiet
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: narrative-reports
+          path: tools/reports/
+          retention-days: 14
+
+  renpy:
+    name: Ren'Py lint and testcases
+    runs-on: ubuntu-latest
+    # Not required for a merge: it depends on an upstream download, and a
+    # renpy.org outage should not block a documentation fix.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Install Python 3.12
+        run: uv python install 3.12
+
+      - name: Sync dependencies
+        run: uv sync --locked
+
+      # Keyed on the pinned version, so a version bump invalidates the cache
+      # rather than silently testing against the old SDK.
+      - name: Cache the Ren'Py SDK
+        id: renpy-cache
+        uses: actions/cache@v4
+        with:
+          path: .tools/renpy
+          key: renpy-8.5.3-${{ runner.os }}
+
+      - name: Install the Ren'Py SDK
+        if: steps.renpy-cache.outputs.cache-hit != 'true'
+        run: uv run s32 renpy install
+
+      # Ren'Py initialises SDL even for `lint`. The dummy drivers are what let it
+      # start on a headless runner; `s32` sets them itself on Linux.
+      - name: Install SDL runtime dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libgl1 libglu1-mesa libasound2t64 || \
+          sudo apt-get install -y --no-install-recommends libgl1 libglu1-mesa libasound2
+
+      - name: Ren'Py lint
+        run: uv run s32 renpy lint
+
+      # These run without any third-party asset installed: Ren'Py substitutes
+      # placeholders for missing images, which is exactly the case worth
+      # covering, since it is how every new contributor first sees the game.
+      - name: Ren'Py testcases
+        run: xvfb-run -a uv run s32 renpy test

@@ -1,0 +1,65 @@
+# ---------------------------------------------------------------------------
+# September 32 — .gitignore
+# ---------------------------------------------------------------------------
+
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Ren'Py -----------------------------------------------------------------
+# Compiled bytecode and generated caches.
+*.rpyc
+*.rpymc
+*.rpyb
+game/saves/
+game/cache/
+game/bytecode.rpyb
+game/*.rpyc
+game/**/*.rpyc
+/build/
+/dist/
+# Ren'Py generates this on first run; it holds machine-local paths.
+.renpy/
+
+# --- Local SDK / toolchain (never commit the Ren'Py SDK) --------------------
+.tools/
+
+# --- Third-party assets -----------------------------------------------------
+# See docs/legal/ASSET_LICENSING.md and ADR-0003.
+# Vendor originals are NEVER committed: the Potat0Master licence forbids
+# redistributing the files "in the form that it is downloaded or even when it
+# is modified", which a public git repository would do.
+assets/vendor/
+# Processed (game-ready) derivatives are likewise redistribution of a modified
+# form of the original, so they stay local too. They are rebuilt from vendor
+# originals by `s32 assets import`.
+assets/processed/
+# Assets copied into the Ren'Py tree at import time.
+game/images/vendor/
+game/audio/vendor/
+game/gui/vendor/
+
+# Downloaded archives cache
+.cache/
+assets/.downloads/
+
+# --- Generated reports ------------------------------------------------------
+tools/reports/contact-sheets/
+tools/reports/simulation/
+tools/reports/graph/
+
+# --- Editor / OS ------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store
+desktop.ini

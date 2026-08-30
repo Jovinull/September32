@@ -1,0 +1,39 @@
+September 32 — Licence Notice
+=============================
+
+Copyright (c) 2026 the September 32 project authors. All rights reserved.
+
+STATUS: PROVISIONAL. The final licensing of this project has NOT been decided.
+This file exists so that the repository has an unambiguous default, not because
+a decision has been made. See docs/legal/LICENSING.md and
+docs/decisions/ADR-0003-asset-licensing.md.
+
+1. ORIGINAL CONTENT (all rights reserved)
+-----------------------------------------
+All original content in this repository — including but not limited to the
+script, dialogue, story, lore, setting, characters, names, marks, artwork,
+music, and design documents — is proprietary. No licence, express or implied,
+is granted to copy, distribute, modify, sublicense, or create derivative works
+from it.
+
+2. SOURCE CODE
+--------------
+The source code (the `s32_engine` package, the `s32tools` package, Ren'Py
+scripts, build scripts and CI configuration) is likewise all rights reserved
+for now. The project intends to relicense the *engine and tooling* portion
+under a permissive open-source licence at a later date, once the boundary
+between reusable code and proprietary narrative content is stable. Until that
+decision is recorded in an ADR, treat this code as proprietary.
+
+3. THIRD-PARTY MATERIAL
+-----------------------
+This repository does not vendor third-party binaries. Third-party assets are
+fetched to `assets/vendor/` on the developer's own machine and remain governed
+solely by their own licences, which are recorded in `assets/catalog/assets.toml`
+with acquisition evidence in `assets/evidence/`. Nothing in this file grants any
+right over third-party material. See THIRD_PARTY_NOTICES.md and CREDITS.md.
+
+4. NO WARRANTY
+--------------
+THE MATERIAL IN THIS REPOSITORY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED.

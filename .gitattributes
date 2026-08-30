@@ -1,0 +1,37 @@
+# Normalise line endings: the repo stores LF, checkout is platform-native.
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF so they run under cmd.exe / PowerShell ISE.
+*.ps1   text eol=crlf
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
+# Ren'Py source is text.
+*.rpy   text diff=python
+*.rpym  text
+*.py    text diff=python
+*.md    text
+*.json  text
+*.toml  text
+*.yml   text
+*.yaml  text
+
+# Ren'Py compiled artefacts are binary and never committed (see .gitignore).
+*.rpyc  binary
+*.rpymc binary
+*.rpyb  binary
+
+# Binary asset types. Git LFS is intentionally NOT enabled by default:
+# no third-party binaries are committed (see ADR-0003). If first-party art is
+# added later, uncomment the filter attributes below and run `git lfs install`.
+*.png   binary
+*.webp  binary
+*.jpg   binary
+*.jpeg  binary
+*.ogg   binary
+*.opus  binary
+*.mp3   binary
+*.wav   binary
+*.ttf   binary
+*.otf   binary
+*.zip   binary

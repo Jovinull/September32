@@ -107,6 +107,10 @@ ignore = [
 # The engine defers two imports to break genuine circular dependencies
 # (state <-> commitments, state <-> types). Hoisting them would not work.
 "game/python-packages/s32_engine/state.py" = ["PLC0415"]
+# documents.py defers its condition and effect imports for the same reason:
+# conditions imports state, state imports commitments, and a top-level import
+# here closes the loop.
+"game/python-packages/s32_engine/documents.py" = ["PLC0415"]
 # The SDK helper defers its hashing import so that `locate()` — the only part
 # most callers need — does not drag in the asset tooling.
 "tools/s32tools/renpy_sdk.py" = ["PLC0415"]

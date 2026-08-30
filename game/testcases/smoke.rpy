@@ -86,13 +86,22 @@ testcase smoke_director_runs:
     advance until screen "choice"
     click "Seems straightforward."
 
-    # First director-selected scene.
+    # archive_intro opens the accession record before it ends.
+    advance until screen "s32_document" timeout 30.0
+    click "Close"
+    pause 0.4
+
     advance until eval (len(S32State.get("history", [])) >= 1) timeout 30.0
     assert eval (S32State["history"][0]["id"] == "archive_intro")
 
-    # Second: the photograph, gated on having seen the first.
+    # Second: the photograph, gated on having seen the first. It produces the
+    # catalogue card, which also has to be closed.
     advance until screen "choice" timeout 30.0
     click "Put it in the maybe pile."
+
+    advance until screen "s32_document" timeout 30.0
+    click "Close"
+    pause 0.4
 
     advance until eval (len(S32State.get("history", [])) >= 2) timeout 30.0
 

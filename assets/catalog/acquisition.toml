@@ -1,0 +1,85 @@
+# GENERATED FILE — do not edit by hand.
+#
+# Written by `s32 assets verify` and `s32 assets import`. Holds only what
+# tooling discovers: archive hashes, acquisition timestamps, and which files
+# were imported. The licence facts live in assets.toml, which no tool writes.
+#
+# This file IS committed. It is how the repository records exactly which
+# bytes were reviewed, without containing them.
+
+[asset.kenney_generic_items]
+original_archive_name = "kenney_generic-items.zip"
+original_sha256 = "93f622e46a86f26c8c718cc133c99b545059758abdba65b335c687a581efa059"
+retrieved_at = "2026-08-30T17:56:32+00:00"
+status = "installed"
+size_bytes = 2278836
+
+[asset.kenney_ui_pack]
+original_archive_name = "kenney_ui-pack.zip"
+original_sha256 = "a8a14a234911eb648c062622915c93e79e94e97cb7f9f375a70f6617f1174318"
+retrieved_at = "2026-08-30T17:56:35+00:00"
+status = "installed"
+size_bytes = 1229750
+
+[asset.pm_bg_personal_rooms_1]
+original_archive_name = "PersonalRooms1_1080p_WEBP.zip"
+original_sha256 = "f5b07f0a78ba0a770c30b860c5284f0076b3ddc3934d2e1785edbadb591cc33b"
+retrieved_at = "2026-08-30T18:03:04+00:00"
+status = "installed"
+size_bytes = 2013068
+
+[asset.pm_bg_school_1]
+original_archive_name = "SchoolMiniPack_1080p_WEBP.zip"
+original_sha256 = "a3f2a1fcba8077ed178e1cd518af5625f2bdef3f9bd7b5c90e4a78053e3364ee"
+retrieved_at = "2026-08-30T17:56:22+00:00"
+status = "installed"
+size_bytes = 7733380
+
+[asset.pm_bg_school_2]
+original_archive_name = "SchoolMiniPack2_1080p_WEBP.zip"
+original_sha256 = "f5de4cdc77bbddaf53bbfd29e04deb11c6280d8b1f6bf9fc66c446596d449de3"
+retrieved_at = "2026-08-30T17:57:52+00:00"
+status = "installed"
+size_bytes = 15855987
+
+[asset.pm_bg_starter_1]
+original_archive_name = "Visual Novel Backgrounds (Starter Pack).zip"
+original_sha256 = "3e417be40caf10e5422415b5ea9f86d41b0ca58243e7d4cd690ac29e30477099"
+retrieved_at = "2026-08-30T18:03:53+00:00"
+status = "installed"
+size_bytes = 98808923
+
+[asset.pm_bgm_1]
+original_archive_name = "BGM Pack 1 OGG.zip"
+original_sha256 = "ad9b432956253bf464c73672dd683f7f32e1190dd00ba24860336f68c94534a7"
+retrieved_at = "2026-08-30T17:59:31+00:00"
+status = "installed"
+size_bytes = 20560734
+
+[asset.pm_char_a01]
+original_archive_name = "BasicCharacterSetA01_1080p_WEBP_Free.zip"
+original_sha256 = "b4c6998c8f45e0dcbe4c011b102c4c25a49b7c832b3e090ab60061a52f21fe63"
+retrieved_at = "2026-08-30T17:57:31+00:00"
+status = "installed"
+size_bytes = 8333506
+
+[asset.pm_char_a02]
+original_archive_name = "BasicCharacterSetA02_1080p_WEBP_Free.zip"
+original_sha256 = "97901095cde67b12884f05d06f690b647110f9defcac1d182fabb7f9c1ccf7b3"
+retrieved_at = "2026-08-30T17:56:18+00:00"
+status = "installed"
+size_bytes = 11415404
+
+[asset.source_sans_3]
+original_archive_name = "TTF-source-sans-3.052R.zip"
+original_sha256 = "1b0dd1ec44b39f1dd98bbd153a1a3815f083639874ddee02c842bd601bad3d21"
+retrieved_at = "2026-08-30T17:56:42+00:00"
+status = "installed"
+size_bytes = 2478353
+
+[asset.source_serif_4]
+original_archive_name = "source-serif-4.005_Desktop.zip"
+original_sha256 = "549fdb8f9a682bd06944298621404969f6de77c2e422ff3b8244a1dcd6a0c425"
+retrieved_at = "2026-08-30T17:56:45+00:00"
+status = "installed"
+size_bytes = 17634695

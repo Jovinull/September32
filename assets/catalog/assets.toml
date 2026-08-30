@@ -1,0 +1,397 @@
+#  September 32 — third-party asset manifest
+#  ==========================================
+#
+#  This file is a legal record, not a build artefact. It is written and reviewed
+#  by hand; no tool rewrites it. Everything a tool discovers (SHA-256 hashes,
+#  timestamps, which files were imported) goes into the generated companion
+#  `acquisition.toml` in this directory, and the two are merged at load time.
+#
+#  Rules
+#  -----
+#  * Every third-party file that touches this project has an entry here, and
+#    every entry has evidence under `assets/evidence/<id>/`.
+#  * `license_name` records a licence, never a payment model. "Royalty-free" is
+#    not a licence; the concrete permissions are the boolean fields below.
+#  * Free is not public domain. `license_verified` is the date a human read the
+#    terms; the evidence directory holds what they read.
+#  * `redistribution_allowed = false` means the files must never be committed to
+#    this repository, in original OR modified form. `.gitignore` enforces it,
+#    but the reason lives here.
+#
+#  Generated from this file:
+#      CREDITS.md, THIRD_PARTY_NOTICES.md, game/credits.txt,
+#      and the in-game Credits screen.
+#  Regenerate with `s32 assets credits`; CI fails if they are stale.
+
+# ===========================================================================
+# CHARACTER ART — the single character system (see ADR-0005)
+# ===========================================================================
+
+[asset.pm_char_a01]
+name = "Free Characters for Visual Novels (Set A01) - School Ver."
+author = "Potat0Master"
+type = "character"
+source_page = "https://potat0master.itch.io/free-characters-for-visual-novels-set-a01"
+download_source = "itch.io public free-download flow (no account, no purchase)"
+license_name = "Custom royalty-free licence (creator's own terms; see license_summary)"
+license_source = "https://potat0master.itch.io/free-characters-for-visual-novels-set-a01"
+license_verified = "2026-08-30"
+license_summary = """
+Verbatim from the pack page on 2026-08-30:
+
+  "These character sprites have a royalty free license. Meaning, you can use
+   these character sprites for both personal and commercial projects, as many
+   times as you want. Giving credit is not necessary but would be appreciated.
+   You can edit and modify these images. However, you cannot resell or
+   distribute the images in the form that it is downloaded or even when it is
+   modified."
+
+Reading applied by this project: use and modification in the game are permitted;
+committing the files (original or processed) to a public repository would be
+distribution of the images as files and is therefore NOT permitted. Hence
+`assets/vendor/` and `assets/processed/` are gitignored.
+"""
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = false
+attribution_required = false
+credit_optional = true
+required_credit = "Character sprites by Potat0Master (potat0master.itch.io)"
+ai_related_terms = """
+The page states "No generative AI was used" as a statement about how the assets
+were made. No restriction on the buyer's own use of AI is stated. This project
+still applies docs/legal/AI_AND_ASSETS_POLICY.md: these files are never uploaded
+to an AI service, never used for training, img2img or style transfer.
+"""
+notes = """
+Free tier: Chinatsu, Kanako, Kohaku, Tomomi, Ume — 17 expressions each, summer
+and winter school uniforms. Three further characters (Ayumi, Mao, Shiori) are
+behind a $2 tier and are NOT used.
+
+Asset identity is kept separate from canon identity: `pm_a01_chinatsu` is a
+sprite, `iris` is a character. See data/characters/*.json.
+"""
+
+[asset.pm_char_a02]
+name = "Free Character Set A02 for Visual Novels (3 Outfits)"
+author = "Potat0Master"
+type = "character"
+source_page = "https://potat0master.itch.io/characters-set-a02"
+download_source = "itch.io public free-download flow (no account, no purchase)"
+license_name = "Custom royalty-free licence (creator's own terms; see license_summary)"
+license_source = "https://potat0master.itch.io/characters-set-a02"
+license_verified = "2026-08-30"
+license_summary = """
+Same terms as Set A01, verbatim on the A02 page on 2026-08-30: royalty-free for
+personal and commercial use, credit appreciated but not required, editing and
+modification permitted, but "you cannot resell or distribute the images in the
+form that it is downloaded or even when it is modified".
+"""
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = false
+attribution_required = false
+credit_optional = true
+required_credit = "Character sprites by Potat0Master (potat0master.itch.io)"
+ai_related_terms = "Page states \"No generative AI was used\". No restriction on buyer AI use stated."
+notes = """
+Additional outfits for the SAME characters as A01. This is the whole reason the
+A01/A02 pair was chosen as the character core: identical anatomy, line weight and
+expression vocabulary across a wardrobe change, which no combination of two
+artists can give.
+"""
+
+# ===========================================================================
+# BACKGROUNDS — same artist, for the same consistency reason
+# ===========================================================================
+
+[asset.pm_bg_school_1]
+name = "Free Visual Novel Backgrounds (School Mini Pack 1)"
+author = "Potat0Master"
+type = "background"
+source_page = "https://potat0master.itch.io/free-visual-novel-backgrounds-school-mini-pack-1"
+download_source = "itch.io public free-download flow (no account, no purchase)"
+license_name = "Custom royalty-free licence (creator's own terms; see license_summary)"
+license_source = "https://potat0master.itch.io/free-visual-novel-backgrounds-school-mini-pack-1"
+license_verified = "2026-08-30"
+license_summary = """
+Verbatim on 2026-08-30:
+
+  "This pack has a royalty free license. Meaning, you can use this pack for both
+   personal and commercial projects, as many times as you want. Giving credit is
+   not necessary but would be appreciated. You can edit and modify these
+   background images. However, you cannot resell or distribute the images in the
+   form that it is downloaded or even when it is modified."
+"""
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = false
+attribution_required = false
+credit_optional = true
+required_credit = "Backgrounds by Potat0Master (potat0master.itch.io)"
+ai_related_terms = """
+Page states: "These are NOT made using AI. So, you don't have to worry about
+owning the rights to your game or facing any legal issues." A provenance claim,
+not a restriction on the buyer.
+"""
+notes = "106 free images: classroom, hallway, notice board, club room, entrance, roof, stairs, with day/night variants."
+
+[asset.pm_bg_school_2]
+name = "Free Visual Novel Backgrounds (School Mini Pack 2)"
+author = "Potat0Master"
+type = "background"
+source_page = "https://potat0master.itch.io/free-visual-novel-backgrounds-school-mini-pack-2"
+download_source = "itch.io public free-download flow (no account, no purchase)"
+license_name = "Custom royalty-free licence (creator's own terms; see license_summary)"
+license_source = "https://potat0master.itch.io/free-visual-novel-backgrounds-school-mini-pack-2"
+license_verified = "2026-08-30"
+license_summary = "Identical terms to School Mini Pack 1, verbatim on the pack page on 2026-08-30."
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = false
+attribution_required = false
+credit_optional = true
+required_credit = "Backgrounds by Potat0Master (potat0master.itch.io)"
+ai_related_terms = "Page states the assets are NOT made using AI. Provenance claim, not a restriction."
+notes = "90 free images: art room, music room, swimming pool, with day/evening/night variants."
+
+[asset.pm_bg_starter_1]
+name = "Free Visual Novel Backgrounds (Starter Pack)"
+author = "Potat0Master"
+type = "background"
+source_page = "https://potat0master.itch.io/free-visual-novel-backgrounds-starter-pack"
+download_source = "itch.io public free-download flow (no account, no purchase)"
+license_name = "Custom royalty-free licence (creator's own terms; see license_summary)"
+license_source = "https://potat0master.itch.io/free-visual-novel-backgrounds-starter-pack"
+license_verified = "2026-08-30"
+license_summary = "Same creator terms as the other Potat0Master background packs; verified on the pack page on 2026-08-30."
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = false
+attribution_required = false
+credit_optional = true
+required_credit = "Backgrounds by Potat0Master (potat0master.itch.io)"
+ai_related_terms = "Creator states packs are not made using AI."
+notes = "General-purpose exteriors and interiors, for locations the school packs do not cover."
+
+[asset.pm_bg_personal_rooms_1]
+name = "Free Visual Novel Backgrounds (Personal Rooms Pack 1)"
+author = "Potat0Master"
+type = "background"
+source_page = "https://potat0master.itch.io/free-visual-novel-backgrounds-personal-rooms-pack-1"
+download_source = "itch.io public free-download flow (no account, no purchase)"
+license_name = "Custom royalty-free licence (creator's own terms; see license_summary)"
+license_source = "https://potat0master.itch.io/free-visual-novel-backgrounds-personal-rooms-pack-1"
+license_verified = "2026-08-30"
+license_summary = "Same creator terms as the other Potat0Master background packs; verified on the pack page on 2026-08-30."
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = false
+attribution_required = false
+credit_optional = true
+required_credit = "Backgrounds by Potat0Master (potat0master.itch.io)"
+ai_related_terms = "Creator states packs are not made using AI."
+notes = "Bedroom and dorm interiors: the protagonist's room, and somewhere private for the quieter scenes."
+
+# ===========================================================================
+# PROPS AND UI — CC0. Utility art only, never the cast (ADR-0005).
+# ===========================================================================
+
+[asset.kenney_generic_items]
+name = "Generic Items"
+author = "Kenney (kenney.nl)"
+type = "prop"
+source_page = "https://kenney.nl/assets/generic-items"
+download_source = "https://kenney.nl/media/pages/assets/generic-items/96b9087204-1677667000/kenney_generic-items.zip"
+license_name = "CC0 1.0 Universal (public domain dedication)"
+license_source = "https://creativecommons.org/publicdomain/zero/1.0/"
+license_verified = "2026-08-30"
+license_summary = """
+The asset page states the licence as "Creative Commons CC0", linking to
+creativecommons.org/publicdomain/zero/1.0/. CC0 waives copyright to the extent
+possible: use, modification, redistribution and commercial use are all permitted
+with no attribution requirement.
+"""
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = true
+attribution_required = false
+credit_optional = true
+required_credit = "Generic Items by Kenney (kenney.nl) — CC0"
+ai_related_terms = "None stated on the asset page."
+notes = """
+160 item sprites. Used for inventory icons, clue-journal placeholders and small
+UI affordances only. Every kept icon gets the same deterministic archival
+treatment (see tools/s32tools/assets/process.py) so the set reads as one visual
+language rather than as a borrowed pack.
+
+CC0 permits committing these, but they are still fetched at bootstrap rather
+than vendored: keeping ONE rule for all third-party binaries ("they are not in
+the repo") is less error-prone than a per-pack exception. See ADR-0003.
+"""
+
+[asset.kenney_ui_pack]
+name = "UI Pack"
+author = "Kenney (kenney.nl)"
+type = "ui"
+source_page = "https://kenney.nl/assets/ui-pack"
+download_source = "https://kenney.nl/media/pages/assets/ui-pack/f651646eab-1718203990/kenney_ui-pack.zip"
+license_name = "CC0 1.0 Universal (public domain dedication)"
+license_source = "https://creativecommons.org/publicdomain/zero/1.0/"
+license_verified = "2026-08-30"
+license_summary = "Asset page states Creative Commons CC0, linking to the CC0 1.0 deed."
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = true
+attribution_required = false
+credit_optional = true
+required_credit = "UI Pack by Kenney (kenney.nl) — CC0"
+ai_related_terms = "None stated on the asset page."
+notes = """
+Bootstrap scaffolding only. The shipped interface must not read as "Kenney UI";
+the project's own archive/photography visual language is defined in
+docs/style/VISUAL_DESIGN_SYSTEM.md and replaces these elements as it lands.
+"""
+
+# ===========================================================================
+# MUSIC
+# ===========================================================================
+
+[asset.pm_bgm_1]
+name = "Free Background Music for Visual Novels (BGM Pack 1)"
+author = "Potat0Master"
+type = "music"
+source_page = "https://potat0master.itch.io/free-background-music-for-visual-novels-bgm-pack-1"
+download_source = "itch.io public free-download flow (no account, no purchase)"
+license_name = "Custom royalty-free licence (creator's own terms; see license_summary)"
+license_source = "https://potat0master.itch.io/free-background-music-for-visual-novels-bgm-pack-1"
+license_verified = "2026-08-30"
+license_summary = """
+Verbatim on 2026-08-30:
+
+  "This background music pack has a royalty free license. Meaning, you can use
+   these for both personal and commercial projects, as many times as you want.
+   Giving credit is not necessary but would be appreciated."
+
+The page further states the tracks may be edited and modified but not resold or
+distributed in original or modified form.
+"""
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = false
+attribution_required = false
+credit_optional = true
+required_credit = "Music by Potat0Master (potat0master.itch.io)"
+ai_related_terms = "Page states \"No generative AI was used\"."
+notes = """
+Free tier: Frozen Winter (emotional), Hope (menu), Beanfeast (cheerful),
+Woo Scary (unease), Dramatic Boi (dramatic). Five tracks is enough for the
+vertical slice; the remaining cues in docs/production/ART_GAP_ANALYSIS.md are
+tracked as gaps rather than filled by grabbing more packs.
+"""
+
+# ===========================================================================
+# FONTS
+# ===========================================================================
+
+[asset.source_sans_3]
+name = "Source Sans 3 (version 3.052R)"
+author = "Adobe / Paul D. Hunt"
+type = "font"
+source_page = "https://github.com/adobe-fonts/source-sans"
+download_source = "https://github.com/adobe-fonts/source-sans/releases/download/3.052R/TTF-source-sans-3.052R.zip"
+license_name = "SIL Open Font License 1.1"
+license_source = "https://github.com/adobe-fonts/source-sans/blob/release/LICENSE.md"
+license_verified = "2026-08-30"
+license_summary = """
+OFL 1.1. Permits use, study, modification and redistribution, including in and
+with commercial software, provided the font itself is not sold on its own and
+any modified version is renamed. Bundling the unmodified font inside a game is
+squarely permitted.
+"""
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = true
+attribution_required = false
+credit_optional = false
+required_credit = "Source Sans 3 by Adobe, SIL Open Font License 1.1"
+ai_related_terms = "None."
+notes = """
+Interface and dialogue face. Chosen for a large x-height that survives a
+dialogue box at 1080p, and for complete Latin coverage including every
+diacritic pt-BR needs. TTF over OTF for the widest engine support.
+
+The OFL requires the licence text to travel with the font, so LICENSE.md is
+copied alongside the .ttf files at import time and reproduced in
+THIRD_PARTY_NOTICES.md.
+"""
+
+[asset.source_serif_4]
+name = "Source Serif 4 (version 4.005R)"
+author = "Adobe / Frank Grießhammer"
+type = "font"
+source_page = "https://github.com/adobe-fonts/source-serif"
+download_source = "https://github.com/adobe-fonts/source-serif/releases/download/4.005R/source-serif-4.005_Desktop.zip"
+license_name = "SIL Open Font License 1.1"
+license_source = "https://github.com/adobe-fonts/source-serif/blob/release/LICENSE.md"
+license_verified = "2026-08-30"
+license_summary = "OFL 1.1, same terms as Source Sans 3."
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = true
+attribution_required = false
+credit_optional = false
+required_credit = "Source Serif 4 by Adobe, SIL Open Font License 1.1"
+ai_related_terms = "None."
+notes = """
+Documents, archive cards and titles. Shares Source Sans's metrics philosophy, so
+the two sit together on a page instead of arguing. The serif is what makes an
+in-game document read as institutional paper rather than as decoration.
+"""
+
+# ===========================================================================
+# THIRD-PARTY SOFTWARE
+#
+# Distinct from assets and from this project's own licence. The game ships on
+# Ren'Py; the toolchain does not ship at all.
+# ===========================================================================
+
+[asset.renpy]
+name = "Ren'Py Visual Novel Engine 8.5.3"
+author = "Tom Rothamel and the Ren'Py contributors"
+type = "software"
+source_page = "https://www.renpy.org/latest.html"
+download_source = "https://www.renpy.org/dl/8.5.3/renpy-8.5.3-sdk.zip"
+license_name = "MIT (engine); see Ren'Py's own LICENSE.txt for bundled components"
+license_source = "https://www.renpy.org/doc/html/license.html"
+license_verified = "2026-08-30"
+license_summary = """
+Ren'Py itself is MIT-licensed. It bundles components under other free licences
+(among them Python, SDL2, FFmpeg subsets and freetype), each with its own terms.
+A game built with Ren'Py must reproduce the notices the engine generates; the
+`renpy` distribute step does this automatically into the built package.
+
+Note the three distinct licences this project must not conflate:
+  1. Ren'Py's own licence (MIT, plus bundled component licences)
+  2. this project's licence (see /LICENSE — provisional, all rights reserved)
+  3. each third-party asset's licence (this file)
+"""
+commercial_use = true
+modification_allowed = true
+redistribution_allowed = true
+attribution_required = true
+credit_optional = false
+required_credit = "Made with Ren'Py — https://www.renpy.org/"
+ai_related_terms = "None."
+notes = """
+The SDK is installed to `.tools/renpy/` and is never committed. See
+docs/decisions/ADR-0001-renpy.md.
+
+One exception to the "no third-party binaries" rule applies here and is
+deliberate: `game/gui/` contains Ren'Py's own GUI template images, copied from
+the SDK and rescaled to 1080p by tools/s32tools/renpy_gui_scale.py. Ren'Py ships
+that template expressly so projects copy it, and a built game needs the images
+present because the SDK's regeneration step only runs in development. They are
+therefore committed, under Ren'Py's own licence, and will be replaced by the
+project's own interface (docs/style/VISUAL_DESIGN_SYSTEM.md).
+"""

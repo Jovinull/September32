@@ -6,6 +6,13 @@
   "status": "prototype",
   "characters": [],
   "location": "courtyard",
+  "time_slots": [
+    "early_morning",
+    "morning",
+    "midday",
+    "afternoon",
+    "evening"
+  ],
   "tags": [
     "slice_of_life",
     "school"

@@ -29,24 +29,24 @@
     "fulfil(meet_theo_archive)",
     "know(attendance_sheet_anomaly, theo_showed_me)",
     "item(attendance_ledger)",
-    "rel theo.trust += 6",
-    "rel theo.respect += 3"
+    "rel theo->player.trust += 6",
+    "rel theo->player.respect += 3"
   ],
   "repeat_policy": "once",
   "summary": "Keeping the promise. Theo produces the ledger and the column with no header. Exercises: commitment as a requirement, and a second knowledge grant that unlocks the anchor.",
   "outcomes": [
     [
       "trait skeptical += 1",
-      "rel theo.respect += 2"
+      "rel theo->player.respect += 2"
     ],
     [
       "trait curious += 2",
-      "rel theo.trust += 3"
+      "rel theo->player.trust += 3"
     ],
     [
       "trait direct += 1",
-      "rel theo.familiarity += 3",
-      "rel theo.suspicion += 2",
+      "rel theo->player.familiarity += 3",
+      "rel theo->player.suspicion += 2",
       "npc_stance(iris, attendance_sheet_anomaly, suspected)"
     ]
   ]

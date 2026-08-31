@@ -29,7 +29,7 @@
   "effects": [
     "know(old_photo_exists, archive_box_17)",
     "item(old_photo)",
-    "rel iris.trust += 2",
+    "rel iris->player.trust += 2",
     "event(found_the_photo)"
   ],
   "repeat_policy": "once",
@@ -37,16 +37,16 @@
   "outcomes": [
     [
       "trait curious += 2",
-      "rel iris.trust += 3",
+      "rel iris->player.trust += 3",
       "suspect(photo_dated_sept_32, a_glance_at_the_stamp)"
     ],
     [
       "trait reserved += 1",
-      "rel iris.respect += 3"
+      "rel iris->player.respect += 3"
     ],
     [
       "trait empathetic += 1",
-      "rel iris.familiarity += 4"
+      "rel iris->player.familiarity += 4"
     ]
   ]
 }

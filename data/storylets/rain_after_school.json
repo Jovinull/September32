@@ -21,12 +21,12 @@
   "weight": 1.0,
   "requirements": [
     "weather == rain",
-    "rel iris.trust >= 7",
+    "rel iris->player.trust >= 7",
     "knows(old_photo_exists)"
   ],
   "effects": [
-    "rel iris.trust += 5",
-    "rel iris.attraction += 4",
+    "rel iris->player.trust += 5",
+    "rel iris->player.attraction += 4",
     "know(iris_keeps_a_second_index, iris_told_me)",
     "npc_stance(iris, old_photo_exists, known)"
   ],
@@ -35,12 +35,12 @@
   "outcomes": [
     [
       "trait empathetic += 1",
-      "rel iris.trust += 4"
+      "rel iris->player.trust += 4"
     ],
     [
       "trait sarcastic += 1",
-      "rel iris.familiarity += 4",
-      "rel iris.attraction += 2"
+      "rel iris->player.familiarity += 4",
+      "rel iris->player.attraction += 2"
     ]
   ]
 }

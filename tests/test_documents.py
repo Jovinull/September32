@@ -52,7 +52,7 @@ def docs(tmp_path: Path):
                 "type": "ledger_page",
                 "title": "Needs a fact",
                 "unlock_conditions": ["knows(photo)"],
-                "view_effects": ["rel iris.trust += 3", "know(date, the_document)"],
+                "view_effects": ["rel iris->player.trust += 3", "know(date, the_document)"],
                 "pages": [
                     {"blocks": [{"kind": "date", "text": "14 SEPTEMBER"}]},
                     {"blocks": [{"kind": "date", "text": ""}]},
@@ -97,7 +97,7 @@ def test_first_reading_applies_the_effects(state, docs):
     changes = mark_read(state, docs.documents["locked"])
 
     assert has_read(state, "locked")
-    assert relationships.get(state, "iris", "trust") == 3
+    assert relationships.get(state, "iris", "player", "trust") == 3
     assert knowledge.knows(state, "date")
     assert len(changes) == 2
 
@@ -113,7 +113,7 @@ def test_re_reading_changes_nothing(state, docs):
     for _ in range(5):
         assert mark_read(state, docs.documents["locked"]) == []
 
-    assert relationships.get(state, "iris", "trust") == 3
+    assert relationships.get(state, "iris", "player", "trust") == 3
     assert state["documents_read"].count("locked") == 1
 
 

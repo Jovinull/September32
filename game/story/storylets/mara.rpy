@@ -39,8 +39,8 @@ label s32_st_mara_reads_the_room:
 
     menu:
         "That sounds about right.":
-            $ rel("mara", "familiarity", 3)
-            $ rel("june", "suspicion", 2, source="mara")
+            $ rel("mara->player", "familiarity", 3)
+            $ rel("mara->june", "suspicion", 2)
 
             c_mara "It usually is."
 
@@ -48,9 +48,9 @@ label s32_st_mara_reads_the_room:
 
         "[trait_label('empathetic')] Or she just likes eating on her own." if has_trait("empathetic", 2):
             $ trait("empathetic")
-            $ rel("mara", "respect", 4)
-            $ rel("mara", "suspicion", 2)
-            $ rel("june", "suspicion", 2, source="mara")
+            $ rel("mara->player", "respect", 4)
+            $ rel("mara->player", "suspicion", 2)
+            $ rel("mara->june", "suspicion", 2)
 
             narrator "Mara stops walking."
 
@@ -66,8 +66,8 @@ label s32_st_mara_reads_the_room:
 
         "Tell me about Theo instead.":
             $ trait("curious")
-            $ rel("mara", "trust", 3)
-            $ rel("theo", "respect", 2, source="mara")
+            $ rel("mara->player", "trust", 3)
+            $ rel("mara->theo", "respect", 2)
 
             c_mara "Theo's fine."
 
@@ -121,8 +121,8 @@ label s32_st_mara_older_story:
     menu:
         "Tell me the version.":
             $ trait("curious")
-            $ rel("mara", "trust", 2)
-            $ rel("mara", "resentment", 3)
+            $ rel("mara->player", "trust", 2)
+            $ rel("mara->player", "resentment", 3)
             $ suspect("photo_is_a_forgery", source="mara_thinks_someone_faked_it")
 
             c_mara "No."
@@ -143,8 +143,8 @@ label s32_st_mara_older_story:
 
         "Then I won't ask.":
             $ trait("gentle")
-            $ rel("mara", "trust", 5)
-            $ rel("mara", "respect", 3)
+            $ rel("mara->player", "trust", 5)
+            $ rel("mara->player", "respect", 3)
             $ suspect("photo_is_a_forgery", source="mara_thinks_someone_faked_it")
 
             c_mara "..."
@@ -163,8 +163,8 @@ label s32_st_mara_older_story:
 
         "This town is strange about that year.":
             $ trait("direct")
-            $ rel("mara", "suspicion", 4)
-            $ rel("mara", "trust", -1)
+            $ rel("mara->player", "suspicion", 4)
+            $ rel("mara->player", "trust", -1)
 
             c_mara "..."
 

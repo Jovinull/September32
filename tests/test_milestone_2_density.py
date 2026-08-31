@@ -231,7 +231,7 @@ def test_profiles_have_somewhere_to_go_and_something_to_say(real_library):
 def test_outcome_scoring_reads_the_declared_effects():
     """The profile answers from the effects, not from the prose."""
     romantic = profile_module.get("romantic")
-    warm = romantic.outcome_score(("rel iris.attraction += 3", "trait gentle"))
+    warm = romantic.outcome_score(("rel iris->player.attraction += 3", "trait gentle"))
     flat = romantic.outcome_score(("flag nothing += 1",))
     assert warm > flat
 
@@ -248,8 +248,8 @@ def test_a_profile_without_opinions_scores_everything_the_same():
     profile likes it, so it has to remain exactly the old uniform behaviour.
     """
     control = profile_module.get("random")
-    assert control.outcome_score(("rel iris.attraction += 3",)) == control.outcome_score(
-        ("rel iris.suspicion += 3",)
+    assert control.outcome_score(("rel iris->player.attraction += 3",)) == control.outcome_score(
+        ("rel iris->player.suspicion += 3",)
     )
 
 

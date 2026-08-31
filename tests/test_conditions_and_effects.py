@@ -53,13 +53,13 @@ def test_negation(ctx):
 
 
 def test_relationship_conditions(state, ctx):
-    assert not evaluate("rel iris.trust >= 10", ctx).passed
-    relationships.change(state, "iris", "trust", 10)
-    assert evaluate("rel iris.trust >= 10", ctx).passed
+    assert not evaluate("rel iris->player.trust >= 10", ctx).passed
+    relationships.change(state, "iris", "player", "trust", 10)
+    assert evaluate("rel iris->player.trust >= 10", ctx).passed
 
 
 def test_npc_to_npc_condition(state, ctx):
-    relationships.change(state, "mara", "respect", 30, source="theo")
+    relationships.change(state, "theo", "mara", "respect", 30)
     assert evaluate("rel theo->mara.respect >= 30", ctx).passed
     assert not evaluate("rel mara->theo.respect >= 30", ctx).passed
 
@@ -162,7 +162,7 @@ def test_evaluate_all_does_not_short_circuit(ctx):
 
 def test_referenced_ids_finds_content_references():
     assert referenced_ids("knows(old_photo)")["knowledge"] == {"old_photo"}
-    assert referenced_ids("rel iris.trust >= 5")["character"] == {"iris"}
+    assert referenced_ids("rel iris->player.trust >= 5")["character"] == {"iris", "player"}
     assert referenced_ids("has_item(camera)")["item"] == {"camera"}
     assert referenced_ids("not seen(intro)")["storylet"] == {"intro"}
 
@@ -173,12 +173,12 @@ def test_referenced_ids_finds_content_references():
 
 
 def test_relationship_effects(state):
-    effects.apply_effect("rel iris.trust += 7", state)
-    assert relationships.get(state, "iris", "trust") == 7
-    effects.apply_effect("rel iris.trust -= 2", state)
-    assert relationships.get(state, "iris", "trust") == 5
-    effects.apply_effect("rel iris.trust = 40", state)
-    assert relationships.get(state, "iris", "trust") == 40
+    effects.apply_effect("rel iris->player.trust += 7", state)
+    assert relationships.get(state, "iris", "player", "trust") == 7
+    effects.apply_effect("rel iris->player.trust -= 2", state)
+    assert relationships.get(state, "iris", "player", "trust") == 5
+    effects.apply_effect("rel iris->player.trust = 40", state)
+    assert relationships.get(state, "iris", "player", "trust") == 40
 
 
 def test_trait_and_flag_effects(state):
@@ -266,10 +266,10 @@ def test_an_unrecognised_effect_raises(state):
 
 def test_effects_apply_in_order(state):
     """Order is preserved because an effect may depend on one above it."""
-    effects.apply_all(["know(photo)", "phase = odd", "rel iris.trust += 3"], state)
+    effects.apply_all(["know(photo)", "phase = odd", "rel iris->player.trust += 3"], state)
     assert knowledge.knows(state, "photo")
     assert state["world"]["phase"] == "odd"
-    assert relationships.get(state, "iris", "trust") == 3
+    assert relationships.get(state, "iris", "player", "trust") == 3
 
 
 def test_granted_knowledge_reads_player_grants_only(state):

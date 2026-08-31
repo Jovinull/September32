@@ -27,7 +27,7 @@
     "not_seen(june_welcome_pack)"
   ],
   "effects": [
-    "rel june.familiarity += 3",
+    "rel june->player.familiarity += 3",
     "event(june_mentioned_the_booklet)"
   ],
   "outcomes": [
@@ -35,18 +35,18 @@
       "trait curious += 1",
       "know(school_history_skips_a_year, junes_welcome_pack)",
       "npc_stance(june, school_history_skips_a_year, known)",
-      "rel june.familiarity += 3"
+      "rel june->player.familiarity += 3"
     ],
     [
       "trait skeptical += 1",
       "know(school_history_skips_a_year, junes_welcome_pack)",
       "npc_stance(june, school_history_skips_a_year, known)",
-      "rel june.respect += 2"
+      "rel june->player.respect += 2"
     ],
     [
       "trait gentle += 1",
-      "rel june.familiarity += 4",
-      "rel june.attraction += 2"
+      "rel june->player.familiarity += 4",
+      "rel june->player.attraction += 2"
     ]
   ],
   "repeat_policy": "once",

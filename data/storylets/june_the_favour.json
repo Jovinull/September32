@@ -24,24 +24,24 @@
     "not_seen(june_the_favour)"
   ],
   "effects": [
-    "rel june.familiarity += 5",
+    "rel june->player.familiarity += 5",
     "event(met_june)"
   ],
   "outcomes": [
     [
       "trait gentle += 1",
-      "rel june.familiarity += 4",
+      "rel june->player.familiarity += 4",
       "commit(june_favour, june, 1, 45)"
     ],
     [
       "trait skeptical += 1",
-      "rel june.respect += 3",
+      "rel june->player.respect += 3",
       "commit(june_favour, june, 1, 45)"
     ],
     [
       "trait direct += 1",
-      "rel june.respect += 4",
-      "rel june.familiarity += 1"
+      "rel june->player.respect += 4",
+      "rel june->player.familiarity += 1"
     ]
   ],
   "repeat_policy": "once",

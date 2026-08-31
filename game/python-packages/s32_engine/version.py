@@ -10,7 +10,9 @@ ENGINE_VERSION: Final = "0.1.0"
 #: read as-is; add a migration step in ``s32_engine.state.migrate_state``.
 #:
 #: v2 added ``documents_read``, for the archive viewer's once-only effects.
-SAVE_SCHEMA_VERSION: Final = 2
+#: v3 flipped relationship edges the broken ``source="player"`` default had
+#: filed backwards.
+SAVE_SCHEMA_VERSION: Final = 3
 
 #: Structure version of the cross-run ``persistent`` meta state. Bump and add
 #: a migration in ``s32_engine.meta.migrate_meta`` when it changes.

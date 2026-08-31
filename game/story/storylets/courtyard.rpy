@@ -82,9 +82,9 @@ label s32_st_courtyard_lunch_table:
 
         "She's got a point. It is every lunchtime.":
             $ trait("gentle")
-            $ rel("june", "trust", 3)
-            $ rel("june", "resentment", 2, source="noah")
-            $ rel("noah", "respect", 1, source="june")
+            $ rel("june->player", "trust", 3)
+            $ rel("noah->june", "resentment", 2)
+            $ rel("june->noah", "respect", 1)
 
             c_noah "Right."
 
@@ -96,9 +96,9 @@ label s32_st_courtyard_lunch_table:
 
         "Six people is not nothing.":
             $ trait("curious")
-            $ rel("noah", "respect", 3)
-            $ rel("noah", "resentment", 2, source="june")
-            $ rel("june", "suspicion", 1, source="noah")
+            $ rel("noah->player", "respect", 3)
+            $ rel("june->noah", "resentment", 2)
+            $ rel("noah->june", "suspicion", 1)
 
             c_noah "Thank you."
 
@@ -112,9 +112,9 @@ label s32_st_courtyard_lunch_table:
 
         "I'm not refereeing this.":
             $ trait("reserved")
-            $ rel("june", "respect", 2)
-            $ rel("noah", "respect", 2)
-            $ rel("noah", "familiarity", 2, source="june")
+            $ rel("june->player", "respect", 2)
+            $ rel("noah->player", "respect", 2)
+            $ rel("june->noah", "familiarity", 2)
 
             c_june "Wise."
 
@@ -154,8 +154,8 @@ label s32_st_iris_outside:
 
         "Sit down.":
             $ trait("gentle")
-            $ rel("iris", "trust", 3)
-            $ rel("iris", "attraction", 3)
+            $ rel("iris->player", "trust", 3)
+            $ rel("iris->player", "attraction", 3)
 
             narrator "You sit on the wall. The wall is cold in the way stone is cold in September, which is not unpleasant for about four minutes."
 
@@ -167,7 +167,7 @@ label s32_st_iris_outside:
 
         "Doesn't that get lonely?":
             $ trait("curious")
-            $ rel("iris", "respect", 3)
+            $ rel("iris->player", "respect", 3)
 
             c_iris "That's the wrong question by about one step."
 

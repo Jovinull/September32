@@ -148,7 +148,7 @@ def test_the_dorm_can_keep_or_break_the_promise(game, real_library):
 
     effects.apply_all(broken[0], game)
     assert commitments.status(game, "june_favour") == "broken"
-    assert relationships.get(game, "june", "resentment") > 0
+    assert relationships.get(game, "june", "player", "resentment") > 0
 
 
 def test_breaking_the_promise_costs_something_measurable(game, real_library):
@@ -267,19 +267,19 @@ def test_telling_noah_costs_iris(game, real_library):
 
     effects.apply_all(branch, game)
 
-    assert relationships.get(game, "noah", "trust") > 0
+    assert relationships.get(game, "noah", "player", "trust") > 0
     assert (
-        relationships.get(game, "iris", "trust") < 0
-        or relationships.get(game, "iris", "trust") == 0
+        relationships.get(game, "iris", "player", "trust") < 0
+        or relationships.get(game, "iris", "player", "trust") == 0
     )
-    assert relationships.get(game, "noah", "suspicion", source="iris") == 3
+    assert relationships.get(game, "iris", "noah", "suspicion") == 3
 
 
 def test_mara_turns_on_june_without_the_player_being_told(game, real_library):
     storylet = real_library.storylets["mara_reads_the_room"]
     branch = storylet.outcomes[0]
     effects.apply_all(branch, game)
-    assert relationships.get(game, "june", "suspicion", source="mara") == 2
+    assert relationships.get(game, "mara", "june", "suspicion") == 2
 
 
 # ---------------------------------------------------------------------------

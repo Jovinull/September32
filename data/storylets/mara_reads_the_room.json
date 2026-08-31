@@ -24,24 +24,24 @@
     "not_seen(mara_reads_the_room)"
   ],
   "effects": [
-    "rel mara.familiarity += 4",
+    "rel mara->player.familiarity += 4",
     "npc_stance(mara, theo_checks_the_ledger, known)",
     "event(mara_read_the_room)"
   ],
   "outcomes": [
     [
-      "rel mara.familiarity += 3",
+      "rel mara->player.familiarity += 3",
       "rel mara->june.suspicion += 2"
     ],
     [
       "trait empathetic += 1",
-      "rel mara.respect += 4",
-      "rel mara.suspicion += 2",
+      "rel mara->player.respect += 4",
+      "rel mara->player.suspicion += 2",
       "rel mara->june.suspicion += 2"
     ],
     [
       "trait curious += 1",
-      "rel mara.trust += 3",
+      "rel mara->player.trust += 3",
       "rel mara->theo.respect += 2"
     ]
   ],

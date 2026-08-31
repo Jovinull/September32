@@ -21,10 +21,10 @@
   "weight": 2.0,
   "requirements": [],
   "blockers": [
-    "rel theo.resentment >= 40"
+    "rel theo->player.resentment >= 40"
   ],
   "effects": [
-    "rel theo.familiarity += 3",
+    "rel theo->player.familiarity += 3",
     "npc_stance(theo, theo_checks_the_ledger, known)"
   ],
   "cooldown": 2,

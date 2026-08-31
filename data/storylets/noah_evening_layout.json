@@ -25,23 +25,23 @@
     "not_seen(noah_evening_layout)"
   ],
   "effects": [
-    "rel noah.familiarity += 3",
+    "rel noah->player.familiarity += 3",
     "event(helped_with_the_paper)"
   ],
   "outcomes": [
     [
       "trait skeptical += 1",
-      "rel noah.respect += 2"
+      "rel noah->player.respect += 2"
     ],
     [
       "trait gentle += 1",
-      "rel noah.familiarity += 4",
-      "rel noah.dependency += 2"
+      "rel noah->player.familiarity += 4",
+      "rel noah->player.dependency += 2"
     ],
     [
       "trait curious += 2",
-      "rel noah.trust += 2",
-      "rel noah.suspicion += 1"
+      "rel noah->player.trust += 2",
+      "rel noah->player.suspicion += 1"
     ]
   ],
   "repeat_policy": "once",

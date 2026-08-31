@@ -231,17 +231,27 @@ init python:
 
 init python:
 
-    def rel(target, axis, delta, source="player"):
-        """Adjust one relationship axis.
+    def rel(pair, axis, delta):
+        """Adjust one relationship axis. ``pair`` is written ``source->target``.
 
-        Example:
-            $ rel("iris", "trust", 3)
+        The direction is not optional and there is no default, because there
+        used to be one and it was wrong in every scene that used it: `rel("iris",
+        "trust", 3)` stored the *player's* trust toward Iris, while every scene
+        that wrote it meant Iris trusting the player.
+
+            $ rel("iris->player", "trust", 3)     # Iris warms to you
+            $ rel("player->iris", "suspicion", 2) # you start doubting her
+            $ rel("mara->june", "resentment", 2)  # nothing to do with you
+
+        See docs/narrative-design/RELATIONSHIP_DIRECTION.md.
         """
-        return s32_relationships.change(S32State, target, axis, delta, source=source)
+        source, target = s32_relationships.parse_pair(pair)
+        return s32_relationships.change(S32State, source, target, axis, delta)
 
-    def rel_get(target, axis, source="player"):
-        """Read one relationship axis."""
-        return s32_relationships.get(S32State, target, axis, source=source)
+    def rel_get(pair, axis):
+        """Read one relationship axis. ``pair`` is written ``source->target``."""
+        source, target = s32_relationships.parse_pair(pair)
+        return s32_relationships.get(S32State, source, target, axis)
 
     def learn(fact_id, source=""):
         """The player now knows something.

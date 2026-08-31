@@ -13,17 +13,17 @@
   "outcomes": [
     [
       "trait curious += 1",
-      "rel mara.familiarity += 4"
+      "rel mara->player.familiarity += 4"
     ],
     [
       "trait reserved += 1",
-      "rel mara.familiarity += 3",
-      "rel mara.respect += 2"
+      "rel mara->player.familiarity += 3",
+      "rel mara->player.respect += 2"
     ],
     [
       "trait direct += 1",
-      "rel mara.familiarity += 2",
-      "rel mara.suspicion += 3"
+      "rel mara->player.familiarity += 2",
+      "rel mara->player.suspicion += 3"
     ]
   ]
 }

@@ -28,7 +28,7 @@
     ],
     [
       "trait gentle += 1",
-      "rel june.familiarity += 2"
+      "rel june->player.familiarity += 2"
     ]
   ],
   "cooldown": 0,

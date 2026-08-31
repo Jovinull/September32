@@ -8,6 +8,20 @@ Relationships are **directed**. ``iris->theo`` is Iris's stance toward Theo and
 says nothing about his toward her. NPC-to-NPC pairs use exactly the same storage
 as player-to-NPC pairs, so the graph can grow without an architectural change
 even though the prototype only exercises a few edges.
+
+The direction must always be written. The functions here take ``source`` and
+``target`` separately; the authoring layers -- the condition and effect grammars
+and the Ren'Py helpers -- take one ``source->target`` string, which is what
+:func:`parse_pair` is for. There used to be a ``source="player"`` default at
+every layer, and it was wrong in every one of the 114 places the content used
+it: ``rel iris.trust += 3`` stored the player's trust toward Iris, while every
+scene that wrote it meant Iris warming to the player. Nothing detected it,
+because the two conditions that read a relationship read the same wrong edge.
+A default that is wrong in 100% of uses is not a default. ``source`` is now a
+positional argument here, ahead of ``target`` and with no default, for the
+same reason: a reader of a call site should not have to remember which end is
+implied, and ``get(state, "iris", "player", "trust")`` reads in the direction
+it means.
 """
 
 from __future__ import annotations
@@ -17,11 +31,27 @@ from s32_engine.state import clamp_axis, pair_key
 from s32_engine.types import (
     AXIS_MAX,
     AXIS_MIN,
-    PLAYER,
     RELATIONSHIP_AXES,
     GameState,
     RelationshipAxis,
 )
+
+
+def parse_pair(pair: str) -> tuple[str, str]:
+    """Split a ``"source->target"`` string into its two agents.
+
+    Raises:
+        ValueError: If the arrow is missing, naming both agents in the message,
+            since the caller wrote one of them and meant one of two things.
+    """
+    source, arrow, target = pair.partition("->")
+    if not arrow or not source.strip() or not target.strip():
+        raise ValueError(
+            f"relationship pair {pair!r} needs an explicit direction: "
+            f"write '{pair}->player' for their stance toward the player, "
+            f"or 'player->{pair}' for yours toward them"
+        )
+    return source.strip(), target.strip()
 
 
 def _vector(state: GameState, source: str, target: str) -> dict[str, int]:
@@ -34,22 +64,22 @@ def _vector(state: GameState, source: str, target: str) -> dict[str, int]:
     return vector
 
 
-def get(state: GameState, target: str, axis: RelationshipAxis, source: str = PLAYER) -> int:
-    """Return one axis of ``source``'s relationship toward ``target``."""
+def get(state: GameState, source: str, target: str, axis: RelationshipAxis) -> int:
+    """Return one axis of ``source``'s stance toward ``target``."""
     return _vector(state, source, target).get(axis, AXIS_MIN)
 
 
-def vector(state: GameState, target: str, source: str = PLAYER) -> dict[str, int]:
+def vector(state: GameState, source: str, target: str) -> dict[str, int]:
     """Return a copy of the full axis vector from ``source`` toward ``target``."""
     return dict(_vector(state, source, target))
 
 
 def change(
     state: GameState,
+    source: str,
     target: str,
     axis: RelationshipAxis,
     delta: int,
-    source: str = PLAYER,
 ) -> int:
     """Adjust one axis by ``delta``, clamped to ``[0, 100]``.
 
@@ -62,7 +92,7 @@ def change(
         >>> from s32_engine.types import CharacterDef, ContentLibrary
         >>> lib = ContentLibrary(characters={"iris": CharacterDef("iris", "Iris", "archivist")})
         >>> st = new_state(lib)
-        >>> change(st, "iris", "trust", 12)
+        >>> change(st, "iris", "player", "trust", 12)
         12
     """
     vec = _vector(state, source, target)
@@ -72,10 +102,10 @@ def change(
 
 def set_axis(
     state: GameState,
+    source: str,
     target: str,
     axis: RelationshipAxis,
     value: int,
-    source: str = PLAYER,
 ) -> int:
     """Set one axis to an absolute value, clamped to ``[0, 100]``.
 
@@ -89,9 +119,9 @@ def set_axis(
 
 def apply(
     state: GameState,
+    source: str,
     target: str,
     deltas: dict[str, int],
-    source: str = PLAYER,
 ) -> dict[str, int]:
     """Apply several axis deltas at once and return the resulting vector.
 
@@ -101,8 +131,8 @@ def apply(
     for axis, delta in deltas.items():
         if axis not in RELATIONSHIP_AXES:
             raise KeyError(f"unknown relationship axis: {axis!r}")
-        change(state, target, axis, delta, source=source)
-    return vector(state, target, source=source)
+        change(state, source, target, axis, delta)
+    return vector(state, source, target)
 
 
 def edges(state: GameState, source: str | None = None) -> list[tuple[str, str]]:
@@ -127,19 +157,19 @@ def edges(state: GameState, source: str | None = None) -> list[tuple[str, str]]:
 # ---------------------------------------------------------------------------
 
 
-def is_close(state: GameState, target: str, source: str = PLAYER) -> bool:
+def is_close(state: GameState, source: str, target: str) -> bool:
     """Return whether the pair reads as an actual friendship, not just contact."""
     vec = _vector(state, source, target)
     return vec["trust"] >= 55 and vec["familiarity"] >= 45
 
 
-def is_strained(state: GameState, target: str, source: str = PLAYER) -> bool:
+def is_strained(state: GameState, source: str, target: str) -> bool:
     """Return whether resentment or suspicion currently outweighs trust."""
     vec = _vector(state, source, target)
     return max(vec["resentment"], vec["suspicion"]) > vec["trust"]
 
 
-def romantic_potential(state: GameState, target: str, source: str = PLAYER) -> int:
+def romantic_potential(state: GameState, source: str, target: str) -> int:
     """Score romantic viability on ``[0, 100]``.
 
     Attraction alone is not romance. This weights attraction by the trust and
@@ -152,7 +182,7 @@ def romantic_potential(state: GameState, target: str, source: str = PLAYER) -> i
     return max(AXIS_MIN, min(AXIS_MAX, base - vec["fear"] // 2))
 
 
-def summary(state: GameState, target: str, source: str = PLAYER) -> str:
+def summary(state: GameState, source: str, target: str) -> str:
     """Return a one-line human reading of a pair, for debug screens and logs."""
     vec = _vector(state, source, target)
     parts = [f"{axis}={vec[axis]}" for axis in RELATIONSHIP_AXES if vec[axis]]

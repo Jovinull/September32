@@ -23,24 +23,24 @@
     "knows(iris_keeps_a_second_index)"
   ],
   "effects": [
-    "rel iris.trust += 3",
-    "rel iris.familiarity += 3"
+    "rel iris->player.trust += 3",
+    "rel iris->player.familiarity += 3"
   ],
   "outcomes": [
     [
       "trait gentle += 1",
-      "rel iris.trust += 4",
-      "rel iris.attraction += 2"
+      "rel iris->player.trust += 4",
+      "rel iris->player.attraction += 2"
     ],
     [
       "trait skeptical += 1",
-      "rel iris.respect += 3",
-      "rel iris.resentment += 2"
+      "rel iris->player.respect += 3",
+      "rel iris->player.resentment += 2"
     ],
     [
       "trait curious += 1",
-      "rel iris.trust += 2",
-      "rel iris.respect += 3"
+      "rel iris->player.trust += 2",
+      "rel iris->player.respect += 3"
     ]
   ],
   "cooldown": 0,

@@ -21,7 +21,7 @@
   ],
   "effects": [
     "commit(meet_theo_archive, theo, 1, 60)",
-    "rel theo.familiarity += 2",
+    "rel theo->player.familiarity += 2",
     "event(theo_asked_to_meet)"
   ],
   "repeat_policy": "once",
@@ -29,12 +29,12 @@
   "outcomes": [
     [
       "trait curious += 1",
-      "rel theo.familiarity += 2"
+      "rel theo->player.familiarity += 2"
     ],
     [
       "trait sarcastic += 1",
-      "rel theo.respect -= 1",
-      "rel theo.familiarity += 2"
+      "rel theo->player.respect -= 1",
+      "rel theo->player.familiarity += 2"
     ]
   ]
 }

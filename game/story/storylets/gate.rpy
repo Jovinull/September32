@@ -102,8 +102,8 @@ label s32_st_gate_waiting:
 
         "Give me half the bag.":
             $ trait("gentle")
-            $ rel("theo", "familiarity", 4)
-            $ rel("theo", "trust", 2)
+            $ rel("theo->player", "familiarity", 4)
+            $ rel("theo->player", "trust", 2)
 
             narrator "He hands you the side pocket without arguing, which is the fastest he has agreed to anything."
 
@@ -121,7 +121,7 @@ label s32_st_gate_waiting:
 
         "What is it?":
             $ trait("direct")
-            $ rel("theo", "respect", 3)
+            $ rel("theo->player", "respect", 3)
 
             c_theo "Something I'm supposed to have."
 

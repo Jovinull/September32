@@ -33,7 +33,7 @@ def test_requirements_gate_a_storylet(state, library):
     assert not director.evaluate(library.storylets["followup"], state).eligible
 
     knowledge.grant(state, "photo")
-    relationships.change(state, "iris", "trust", 5)
+    relationships.change(state, "iris", "player", "trust", 5)
 
     assert director.evaluate(library.storylets["followup"], state).eligible
 
@@ -43,7 +43,7 @@ def test_a_passing_blocker_blocks(state, library):
     state["world"]["location"] = "rooftop"
     assert director.evaluate(library.storylets["blocked"], state).eligible
 
-    relationships.change(state, "iris", "trust", 10)
+    relationships.change(state, "iris", "player", "trust", 10)
     assert not director.evaluate(library.storylets["blocked"], state).eligible
 
 
@@ -77,10 +77,10 @@ def test_the_trace_names_the_failing_clause(state, library):
 
     assert "ELIGIBLE: false" in text
     assert "PASS knows(photo)" in text
-    assert "FAIL rel iris.trust >= 5" in text
+    assert "FAIL rel iris->player.trust >= 5" in text
     # The actual value, not just the clause: "needs 5" is useless without
     # "currently 0".
-    assert "player->iris.trust=0" in text
+    assert "iris->player.trust=0" in text
 
 
 def test_the_trace_reports_every_failure_not_just_the_first(state, library):
@@ -139,7 +139,7 @@ def test_play_applies_effects_and_records_history(state, library):
     director = NarrativeDirector(library)
     changes = director.play(library.storylets["intro"], state)
 
-    assert relationships.get(state, "iris", "trust") == 5
+    assert relationships.get(state, "iris", "player", "trust") == 5
     assert knowledge.knows(state, "photo")
     assert state["history"][-1]["id"] == "intro"
     assert state["seen_counts"]["intro"] == 1
@@ -189,7 +189,7 @@ def test_fast_and_full_eligibility_agree(library):
         probe["world"]["phase"] = "odd" if seed % 5 == 0 else "normal"
         if seed % 2:
             knowledge.grant(probe, "photo")
-            relationships.change(probe, "iris", "trust", seed % 12)
+            relationships.change(probe, "iris", "player", "trust", seed % 12)
         if seed % 7 == 0:
             record_storylet(probe, "intro")
 

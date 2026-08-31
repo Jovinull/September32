@@ -16,17 +16,17 @@
   "outcomes": [
     [
       "trait curious += 1",
-      "rel iris.trust += 4",
-      "rel iris.familiarity += 3"
+      "rel iris->player.trust += 4",
+      "rel iris->player.familiarity += 3"
     ],
     [
       "trait reserved += 1",
-      "rel iris.familiarity += 3"
+      "rel iris->player.familiarity += 3"
     ],
     [
       "trait empathetic += 1",
-      "rel iris.trust += 5",
-      "rel iris.attraction += 2"
+      "rel iris->player.trust += 5",
+      "rel iris->player.attraction += 2"
     ]
   ]
 }

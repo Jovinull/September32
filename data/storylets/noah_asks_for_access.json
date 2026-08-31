@@ -26,24 +26,24 @@
   ],
   "effects": [
     "know(noah_is_writing_about_the_archive, he_told_me)",
-    "rel noah.familiarity += 5",
+    "rel noah->player.familiarity += 5",
     "event(noah_asked_for_access)"
   ],
   "outcomes": [
     [
-      "rel noah.familiarity += 3",
+      "rel noah->player.familiarity += 3",
       "commit(noah_access, noah, 2, 55)"
     ],
     [
       "trait direct += 1",
-      "rel noah.respect += 4",
-      "rel noah.resentment += 2"
+      "rel noah->player.respect += 4",
+      "rel noah->player.resentment += 2"
     ],
     [
       "trait curious += 1",
-      "rel noah.trust += 4",
+      "rel noah->player.trust += 4",
       "rel iris->noah.suspicion += 3",
-      "rel iris.trust -= 2"
+      "rel iris->player.trust -= 2"
     ]
   ],
   "repeat_policy": "once",

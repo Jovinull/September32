@@ -21,17 +21,17 @@
   "weight": 1.2,
   "requirements": [],
   "effects": [
-    "rel theo.familiarity += 2",
+    "rel theo->player.familiarity += 2",
     "event(lost_property_crate)"
   ],
   "outcomes": [
     [
       "trait gentle += 1",
-      "rel theo.familiarity += 3"
+      "rel theo->player.familiarity += 3"
     ],
     [
       "trait curious += 1",
-      "rel theo.respect += 2"
+      "rel theo->player.respect += 2"
     ]
   ],
   "cooldown": 4,

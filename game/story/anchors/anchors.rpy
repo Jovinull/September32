@@ -31,22 +31,22 @@ label s32_anchor_arrival:
     menu:
         "How do you know about the archive job?":
             $ trait("curious")
-            $ rel("mara", "familiarity", 4)
+            $ rel("mara->player", "familiarity", 4)
             c_mara "Everyone knows. It's been on the noticeboard since June."
             c_mara "Nobody wanted it. Sorry."
             narrator "She does not sound sorry. She sounds like someone being accurate."
 
         "Thanks. Lead on.":
             $ trait("reserved")
-            $ rel("mara", "familiarity", 3)
-            $ rel("mara", "respect", 2)
+            $ rel("mara->player", "familiarity", 3)
+            $ rel("mara->player", "respect", 2)
             c_mara "Right."
             narrator "She walks. You follow. It is a long enough silence to be comfortable, which is not what you expected."
 
         "Does everyone get met at the gate?":
             $ trait("direct")
-            $ rel("mara", "familiarity", 2)
-            $ rel("mara", "suspicion", 3)
+            $ rel("mara->player", "familiarity", 2)
+            $ rel("mara->player", "suspicion", 3)
             c_mara "No."
             narrator "She holds the pause exactly long enough for you to notice it."
             c_mara "My family's been here a while. You get used to being the one who's around."
@@ -82,21 +82,21 @@ label s32_anchor_first_shift:
     menu:
         "What happens if something isn't labelled?":
             $ trait("curious")
-            $ rel("iris", "trust", 4)
-            $ rel("iris", "familiarity", 3)
+            $ rel("iris->player", "trust", 4)
+            $ rel("iris->player", "familiarity", 3)
             c_iris "Then it goes in the maybe pile and I photograph it anyway."
             c_iris "Most of the maybe pile is somebody's aunt at a sports day in 1974."
             narrator "She says {i}most{/i} the way you would set something down carefully."
 
         "Seems straightforward.":
             $ trait("reserved")
-            $ rel("iris", "familiarity", 3)
+            $ rel("iris->player", "familiarity", 3)
             c_iris "It is. That's why nobody does it."
 
         "How long have you been doing this alone?":
             $ trait("empathetic")
-            $ rel("iris", "trust", 5)
-            $ rel("iris", "attraction", 2)
+            $ rel("iris->player", "trust", 5)
+            $ rel("iris->player", "attraction", 2)
             c_iris "..."
             c_iris "Since March."
             narrator "She goes back to the scanner, which is her way of finishing a sentence."

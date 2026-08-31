@@ -78,8 +78,8 @@ label s32_st_archive_iris_index:
 
         "I could help you keep it up.":
             $ trait("gentle")
-            $ rel("iris", "trust", 4)
-            $ rel("iris", "attraction", 2)
+            $ rel("iris->player", "trust", 4)
+            $ rel("iris->player", "attraction", 2)
 
             c_iris "You'd get bored."
 
@@ -93,8 +93,8 @@ label s32_st_archive_iris_index:
 
         "The office would take that off you if they knew.":
             $ trait("skeptical")
-            $ rel("iris", "respect", 3)
-            $ rel("iris", "resentment", 2)
+            $ rel("iris->player", "respect", 3)
+            $ rel("iris->player", "resentment", 2)
 
             c_iris "Yes."
 
@@ -106,8 +106,8 @@ label s32_st_archive_iris_index:
 
         "What do you think isn't in the box?":
             $ trait("curious")
-            $ rel("iris", "trust", 2)
-            $ rel("iris", "respect", 3)
+            $ rel("iris->player", "trust", 2)
+            $ rel("iris->player", "respect", 3)
 
             c_iris "That's a better question than the one people usually ask."
 
@@ -153,9 +153,9 @@ label s32_st_archive_theo_returns:
 
         "She would know. She keeps two records.":
             $ trait("direct")
-            $ rel("iris", "trust", 3)
-            $ rel("theo", "respect", -1)
-            $ rel("theo", "suspicion", 2, source="iris")
+            $ rel("iris->player", "trust", 3)
+            $ rel("theo->player", "respect", -1)
+            $ rel("iris->theo", "suspicion", 2)
 
             c_theo "Right."
 
@@ -167,9 +167,9 @@ label s32_st_archive_theo_returns:
 
         "He is not accusing you of anything.":
             $ trait("gentle")
-            $ rel("theo", "trust", 3)
-            $ rel("iris", "familiarity", 2)
-            $ rel("iris", "respect", 2, source="theo")
+            $ rel("theo->player", "trust", 3)
+            $ rel("iris->player", "familiarity", 2)
+            $ rel("theo->iris", "respect", 2)
 
             c_iris "I know he isn't."
 
@@ -183,9 +183,9 @@ label s32_st_archive_theo_returns:
 
         "Say nothing.":
             $ trait("reserved")
-            $ rel("iris", "respect", 2)
-            $ rel("theo", "respect", 2)
-            $ rel("theo", "familiarity", 2, source="iris")
+            $ rel("iris->player", "respect", 2)
+            $ rel("theo->player", "respect", 2)
+            $ rel("iris->theo", "familiarity", 2)
 
             narrator "You stay out of it and it resolves itself in about ninety seconds, the way most of these do."
 

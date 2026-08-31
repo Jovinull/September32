@@ -24,24 +24,24 @@
     "seen(mara_reads_the_room)"
   ],
   "effects": [
-    "rel mara.familiarity += 1",
-    "rel june.familiarity += 1"
+    "rel mara->player.familiarity += 1",
+    "rel june->player.familiarity += 1"
   ],
   "outcomes": [
     [
       "trait reserved += 1",
-      "rel mara.respect += 3",
-      "rel june.familiarity += 2"
+      "rel mara->player.respect += 3",
+      "rel june->player.familiarity += 2"
     ],
     [
       "trait gentle += 1",
-      "rel june.trust += 3",
+      "rel june->player.trust += 3",
       "rel mara->june.familiarity += 2"
     ],
     [
       "trait direct += 1",
-      "rel june.familiarity += 4",
-      "rel mara.suspicion += 3",
+      "rel june->player.familiarity += 4",
+      "rel mara->player.suspicion += 3",
       "rel mara->june.suspicion += 2"
     ]
   ],

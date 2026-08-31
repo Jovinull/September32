@@ -76,7 +76,7 @@ def library() -> ContentLibrary:
                 location="archive",
                 characters=("iris",),
                 priority=70,
-                effects=("rel iris.trust += 5", "know(photo, box)"),
+                effects=("rel iris->player.trust += 5", "know(photo, box)"),
                 tags=("archive",),
             ),
             "followup": StoryletDef(
@@ -86,7 +86,7 @@ def library() -> ContentLibrary:
                 category="investigation",
                 location="archive",
                 priority=60,
-                requirements=("knows(photo)", "rel iris.trust >= 5"),
+                requirements=("knows(photo)", "rel iris->player.trust >= 5"),
                 effects=("know(date, stamp)",),
                 tags=("mystery",),
             ),
@@ -109,7 +109,7 @@ def library() -> ContentLibrary:
                 category="conversation",
                 location="rooftop",
                 priority=50,
-                blockers=("rel iris.trust >= 5",),
+                blockers=("rel iris->player.trust >= 5",),
             ),
         },
         anchors={

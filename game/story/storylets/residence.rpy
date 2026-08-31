@@ -137,7 +137,7 @@ label s32_st_town_road_last_bus:
 
         "Phone June and ask if she is still up.":
             $ trait("gentle")
-            $ rel("june", "familiarity", 2)
+            $ rel("june->player", "familiarity", 2)
 
             c_document "yes. why are you outside"
 

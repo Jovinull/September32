@@ -22,7 +22,7 @@ Supported forms::
     phase >= unsettling             ordered phase comparison
     month == September
 
-    rel iris.trust >= 30            player -> iris
+    rel player->iris.trust >= 30    player -> iris
     rel iris->theo.respect < 20     npc -> npc
     trait curious >= 3
     flag archive_visits >= 2
@@ -225,11 +225,28 @@ def _h_phase(m: re.Match[str], ctx: ConditionContext) -> tuple[bool, str]:
     )
 
 
+def _h_rel_no_direction(m: re.Match[str], ctx: ConditionContext) -> tuple[bool, str]:
+    """Reject the old direction-less form, by name, with the fix in the message.
+
+    ``rel iris.trust`` used to mean the *player's* trust toward Iris, defaulting
+    the source. It read to most people as Iris's trust toward the player, which
+    is the opposite, and the notation gave a reader nothing to check against.
+    Both directions must now be written.
+    """
+    del ctx
+    target, axis = m.group("target"), m.group("axis")
+    raise ConditionError(
+        f"ambiguous relationship direction in 'rel {target}.{axis}': "
+        f"write 'rel player->{target}.{axis}' for the player's stance toward "
+        f"{target}, or 'rel {target}->player.{axis}' for theirs toward the player"
+    )
+
+
 def _h_rel(m: re.Match[str], ctx: ConditionContext) -> tuple[bool, str]:
-    source = m.group("source") or "player"
+    source = m.group("source")
     target = m.group("target")
     axis = m.group("axis")
-    actual = relationships.get(ctx.state, target, axis, source=source)  # type: ignore[arg-type]
+    actual = relationships.get(ctx.state, source, target, axis)  # type: ignore[arg-type]
     return _num_compare(actual, m.group("op"), int(m.group("value")), f"{source}->{target}.{axis}")
 
 
@@ -381,10 +398,18 @@ _HANDLERS: tuple[tuple[re.Pattern[str], Handler], ...] = (
     (re.compile(r"phase\s*(?P<op>==|!=|>=|<=|>|<)\s*(?P<value>[a-z_]+)"), _h_phase),
     (
         re.compile(
-            rf"rel\s+(?:(?P<source>{_IDENT})->)?(?P<target>{_IDENT})\.(?P<axis>{_IDENT})"
+            rf"rel\s+(?P<source>{_IDENT})->(?P<target>{_IDENT})\.(?P<axis>{_IDENT})"
             r"\s*(?P<op>==|!=|>=|<=|>|<)\s*(?P<value>-?\d+)"
         ),
         _h_rel,
+    ),
+    # Must come after the explicit form, and exists only to fail usefully.
+    (
+        re.compile(
+            rf"rel\s+(?P<target>{_IDENT})\.(?P<axis>{_IDENT})"
+            r"\s*(?P<op>==|!=|>=|<=|>|<)\s*(?P<value>-?\d+)"
+        ),
+        _h_rel_no_direction,
     ),
     (
         re.compile(rf"trait\s+(?P<axis>{_IDENT})\s*(?P<op>==|!=|>=|<=|>|<)\s*(?P<value>-?\d+)"),
@@ -450,24 +475,36 @@ _HANDLERS: tuple[tuple[re.Pattern[str], Handler], ...] = (
 
 #: Maps each condition form to the content ids it references, so the validator
 #: can check them without duplicating the grammar.
+#:
+#: Keyed by handler rather than by position in ``_HANDLERS``. An earlier version
+#: indexed the tuple, which meant inserting one pattern silently re-pointed
+#: every entry after it at the wrong grammar.
+def _pattern_for(handler: Handler) -> re.Pattern[str]:
+    """Return the first pattern bound to ``handler``."""
+    for pattern, bound in _HANDLERS:
+        if bound is handler:
+            return pattern
+    raise KeyError(handler)
+
+
 _REFERENCE_PATTERNS: tuple[tuple[re.Pattern[str], dict[str, str]], ...] = tuple(
-    (pattern, kinds)
-    for pattern, kinds in (
-        (_HANDLERS[1][0], {"value": "location_or_enum"}),
-        (_HANDLERS[4][0], {"source": "character", "target": "character", "axis": "rel_axis"}),
-        (_HANDLERS[5][0], {"axis": "trait_axis"}),
-        (_HANDLERS[7][0], {"fact": "knowledge"}),
-        (_HANDLERS[8][0], {"fact": "knowledge"}),
-        (_HANDLERS[9][0], {"agent": "character", "fact": "knowledge"}),
-        (_HANDLERS[10][0], {"agent": "character", "fact": "knowledge", "value": "stance"}),
-        (_HANDLERS[11][0], {"sid": "storylet"}),
-        (_HANDLERS[12][0], {"sid": "storylet"}),
-        (_HANDLERS[13][0], {"sid": "storylet"}),
-        (_HANDLERS[14][0], {"sid": "storylet"}),
-        (_HANDLERS[15][0], {"item": "item"}),
-        (_HANDLERS[16][0], {"anchor": "anchor"}),
-        (_HANDLERS[18][0], {"who": "character"}),
-        (_HANDLERS[19][0], {"char": "character"}),
-        (_HANDLERS[20][0], {"char": "character"}),
+    (_pattern_for(handler), kinds)
+    for handler, kinds in (
+        (_h_world_str, {"value": "location_or_enum"}),
+        (_h_rel, {"source": "character", "target": "character", "axis": "rel_axis"}),
+        (_h_trait, {"axis": "trait_axis"}),
+        (_h_knows, {"fact": "knowledge"}),
+        (_h_suspects, {"fact": "knowledge"}),
+        (_h_npc_knows, {"agent": "character", "fact": "knowledge"}),
+        (_h_stance, {"agent": "character", "fact": "knowledge", "value": "stance"}),
+        (_h_seen, {"sid": "storylet"}),
+        (_h_not_seen, {"sid": "storylet"}),
+        (_h_seen_count, {"sid": "storylet"}),
+        (_h_days_since, {"sid": "storylet"}),
+        (_h_has_item, {"item": "item"}),
+        (_h_anchor_done, {"anchor": "anchor"}),
+        (_h_broken_weight, {"who": "character"}),
+        (_h_char_num, {"char": "character"}),
+        (_h_char, {"char": "character"}),
     )
 )

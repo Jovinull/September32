@@ -69,7 +69,7 @@ def test_a_fresh_state_is_entirely_tracked(tracked, library):
 
 def test_relationship_vectors_created_on_demand_are_tracked(tracked, library):
     state = new_state(library, seed=1)
-    relationships.change(state, "theo", "trust", 5, source="iris")
+    relationships.change(state, "iris", "theo", "trust", 5)
     assert_all_tracked(state)
 
 

@@ -27,17 +27,17 @@
     [
       "trait gentle += 1",
       "fulfil(june_favour)",
-      "rel june.trust += 4"
+      "rel june->player.trust += 4"
     ],
     [
       "trait reserved += 1",
       "break(june_favour)",
-      "rel june.resentment += 3"
+      "rel june->player.resentment += 3"
     ],
     [
       "trait curious += 2",
-      "rel iris.familiarity += 2",
-      "rel iris.trust += 2"
+      "rel iris->player.familiarity += 2",
+      "rel iris->player.trust += 2"
     ]
   ],
   "cooldown": 2,

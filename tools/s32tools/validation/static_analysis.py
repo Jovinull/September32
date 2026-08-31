@@ -44,11 +44,11 @@ def _reachable_weather() -> set[Weather]:
 
 
 _REL_REQ = re.compile(
-    r"rel\s+(?:(?P<source>[a-z_][a-z0-9_]*)->)?(?P<target>[a-z_][a-z0-9_]*)"
+    r"rel\s+(?P<source>[a-z_][a-z0-9_]*)->(?P<target>[a-z_][a-z0-9_]*)"
     r"\.(?P<axis>[a-z_]+)\s*(?P<op>>=|>)\s*(?P<value>-?\d+)"
 )
 _REL_EFF = re.compile(
-    r"rel\s+(?:(?P<source>[a-z_][a-z0-9_]*)->)?(?P<target>[a-z_][a-z0-9_]*)"
+    r"rel\s+(?P<source>[a-z_][a-z0-9_]*)->(?P<target>[a-z_][a-z0-9_]*)"
     r"\.(?P<axis>[a-z_]+)\s*(?P<op>\+=|=)\s*(?P<value>-?\d+)"
 )
 _TRAIT_REQ = re.compile(r"trait\s+(?P<axis>[a-z_]+)\s*(?:>=|>)\s*(?P<value>-?\d+)")
@@ -226,8 +226,7 @@ def _absorb(effect_list: tuple[str, ...], ceiling: Ceiling) -> None:
         ceiling.anchors.update(refs.get("anchor", set()))
 
         if match := _REL_EFF.fullmatch(text):
-            actor = match.group("source") or "player"
-            key = f"{actor}->{match.group('target')}.{match.group('axis')}"
+            key = f"{match.group('source')}->{match.group('target')}.{match.group('axis')}"
             value = int(match.group("value"))
             if match.group("op") == "+=":
                 # Repeatable content could apply this many times, so a positive
@@ -263,10 +262,7 @@ def _check_unsatisfiable(  # noqa: PLR0912 - one branch per requirement form, wh
                 continue
 
             if match := _REL_REQ.fullmatch(text):
-                key = (
-                    f"{match.group('source') or 'player'}->{match.group('target')}"
-                    f".{match.group('axis')}"
-                )
+                key = f"{match.group('source')}->{match.group('target')}.{match.group('axis')}"
                 needed = int(match.group("value"))
                 if ceiling.relationships.get(key, 0) < needed:
                     report.add(

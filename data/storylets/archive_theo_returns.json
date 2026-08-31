@@ -24,26 +24,26 @@
     "flag theo_lost_something >= 1"
   ],
   "effects": [
-    "rel iris.familiarity += 1",
-    "rel theo.familiarity += 1"
+    "rel iris->player.familiarity += 1",
+    "rel theo->player.familiarity += 1"
   ],
   "outcomes": [
     [
       "trait direct += 1",
-      "rel iris.trust += 3",
-      "rel theo.respect -= 1",
+      "rel iris->player.trust += 3",
+      "rel theo->player.respect -= 1",
       "rel iris->theo.suspicion += 2"
     ],
     [
       "trait gentle += 1",
-      "rel theo.trust += 3",
-      "rel iris.familiarity += 2",
+      "rel theo->player.trust += 3",
+      "rel iris->player.familiarity += 2",
       "rel theo->iris.respect += 2"
     ],
     [
       "trait reserved += 1",
-      "rel iris.respect += 2",
-      "rel theo.respect += 2",
+      "rel iris->player.respect += 2",
+      "rel theo->player.respect += 2",
       "rel iris->theo.familiarity += 2"
     ]
   ],

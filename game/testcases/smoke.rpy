@@ -53,14 +53,14 @@ testcase smoke_start_and_choose:
     advance until screen "choice"
 
     assert eval (S32State["traits"]["curious"] >= 1)
-    assert eval (S32State["relationships"]["player->mara"]["familiarity"] > 0)
+    assert eval (S32State["relationships"]["mara->player"]["familiarity"] > 0)
     assert eval ("arrival" in S32State["anchors_done"])
 
     click "What happens if something isn't labelled?"
 
     advance until eval ("first_shift" in S32State["anchors_done"]) timeout 20.0
 
-    assert eval (S32State["relationships"]["player->iris"]["trust"] >= 4)
+    assert eval (S32State["relationships"]["iris->player"]["trust"] >= 4)
 
     exit
 
@@ -130,7 +130,7 @@ testcase smoke_rollback:
     # written literally rather than captured into a store variable: a variable
     # set here would itself be rolled back, and the test would end up comparing
     # a rolled-back value against a rolled-back value and always pass.
-    assert eval (S32State["relationships"]["player->mara"]["suspicion"] >= 3)
+    assert eval (S32State["relationships"]["mara->player"]["suspicion"] >= 3)
 
     # Rollback is driven through the same action the UI uses, rather than a
     # keysym, so the test exercises the path a player actually takes.
@@ -143,7 +143,7 @@ testcase smoke_rollback:
     run Rollback()
     pause 0.5
 
-    assert eval (S32State["relationships"]["player->mara"]["suspicion"] < 3)
+    assert eval (S32State["relationships"]["mara->player"]["suspicion"] < 3)
 
     exit
 

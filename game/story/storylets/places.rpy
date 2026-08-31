@@ -28,7 +28,7 @@ label s32_st_dorm_message:
             "Answer her.":
                 $ trait("gentle")
                 $ kept("june_favour")
-                $ rel("june", "trust", 4)
+                $ rel("june->player", "trust", 4)
 
                 narrator "You type {i}I said yes, I'm coming{/i} and delete the {i}I said yes{/i} because it reads as annoyed."
 
@@ -39,7 +39,7 @@ label s32_st_dorm_message:
             "Leave it until morning.":
                 $ trait("reserved")
                 $ broke("june_favour")
-                $ rel("june", "resentment", 3)
+                $ rel("june->player", "resentment", 3)
 
                 narrator "You put the phone face down. It is a reasonable decision made at the reasonable hour of six in the evening."
 
@@ -47,12 +47,12 @@ label s32_st_dorm_message:
 
             "[trait_label('curious')] Look at the photograph again." if has_trait("curious") and has_item("old_photo"):
                 $ trait("curious", 2)
-                $ rel("iris", "familiarity", 2)
+                $ rel("iris->player", "familiarity", 2)
 
                 narrator "You answer June first — {i}coming{/i}, one word — and then take the photograph out of the drawer and put it under the desk lamp."
 
                 $ kept("june_favour")
-                $ rel("june", "trust", 4)
+                $ rel("june->player", "trust", 4)
 
                 narrator "Forty-odd faces. The bench in the back row is the same bench that is still in the courtyard, which you had not noticed and which is not interesting, exactly."
 
@@ -65,7 +65,7 @@ label s32_st_dorm_message:
         menu:
             "Look at it properly.":
                 $ trait("curious", 2)
-                $ rel("iris", "familiarity", 2)
+                $ rel("iris->player", "familiarity", 2)
 
                 narrator "Forty-odd faces. Three rows. The print has been trimmed with scissors rather than cut, and not very straight, by somebody who wanted it to fit something."
 

@@ -36,7 +36,7 @@ label s32_st_june_the_favour:
     menu:
         "Sure. I'll do it.":
             $ trait("gentle")
-            $ rel("june", "familiarity", 4)
+            $ rel("june->player", "familiarity", 4)
             $ promise("june_favour", "june", in_days=1, importance=45)
 
             c_june "Oh — great. Thanks."
@@ -51,7 +51,7 @@ label s32_st_june_the_favour:
 
         "What is it, exactly?":
             $ trait("skeptical")
-            $ rel("june", "respect", 3)
+            $ rel("june->player", "respect", 3)
             $ promise("june_favour", "june", in_days=1, importance=45)
 
             c_june "Sixty chairs, a table, a clipboard, and roughly ninety minutes of saying good evening to people who are looking past you for their child."
@@ -64,8 +64,8 @@ label s32_st_june_the_favour:
 
         "Ask someone else. I'm not the one who says yes to things.":
             $ trait("direct")
-            $ rel("june", "respect", 4)
-            $ rel("june", "familiarity", 1)
+            $ rel("june->player", "respect", 4)
+            $ rel("june->player", "familiarity", 1)
 
             narrator "She looks at you properly for the first time."
 
@@ -109,7 +109,7 @@ label s32_st_june_welcome_pack:
             $ trait("curious")
             $ learn("school_history_skips_a_year", source="junes_welcome_pack")
             $ npc_learns("june", "school_history_skips_a_year", "known")
-            $ rel("june", "familiarity", 3)
+            $ rel("june->player", "familiarity", 3)
 
             c_june "No idea."
 
@@ -123,7 +123,7 @@ label s32_st_june_welcome_pack:
             $ trait("skeptical")
             $ learn("school_history_skips_a_year", source="junes_welcome_pack")
             $ npc_learns("june", "school_history_skips_a_year", "known")
-            $ rel("june", "respect", 2)
+            $ rel("june->player", "respect", 2)
 
             c_june "That's what I thought. That's exactly what I thought."
 
@@ -133,8 +133,8 @@ label s32_st_june_welcome_pack:
 
         "You were fifteen and you read the history section?":
             $ trait("gentle")
-            $ rel("june", "familiarity", 4)
-            $ rel("june", "attraction", 2)
+            $ rel("june->player", "familiarity", 4)
+            $ rel("june->player", "attraction", 2)
 
             c_june "I read all of it. Twice. On the bus."
 

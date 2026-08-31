@@ -81,7 +81,7 @@ label s32_st_old_photo_glimpse:
     menu:
         "Turn it over properly.":
             $ trait("curious", 2)
-            $ rel("iris", "trust", 3)
+            $ rel("iris->player", "trust", 3)
             narrator "The stamp is a date. Most of it has survived."
             narrator "You get as far as the month before Iris takes it out of your hands, gently, the way you take something from someone who is about to smudge it."
             c_iris "Gloves. Sorry. I'm not being precious, it's the oil on your fingers."
@@ -89,13 +89,13 @@ label s32_st_old_photo_glimpse:
 
         "Put it in the maybe pile.":
             $ trait("reserved")
-            $ rel("iris", "respect", 3)
+            $ rel("iris->player", "respect", 3)
             c_iris "Good. That's the correct answer and nobody ever gives it."
             narrator "The maybe pile is four inches deep and growing."
 
         "Ask who's in it.":
             $ trait("empathetic")
-            $ rel("iris", "familiarity", 4)
+            $ rel("iris->player", "familiarity", 4)
             c_iris "No idea. That's the problem with the good ones."
             c_iris "Forty people and not one of them wrote anything down."
             narrator "She looks at it a moment longer than the sentence needed."
@@ -136,13 +136,13 @@ label s32_st_message_after_class:
     menu:
         "Fold it up and keep it.":
             $ trait("curious")
-            $ rel("theo", "familiarity", 2)
+            $ rel("theo->player", "familiarity", 2)
             narrator "You put it in the same pocket as everything else you have not decided about."
 
         "He could have just asked.":
             $ trait("sarcastic")
-            $ rel("theo", "respect", -1)
-            $ rel("theo", "familiarity", 2)
+            $ rel("theo->player", "respect", -1)
+            $ rel("theo->player", "familiarity", 2)
             narrator "He could have. He has instead produced a document, which tells you something about Theo."
 
     return
@@ -169,14 +169,14 @@ label s32_st_rain_after_school:
     menu:
         "Go on.":
             $ trait("empathetic")
-            $ rel("iris", "trust", 4)
+            $ rel("iris->player", "trust", 4)
             c_iris "I photograph things before I catalogue them. Everything. Even the things that turn out to be nothing."
             c_iris "There's a folder on my laptop with about nine thousand photographs of objects nobody has ever asked about."
 
         "That's a low bar around here.":
             $ trait("sarcastic")
-            $ rel("iris", "familiarity", 4)
-            $ rel("iris", "attraction", 2)
+            $ rel("iris->player", "familiarity", 4)
+            $ rel("iris->player", "attraction", 2)
             narrator "She laughs, once, mostly through her nose."
             c_iris "Fine. I photograph everything before I catalogue it. Everything. Including the nothing."
 
@@ -189,15 +189,15 @@ label s32_st_rain_after_school:
     menu:
         "Show me the folder sometime.":
             $ trait("curious")
-            $ rel("iris", "trust", 4)
-            $ rel("iris", "attraction", 3)
+            $ rel("iris->player", "trust", 4)
+            $ rel("iris->player", "attraction", 3)
             c_iris "Maybe."
             narrator "Which from Iris appears to mean yes, eventually, on a day she chooses."
 
         "That's a lot of photographs of nothing.":
             $ trait("skeptical")
-            $ rel("iris", "trust", 1)
-            $ rel("iris", "suspicion", 2)
+            $ rel("iris->player", "trust", 1)
+            $ rel("iris->player", "suspicion", 2)
             c_iris "It is."
             c_iris "I'd rather have nine thousand photographs of nothing than one missing photograph of something."
 
@@ -255,13 +255,13 @@ label s32_st_theo_ledger_question:
     menu:
         "Someone forgot.":
             $ trait("skeptical")
-            $ rel("theo", "respect", 2)
+            $ rel("theo->player", "respect", 2)
             c_theo "That was my first answer too."
             c_theo "Then I checked the other two volumes. Ninety-one pages. Nobody has ever forgotten."
 
         "What's in the column?":
             $ trait("curious", 2)
-            $ rel("theo", "trust", 3)
+            $ rel("theo->player", "trust", 3)
             c_theo "Fourteen items. Eleven of them are in box seventeen."
             c_theo "Two are in the maybe pile."
             c_theo "One is a photograph."
@@ -269,8 +269,8 @@ label s32_st_theo_ledger_question:
 
         "Does Iris know?":
             $ trait("direct")
-            $ rel("theo", "familiarity", 3)
-            $ rel("theo", "suspicion", 2)
+            $ rel("theo->player", "familiarity", 3)
+            $ rel("theo->player", "suspicion", 2)
             c_theo "..."
             c_theo "Iris photographs things before she catalogues them."
             c_theo "I don't know what that means yet either."

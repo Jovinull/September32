@@ -29,7 +29,7 @@
     "not_seen(archive_intro)"
   ],
   "effects": [
-    "rel iris.familiarity += 8",
+    "rel iris->player.familiarity += 8",
     "flag archive_visits += 1",
     "event(met_iris_in_archive)"
   ],

@@ -7,9 +7,9 @@ analyser can read a storylet and know that it grants ``old_photo``, which is how
 
 Supported forms::
 
-    rel iris.trust += 3            player -> iris, delta
-    rel iris.trust -= 2
-    rel iris.trust = 40            absolute (reserved for anchors)
+    rel player->iris.trust += 3    player -> iris, delta
+    rel player->iris.trust -= 2
+    rel player->iris.trust = 40    absolute (reserved for anchors)
     rel iris->theo.respect += 5    npc -> npc
 
     trait curious += 1
@@ -141,8 +141,25 @@ def referenced_ids(effect: str) -> dict[str, set[str]]:
 Handler = Callable[[re.Match[str], GameState], str]
 
 
+def _h_rel_no_direction(m: re.Match[str], state: GameState) -> str:
+    """Reject the old direction-less form, by name, with the fix in the message.
+
+    ``rel iris.trust += 3`` used to mean the *player's* trust toward Iris,
+    defaulting the source. It read to most people as Iris trusting the player
+    more, which is the opposite, and the notation gave a reader nothing to check
+    against. Both directions must now be written.
+    """
+    del state
+    target, axis, op = m.group("target"), m.group("axis"), m.group("op")
+    raise EffectError(
+        f"ambiguous relationship direction in 'rel {target}.{axis} {op} ...': "
+        f"write 'rel player->{target}.{axis}' for the player's stance toward "
+        f"{target}, or 'rel {target}->player.{axis}' for theirs toward the player"
+    )
+
+
 def _h_rel(m: re.Match[str], state: GameState) -> str:
-    source = m.group("source") or "player"
+    source = m.group("source")
     target, axis, op, value = (
         m.group("target"),
         m.group("axis"),
@@ -151,13 +168,11 @@ def _h_rel(m: re.Match[str], state: GameState) -> str:
     )
     if op == "=":
         result = relationships.set_axis(
-            state, target, cast("RelationshipAxis", axis), value, source=source
+            state, source, target, cast("RelationshipAxis", axis), value
         )
     else:
         delta = value if op == "+=" else -value
-        result = relationships.change(
-            state, target, cast("RelationshipAxis", axis), delta, source=source
-        )
+        result = relationships.change(state, source, target, cast("RelationshipAxis", axis), delta)
     return f"{source}->{target}.{axis}={result}"
 
 
@@ -328,10 +343,18 @@ _KNOW_PATTERN = re.compile(rf"know\(\s*(?P<fact>{_IDENT})\s*(?:,\s*(?P<source>{_
 _HANDLERS: tuple[tuple[re.Pattern[str], Handler], ...] = (
     (
         re.compile(
-            rf"rel\s+(?:(?P<source>{_IDENT})->)?(?P<target>{_IDENT})\.(?P<axis>{_IDENT})"
+            rf"rel\s+(?P<source>{_IDENT})->(?P<target>{_IDENT})\.(?P<axis>{_IDENT})"
             r"\s*(?P<op>\+=|-=|=)\s*(?P<value>-?\d+)"
         ),
         _h_rel,
+    ),
+    # Must come after the explicit form, and exists only to fail usefully.
+    (
+        re.compile(
+            rf"rel\s+(?P<target>{_IDENT})\.(?P<axis>{_IDENT})"
+            r"\s*(?P<op>\+=|-=|=)\s*(?P<value>-?\d+)"
+        ),
+        _h_rel_no_direction,
     ),
     (re.compile(rf"trait\s+(?P<axis>{_IDENT})\s*(?P<op>\+=|-=|=)\s*(?P<value>-?\d+)"), _h_trait),
     (re.compile(rf"flag\s+(?P<name>{_IDENT})\s*(?P<op>\+=|-=|=)\s*(?P<value>-?\d+)"), _h_flag),
@@ -382,18 +405,33 @@ _HANDLERS: tuple[tuple[re.Pattern[str], Handler], ...] = (
     (re.compile(rf"anchor_done\(\s*(?P<anchor>{_IDENT})\s*\)"), _h_anchor_done),
 )
 
-_REFERENCE_PATTERNS: tuple[tuple[re.Pattern[str], dict[str, str]], ...] = (
-    (_HANDLERS[0][0], {"source": "character", "target": "character", "axis": "rel_axis"}),
-    (_HANDLERS[1][0], {"axis": "trait_axis"}),
-    (_HANDLERS[3][0], {"fact": "knowledge"}),
-    (_HANDLERS[4][0], {"fact": "knowledge"}),
-    (_HANDLERS[5][0], {"fact": "knowledge"}),
-    (_HANDLERS[6][0], {"agent": "character", "fact": "knowledge", "stance": "stance"}),
-    (_HANDLERS[7][0], {"item": "item"}),
-    (_HANDLERS[8][0], {"item": "item"}),
-    (_HANDLERS[11][0], {"value": "location"}),
-    (_HANDLERS[13][0], {"char": "character"}),
-    (_HANDLERS[14][0], {"char": "character"}),
-    (_HANDLERS[15][0], {"who": "character"}),
-    (_HANDLERS[18][0], {"anchor": "anchor"}),
+
+#: Keyed by handler rather than by position in ``_HANDLERS``. An earlier
+#: version indexed the tuple, which meant inserting one pattern silently
+#: re-pointed every entry after it at the wrong grammar.
+def _pattern_for(handler: Handler) -> re.Pattern[str]:
+    """Return the first pattern bound to ``handler``."""
+    for pattern, bound in _HANDLERS:
+        if bound is handler:
+            return pattern
+    raise KeyError(handler)
+
+
+_REFERENCE_PATTERNS: tuple[tuple[re.Pattern[str], dict[str, str]], ...] = tuple(
+    (_pattern_for(handler), kinds)
+    for handler, kinds in (
+        (_h_rel, {"source": "character", "target": "character", "axis": "rel_axis"}),
+        (_h_trait, {"axis": "trait_axis"}),
+        (_h_know, {"fact": "knowledge"}),
+        (_h_suspect, {"fact": "knowledge"}),
+        (_h_disprove, {"fact": "knowledge"}),
+        (_h_npc_stance, {"agent": "character", "fact": "knowledge", "stance": "stance"}),
+        (_h_item, {"item": "item"}),
+        (_h_drop_item, {"item": "item"}),
+        (_h_location, {"value": "location"}),
+        (_h_char_num, {"char": "character"}),
+        (_h_char_set, {"char": "character"}),
+        (_h_commit, {"who": "character"}),
+        (_h_anchor_done, {"anchor": "anchor"}),
+    )
 )

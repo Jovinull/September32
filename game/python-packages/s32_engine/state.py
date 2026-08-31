@@ -26,6 +26,7 @@ from s32_engine.errors import StateError
 from s32_engine.types import (
     AXIS_MAX,
     AXIS_MIN,
+    PLAYER,
     RELATIONSHIP_AXES,
     TRAIT_AXES,
     CharacterState,
@@ -73,7 +74,11 @@ def new_state(library: ContentLibrary, *, seed: int = 0) -> GameState:
     relationships: dict[str, dict[str, int]] = new_dict()
     for char_id in sorted(library.characters):
         characters[char_id] = _blank_character()
-        relationships[_pair_key("player", char_id)] = _blank_axes()
+        # Both directions. Seeding only ``player->x`` meant a scene reading
+        # ``x->player`` -- which is what almost every scene means -- hit a
+        # missing key on a fresh run and after a rollback past the first change.
+        relationships[_pair_key(PLAYER, char_id)] = _blank_axes()
+        relationships[_pair_key(char_id, PLAYER)] = _blank_axes()
 
     return cast(
         "GameState",
@@ -271,6 +276,8 @@ def migrate_state(raw: dict[str, Any]) -> GameState:
     # Ordered, forward-only steps. Each must leave the dict valid for the next.
     if version < 2:
         _migrate_1_to_2(raw)
+    if version < 3:
+        _migrate_2_to_3(raw)
 
     raw["save_schema_version"] = SAVE_SCHEMA_VERSION
     # Rebuild through the configured factories. A save written by a build with a
@@ -288,6 +295,44 @@ def _migrate_1_to_2(raw: dict[str, Any]) -> None:
     raw.setdefault("documents_read", [])
 
 
+def _migrate_2_to_3(raw: dict[str, Any]) -> None:
+    """v2 -> v3: relationships the player earned were stored on the wrong edge.
+
+    Every authored scene wrote ``rel iris.trust += 3`` meaning *Iris* warming to
+    the player, and the direction-less form stored it as the player's stance
+    toward Iris. So a v2 save has the whole cast's feelings about the player
+    filed under ``player->them``.
+
+    Flipping is the correct repair rather than a heuristic: the old grammar had
+    no way to express the player's own stance, so every ``player->x`` edge in a
+    v2 save was written by the broken default and none was deliberate.
+
+    Merged per axis rather than wholesale, because a state carries a zeroed
+    vector for every pair from the moment it is created. Replacing the whole
+    vector would let those placeholder zeros overwrite the values being
+    repaired, or the reverse, depending on which key happened to be seen first.
+    A value already sitting on the correct edge wins, since only content written
+    after the fix could have put it there.
+    """
+    stored = raw.get("relationships")
+    if not isinstance(stored, dict):
+        return
+    repaired: dict[str, Any] = {}
+    flipped: dict[str, dict[str, int]] = {}
+    for key, axes in stored.items():
+        source, arrow, target = str(key).partition("->")
+        if arrow and source == PLAYER and target != PLAYER:
+            flipped[f"{target}->{PLAYER}"] = axes
+        else:
+            repaired[key] = axes
+    for key, axes in flipped.items():
+        correct = repaired.setdefault(key, {})
+        for axis, value in axes.items():
+            if not correct.get(axis):
+                correct[axis] = value
+    raw["relationships"] = repaired
+
+
 def sync_with_library(state: GameState, library: ContentLibrary) -> list[str]:
     """Add state entries for characters authored since the save was written.
 
@@ -303,9 +348,9 @@ def sync_with_library(state: GameState, library: ContentLibrary) -> list[str]:
         if char_id not in state["characters"]:
             state["characters"][char_id] = _blank_character()
             added.append(char_id)
-        key = _pair_key("player", char_id)
-        if key not in state["relationships"]:
-            state["relationships"][key] = _blank_axes()
+        for key in (_pair_key(PLAYER, char_id), _pair_key(char_id, PLAYER)):
+            if key not in state["relationships"]:
+                state["relationships"][key] = _blank_axes()
 
     for trait_axis in TRAIT_AXES:
         state["traits"].setdefault(trait_axis, 0)

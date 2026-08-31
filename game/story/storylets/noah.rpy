@@ -37,7 +37,7 @@ label s32_st_noah_asks_for_access:
 
     menu:
         "I'll ask her for you.":
-            $ rel("noah", "familiarity", 3)
+            $ rel("noah->player", "familiarity", 3)
             $ promise("noah_access", "noah", in_days=2, importance=55)
 
             c_noah "Would you? That's — yes. Thursday's fine. Any day's fine."
@@ -48,8 +48,8 @@ label s32_st_noah_asks_for_access:
 
         "Ask her yourself. It's her room.":
             $ trait("direct")
-            $ rel("noah", "respect", 4)
-            $ rel("noah", "resentment", 2)
+            $ rel("noah->player", "respect", 4)
+            $ rel("noah->player", "resentment", 2)
 
             c_noah "It's the school's room."
 
@@ -67,9 +67,9 @@ label s32_st_noah_asks_for_access:
 
         "There's a photograph in there that isn't on any list.":
             $ trait("curious")
-            $ rel("noah", "trust", 4)
-            $ rel("noah", "suspicion", 3, source="iris")
-            $ rel("iris", "trust", -2)
+            $ rel("noah->player", "trust", 4)
+            $ rel("iris->noah", "suspicion", 3)
+            $ rel("iris->player", "trust", -2)
 
             narrator "You hear yourself say it and it is already out."
 
@@ -117,7 +117,7 @@ label s32_st_noah_evening_layout:
     menu:
         "Doesn't that bother you?":
             $ trait("skeptical")
-            $ rel("noah", "respect", 2)
+            $ rel("noah->player", "respect", 2)
 
             c_noah "Not really?"
 
@@ -129,8 +129,8 @@ label s32_st_noah_evening_layout:
 
         "Give me half the desks. I'll sort them.":
             $ trait("gentle")
-            $ rel("noah", "familiarity", 4)
-            $ rel("noah", "dependency", 2)
+            $ rel("noah->player", "familiarity", 4)
+            $ rel("noah->player", "dependency", 2)
 
             c_noah "Seriously? Right — take those, they go oldest at the bottom, don't trust the dates on the covers, half of them are wrong."
 
@@ -142,8 +142,8 @@ label s32_st_noah_evening_layout:
 
         "[trait_label('curious')] How long a run is missing?" if has_trait("curious"):
             $ trait("curious", 2)
-            $ rel("noah", "trust", 2)
-            $ rel("noah", "suspicion", 1)
+            $ rel("noah->player", "trust", 2)
+            $ rel("noah->player", "suspicion", 1)
 
             c_noah "Dunno. A year, near enough."
 

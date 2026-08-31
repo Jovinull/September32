@@ -31,7 +31,7 @@ label s32_st_hallway_lost_property:
 
         "Take the right-hand pile.":
             $ trait("gentle")
-            $ rel("theo", "familiarity", 3)
+            $ rel("theo->player", "familiarity", 3)
 
             narrator "You work through it. Nine unmatched gloves. A recorder. A tie so old the school does not use that pattern any more. A single boot."
 
@@ -45,7 +45,7 @@ label s32_st_hallway_lost_property:
 
         "What are you actually looking for?":
             $ trait("curious")
-            $ rel("theo", "respect", 2)
+            $ rel("theo->player", "respect", 2)
 
             c_theo "Anything brass."
 
@@ -89,8 +89,8 @@ label s32_st_hallway_after_bell:
 
         "Stay where you are and say nothing.":
             $ trait("reserved")
-            $ rel("mara", "respect", 3)
-            $ rel("june", "familiarity", 2)
+            $ rel("mara->player", "respect", 3)
+            $ rel("june->player", "familiarity", 2)
 
             narrator "You lean on the rail. June makes the case twice more, in slightly different words, and Mara lets both versions finish."
 
@@ -104,8 +104,8 @@ label s32_st_hallway_after_bell:
 
         "Sounds like she's already said no twice.":
             $ trait("gentle")
-            $ rel("june", "trust", 3)
-            $ rel("june", "familiarity", 2, source="mara")
+            $ rel("june->player", "trust", 3)
+            $ rel("mara->june", "familiarity", 2)
 
             c_june "She has not said no once, is the thing."
 
@@ -121,9 +121,9 @@ label s32_st_hallway_after_bell:
 
         "What were you talking about?":
             $ trait("direct")
-            $ rel("june", "familiarity", 4)
-            $ rel("mara", "suspicion", 3)
-            $ rel("june", "suspicion", 2, source="mara")
+            $ rel("june->player", "familiarity", 4)
+            $ rel("mara->player", "suspicion", 3)
+            $ rel("mara->june", "suspicion", 2)
 
             c_june "A lift into town on Saturday. That's genuinely it."
 

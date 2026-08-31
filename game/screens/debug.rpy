@@ -139,10 +139,16 @@ screen s32_character_inspector():
                         $ _head = "{}  ({})".format(entry["name"], entry["id"])
                         $ _status = "present={}  mood={}  availability={}".format(entry["present"], entry["mood"], entry["availability"])
                         $ _toward = entry["to_them"]
+                        $ _from_them = entry["from_them"]
                         $ _beliefs = entry["beliefs"]
                         text "[_head]" style "s32_debug_head"
                         text "[_status]" style "s32_debug_text"
+                        # Both edges, always, even when one is empty. Showing
+                        # only one is how a direction bug survives a debug
+                        # screen: the number moves, it looks right, and it is
+                        # on the wrong arrow.
                         text "player -> them: [_toward]" style "s32_debug_text"
+                        text "them -> player: [_from_them]" style "s32_debug_text"
                         text "beliefs: [_beliefs]" style "s32_debug_text"
 
             frame:
@@ -264,7 +270,8 @@ init python:
                 "present": state.get("present"),
                 "mood": state.get("mood"),
                 "availability": state.get("availability"),
-                "to_them": s32_relationships.summary(S32State, char_id),
+                "to_them": s32_relationships.summary(S32State, "player", char_id),
+                "from_them": s32_relationships.summary(S32State, char_id, "player"),
                 "beliefs": ", ".join(
                     "{}={}".format(fact, entry["stance"]) for fact, entry in sorted(beliefs.items())
                 ) or "—",

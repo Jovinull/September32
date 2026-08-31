@@ -1,0 +1,46 @@
+{
+  "id": "iris_outside",
+  "label": "s32_st_iris_outside",
+  "title": "Out in the Light",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "iris"
+  ],
+  "location": "courtyard",
+  "time_slots": [
+    "morning",
+    "midday"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "character"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [
+    "seen(archive_intro)"
+  ],
+  "effects": [
+    "rel iris.familiarity += 3"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel iris.trust += 3",
+      "rel iris.attraction += 3"
+    ],
+    [
+      "trait curious += 1",
+      "rel iris.respect += 3"
+    ],
+    [
+      "trait reserved += 1",
+      "rel iris.familiarity += 1"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Iris out of the archive, eating lunch at ten past eleven because that is when the room is quiet. Iris was the most-encountered character in the game and had one storylet of her own."
+}

@@ -1,0 +1,43 @@
+{
+  "id": "gate_waiting",
+  "label": "s32_st_gate_waiting",
+  "title": "Still Here",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "theo"
+  ],
+  "location": "school_gate",
+  "time_slots": [
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "character"
+  ],
+  "priority": 40,
+  "weight": 1.0,
+  "requirements": [],
+  "effects": [
+    "flag theo_lost_something += 1",
+    "rel theo.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel theo.familiarity += 4",
+      "rel theo.trust += 2"
+    ],
+    [
+      "trait direct += 1",
+      "rel theo.respect += 3"
+    ],
+    [
+      "trait reserved += 1"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Theo at the gate at the end of the day, checking his bag for the third time. Sets theo_lost_something, which archive_theo_returns reads days later."
+}

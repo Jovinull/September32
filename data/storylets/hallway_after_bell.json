@@ -1,0 +1,51 @@
+{
+  "id": "hallway_after_bell",
+  "label": "s32_st_hallway_after_bell",
+  "title": "Mid-Sentence",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "mara",
+    "june"
+  ],
+  "location": "hallway_east",
+  "time_slots": [
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "character"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [
+    "seen(mara_reads_the_room)"
+  ],
+  "effects": [
+    "rel mara.familiarity += 1",
+    "rel june.familiarity += 1"
+  ],
+  "outcomes": [
+    [
+      "trait reserved += 1",
+      "rel mara.respect += 3",
+      "rel june.familiarity += 2"
+    ],
+    [
+      "trait gentle += 1",
+      "rel june.trust += 3",
+      "rel mara->june.familiarity += 2"
+    ],
+    [
+      "trait direct += 1",
+      "rel june.familiarity += 4",
+      "rel mara.suspicion += 3",
+      "rel mara->june.suspicion += 2"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Mara and June stopping mid-conversation when you arrive -- the ordinary version of that, not the sinister one. Asking what it was about is a trade: June's familiarity for Mara's suspicion, not a mistake."
+}

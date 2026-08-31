@@ -1,0 +1,53 @@
+{
+  "id": "archive_theo_returns",
+  "label": "s32_st_archive_theo_returns",
+  "title": "Two Reasonable People",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "iris",
+    "theo"
+  ],
+  "location": "archive_room",
+  "time_slots": [
+    "afternoon",
+    "evening"
+  ],
+  "tags": [
+    "archive",
+    "character",
+    "school"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [
+    "flag theo_lost_something >= 1"
+  ],
+  "effects": [
+    "rel iris.familiarity += 1",
+    "rel theo.familiarity += 1"
+  ],
+  "outcomes": [
+    [
+      "trait direct += 1",
+      "rel iris.trust += 3",
+      "rel theo.respect -= 1",
+      "rel iris->theo.suspicion += 2"
+    ],
+    [
+      "trait gentle += 1",
+      "rel theo.trust += 3",
+      "rel iris.familiarity += 2",
+      "rel theo->iris.respect += 2"
+    ],
+    [
+      "trait reserved += 1",
+      "rel iris.respect += 2",
+      "rel theo.respect += 2",
+      "rel iris->theo.familiarity += 2"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Theo comes to the archive for the thing he lost and Iris is territorial about the room in a way she has never been with the player. Two people who both think they are being reasonable. Relationship effects follow the player->target convention; the NPC-to-NPC axes carry what the two of them come to think of each other."
+}

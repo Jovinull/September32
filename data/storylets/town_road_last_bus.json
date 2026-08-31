@@ -1,0 +1,37 @@
+{
+  "id": "town_road_last_bus",
+  "label": "s32_st_town_road_last_bus",
+  "title": "The Last One Is Twenty Past",
+  "category": "interstitial",
+  "status": "prototype",
+  "characters": [],
+  "location": "town_road",
+  "time_slots": [
+    "night"
+  ],
+  "tags": [
+    "slice_of_life"
+  ],
+  "priority": 60,
+  "weight": 1.0,
+  "requirements": [],
+  "effects": [
+    "event(caught_out_late)"
+  ],
+  "outcomes": [
+    [
+      "trait direct += 1"
+    ],
+    [
+      "trait reserved += 1",
+      "time += 1"
+    ],
+    [
+      "trait gentle += 1",
+      "rel june.familiarity += 2"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Further from the dorms than you meant to be, against a real deadline. Walking spends a time slot -- the first content where a choice costs the clock rather than a relationship, which is what lets a promise compete with a pleasant evening."
+}

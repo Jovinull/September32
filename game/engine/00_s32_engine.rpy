@@ -285,6 +285,16 @@ init python:
         """Return the bracketed label for a trait-gated choice."""
         return s32_traits.label(axis)
 
+    def times_seen(storylet_id):
+        """Return how many times a storylet has already played this run.
+
+        Exposed for repeatable scenes whose variants are a progression rather
+        than a shuffle: a room stops being unfamiliar in a fixed order, and
+        picking that at random is the bug this exists to prevent. See
+        docs/narrative-design/CONTINUITY_REVIEW.md.
+        """
+        return s32_state.times_seen(S32State, storylet_id)
+
     def promise(commitment_id, who, in_days=1, importance=50, kind="meeting"):
         """Record a promise the player just made."""
         return s32_commitments.make(

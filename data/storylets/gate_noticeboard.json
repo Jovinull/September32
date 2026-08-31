@@ -1,0 +1,40 @@
+{
+  "id": "gate_noticeboard",
+  "label": "s32_st_gate_noticeboard",
+  "title": "The Glass Case",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "school_gate",
+  "time_slots": [
+    "morning",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "investigation"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [],
+  "effects": [
+    "event(read_the_noticeboard)"
+  ],
+  "outcomes": [
+    [
+      "know(bound_volumes_were_moved, the_noticeboard)",
+      "trait curious += 1"
+    ],
+    [
+      "trait gentle += 1",
+      "event(took_down_a_notice)"
+    ],
+    [
+      "trait direct += 1"
+    ]
+  ],
+  "cooldown": 3,
+  "repeat_policy": "cooldown",
+  "summary": "Lost property, a folded club, and a laminated notice that the paper's bound volumes went into storage. The boring explanation for Noah's missing run, arriving on paper rather than from a person, so R5's sceptical reading stays available."
+}

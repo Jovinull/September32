@@ -1,0 +1,25 @@
+{
+  "id": "dorm_late_night",
+  "label": "s32_st_dorm_late_night",
+  "title": "The Building Has Gone Quiet",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "dorm_room",
+  "time_slots": [
+    "night",
+    "late_night"
+  ],
+  "tags": [
+    "slice_of_life"
+  ],
+  "priority": 20,
+  "weight": 2.5,
+  "requirements": [],
+  "effects": [
+    "event(awake_late_in_the_dorm)"
+  ],
+  "cooldown": 1,
+  "repeat_policy": "repeatable",
+  "summary": "Three variants selected by seen_count rather than at random: the room unfamiliar, the room ordinary, then the small territorial act of moving the desk. Written this way because of the dorm_message bug -- a repeatable scene that narrates first-time discovery is wrong the second time."
+}

@@ -1,0 +1,26 @@
+{
+  "id": "courtyard_morning_queue",
+  "label": "s32_st_courtyard_morning_queue",
+  "title": "The Hatch",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "courtyard",
+  "time_slots": [
+    "early_morning",
+    "morning"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 20,
+  "weight": 2.5,
+  "requirements": [],
+  "effects": [
+    "event(queued_at_the_hatch)"
+  ],
+  "cooldown": 1,
+  "repeat_policy": "repeatable",
+  "summary": "The queue at the hatch that sells three things, and a school rule nobody can account for. The second ambient option in the courtyard, which is what the repeat damping needed somewhere to send the player."
+}

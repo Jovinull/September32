@@ -1,0 +1,37 @@
+{
+  "id": "town_road_shops",
+  "label": "s32_st_town_road_shops",
+  "title": "Four Shops",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "town_road",
+  "time_slots": [
+    "afternoon",
+    "evening"
+  ],
+  "tags": [
+    "slice_of_life"
+  ],
+  "priority": 40,
+  "weight": 1.4,
+  "requirements": [],
+  "effects": [
+    "event(went_to_the_shops)"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1"
+    ],
+    [
+      "trait curious += 1",
+      "know(caretaker_opens_at_seven, the_shop_window)"
+    ],
+    [
+      "trait reserved += 1"
+    ]
+  ],
+  "cooldown": 3,
+  "repeat_policy": "cooldown",
+  "summary": "The parade of four shops; one sells everything and the others have opinions about that. Mara is deliberately NOT in the characters list so the scene stays eligible when she is not around -- the town should exist without her."
+}

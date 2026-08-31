@@ -1,0 +1,26 @@
+{
+  "id": "gate_early_arrival",
+  "label": "s32_st_gate_early_arrival",
+  "title": "Before the Gate Is Open",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "school_gate",
+  "time_slots": [
+    "early_morning",
+    "morning"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 20,
+  "weight": 2.5,
+  "requirements": [],
+  "effects": [
+    "event(waited_at_the_gate)"
+  ],
+  "cooldown": 1,
+  "repeat_policy": "repeatable",
+  "summary": "The chained gate and the people who wait at it. Three variants on the engine RNG; one of them grants caretaker_opens_at_seven. Exists because the game had no scene about arriving anywhere."
+}

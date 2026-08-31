@@ -1,0 +1,49 @@
+{
+  "id": "archive_iris_index",
+  "label": "s32_st_archive_iris_index",
+  "title": "Her Own Index",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "iris"
+  ],
+  "location": "archive_room",
+  "time_slots": [
+    "afternoon",
+    "evening"
+  ],
+  "tags": [
+    "archive",
+    "character",
+    "investigation"
+  ],
+  "priority": 60,
+  "weight": 1.2,
+  "requirements": [
+    "knows(iris_keeps_a_second_index)"
+  ],
+  "effects": [
+    "rel iris.trust += 3",
+    "rel iris.familiarity += 3"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel iris.trust += 4",
+      "rel iris.attraction += 2"
+    ],
+    [
+      "trait skeptical += 1",
+      "rel iris.respect += 3",
+      "rel iris.resentment += 2"
+    ],
+    [
+      "trait curious += 1",
+      "rel iris.trust += 2",
+      "rel iris.respect += 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "The payoff of the rain conversation: Iris shows the card index she keeps because the official accession record is not usable. Opens accession_record_box_17 in the document viewer for a second, different reason."
+}

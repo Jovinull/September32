@@ -1,0 +1,25 @@
+{
+  "id": "dorm_corridor_noise",
+  "label": "s32_st_dorm_corridor_noise",
+  "title": "Through the Wall",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "dorm_room",
+  "time_slots": [
+    "evening",
+    "night"
+  ],
+  "tags": [
+    "slice_of_life"
+  ],
+  "priority": 20,
+  "weight": 2.0,
+  "requirements": [],
+  "effects": [
+    "event(heard_the_corridor)"
+  ],
+  "cooldown": 2,
+  "repeat_policy": "cooldown",
+  "summary": "Residential life through a wall: a phone call, a kettle, an argument about a rota. The player is not in any of it, which is the point -- other people have days too."
+}

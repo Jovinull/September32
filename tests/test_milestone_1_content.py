@@ -45,9 +45,15 @@ def _director(real_library) -> NarrativeDirector:
 # ---------------------------------------------------------------------------
 
 
-def test_there_are_exactly_fifteen_storylets(real_library):
-    """Fifteen is a validation checkpoint, not a milestone to overshoot."""
-    assert len(real_library.storylets) == 15
+def test_the_library_has_not_quietly_doubled(real_library):
+    """A checkpoint, not a target.
+
+    Milestone 1 pinned this at fifteen and Milestone 2 at thirty, and the
+    number moving is always meant to be a decision somebody made. A range
+    rather than an equality because the point is to notice a library that grew
+    by forty scenes nobody reviewed, not to fail a build over the thirty-first.
+    """
+    assert 30 <= len(real_library.storylets) <= 32
 
 
 def test_all_eight_new_storylets_exist(real_library):

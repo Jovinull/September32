@@ -70,23 +70,33 @@ that single fact.
 
 ### The map, by hour
 
-Storylets eligible in each (location, time slot) cell, ignoring state gates —
+Storylets eligible in each (location, time slot) cell, ignoring state gates --
 so these are ceilings, not what the player actually meets:
 
-| | early | morn | late_m | aft | late_a | eve | night |
+| | early morning | morning | midday | afternoon | evening | night | late night |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `archive_room` | 2 | 2 | 2 | 3 | 2 | 2 | 2 |
-| `classroom_2b` | 1 | 1 | 1 | 2 | 1 | 2 | 2 |
-| `courtyard` | 1 | 1 | 1 | 3 | 1 | 1 | 1 |
-| `dorm_room` | 0 | 0 | 0 | 0 | 0 | 1 | 1 |
-| `hallway_east` | 0 | 2 | 0 | 0 | 0 | 0 | 0 |
-| `rooftop` | 0 | 0 | 0 | 1 | 0 | 1 | 0 |
+| `archive_room` | 2 | 2 | 3 | 3 | 2 | 2 | 2 |
+| `classroom_2b` | 1 | 1 | 2 | 2 | 2 | 2 | 1 |
+| `courtyard` | 1 | 1 | 3 | 3 | 1 | 1 | 1 |
+| `dorm_room` | 0 | 0 | 0 | 0 | 1 | 1 | 0 |
+| `hallway_east` | 0 | 2 | 2 | 0 | 0 | 0 | 0 |
+| `rooftop` | 0 | 0 | 0 | 1 | 1 | 0 | 0 |
 | `school_gate` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| `town_road` | 0 | 0 | 0 | 2 | 0 | 2 | 0 |
+| `town_road` | 0 | 0 | 0 | 2 | 2 | 0 | 0 |
 
-Of 56 cells: **50% are empty**, 25% hold exactly one storylet, 25% hold two or
+Of 56 cells: **48% are empty**, 21% hold exactly one storylet, 30% hold two or
 more. `school_gate` is a location the player can stand in at any hour of any
-day with nothing authored there. `hallway_east` exists only in the morning.
+day with nothing authored there at all. `dorm_room`, `rooftop` and `town_road`
+each exist for two hours out of seven.
+
+> Corrected during Milestone 2. The table published with Milestone 1 used
+> column headings -- `late_m`, `late_a` -- that name no time slot this game
+> has. The real vocabulary is the seven above, from
+> `s32_engine.types.TIME_SLOTS`. The cell counts and the 50%/25%/25% split
+> derived from it were therefore wrong. The conclusions drawn from it were
+> not: `school_gate` was empty at every hour, the empty share was roughly half,
+> and both remain true of the corrected table. Recomputed from the same
+> fifteen storylet files, which Milestone 2 changed only in `priority`.
 
 ## The recommendation, and what was deliberately not done
 

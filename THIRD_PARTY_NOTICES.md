@@ -5,7 +5,7 @@
 
 # Third-party notices
 
-Generated 2026-08-30 from `assets/catalog/assets.toml`.
+Generated 2026-08-31 from `assets/catalog/assets.toml`.
 
 This document lists third-party material used by September 32 and the
 terms it is used under. It covers three separate categories that must not

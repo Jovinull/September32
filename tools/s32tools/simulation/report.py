@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 from typing import Any
 
 from s32_engine.types import ContentLibrary
+from s32tools.simulation import density
 from s32tools.simulation.simulator import SimulationResult
 
 
@@ -70,6 +71,9 @@ def to_dict(result: SimulationResult, library: ContentLibrary) -> dict[str, Any]
             ],
         },
         "rare_states": [{"storylet": sid, "plays": n} for sid, n in result.rare_storylets],
+        # Embedded rather than written alongside, so `s32 compare` can diff the
+        # density of two runs from the one file it already reads.
+        "density": density.to_dict(result, library),
         "relationship_ranges": {k: list(v) for k, v in result.relationship_ranges.items()},
     }
 

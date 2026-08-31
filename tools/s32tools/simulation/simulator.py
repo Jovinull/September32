@@ -67,6 +67,18 @@ class RunResult:
     tag_counts: dict[str, int] = field(default_factory=dict)
     dead_end: bool = False
     dead_end_at: str = ""
+    #: How many storylets were eligible at each selection moment, and how many
+    #: shared the top priority tier. These are different questions: five
+    #: eligible scenes with one in the top tier still leaves the weighted draw
+    #: nothing to draw from. Counted here rather than derived afterwards
+    #: because the eligible set does not survive the run.
+    eligible_hist: Counter[int] = field(default_factory=Counter)
+    tier_hist: Counter[int] = field(default_factory=Counter)
+    #: "location|time_slot" -> moments spent there, and eligible candidates
+    #: summed over them, so the matrix can report a mean rather than a total.
+    cell_moments: Counter[str] = field(default_factory=Counter)
+    cell_eligible: Counter[str] = field(default_factory=Counter)
+    cell_multi: Counter[str] = field(default_factory=Counter)
 
 
 @dataclass(slots=True)
@@ -92,6 +104,11 @@ class SimulationResult:
     average_repeats: float = 0.0
     relationship_ranges: dict[str, tuple[int, int]] = field(default_factory=dict)
     rare_storylets: list[tuple[str, int]] = field(default_factory=list)
+    eligible_hist: Counter[int] = field(default_factory=Counter)
+    tier_hist: Counter[int] = field(default_factory=Counter)
+    cell_moments: Counter[str] = field(default_factory=Counter)
+    cell_eligible: Counter[str] = field(default_factory=Counter)
+    cell_multi: Counter[str] = field(default_factory=Counter)
 
 
 class Simulator:
@@ -101,6 +118,14 @@ class Simulator:
         self.library = library
         self.director = NarrativeDirector(library)
         self._locations = sorted(library.locations)
+        # Which storylets could ever fire in each location. Scoring a candidate
+        # destination otherwise walks the whole library once per location per
+        # move, which the hot loop notices. A storylet with no declared location
+        # can fire anywhere, so it appears in every list.
+        self._by_location: dict[str, list[StoryletDef]] = {
+            loc: [s for s in library.storylets.values() if not s.location or s.location == loc]
+            for loc in self._locations
+        }
 
     def run_once(
         self,
@@ -123,10 +148,33 @@ class Simulator:
         for char in state["characters"].values():
             char["present"] = True
 
+        eligible_hist: Counter[int] = Counter()
+        tier_hist: Counter[int] = Counter()
+        cell_moments: Counter[str] = Counter()
+        cell_eligible: Counter[str] = Counter()
+        cell_multi: Counter[str] = Counter()
+
         for step in range(1, max_steps + 1):
             self._fire_ready_anchor(state, rng)
 
             selection = self.director.select(state, rng, keep_trace=False)
+
+            # Every pass through here is a moment the director was asked for a
+            # scene, including the ones where it had nothing. Measured before
+            # the profile gets a say, because this is about what the *director*
+            # was offered.
+            eligible = selection.eligible
+            count = len(eligible)
+            eligible_hist[count] += 1
+            if eligible:
+                top = max(e.priority for e in eligible)
+                tier_hist[sum(1 for e in eligible if e.priority == top)] += 1
+            cell = f"{state['world']['location']}|{state['world']['time_slot']}"
+            cell_moments[cell] += 1
+            cell_eligible[cell] += count
+            if count >= 2:  # two is the definition of a choice
+                cell_multi[cell] += 1
+
             if selection.storylet is None:
                 empty_streak += 1
                 if empty_streak >= DEAD_END_THRESHOLD:
@@ -141,24 +189,45 @@ class Simulator:
                         profile,
                         step,
                         played,
+                        density=(
+                            eligible_hist,
+                            tier_hist,
+                            cell_moments,
+                            cell_eligible,
+                            cell_multi,
+                        ),
                         dead_end=not self._anchors_complete(state),
                         dead_end_at=f"day {state['world']['day']} {state['world']['time_slot']} "
                         f"@ {state['world']['location']}",
                     )
-                self._wander(state, rng)
+                self._wander(state, rng, profile)
                 continue
 
             empty_streak = 0
             chosen = self._apply_profile(selection, state, rng, profile)
             self.director.play(chosen, state)
-            self._resolve_outcome(chosen, state, rng)
+            self._resolve_outcome(chosen, state, rng, profile)
             played.append(chosen.id)
             self._advance(state, rng)
+
+            # Having done one thing, this player sometimes goes to look for
+            # another. Without this the only reason to change location is
+            # starvation, and a location that always has something ambient on
+            # offer -- the courtyard -- becomes a place a run never leaves.
+            if rng.random() < profile.mobility:
+                self._relocate(state, rng, profile)
 
             if state["world"]["day"] > max_days:
                 break
 
-        return self._finish(state, seed, profile, step, played)
+        return self._finish(
+            state,
+            seed,
+            profile,
+            step,
+            played,
+            density=(eligible_hist, tier_hist, cell_moments, cell_eligible, cell_multi),
+        )
 
     def _apply_profile(
         self,
@@ -200,20 +269,35 @@ class Simulator:
         if anchor_id not in state["anchors_done"]:
             state["anchors_done"].append(anchor_id)
 
-    def _resolve_outcome(self, storylet: StoryletDef, state: GameState, rng: Rng) -> None:
-        """Apply one of a storylet's declared choice outcomes, at random.
+    def _resolve_outcome(
+        self, storylet: StoryletDef, state: GameState, rng: Rng, profile: Profile
+    ) -> None:
+        """Apply one of a storylet's declared choice outcomes.
 
-        The simulator does not read prose and has no opinion about which option
-        a character would pick, so it picks uniformly. That is the right model
-        for a *reachability* sweep: over a thousand runs every branch is taken,
-        which is what makes "no run reached this" mean something.
+        Resolution used to be uniform, on the reasoning that a reachability
+        sweep wants every branch taken. That was true and it was also why every
+        profile finished a run in the same state: two players who reached the
+        same scene always left it identically, so nothing downstream could
+        diverge.
+
+        Now the profile answers, scored from the declared effects, and
+        ``profile.noise`` keeps the uniform behaviour often enough that no
+        branch becomes unreachable. A profile with no ``outcome_weights`` scores
+        every branch 1.0 and is therefore exactly the old behaviour.
         """
         from s32_engine.types import StoryletDef
 
         assert isinstance(storylet, StoryletDef)
         if not storylet.outcomes:
             return
-        apply_all(rng.choice(storylet.outcomes), state)
+        if len(storylet.outcomes) == 1 or rng.random() < profile.noise:
+            apply_all(rng.choice(storylet.outcomes), state)
+            return
+        chosen = rng.weighted_choice(
+            list(storylet.outcomes),
+            [profile.outcome_score(branch) for branch in storylet.outcomes],
+        )
+        apply_all(chosen, state)
 
     def _advance(self, state: GameState, rng: Rng) -> None:
         """Move the clock forward one slot, rolling the weather on a new day."""
@@ -222,7 +306,7 @@ class Simulator:
         if state["world"]["day"] != before:
             roll_weather(state, rng)
 
-    def _wander(self, state: GameState, rng: Rng) -> None:
+    def _wander(self, state: GameState, rng: Rng, profile: Profile) -> None:
         """Nothing fits here: go where something is happening, and let time pass.
 
         Modelling this correctly matters more than it looks. A purely random
@@ -236,12 +320,53 @@ class Simulator:
         end is now "nowhere in the world has anything for me", which is a real
         content bug, rather than "I guessed wrong six times".
         """
-        options = locations_with_content(state, self.library, self.director, rng)
-        if options:
-            set_location(state, rng.choice(options))
-        elif self._locations:
+        if not self._relocate(state, rng, profile) and self._locations:
             set_location(state, rng.choice(self._locations))
         self._advance(state, rng)
+
+    def _relocate(self, state: GameState, rng: Rng, profile: Profile) -> bool:
+        """Move to a location this profile wants to be in. Time does not pass.
+
+        The candidate set is :func:`locations_with_content` -- the same list the
+        game offers the player on the travel screen, so the model is choosing
+        from what a player can actually see rather than from the library. What
+        the profile adds is a reason to prefer one of them, which is the half
+        that was missing: destinations used to be drawn uniformly, so a profile
+        could not express that it would rather be in the archive than the gate.
+
+        Returns:
+            Whether the player moved. False means nowhere in the world has
+            anything, which is the dead-end condition and the caller's problem.
+        """
+        options = locations_with_content(state, self.library, self.director, rng)
+        if not options:
+            return False
+        set_location(
+            state,
+            rng.weighted_choice(
+                options, [self._appetite(state, rng, profile, option) for option in options]
+            ),
+        )
+        return True
+
+    def _appetite(self, state: GameState, rng: Rng, profile: Profile, location: str) -> float:
+        """Return how much this profile wants to be in ``location`` right now.
+
+        Summed rather than averaged: a location with three things the player
+        half-wants is a better place to be than one with a single thing they
+        half-want, and the busy-place-is-attractive reading is the one a student
+        would recognise.
+        """
+        original = state["world"]["location"]
+        state["world"]["location"] = location
+        try:
+            return sum(
+                profile.score(storylet, state)
+                for storylet in self._by_location[location]
+                if self.director.is_eligible(storylet, state, rng)
+            )
+        finally:
+            state["world"]["location"] = original
 
     def _anchors_complete(self, state: GameState) -> bool:
         """Return whether every anchor beat has played.
@@ -262,10 +387,19 @@ class Simulator:
         steps: int,
         played: list[str],
         *,
+        density: tuple[Counter[int], Counter[int], Counter[str], Counter[str], Counter[str]]
+        | None = None,
         dead_end: bool = False,
         dead_end_at: str = "",
     ) -> RunResult:
         """Package the final state into a :class:`RunResult`."""
+        eligible_hist, tier_hist, cell_moments, cell_eligible, cell_multi = density or (
+            Counter(),
+            Counter(),
+            Counter(),
+            Counter(),
+            Counter(),
+        )
         tag_counts: Counter[str] = Counter()
         for sid in played:
             tag_counts.update(self.library.storylets[sid].tags)
@@ -289,6 +423,11 @@ class Simulator:
             tag_counts=dict(tag_counts),
             dead_end=dead_end,
             dead_end_at=dead_end_at,
+            eligible_hist=eligible_hist,
+            tier_hist=tier_hist,
+            cell_moments=cell_moments,
+            cell_eligible=cell_eligible,
+            cell_multi=cell_multi,
         )
 
     # -- aggregation --------------------------------------------------------
@@ -339,6 +478,12 @@ class Simulator:
             for pair, vector in run.relationships.items():
                 for axis, value in vector.items():
                     axis_ranges.setdefault(f"{pair}.{axis}", []).append(value)
+
+            result.eligible_hist.update(run.eligible_hist)
+            result.tier_hist.update(run.tier_hist)
+            result.cell_moments.update(run.cell_moments)
+            result.cell_eligible.update(run.cell_eligible)
+            result.cell_multi.update(run.cell_multi)
 
             if run.dead_end:
                 result.dead_ends += 1

@@ -229,6 +229,7 @@ def _cmd_schemas(args: argparse.Namespace) -> int:
 
 
 def _cmd_simulate(args: argparse.Namespace) -> int:
+    from s32tools.simulation import density as sim_density
     from s32tools.simulation import report as sim_report
     from s32tools.simulation.profiles import DEFAULT_PROFILES, get
     from s32tools.simulation.simulator import Simulator
@@ -245,6 +246,7 @@ def _cmd_simulate(args: argparse.Namespace) -> int:
     (out / "simulation.json").write_text(sim_report.to_json(result, library), encoding="utf-8")
     markdown = sim_report.to_markdown(result, library)
     (out / "simulation.md").write_text(markdown, encoding="utf-8")
+    (out / "density.md").write_text(sim_density.to_markdown(result, library), encoding="utf-8")
 
     if args.quiet:
         print(

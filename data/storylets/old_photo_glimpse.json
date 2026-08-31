@@ -8,12 +8,18 @@
     "iris"
   ],
   "location": "archive_room",
+  "time_slots": [
+    "morning",
+    "midday",
+    "afternoon",
+    "evening"
+  ],
   "tags": [
     "mystery",
     "archive",
     "investigation"
   ],
-  "priority": 75,
+  "priority": 40,
   "weight": 1.0,
   "requirements": [
     "seen(archive_intro)",

@@ -17,7 +17,7 @@
     "school",
     "friendship"
   ],
-  "priority": 40,
+  "priority": 20,
   "weight": 2.0,
   "requirements": [],
   "blockers": [

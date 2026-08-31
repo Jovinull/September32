@@ -18,7 +18,7 @@
     "character",
     "investigation"
   ],
-  "priority": 60,
+  "priority": 40,
   "weight": 1.2,
   "requirements": [
     "seen(archive_intro)",

@@ -17,7 +17,7 @@
     "romance",
     "character"
   ],
-  "priority": 65,
+  "priority": 60,
   "weight": 1.0,
   "requirements": [
     "weather == rain",

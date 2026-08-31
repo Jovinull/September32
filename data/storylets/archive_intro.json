@@ -22,7 +22,7 @@
     "archive",
     "character"
   ],
-  "priority": 70,
+  "priority": 40,
   "weight": 1.0,
   "requirements": [
     "anchor_done(arrival)",

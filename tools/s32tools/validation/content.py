@@ -38,6 +38,16 @@ from s32_engine.types import (
 
 Severity = Literal["error", "warning", "info"]
 
+#: The priority values a storylet is expected to use.
+#:
+#: A content convention, not an engine rule -- the director will happily sort
+#: any integer. It exists because priority is a *hard tier*, so a value nothing
+#: else shares removes that storylet from the weighted draw entirely. Five bands
+#: keep scenes competing; a hundred distinct levels are a total ranking of the
+#: library, which nobody can maintain and which no draw can act on.
+#: docs/narrative-design/PRIORITY_AUTHORING.md
+PRIORITY_BANDS: frozenset[int] = frozenset({100, 80, 60, 40, 20})
+
 #: Matches a Ren'Py `label foo:` definition, ignoring indented (nested) labels.
 _LABEL_RE = re.compile(r"^label\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:\(.*?\))?\s*:", re.MULTILINE)
 
@@ -260,6 +270,21 @@ def _check_policies(library: ContentLibrary, report: Report) -> None:
             report.add("warning", "no-summary", where, "active storylet has no summary")
         if s.category == "anchor" and not s.anchor:
             report.add("warning", "anchor-unlinked", where, "category=anchor but no anchor id set")
+
+        # Priority is a hard tier: a value nothing else shares guarantees a
+        # tier of one, and a tier of one makes the weighted draw a formality.
+        # The bands are a content convention rather than an engine rule, so
+        # this is informational -- a deliberate exception is allowed, it just
+        # has to be deliberate enough to notice.
+        # docs/narrative-design/PRIORITY_AUTHORING.md
+        if s.priority not in PRIORITY_BANDS:
+            report.add(
+                "info",
+                "off-band-priority",
+                where,
+                f"priority={s.priority} is not one of {sorted(PRIORITY_BANDS)}",
+                hint="see docs/narrative-design/PRIORITY_AUTHORING.md",
+            )
 
         # A `not_seen(self)` requirement duplicates repeat_policy=once. Harmless,
         # but it hides the real policy from the coverage report, so flag it.

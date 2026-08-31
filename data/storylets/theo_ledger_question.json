@@ -8,12 +8,18 @@
     "theo"
   ],
   "location": "archive_room",
+  "time_slots": [
+    "morning",
+    "midday",
+    "afternoon",
+    "evening"
+  ],
   "tags": [
     "mystery",
     "investigation",
     "archive"
   ],
-  "priority": 72,
+  "priority": 80,
   "weight": 1.0,
   "requirements": [
     "knows(old_photo_exists)",

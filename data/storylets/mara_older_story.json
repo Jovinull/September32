@@ -17,7 +17,7 @@
     "mystery",
     "character"
   ],
-  "priority": 68,
+  "priority": 60,
   "weight": 1.0,
   "requirements": [
     "knows(old_photo_exists)",

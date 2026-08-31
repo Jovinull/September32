@@ -8,13 +8,19 @@
     "june"
   ],
   "location": "classroom_2b",
+  "time_slots": [
+    "early_morning",
+    "morning",
+    "midday",
+    "afternoon"
+  ],
   "tags": [
     "slice_of_life",
     "school",
     "mystery",
     "character"
   ],
-  "priority": 62,
+  "priority": 60,
   "weight": 1.0,
   "requirements": [
     "seen(june_the_favour)",

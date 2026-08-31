@@ -1,5 +1,18 @@
 # Adding content
 
+Three companions to this file, and a scene that ignores them will pass every
+gate and still be wrong:
+
+- [`CELL_MAP.md`](../narrative-design/CELL_MAP.md) — which (location, hour)
+  cells want content, which are empty on purpose, and which the player should
+  not be standing in at all. **Read before choosing a location and a time slot.**
+- [`PRIORITY_AUTHORING.md`](../narrative-design/PRIORITY_AUTHORING.md) — the
+  five priority bands. `priority` is a hard tier, so a value nothing else shares
+  removes the scene from the weighted draw entirely.
+- [`CONTINUITY_REVIEW.md`](../narrative-design/CONTINUITY_REVIEW.md) — the words
+  that make a claim about the player's past, and what has to be true before you
+  use one. Also the policy for repeatable scenes.
+
 ## A storylet
 
 **1. The scene card.** `docs/narrative-design/SCENE_CARD_TEMPLATE.md`. Before the
@@ -18,7 +31,7 @@ prose, not after.
   "location": "rooftop",
   "time_slots": ["evening"],
   "tags": ["slice_of_life", "romance", "character"],
-  "priority": 65,
+  "priority": 60,
   "requirements": ["weather == rain", "rel iris.trust >= 10"],
   "effects": ["rel iris.trust += 5"],
   "outcomes": [
@@ -56,13 +69,21 @@ actually get there.
 eligible storylets compete. Use it for "this must happen now"; use `weight` for
 "this is more likely than that".
 
-| Range | For |
-| --- | --- |
-| 80–100 | Must happen now. |
-| 60–79 | Significant. Investigation, character beats. |
-| 40–59 | Ordinary. |
-| 20–39 | Ambient. |
-| 0–19 | Filler, and the game needs some. |
+Five values, and nothing in between them. A scene that seems to want 45 wants a
+different requirement, not a different priority.
+
+| Value | Band | For |
+| ---: | --- | --- |
+| 100 | `REQUIRED` | The run is incoherent without it. Reserved; anchors cover most of this. |
+| 80 | `URGENT` | A commitment falling due, or a consequence that stops making sense if deferred. |
+| 60 | `CALLBACK` | Reacts to a specific earlier decision, or to a window that will close. |
+| 40 | `EVENT` | The ordinary body of the game. **Most content lives here.** |
+| 20 | `AMBIENT` | Texture. Must never outrank anything with something to say. |
+
+Ranges were the old convention and they produced fifteen storylets on fifteen
+distinct values, which made the top tier a singleton in 100% of selections and
+`weight` a decoration. `s32 validate` reports an `off-band-priority` info
+finding for anything else.
 
 **`weight`** competes within a tier. Halves with each play, so a repeatable scene
 is available rather than insistent.

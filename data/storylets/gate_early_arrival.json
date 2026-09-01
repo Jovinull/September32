@@ -3,7 +3,7 @@
   "label": "s32_st_gate_early_arrival",
   "title": "Before the Gate Is Open",
   "category": "ambient",
-  "status": "prototype",
+  "status": "draft",
   "characters": [],
   "location": "school_gate",
   "time_slots": [

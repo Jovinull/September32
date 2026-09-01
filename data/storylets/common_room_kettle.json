@@ -3,7 +3,7 @@
   "label": "s32_st_common_room_kettle",
   "title": "The Kettle Question",
   "category": "ambient",
-  "status": "prototype",
+  "status": "draft",
   "characters": [],
   "location": "common_room",
   "time_slots": [

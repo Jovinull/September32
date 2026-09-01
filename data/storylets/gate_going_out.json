@@ -3,7 +3,7 @@
   "label": "s32_st_gate_going_out",
   "title": "Signing Out",
   "category": "conversation",
-  "status": "prototype",
+  "status": "draft",
   "characters": [],
   "location": "school_gate",
   "time_slots": [

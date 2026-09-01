@@ -420,7 +420,7 @@ label s32_st_ellery_the_sign_off:
 
     c_ellery "Theo's or the real one?"
 
-    narrator "There is no edge on the question. She is establishing which of two records she is being asked to sign against, which is a reasonable thing for a person signing something to want to know."
+    narrator "There is no edge on the question. She is establishing which of two records she is being asked to sign against, and a person about to put her name on something is entitled to know."
 
     c_ellery "Both, then. Good."
 

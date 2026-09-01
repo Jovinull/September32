@@ -33,7 +33,7 @@
     "event(found_the_photo)"
   ],
   "repeat_policy": "once",
-  "summary": "The photograph surfaces. The player is not told the date yet; only that it is out of sequence. Exercises: knowledge grant, inventory, requirement on a prior storylet.",
+  "summary": "The photograph surfaces. The player is not told the date yet; only that it is out of sequence. Exercises: knowledge grant, inventory, requirement on a prior storylet. Blocked after the_date. The scene is the FIRST look at box seventeen, and its curious branch SUSPECTS the stamp -- which, played after the anchor that establishes the date as known, walked the player backwards from known to suspected in about one run in six. known -> suspected is a legal transition and a deliberate one; it is just not what this scene means once the anchor has happened.",
   "outcomes": [
     [
       "trait curious += 2",
@@ -48,5 +48,8 @@
       "trait empathetic += 1",
       "rel iris->player.familiarity += 4"
     ]
+  ],
+  "blockers": [
+    "anchor_done(the_date)"
   ]
 }

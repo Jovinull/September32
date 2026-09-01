@@ -129,7 +129,7 @@ label s32_st_annexe_two_of_them:
 
     c_iris "That's what a catalogue is. Nobody has read the catalogue in eleven years and I would like to keep it that way for about another six months."
 
-    narrator "Noah does the thing where he gets more reasonable as he gets more sure, which is genuinely persuasive and which you should probably watch for."
+    narrator "Noah does the thing where he gets more reasonable as he gets more sure. It is genuinely persuasive."
 
     c_noah "Why six months?"
 
@@ -161,7 +161,7 @@ label s32_st_annexe_two_of_them:
 
             c_iris "It's the school's archive and I'm the only one in it."
 
-            narrator "Noah leaves first, which is unusual, and Iris stands there for a second afterwards looking like she has won something she did not want."
+            narrator "Noah leaves first. He does not usually leave first. Iris stands there for a second afterwards looking like somebody who has won something they did not want."
 
         "It's a school. Things get written about.":
             $ trait("direct")
@@ -199,7 +199,7 @@ label s32_st_annexe_two_of_them:
 
             narrator "They negotiate for about ninety seconds, competently, and arrive at something neither of them is thrilled with, and Iris says {i}fine{/i} in the voice of a person who has been listened to."
 
-            narrator "You have not made either of them like you more. They are both, marginally, easier with each other, which is not the same thing and is worth more."
+            narrator "You have not made either of them like you more. They are both, marginally, easier with each other."
 
     hide iris with dissolve
     hide noah with dissolve
@@ -224,7 +224,7 @@ label s32_st_courtyard_the_bench:
 
     c_mara "No."
 
-    narrator "He writes it down anyway. She watches him write it down and does not stop him, which is a kind of permission neither of them will acknowledge."
+    narrator "He writes it down anyway. She watches him write it down and does not stop him, and neither of them will call that permission."
 
     show noah school_summer neutral
 
@@ -314,7 +314,7 @@ label s32_st_iris_the_second_box:
 
     show iris school_summer neutral at s32_centre with dissolve
 
-    narrator "The second shoebox is on the desk with the lid off, which is not where it was and not how it was."
+    narrator "There is a second shoebox on the desk with the lid off."
 
     c_iris "I started it."
 
@@ -446,7 +446,7 @@ label s32_st_theo_admits_it:
 
             c_theo "Tomorrow."
 
-            narrator "He appears steadier for having been given an instruction, which is not something you can put in a spreadsheet, and which you are not going to point out."
+            narrator "He appears steadier for having been given an instruction. You do not point this out."
 
         "You put 'seen' when you hadn't. That's the whole problem with your column.":
             $ trait("sarcastic")

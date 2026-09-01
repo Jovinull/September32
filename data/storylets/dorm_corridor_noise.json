@@ -3,7 +3,7 @@
   "label": "s32_st_dorm_corridor_noise",
   "title": "Through the Wall",
   "category": "ambient",
-  "status": "prototype",
+  "status": "draft",
   "characters": [],
   "location": "dorm_room",
   "time_slots": [

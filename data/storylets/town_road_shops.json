@@ -3,7 +3,7 @@
   "label": "s32_st_town_road_shops",
   "title": "Four Shops",
   "category": "ambient",
-  "status": "prototype",
+  "status": "draft",
   "characters": [],
   "location": "town_road",
   "time_slots": [

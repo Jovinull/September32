@@ -3,7 +3,7 @@
   "label": "s32_st_annexe_door",
   "title": "The Annexe",
   "category": "investigation",
-  "status": "prototype",
+  "status": "draft",
   "characters": [],
   "location": "hallway_east",
   "time_slots": [

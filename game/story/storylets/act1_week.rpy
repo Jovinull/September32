@@ -229,7 +229,7 @@ label s32_st_june_reads_it_flat:
 
             c_june "I don't find it boring."
 
-            narrator "She says this and then does not develop it, and puts the television on, and it is canals again."
+            narrator "She says this and then does not develop it, and puts the television on, and whatever is on it is about canals."
 
     hide june with dissolve
 

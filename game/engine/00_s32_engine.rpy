@@ -26,6 +26,7 @@ init python:
 
     import s32_engine as s32
     from s32_engine import (
+        calendar as s32_calendar_module,
         commitments as s32_commitments,
         conditions as s32_conditions,
         definitions as s32_definitions,

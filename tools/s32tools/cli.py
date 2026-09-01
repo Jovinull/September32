@@ -11,6 +11,7 @@ colour, and cost a package that everyone who touches the project has to install.
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -666,6 +667,27 @@ def _cmd_renpy_lint(_args: argparse.Namespace) -> int:
     return result.returncode
 
 
+#: Matches a `testcase foo:` definition. Suites are declared with `testsuite`
+#: and are not run by name, so they are deliberately not matched.
+_TESTCASE_RE = re.compile(r"^testcase\s+([A-Za-z_][A-Za-z0-9_]*)\s*:", re.MULTILINE)
+
+
+def _discover_testcases() -> list[str]:
+    """Return every testcase defined under ``game/testcases``, in file order.
+
+    This list used to be written out by hand in this file, which meant a new
+    testcase file ran in nobody's build until somebody remembered -- and a test
+    that does not run is worse than no test, because it looks like coverage.
+    """
+    found: list[str] = []
+    for path in sorted((paths.game_dir() / "testcases").glob("*.rpy")):
+        found.extend(_TESTCASE_RE.findall(path.read_text(encoding="utf-8")))
+    # `default` is what Ren'Py runs when `renpy . test` is given no name. It is
+    # a duplicate of the opening of `smoke_start_and_choose` and exists for the
+    # bare command, so running it here would be running the same test twice.
+    return [name for name in found if name != "default"]
+
+
 def _cmd_renpy_test(args: argparse.Namespace) -> int:
     from s32tools.renpy_sdk import headless_env, run
 
@@ -673,19 +695,10 @@ def _cmd_renpy_test(args: argparse.Namespace) -> int:
     if info is None:
         return 1
 
-    cases = args.case or [
-        "smoke_main_menu",
-        "smoke_start_and_choose",
-        "smoke_director_runs",
-        "smoke_rollback",
-        "smoke_debug_screens",
-        "smoke_journal",
-        "archive_opens_and_closes",
-        "archive_pages_with_the_keyboard",
-        "archive_effects_apply_once",
-        "archive_index_hides_locked_documents",
-        "archive_survives_rollback",
-    ]
+    cases = args.case or _discover_testcases()
+    if not cases:
+        print("no testcases found under game/testcases/")
+        return 1
     env = {**headless_env(), "S32_SEED": str(args.seed)}
 
     failures = 0

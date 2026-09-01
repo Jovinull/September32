@@ -334,6 +334,10 @@ screen navigation():
             ## at properly, reopenable at any time.
             textbutton _("Archive") action ShowMenu("s32_archive_index")
 
+            ## The calendar: a view of where the run is, what the protagonist
+            ## has done and what they have promised. game/screens/calendar.rpy
+            textbutton _("Calendar") action ShowMenu("s32_calendar")
+
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Help isn't necessary or relevant to mobile devices.

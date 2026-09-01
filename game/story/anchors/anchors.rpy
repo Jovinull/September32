@@ -314,7 +314,7 @@ label s32_anchor_the_undated_column:
 
     $ go("archive_room")
 
-    scene bg archive_room afternoon with dissolve
+    scene bg archive_room day with dissolve
 
     if knows("attendance_sheet_anomaly"):
 

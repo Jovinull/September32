@@ -32,13 +32,18 @@ SEEDS = range(1234, 1234 + 60)
 
 #: Axes worth printing. The full set is large and mostly moves together; these
 #: are the ones the profiles were written to pull in different directions.
+#: Written `x->player` because that is the direction the content moves: these
+#: are the characters' stances toward the player, earned by what the player did.
+#: They read `player->x` until Milestone 3, which is how a table of zeros went
+#: unnoticed for two milestones -- the numbers were on the other arrow the whole
+#: time. docs/narrative-design/RELATIONSHIP_DIRECTION.md
 AXES = (
-    "player->iris.attraction",
-    "player->iris.trust",
-    "player->theo.respect",
-    "player->june.trust",
-    "player->mara.suspicion",
-    "player->noah.respect",
+    "iris->player.attraction",
+    "iris->player.trust",
+    "theo->player.respect",
+    "june->player.trust",
+    "mara->player.suspicion",
+    "noah->player.respect",
 )
 
 
@@ -93,7 +98,13 @@ def main() -> None:
         )
 
     print("\n## Relationship axes, mean per run\n")
-    print(f"  {'profile':<14}" + "".join(f"{a.split('->')[1][:11]:>13}" for a in AXES))
+
+    def _head(axis: str) -> str:
+        """Render `iris->player.trust` as `iris.trust`, which is the column."""
+        pair, _, name = axis.partition(".")
+        return f"{pair.split('->')[0]}.{name}"[:12]
+
+    print(f"  {'profile':<14}" + "".join(f"{_head(a):>13}" for a in AXES))
     for name in names:
         print(f"  {name:<14}" + "".join(f"{axes[name].get(a, 0) / runs:>13.1f}" for a in AXES))
 

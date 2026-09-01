@@ -15,7 +15,6 @@ credited costs nothing; failing to credit someone who did is a real problem.
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
 from pathlib import Path
 
 from s32tools.assets.manifest import AssetEntry, Manifest
@@ -90,6 +89,23 @@ def credits_markdown(manifest: Manifest) -> str:
     return "\n".join(lines)
 
 
+def _last_verified(manifest: Manifest) -> str:
+    """Return the most recent ``license_verified`` date in the catalogue.
+
+    This replaced a ``datetime.now()`` stamp, which made the generated notices
+    differ from the committed ones at every midnight and failed the freshness
+    gate on content nobody had touched. A gate that cries wolf daily is a gate
+    people stop reading.
+
+    It is also the more useful date. "When a script last ran" says nothing about
+    a legal notice; ``license_verified`` is the day a human read the terms, it
+    is hand-written in the committed catalogue, and it changes exactly when the
+    thing it describes changes.
+    """
+    dates = sorted(entry.license_verified for entry in manifest.entries.values() if entry.license_verified)
+    return dates[-1] if dates else "an unrecorded date"
+
+
 def notices_markdown(manifest: Manifest) -> str:
     """Render ``THIRD_PARTY_NOTICES.md``.
 
@@ -102,7 +118,8 @@ def notices_markdown(manifest: Manifest) -> str:
         "",
         "# Third-party notices",
         "",
-        f"Generated {datetime.now(UTC).date().isoformat()} from `assets/catalog/assets.toml`.",
+        f"Generated from `assets/catalog/assets.toml`. Licence terms last read "
+        f"by a person on {_last_verified(manifest)}.",
         "",
         "This document lists third-party material used by September 32 and the",
         "terms it is used under. It covers three separate categories that must not",

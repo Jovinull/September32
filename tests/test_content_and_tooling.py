@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import ast
 import json
+import pathlib
 import sys
 from pathlib import Path
 
@@ -173,6 +174,45 @@ def test_credit_files_are_up_to_date():
     manifest = load(paths.catalog_path())
     stale = check_all(paths.repo_root(), manifest)
     assert not stale, "run `s32 assets credits`: " + ", ".join(stale)
+
+
+def test_credit_generation_does_not_depend_on_todays_date():
+    """The freshness gate used to fail every midnight.
+
+    ``THIRD_PARTY_NOTICES.md`` embedded ``datetime.now()``, and the gate
+    compares file contents, so a build run the day after the last regeneration
+    reported the notices stale on content nobody had touched. Rendering twice
+    under two different wall clocks is the direct check for that: same
+    catalogue, same bytes.
+    """
+    from s32tools.assets import generate_credits
+    from s32tools.assets.generate_credits import OUTPUTS, render
+    from s32tools.assets.manifest import load
+
+    manifest = load(paths.catalog_path())
+    first = {name: render(name, manifest) for name in OUTPUTS}
+
+    second = {name: render(name, manifest) for name in OUTPUTS}
+    assert first == second
+
+    # Rendering twice in one second proves little on its own, so the invariant
+    # is stated directly: there is no clock in the generator to read. Parsed
+    # rather than grepped, because a local import inside a function would
+    # satisfy the namespace check and reintroduce the bug -- and because the
+    # docstring explaining all this necessarily mentions `datetime.now`.
+    assert not hasattr(generate_credits, "datetime")
+    tree = ast.parse(pathlib.Path(generate_credits.__file__).read_text(encoding="utf-8"))
+    clocks = {"datetime", "date", "time", "monotonic", "now", "today"}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import | ast.ImportFrom):
+            names = [alias.name.split(".")[0] for alias in node.names]
+            names.append((getattr(node, "module", None) or "").split(".")[0])
+            assert not clocks & set(names), f"{names} would put a clock in the generator"
+
+    # And the date it does print comes from the committed catalogue, so it
+    # moves only when a person records reading the terms again.
+    verified = sorted(e.license_verified for e in manifest.entries.values() if e.license_verified)
+    assert verified[-1] in first["THIRD_PARTY_NOTICES.md"]
 
 
 def test_the_game_version_matches_options_rpy():

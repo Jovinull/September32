@@ -173,6 +173,45 @@ possible 28.5 means the bands are keeping roughly two thirds of the available
 contests intact and losing the rest to a legitimate rank — an `EVENT` beating an
 `AMBIENT` is the system working, not a loss.
 
+## Milestone 3: the bands held, and the content did the work
+
+Twenty-one more storylets, no change to the bands, no change to the director.
+
+| | M1 (15) | M2 (30) | **M3 (51)** |
+| --- | ---: | ---: | ---: |
+| Nothing eligible | 64.5% | 32.5% | **26.6%** |
+| One eligible, of productive moments | 93.2% | 57.9% | **44.5%** |
+| Two or more eligible | 6.8% | 30.3% | **40.7%** |
+| Top tier held 2+ | 0.0% | 18.1% | **30.9%** |
+| Contests kept, of contests available | — | 60% | **76%** |
+
+The band distribution across fifty-one storylets:
+
+| Band | Storylets |
+| --- | ---: |
+| `URGENT` (80) | 2 |
+| `CALLBACK` (60) | 9 |
+| `EVENT` (40) | 28 |
+| `AMBIENT` (20) | 12 |
+
+`EVENT` holds more than half the library, which is the shape the convention was
+written for: it is the band where competition happens, and everything that does
+not have a structural reason to go first belongs in it.
+
+**The single most instructive result of the milestone** is that the biggest move
+in the contested-tier rate came from one ambient scene. After twenty new
+storylets the rate was 17.2% -- *below* where Milestone 2 left it. The cause was
+`dorm_room` at early morning: the player wakes up there every day of a
+fourteen-day run, one scene had been written for it, and that scene was taking
+13% of everything played in the game with nothing to compete against.
+
+Writing a second one moved contested tiers to 30.7%.
+
+The lesson is not "add ambient scenes". It is that a cell with one storylet and
+high traffic is worth more attention than a cell with none, because the empty
+cell costs a moment and the single-occupancy cell costs a *choice* -- and only
+the second one is invisible in a play-count table.
+
 ## Ten real contested selections
 
 Collected from live runs, not constructed. Each is a moment where the top band

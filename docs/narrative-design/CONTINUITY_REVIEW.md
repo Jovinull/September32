@@ -73,6 +73,31 @@ game not paying attention, which is precisely the impression a quality-based
 narrative cannot afford, because the whole promise is that it is paying
 attention.
 
+## The Milestone 3 audit
+
+Twenty-one new scenes and two new anchors. 46 lines contain a checklist word;
+two made a claim the player might not be able to cash, and both were mine.
+
+| Scene | Line | Verdict |
+| --- | --- | --- |
+| `iris_the_second_box` | "The second shoebox is on the desk with the lid off, which is not where it was and not how it was" | **Fixed.** The scene requires `knows(iris_keeps_a_second_index)`, and knowing the index exists is not the same as having seen the box: only one of `archive_iris_index`'s three branches mentions it, and `iris_the_apology` grants the fact without a shoebox in the room. Rewritten to "There is a second shoebox on the desk with the lid off." |
+| `june_reads_it_flat` | "and it is canals again" | **Fixed.** A callback to one of three variants of `common_room_evening`, a scene the player may never have played. Rewritten so the joke stands on its own. |
+| `noah_the_sports_report` | "the longest you have known him to be silent" | **Kept.** The storylet requires `seen(noah_asks_for_access)`, so a prior Noah scene is guaranteed. |
+| `annexe_two_of_them` | "He does not usually leave first" | **Kept, marginally.** Requires `knows(noah_is_writing_about_the_archive)`, which only `noah_asks_for_access` grants, so there has been at least one Noah scene. Thin, and the thinnest thing kept in this audit. |
+| `theo_the_spreadsheet` | "the longest sentence you have heard him produce" | **Kept.** Requires `anchor_done(the_common_room)`, where Theo speaks. |
+| `theo_admits_it` | "I've been calling it a key for eleven days", "I checked the crate three times" | **Kept.** Theo counting his own life, which needs no player history. |
+| `common_room_three_way` | "She says it the second time in a completely different tone" | **Kept.** Within-scene: she says the same three words twice, four lines apart. |
+| `mara_the_long_way` | "You're the first person in two years who's had to be told anything" | **Kept.** Mara's own account of the school, and true whatever the player has done. |
+| `the_undated_column` (anchor) | "You go back to it on your own, which is different from being shown it" | **Guarded.** The whole opening branches on `knows("attendance_sheet_anomaly")`, because `theo_ledger_question` reaches about five runs in six and an anchor cannot depend on that. |
+| `the_date` (anchor) | "You have had it for days" | **Guarded.** Branches on `has_item("old_photo")`; the else branch finds the box for the first time. |
+
+Two rules held up and one is new:
+
+**A scene's requirement is the guarantee, not the vibe.** Both faults were the
+same mistake in different clothes: a requirement that sounded like it implied a
+memory (`knows(iris_keeps_a_second_index)`) and did not. Knowing *about* a thing
+is not having *seen* it, and the storylet metadata cannot tell the difference.
+
 ## Repeatable is not the same as resettable
 
 A `repeat_policy` of `repeatable` says the engine may fire the scene again. It
@@ -119,8 +144,8 @@ runs for every visit from the third onward, so there is no cliff at four.
 `repeat_policy: once`. Anything that discovers something, changes a
 relationship materially, or could not honestly happen twice.
 
-Eighteen of the thirty. The test is not "would the engine allow it" but "would
-a person do this twice" — Theo does not lose the same key twice.
+Thirty-three of the fifty-one. The test is not "would the engine allow it" but
+"would a person do this twice" — Theo does not lose the same key twice.
 
 ### Cooldowns are a fifth thing, and they are not a policy
 
@@ -131,8 +156,8 @@ have been visited. Scenes with cooldowns are audited as `WITH VARIANTS`.
 
 ## Audit of the existing repeatables
 
-Twelve repeatable or cooldown scenes at the end of Milestone 2 -- five
-`repeatable`, seven on a cooldown. Each was read for "discovering it again":
+Eighteen repeatable or cooldown scenes at the end of Milestone 3 -- nine
+`repeatable`, nine on a cooldown. Each was read for "discovering it again":
 
 | Scene | Kind | Discovers something | Verdict |
 | --- | --- | --- | --- |
@@ -148,9 +173,22 @@ Twelve repeatable or cooldown scenes at the end of Milestone 2 -- five
 | `dorm_late_night` | progressive | no | clean — and the reason `times_seen` exists |
 | `town_road_shops` | cooldown 3 | `learn(caretaker_opens_at_seven)` behind a menu choice | clean — the line is about a rota being unsecret, not about learning a time |
 | `classroom_before_bell` | variants | no | clean |
+| `dorm_early_start` | variants (3) | no | clean |
+| `dorm_bathroom_queue` | variants (3) | no | clean |
+| `hallway_afternoon_drift` | variants (3) | no | clean |
+| `common_room_evening` | variants (3) | no | clean |
+| `common_room_kettle` | variants (2) | no | clean |
+| `gate_going_out` | cooldown 3, menu | no | clean — the sign-out book is a joke about a shelf, not a discovery |
 
-One `watch`, no failures. `gate_noticeboard` is the item to look at first if
-this section is ever revisited.
+One `watch`, no failures, across three milestones. `gate_noticeboard` is still
+the item to look at first if this section is ever revisited.
+
+One thing worth recording rather than fixing: `dorm_late_night` is
+`PROGRESSIVE` with three stages and plays about nine times in a fourteen-day
+run, so a player sees its third stage roughly seven times. That is inside the
+policy -- the last stage is stable on purpose, so there is no cliff -- but it is
+the largest amount of repetition of one body of text in the game, and if the
+residence gets more late-night content it should go there first.
 
 ## What this file does not do
 

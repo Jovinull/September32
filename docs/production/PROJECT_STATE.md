@@ -1,24 +1,24 @@
 # Project state
 
-**Read this before starting work.** Last updated: 2026-08-31.
+**Read this before starting work.** Last updated: 2026-08-31 (Milestone 3).
 
 ## Summary
 
-Milestone 2 complete. Thirty storylets, priority bands, and a player model that
-moves for a reason. Every quality gate is green.
+Milestone 3 complete. Fifty-one storylets, a structured first week, a calendar,
+and two long-standing authoring hazards removed. Every quality gate is green.
 
-Milestone 1 ended with a director that was not choosing: 92.7% of the time it
-had exactly one eligible scene, and the top priority tier held one candidate in
-100% of selections, so `weight`, repeat damping and the player profiles were all
-mechanisms that could not act. Milestone 2 fixed that from the content side and
-left the algorithm alone. The singleton rate is now **57.9%** and the top tier
-holds two or more in **18.1%** of selections, up from 0.0%. All thirty storylets
-are reachable and the nine profiles no longer produce identical runs.
+The milestone was asked whether September 32 is **interesting to play for a
+week**, and it answers yes with a qualification. Three simulated first weeks
+share 37% of their scenes and differ on the rest: who the player spent time
+with, what they promised, what they learned, and which reading of the evidence
+they lean toward. The week has a shape — arrival, routine, connection,
+inconsistency, doubt, consequence, contradiction — and it ends holding two
+records that do not agree and no explanation that covers both.
 
-The target for contested tiers was 30% and it was not met. That is a content
-volume question -- two scenes cannot share a tier unless two are eligible, and
-two are eligible in 28.5% of moments -- and it is the first thing the next
-milestone should read. [`MILESTONE_2_DENSITY.md`](MILESTONE_2_DENSITY.md).
+The qualification is that this is a first draft of a first week, marked
+`ACT1_DRAFT` and not `CANON`. Green gates are not finished prose.
+
+[`MILESTONE_3_ACT_1.md`](MILESTONE_3_ACT_1.md).
 
 ## Engine
 
@@ -58,45 +58,44 @@ a photograph, a promise, an ending note. Marked PROTOTYPE / NON-FINAL in-game.
 
 | Gate | Result |
 | --- | --- |
-| `uv run pytest` | **194 passed** |
+| `uv run pytest` | **222 passed** |
 | `uv run ruff check .` | **clean** |
 | `uv run ruff format --check .` | **clean** |
-| `uv run mypy` | **clean, 68 files, strict** |
+| `uv run mypy` | **clean, 71 files, strict** |
 | `s32 validate` | **0 errors, 0 warnings**, 9 info |
 | `s32 renpy lint` | **clean** |
-| `s32 renpy test` | **11/11 testcases passed** |
-| `s32 simulate --runs 5000` | **30/30 storylets reachable, 0 dead ends** |
+| `s32 renpy test` | **16/16 testcases passed** |
+| `s32 simulate --runs 5000` | **51/51 storylets reachable, 0 dead ends, 5/5 anchors in 100% of runs** |
 | `s32 doctor` | **0 failures, 0 warnings** |
 
 ## Content
 
 | | |
 | --- | --- |
-| Storylets | 30 (all `prototype`) |
-| Anchors | 3 |
+| Storylets | 51 |
+| Anchors | 5 |
 | Characters | 6 (5 with art) |
-| Locations | 8 |
-| Knowledge facts | 11 |
-| Documents | 3 |
+| Locations | 9 |
+| Knowledge facts | 14 |
+| Documents | 6 |
 | Items | 3 |
 
-Unique scenes in an average run: **13.6** at Milestone 1, from 5.9 at the
-bootstrap. The single most played scene now takes 19.1% of everything played,
-down from 42.1% and from 71.7% before that. Twenty-nine of the 56 (location,
-time slot) cells are live; the rest are classified in
+Unique scenes in an average run: **38.0**, from 13.6 at Milestone 1 and 5.9 at
+the bootstrap. The single most played scene takes **13.1%** of everything
+played, down from 19.1% and from 71.7% at the start. Thirty-seven of the 63
+(location, time slot) cells are live; the rest are classified in
 [`CELL_MAP.md`](../narrative-design/CELL_MAP.md) rather than treated as gaps.
 
 ## Known gaps
 
-**Content density, still the main constraint, now for a narrower reason.**
-Thirty storylets, and the director is choosing between two or more in 28.5% of
-moments rather than 6.8%. But 57.9% of productive moments still offer exactly
-one scene, so the intended 30% contested-tier rate was missed at 18.1%. The
-remaining shortfall is arithmetic and not tuning: contests cannot exceed the
-rate at which two scenes are eligible together, and the cells where that happens
-are named in [`CELL_MAP.md`](../narrative-design/CELL_MAP.md). The largest
-single gap is `dorm_room` in the early morning -- 34,000 visits in 5000 runs
-with nothing authored, because the player wakes up there.
+**Content density is no longer the binding constraint.** Fifty-one storylets;
+the director is choosing between two or more in 40.5% of moments, and the top
+priority tier holds two or more in **28.2%** — the Milestone 2 target of 30%,
+essentially reached, without the selection algorithm changing. Milestone 2's
+largest single gap, `dorm_room` in the early morning, is filled, and filling it
+was worth thirteen points on its own. What remains thin is the **rooftop**: one
+weather-gated scene across two hours, and the only location in the game with a
+single storylet in it.
 
 **Art.** Three characters have no casual outfit; one has no sprite; there is no
 male-presenting sprite in a compatible style; the archive room is played by a
@@ -140,6 +139,13 @@ Evidence in [`ASSET_NAMING.md`](ASSET_NAMING.md). A human should still confirm
 the word choice before a scene depends on the gloom/sad distinction:
 [`HUMAN_ART_REVIEW.md`](HUMAN_ART_REVIEW.md).
 
+**UI.** Two signature interfaces now exist and share a visual language: the
+archive document viewer (six documents, two of them deliberately mundane) and
+the **calendar**, which stores nothing and derives every square from
+`WorldState`, commitments and history when asked. No part of the calendar parses
+a date, so a September with thirty-two days in it stays representable without
+the UI being rewritten.
+
 **The player profiles are no longer inert.** Milestone 1 recorded that all six
 produced byte-identical runs. Nine profiles now diverge on every measure: 0 of
 36 profile pairs share an aggregate play count, and the axes separate in the
@@ -151,18 +157,21 @@ choices resolved by the profile rather than uniformly at random, and a movement
 model that relocates by preference rather than only when starving. Measure it
 with `uv run python scripts/profile_divergence.py`.
 
-**Relationship direction is easy to write backwards.** `rel X.axis` defaults to
-`source="player"` and therefore means *the player's stance toward X*, not X's
-stance toward the player. Several outcomes read naturally as the latter. Nothing
-is known to be wrong today -- the Milestone 2 content was written against the
-convention deliberately -- but the notation invites the mistake and there is no
-check for it. Worth an explicit `player->x.trust` form, or a validator, before
-the content doubles again.
+**Both Milestone 2 hazards are gone, and one of them was worse than reported.**
+Relationship direction is now explicit everywhere and refused when omitted; the
+audit found that the implicit default had been wrong in **all 114** places the
+content used it, not merely ambiguous.
+[`RELATIONSHIP_DIRECTION.md`](../narrative-design/RELATIONSHIP_DIRECTION.md).
+Credits generation no longer reads the wall clock, and a test rejects any clock
+reintroduced into that module.
 
-**The credits gate fails every midnight.** `THIRD_PARTY_NOTICES.md` embeds its
-generation date and the freshness test compares content, so the file needs
-regenerating on the first run of each day. Cosmetic, recurring, and mildly
-corrosive: a gate that cries wolf daily is a gate people stop reading.
+**Art is now the largest unaddressed risk, and has been for three milestones.**
+Ms. Ellery has appeared on screen for the first time and had to be written
+without a sprite. The class photograph — the object the entire premise turns on
+— does not exist and is `image_placeholder` in the document viewer. Neither is
+solvable by downloading another character pack, by generating anything, or by
+substituting a photograph of real people, and placeholders working is not the
+same as the problem being handled. `ART_GAP_ANALYSIS.md`.
 
 ## Blocked
 
@@ -273,33 +282,85 @@ Same reason as above: they are the evidence the tooling earns its keep.
     conclusions drawn from it survived recomputation. Corrected in place, with
     the error recorded rather than quietly overwritten.
 
+## Bugs found during Milestone 3
+
+Classified, because the classes are starting to be informative.
+
+17. **`AUTHORING` — every relationship in the game was on the wrong edge.**
+    `rel iris.trust += 3` defaulted its source to the player and therefore
+    stored *the player's* trust toward Iris. All 114 authored uses meant the
+    reverse. Undetectable by construction: the only two conditions that read a
+    relationship read the same wrong edge, so the game behaved exactly as
+    intended, every test passed, and the debug screen showed a number going up
+    beside the right name. Found by asking, scene by scene, what the number was
+    supposed to mean.
+18. **`TOOLING` — the credits gate failed every midnight.**
+    `THIRD_PARTY_NOTICES.md` embedded `datetime.now()` and the gate compares
+    file contents. Now derived from the committed manifest's newest
+    `license_verified` date, which is both reproducible and the more useful
+    fact.
+19. **`TOOLING` — the Ren'Py testcase list was hand-written in `cli.py`.**
+    A new testcase file ran in nobody's build until somebody remembered to add
+    it. Found by adding one: five calendar testcases passed silently by never
+    running. Discovery now walks `game/testcases/`.
+20. **`DATA` — a scene walked the player backwards from `known` to
+    `suspected`.** `old_photo_glimpse` suspects the date on the stamp, which is
+    right the first time and wrong after the `the_date` anchor has established
+    it. About one run in six ended the week having *unlearned* the fact the act
+    is built on. `known -> suspected` is a legal and deliberate transition; the
+    fix was a blocker on the scene, not a change to the knowledge model.
+21. **`CONTINUITY` — two callbacks I wrote had nothing behind them.**
+    `iris_the_second_box` opened on "not where it was and not how it was" while
+    gated only on *knowing about* the second shoebox, and `june_reads_it_flat`
+    closed on a callback to one variant of a scene the player may never have
+    played. Both found by the written checklist rather than by a tool, which is
+    the third milestone running in which that checklist has earned its place.
+22. **`TOOLING` — the divergence script was reading the empty edge.**
+    `scripts/profile_divergence.py` printed a table of zeros for every
+    relationship axis after the direction fix, because its axis list still said
+    `player->iris`. A report that shows zeros where there is data is worse than
+    no report.
+
 ## Next milestone
 
-**Not yet decided. The data is in; the decision is a person's.**
+**Recommended: Milestone 4 — Act 1 depth, not Act 1 breadth.**
 
-Milestone 2 was asked not to choose the next milestone before the numbers
-existed. They do now, and they point three different ways:
+Milestone 3 was asked not to choose until the data existed. It does, and it
+points at depth rather than at more storylets:
 
-1. **More content in the cells that are already busy.** The cheapest path, with
-   a known ceiling: `dorm_room` early morning, `school_gate` evening,
-   `hallway_east` afternoon, the rooftop at any hour. Would move the
-   contested-tier rate directly.
-2. **The calendar.** Deliberately not built this milestone. The strongest
-   argument for it is that the movement model is currently the thing deciding
-   where the player is, and a player who could plan a day would produce a very
-   different distribution.
-3. **Revisit the selection algorithm, now that there is something to test it
-   against.** Milestone 2 was explicitly forbidden from turning the hard
-   priority tier into a soft additive score, and the reband plus the content
-   made that unnecessary rather than merely deferred. Whether it stays
-   unnecessary at sixty storylets is a real question, and
-   [ADR-0002](../decisions/ADR-0002-storylet-architecture.md) is where it
-   belongs.
+- Density is no longer the constraint. 28.2% contested tiers against a 20–30%
+  target, reached without touching the algorithm. Another twenty ambient scenes
+  would move that by very little.
+- Structure holds. Five anchors fire in 100% of runs, seven days have a shape,
+  and three profiles share 37% of a week.
+- What is thin is **character**. Every one of the five has exactly one scene
+  whose conflict is not the archive, and every one of their `core wound`s is
+  still `IDEA`. The cast is likeable and none of them has cost the player
+  anything yet.
 
-Standing, independent of that choice:
+So: fewer, longer, harder scenes, not more of them. Concretely —
 
-- The items in [`HUMAN_ART_REVIEW.md`](HUMAN_ART_REVIEW.md), which need a person
-  and about ten minutes.
-- The narrative reading list in
-  [`MILESTONE_2_DENSITY.md`](MILESTONE_2_DENSITY.md), which needs a person and
+1. **A second and third beat per character**, including at least one where
+   liking someone and doing the right thing come apart.
+2. **The rooftop**, the only location with a single storylet, and the one place
+   the game has that is not institutional.
+3. **Day 8 onward.** Act 1 ends inside `odd` holding two records; `unsettling`
+   is the second and third thing, and it needs somewhere to happen.
+
+Explicitly **not** recommended yet:
+
+- **Scaling to 80–100 storylets.** The measurements do not support it, and the
+  first week is a draft nobody has read aloud.
+- **Touching the selection algorithm.** Three milestones of pressure and it has
+  not needed changing. [ADR-0002](../decisions/ADR-0002-storylet-architecture.md)
+  is where that decision lives if it ever does.
+
+Standing, and independent of the choice:
+
+- The art gap. The class photograph does not exist and Ms. Ellery has now been
+  written around rather than written for. This is a production risk that three
+  milestones of working placeholders have not reduced.
+- The items in [`HUMAN_ART_REVIEW.md`](HUMAN_ART_REVIEW.md), ten minutes.
+- The reading list in
+  [`MILESTONE_3_ACT_1.md`](MILESTONE_3_ACT_1.md#human-narrative-review-needed),
   rather longer.

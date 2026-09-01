@@ -22,24 +22,36 @@ the raw counts with `uv run s32 simulate` and read `density.md`.
 
 ## The map
 
-Storylets naming each cell, after Milestone 2. Ceilings, not what a player meets
-— state gates cut these down, sometimes to nothing.
+Storylets naming each cell, after Milestone 3. Ceilings, not what a player meets
+-- state gates cut these down, sometimes to nothing.
 
 | Location | early morning | morning | midday | afternoon | evening | night | late night |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `archive_room` | 0 | 2 | 3 | 5 | 4 | 0 | 0 |
-| `classroom_2b` | 2 | 2 | 2 | 2 | 1 | 1 | 0 |
-| `courtyard` | 2 | 3 | 5 | 3 | 1 | 0 | 0 |
-| `dorm_room` | 0 | 0 | 0 | 0 | 2 | 3 | 1 |
-| `hallway_east` | 0 | 2 | 4 | 2 | 0 | 0 | 0 |
+| `archive_room` | 0 | 3 | 4 | 8 | 5 | 0 | 0 |
+| `classroom_2b` | 2 | 2 | 2 | 3 | 2 | 1 | 0 |
+| `common_room` | 1 | 2 | 2 | 2 | 6 | 4 | 0 |
+| `courtyard` | 2 | 3 | 7 | 5 | 1 | 0 | 0 |
+| `dorm_room` | 2 | 0 | 0 | 0 | 2 | 3 | 1 |
+| `hallway_east` | 0 | 2 | 4 | 5 | 1 | 0 | 0 |
 | `rooftop` | 0 | 0 | 0 | 1 | 1 | 0 | 0 |
-| `school_gate` | 1 | 2 | 0 | 2 | 0 | 0 | 0 |
-| `town_road` | 0 | 0 | 0 | 3 | 3 | 1 | 0 |
+| `school_gate` | 1 | 3 | 1 | 2 | 1 | 0 | 0 |
+| `town_road` | 0 | 0 | 0 | 4 | 4 | 1 | 0 |
 
-27 of 56 cells hold nothing, 8 hold one storylet, 21 hold two or more. Milestone
-1 was 27 / 12 / 17 against the same denominator: the empty count did not move,
-and that is the intended outcome. Fifteen new storylets went into cells that
-already had something, or into a location that had nothing anywhere.
+Nine locations now, because Milestone 3 added the common room: a residential
+school with nowhere communal to sit was a gap in the fiction before it was a gap
+in the map, and three of the four group scenes happen there.
+
+Of 63 cells, 24 hold nothing, 12 hold one storylet, and 27 hold two or more.
+The three milestones, against their own denominators:
+
+| | cells | empty | one | two or more |
+| --- | ---: | ---: | ---: | ---: |
+| Milestone 1 (15 storylets, 8 locations) | 56 | 48% | 21% | 30% |
+| Milestone 2 (30 storylets, 8 locations) | 56 | 48% | 14% | 38% |
+| Milestone 3 (51 storylets, 9 locations) | 63 | 38% | 19% | 43% |
+
+The empty share moved for the first time, and it moved because two `FUTURE`
+cells got content rather than because anything was spread thin.
 
 ## Verdict by cell
 
@@ -72,6 +84,22 @@ being wrong.
 | night | `ACTIVE` | Thin (1). Same, later. |
 | late night | `INTENTIONALLY_EMPTY` | The block is locked. |
 
+### `common_room` — new in Milestone 3
+
+| Slot | Verdict | Note |
+| --- | --- | --- |
+| early morning | `ACTIVE` | Thin (1). The kettle, and somewhere to go that is not your own room. |
+| morning | `ACTIVE` | |
+| midday | `ACTIVE` | |
+| afternoon | `ACTIVE` | |
+| evening | `ACTIVE` | 6, the second densest cell in the game. This is what the location is for. |
+| night | `ACTIVE` | 4. |
+| late night | `INTENTIONALLY_EMPTY` | Everyone has gone up. |
+
+Added because a residential school with nowhere communal to sit is a gap in the
+fiction, and because three of the four group scenes need a room where four
+people can plausibly already be when the player walks in.
+
 ### `courtyard` — the busiest place in the game
 
 | Slot | Verdict | Note |
@@ -92,7 +120,7 @@ now holds five scenes at its peak and none after dark.
 
 | Slot | Verdict | Note |
 | --- | --- | --- |
-| early morning | `FUTURE` | 34,000 visits and nothing authored — the single largest empty cell in the simulation, because the player wakes up here. Getting up is a scene nobody has written. |
+| early morning | `ACTIVE` | Was the largest empty cell in the game: 34,000 visits and nothing authored, because the player wakes up here. Two ambient scenes now, and adding the second of them moved contested top tiers from 17% to 31% on its own. |
 | morning | `INTENTIONALLY_EMPTY` | You are supposed to be in class. |
 | midday | `INTENTIONALLY_EMPTY` | As above. |
 | afternoon | `INTENTIONALLY_EMPTY` | As above. |
@@ -100,8 +128,11 @@ now holds five scenes at its peak and none after dark.
 | night | `ACTIVE` | 3. |
 | late night | `ACTIVE` | Thin (1), and correctly so: `dorm_late_night` is the only thing that happens at that hour anywhere. |
 
-`dorm_room` at early morning is the clearest content recommendation this
-milestone produces. It is not a density problem the director can fix.
+`dorm_room` at early morning was the clearest content recommendation Milestone 2
+produced, and Milestone 3 acted on it. The result is the strongest single piece
+of evidence this project has that density is a content problem: one ambient
+scene, written into the busiest empty cell, moved the contested-tier rate by
+thirteen points without the director changing at all.
 
 ### `hallway_east`
 
@@ -138,7 +169,7 @@ scene at two hours is not a place; it is a set with a single use.
 | morning | `ACTIVE` | |
 | midday | `INTENTIONALLY_EMPTY` | 11,600 visits, nothing authored. Arguably `FUTURE`: nobody is at the gate at lunch, but the player keeps going there. |
 | afternoon | `ACTIVE` | |
-| evening | `FUTURE` | 8,300 visits. Going out, or coming back. |
+| evening | `ACTIVE` | Thin (1). `gate_going_out` and the sign-out book. |
 | night | `INVALID` | Chained. 9 visits total. |
 | late night | `INVALID` | |
 
@@ -159,27 +190,27 @@ at a school. It now has three.
 
 ## The tally
 
-| Verdict | Cells |
-| --- | ---: |
-| `ACTIVE` | 29 |
-| `INTENTIONALLY_EMPTY` | 16 |
-| `FUTURE` | 6 |
-| `INVALID` | 5 |
+Nine locations by seven slots is 63 cells.
 
-Twenty-nine live cells against thirty storylets is the honest shape of the game
-right now. The six `FUTURE` cells, ranked by how much traffic they already carry
-with nothing in them:
+| Verdict | Cells | Milestone 2 |
+| --- | ---: | ---: |
+| `ACTIVE` | 37 | 29 |
+| `INTENTIONALLY_EMPTY` | 17 | 16 |
+| `FUTURE` | 4 | 6 |
+| `INVALID` | 5 | 5 |
 
-1. `dorm_room` early morning — 34,000 visits, 0 authored
-2. `school_gate` evening — 8,300 visits, 0 authored
-3. `rooftop` midday — the obvious scene nobody has written
-4. `rooftop` night
-5. `rooftop` early morning
-6. `hallway_east` early morning — about 900 visits; low priority
+Thirty-seven live cells against fifty-one storylets. The two `FUTURE` cells
+Milestone 2 ranked first and second were both filled, and the remaining four are
+all the rooftop and one thin corridor hour:
 
-`hallway_east` afternoon is `ACTIVE` rather than `FUTURE`, but it is the
-thinnest active cell by a distance: 22,600 visits against two storylets. It is
-the first place a sixteenth scene should go.
+1. `rooftop` midday — the obvious scene nobody has written, and the location
+   most clearly waiting for Act 2
+2. `rooftop` night
+3. `rooftop` early morning
+4. `hallway_east` early morning — about 900 visits; low priority
+
+The rooftop is now the only location in the game with one storylet in it. That
+is the recommendation this milestone hands forward.
 
 ## The hot cells, and why those
 
@@ -204,6 +235,28 @@ crossed with a location that had a reason to exist.** Not "which cell is empty" 
 Two of the fifteen did not go to a hot cell. `town_road_last_bus` and
 `archive_iris_index` are there for the shape of the week rather than for
 density, and both are flagged as such on their scene cards.
+
+### Milestone 3
+
+Twenty-one storylets, aimed the same way, plus a location that did not exist.
+
+| Cell | Milestone 2 state | Added | Now |
+| --- | --- | ---: | ---: |
+| `dorm_room` early morning | 34,000 visits, 0 authored | +2 | 2 |
+| `common_room` evening | did not exist | +6 | 6 |
+| `common_room` night | did not exist | +4 | 4 |
+| `hallway_east` afternoon | 22,600 visits, 2 authored | +3 | 5 |
+| `archive_room` afternoon | 5 authored, mean eligible 1.0 | +3 | 8 |
+| `courtyard` midday | 5 | +2 | 7 |
+| `school_gate` evening | 8,300 visits, 0 authored | +1 | 1 |
+| `town_road` afternoon/evening | 3 | +1 | 4 |
+| `classroom_2b` afternoon | 2 | +1 | 3 |
+
+The second entry in `dorm_room` early morning is worth singling out. It was not
+in the plan; it exists because a 600-run sweep of the other twenty scenes showed
+`dorm_early_start` taking 13% of everything played in the game on its own, from
+a cell that had no competition. Adding one scene against it moved contested top
+tiers from 17.2% to 30.7%.
 
 ## Reading a cell honestly
 

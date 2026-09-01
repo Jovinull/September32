@@ -270,7 +270,7 @@ label s32_st_june_is_not_fine:
 
     c_june "God. With the — yes. Right."
 
-    narrator "She has run out of the thing she was doing, which was talking, and she reaches for a second one, which is also talking."
+    narrator "She has run out of the thing she was doing. The thing she was doing was talking. She reaches for a second one and it is also talking."
 
     show june school_summer talk
 
@@ -299,7 +299,7 @@ label s32_st_june_is_not_fine:
 
             c_june "I'll make it at four."
 
-            narrator "At four she makes it. You are not there. She tells you the next day that she made it, unprompted, in the middle of something else, which is her way of saying thank you and is not going to be acknowledged as one."
+            narrator "At four she makes it. You are not there. She tells you the next day that she made it, unprompted, in the middle of something else, and does not stop to let you say anything about it."
 
         "Sit down and let her get on with it.":
             $ trait("reserved")

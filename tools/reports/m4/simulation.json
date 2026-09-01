@@ -1,0 +1,1440 @@
+{
+  "generated_at": "2026-09-01T02:11:09+00:00",
+  "runs": 5000,
+  "seed": 1234,
+  "profiles": [
+    "random",
+    "altruistic",
+    "curious",
+    "romantic",
+    "paranoid",
+    "completionist",
+    "investigator",
+    "selfish",
+    "impulsive"
+  ],
+  "storylets": {
+    "total": 58,
+    "reachable": [
+      "annexe_door",
+      "annexe_two_of_them",
+      "archive_intro",
+      "archive_iris_index",
+      "archive_theo_returns",
+      "classroom_before_bell",
+      "classroom_the_lesson",
+      "common_room_evening",
+      "common_room_kettle",
+      "common_room_three_way",
+      "courtyard_before_you",
+      "courtyard_lunch_table",
+      "courtyard_morning_queue",
+      "courtyard_small_talk",
+      "courtyard_the_bench",
+      "dorm_bathroom_queue",
+      "dorm_corridor_noise",
+      "dorm_early_start",
+      "dorm_late_night",
+      "dorm_message",
+      "ellery_and_the_form",
+      "ellery_the_sign_off",
+      "gate_early_arrival",
+      "gate_going_out",
+      "gate_noticeboard",
+      "gate_waiting",
+      "hallway_after_bell",
+      "hallway_afternoon_drift",
+      "hallway_encounter",
+      "hallway_lost_property",
+      "iris_outside",
+      "iris_the_apology",
+      "iris_the_second_box",
+      "iris_the_wrong_photograph",
+      "june_is_not_fine",
+      "june_reads_it_flat",
+      "june_the_favour",
+      "june_the_kitchen",
+      "june_welcome_pack",
+      "mara_is_wrong",
+      "mara_older_story",
+      "mara_reads_the_room",
+      "mara_the_long_way",
+      "message_after_class",
+      "noah_asks_for_access",
+      "noah_evening_layout",
+      "noah_takes_a_call",
+      "noah_the_sports_report",
+      "old_photo_glimpse",
+      "rain_after_school",
+      "the_saturday",
+      "theo_admits_it",
+      "theo_ledger_question",
+      "theo_the_quiz",
+      "theo_the_spreadsheet",
+      "town_road_evening_walk",
+      "town_road_last_bus",
+      "town_road_shops"
+    ],
+    "unreachable": [],
+    "play_counts": {
+      "annexe_door": 3687,
+      "annexe_two_of_them": 2596,
+      "archive_intro": 4237,
+      "archive_iris_index": 1784,
+      "archive_theo_returns": 3986,
+      "classroom_before_bell": 7364,
+      "classroom_the_lesson": 11062,
+      "common_room_evening": 9514,
+      "common_room_kettle": 10283,
+      "common_room_three_way": 1740,
+      "courtyard_before_you": 7573,
+      "courtyard_lunch_table": 4881,
+      "courtyard_morning_queue": 7127,
+      "courtyard_small_talk": 22471,
+      "courtyard_the_bench": 3237,
+      "dorm_bathroom_queue": 24518,
+      "dorm_corridor_noise": 4111,
+      "dorm_early_start": 24825,
+      "dorm_late_night": 45823,
+      "dorm_message": 16212,
+      "ellery_and_the_form": 952,
+      "ellery_the_sign_off": 2292,
+      "gate_early_arrival": 4582,
+      "gate_going_out": 4361,
+      "gate_noticeboard": 11194,
+      "gate_waiting": 2093,
+      "hallway_after_bell": 4160,
+      "hallway_afternoon_drift": 2488,
+      "hallway_encounter": 3675,
+      "hallway_lost_property": 9703,
+      "iris_outside": 3890,
+      "iris_the_apology": 3685,
+      "iris_the_second_box": 1182,
+      "iris_the_wrong_photograph": 3935,
+      "june_is_not_fine": 4944,
+      "june_reads_it_flat": 4978,
+      "june_the_favour": 4992,
+      "june_the_kitchen": 2107,
+      "june_welcome_pack": 4969,
+      "mara_is_wrong": 3483,
+      "mara_older_story": 4086,
+      "mara_reads_the_room": 4533,
+      "mara_the_long_way": 3000,
+      "message_after_class": 4831,
+      "noah_asks_for_access": 3973,
+      "noah_evening_layout": 3529,
+      "noah_takes_a_call": 1547,
+      "noah_the_sports_report": 2942,
+      "old_photo_glimpse": 2101,
+      "rain_after_school": 743,
+      "the_saturday": 1842,
+      "theo_admits_it": 2524,
+      "theo_ledger_question": 2944,
+      "theo_the_quiz": 2109,
+      "theo_the_spreadsheet": 4881,
+      "town_road_evening_walk": 1876,
+      "town_road_last_bus": 4900,
+      "town_road_shops": 6815
+    }
+  },
+  "anchors": {
+    "total": 5,
+    "reached": {
+      "arrival": 5000,
+      "first_shift": 5000,
+      "the_common_room": 5000,
+      "the_date": 5000,
+      "the_undated_column": 5000
+    },
+    "unreached": []
+  },
+  "knowledge": {
+    "acquisition_rate": {
+      "annexe_is_locked": 0.7926,
+      "attendance_sheet_anomaly": 1.0,
+      "bound_volumes_were_moved": 0.7788,
+      "caretaker_opens_at_seven": 0.589,
+      "iris_keeps_a_second_index": 0.441,
+      "june_arrived_alone": 0.3816,
+      "mara_knows_the_older_story": 0.8172,
+      "noah_is_writing_about_the_archive": 0.7946,
+      "old_photo_exists": 1.0,
+      "photo_dated_sept_32": 1.0,
+      "school_history_skips_a_year": 0.7576,
+      "theo_lost_the_annexe_key": 0.5048
+    },
+    "never_acquired": [
+      "photo_is_a_forgery",
+      "theo_checks_the_ledger"
+    ]
+  },
+  "characters": {
+    "encounter_rate": {
+      "ellery": 0.6488,
+      "iris": 5.6278,
+      "june": 6.9226,
+      "mara": 4.8478,
+      "noah": 4.541,
+      "theo": 5.549
+    }
+  },
+  "content_mix": {
+    "archive": 0.0746,
+    "character": 0.3571,
+    "friendship": 0.2345,
+    "investigation": 0.0786,
+    "mystery": 0.0731,
+    "romance": 0.0021,
+    "school": 0.6101,
+    "slice_of_life": 0.9284
+  },
+  "phases_reached": {
+    "consequences": 0,
+    "impossible": 0,
+    "normal": 0,
+    "odd": 5000,
+    "unsettling": 0
+  },
+  "averages": {
+    "scenes_per_run": 71.97,
+    "days_per_run": 15.0,
+    "repeats_per_run": 30.99
+  },
+  "dead_ends": {
+    "count": 0,
+    "rate": 0.0,
+    "examples": []
+  },
+  "rare_states": [],
+  "density": {
+    "selection_moments": 485343,
+    "productive_moments": 359872,
+    "empty_rate": 0.2585,
+    "singleton_when_any": 0.3898,
+    "eligible_distribution": {
+      "0": 0.2585,
+      "1": 0.289,
+      "2": 0.2946,
+      "3": 0.1073,
+      "4+": 0.0505
+    },
+    "tier_distribution": {
+      "0": 0.0,
+      "1": 0.6514,
+      "2": 0.2887,
+      "3": 0.0489,
+      "4+": 0.011
+    },
+    "singleton_eligible_rate": 0.289,
+    "tier_multi_rate": 0.3486,
+    "authored_cells": {
+      "archive_room|afternoon": 8,
+      "archive_room|evening": 5,
+      "archive_room|midday": 4,
+      "archive_room|morning": 4,
+      "classroom_2b|afternoon": 4,
+      "classroom_2b|early_morning": 2,
+      "classroom_2b|evening": 2,
+      "classroom_2b|midday": 3,
+      "classroom_2b|morning": 3,
+      "classroom_2b|night": 1,
+      "common_room|afternoon": 1,
+      "common_room|early_morning": 1,
+      "common_room|evening": 7,
+      "common_room|midday": 1,
+      "common_room|morning": 1,
+      "common_room|night": 4,
+      "courtyard|afternoon": 6,
+      "courtyard|early_morning": 2,
+      "courtyard|evening": 2,
+      "courtyard|midday": 8,
+      "courtyard|morning": 4,
+      "dorm_room|early_morning": 2,
+      "dorm_room|evening": 2,
+      "dorm_room|late_night": 1,
+      "dorm_room|night": 3,
+      "hallway_east|afternoon": 6,
+      "hallway_east|evening": 1,
+      "hallway_east|midday": 4,
+      "hallway_east|morning": 2,
+      "rooftop|afternoon": 1,
+      "rooftop|evening": 1,
+      "school_gate|afternoon": 2,
+      "school_gate|early_morning": 1,
+      "school_gate|evening": 2,
+      "school_gate|midday": 1,
+      "school_gate|morning": 3,
+      "town_road|afternoon": 4,
+      "town_road|evening": 4,
+      "town_road|night": 1
+    },
+    "cells": {
+      "archive_room|afternoon": {
+        "location": "archive_room",
+        "time_slot": "afternoon",
+        "moments": 9889,
+        "mean_eligible": 2.12,
+        "multi_rate": 0.7378
+      },
+      "archive_room|early_morning": {
+        "location": "archive_room",
+        "time_slot": "early_morning",
+        "moments": 263,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "archive_room|evening": {
+        "location": "archive_room",
+        "time_slot": "evening",
+        "moments": 9521,
+        "mean_eligible": 0.86,
+        "multi_rate": 0.167
+      },
+      "archive_room|midday": {
+        "location": "archive_room",
+        "time_slot": "midday",
+        "moments": 5752,
+        "mean_eligible": 0.9,
+        "multi_rate": 0.1083
+      },
+      "archive_room|morning": {
+        "location": "archive_room",
+        "time_slot": "morning",
+        "moments": 2536,
+        "mean_eligible": 1.28,
+        "multi_rate": 0.2638
+      },
+      "archive_room|night": {
+        "location": "archive_room",
+        "time_slot": "night",
+        "moments": 4919,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "classroom_2b|afternoon": {
+        "location": "classroom_2b",
+        "time_slot": "afternoon",
+        "moments": 10793,
+        "mean_eligible": 1.19,
+        "multi_rate": 0.3488
+      },
+      "classroom_2b|early_morning": {
+        "location": "classroom_2b",
+        "time_slot": "early_morning",
+        "moments": 3461,
+        "mean_eligible": 1.26,
+        "multi_rate": 0.2696
+      },
+      "classroom_2b|evening": {
+        "location": "classroom_2b",
+        "time_slot": "evening",
+        "moments": 6037,
+        "mean_eligible": 0.56,
+        "multi_rate": 0.1709
+      },
+      "classroom_2b|late_night": {
+        "location": "classroom_2b",
+        "time_slot": "late_night",
+        "moments": 2004,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "classroom_2b|midday": {
+        "location": "classroom_2b",
+        "time_slot": "midday",
+        "moments": 12712,
+        "mean_eligible": 1.36,
+        "multi_rate": 0.3887
+      },
+      "classroom_2b|morning": {
+        "location": "classroom_2b",
+        "time_slot": "morning",
+        "moments": 7741,
+        "mean_eligible": 1.91,
+        "multi_rate": 0.7564
+      },
+      "classroom_2b|night": {
+        "location": "classroom_2b",
+        "time_slot": "night",
+        "moments": 3014,
+        "mean_eligible": 0.56,
+        "multi_rate": 0.0
+      },
+      "common_room|afternoon": {
+        "location": "common_room",
+        "time_slot": "afternoon",
+        "moments": 4013,
+        "mean_eligible": 0.53,
+        "multi_rate": 0.0
+      },
+      "common_room|early_morning": {
+        "location": "common_room",
+        "time_slot": "early_morning",
+        "moments": 2251,
+        "mean_eligible": 0.97,
+        "multi_rate": 0.0
+      },
+      "common_room|evening": {
+        "location": "common_room",
+        "time_slot": "evening",
+        "moments": 9567,
+        "mean_eligible": 4.0,
+        "multi_rate": 0.9938
+      },
+      "common_room|late_night": {
+        "location": "common_room",
+        "time_slot": "late_night",
+        "moments": 17608,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "common_room|midday": {
+        "location": "common_room",
+        "time_slot": "midday",
+        "moments": 4781,
+        "mean_eligible": 0.75,
+        "multi_rate": 0.0
+      },
+      "common_room|morning": {
+        "location": "common_room",
+        "time_slot": "morning",
+        "moments": 3442,
+        "mean_eligible": 0.7,
+        "multi_rate": 0.0
+      },
+      "common_room|night": {
+        "location": "common_room",
+        "time_slot": "night",
+        "moments": 18319,
+        "mean_eligible": 1.6,
+        "multi_rate": 0.4821
+      },
+      "courtyard|afternoon": {
+        "location": "courtyard",
+        "time_slot": "afternoon",
+        "moments": 20244,
+        "mean_eligible": 1.66,
+        "multi_rate": 0.5162
+      },
+      "courtyard|early_morning": {
+        "location": "courtyard",
+        "time_slot": "early_morning",
+        "moments": 6197,
+        "mean_eligible": 2.0,
+        "multi_rate": 1.0
+      },
+      "courtyard|evening": {
+        "location": "courtyard",
+        "time_slot": "evening",
+        "moments": 12260,
+        "mean_eligible": 0.82,
+        "multi_rate": 0.1466
+      },
+      "courtyard|midday": {
+        "location": "courtyard",
+        "time_slot": "midday",
+        "moments": 22876,
+        "mean_eligible": 2.87,
+        "multi_rate": 0.8486
+      },
+      "courtyard|morning": {
+        "location": "courtyard",
+        "time_slot": "morning",
+        "moments": 12716,
+        "mean_eligible": 2.76,
+        "multi_rate": 0.955
+      },
+      "courtyard|night": {
+        "location": "courtyard",
+        "time_slot": "night",
+        "moments": 5910,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "dorm_room|early_morning": {
+        "location": "dorm_room",
+        "time_slot": "early_morning",
+        "moments": 49343,
+        "mean_eligible": 2.0,
+        "multi_rate": 1.0
+      },
+      "dorm_room|evening": {
+        "location": "dorm_room",
+        "time_slot": "evening",
+        "moments": 4045,
+        "mean_eligible": 1.84,
+        "multi_rate": 0.8396
+      },
+      "dorm_room|late_night": {
+        "location": "dorm_room",
+        "time_slot": "late_night",
+        "moments": 45823,
+        "mean_eligible": 0.95,
+        "multi_rate": 0.0
+      },
+      "dorm_room|morning": {
+        "location": "dorm_room",
+        "time_slot": "morning",
+        "moments": 26559,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "dorm_room|night": {
+        "location": "dorm_room",
+        "time_slot": "night",
+        "moments": 18721,
+        "mean_eligible": 2.63,
+        "multi_rate": 0.9675
+      },
+      "hallway_east|afternoon": {
+        "location": "hallway_east",
+        "time_slot": "afternoon",
+        "moments": 16381,
+        "mean_eligible": 2.72,
+        "multi_rate": 0.8481
+      },
+      "hallway_east|early_morning": {
+        "location": "hallway_east",
+        "time_slot": "early_morning",
+        "moments": 300,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "hallway_east|evening": {
+        "location": "hallway_east",
+        "time_slot": "evening",
+        "moments": 11071,
+        "mean_eligible": 0.17,
+        "multi_rate": 0.0
+      },
+      "hallway_east|midday": {
+        "location": "hallway_east",
+        "time_slot": "midday",
+        "moments": 11963,
+        "mean_eligible": 2.19,
+        "multi_rate": 0.8065
+      },
+      "hallway_east|morning": {
+        "location": "hallway_east",
+        "time_slot": "morning",
+        "moments": 4430,
+        "mean_eligible": 1.43,
+        "multi_rate": 0.428
+      },
+      "hallway_east|night": {
+        "location": "hallway_east",
+        "time_slot": "night",
+        "moments": 1343,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "rooftop|afternoon": {
+        "location": "rooftop",
+        "time_slot": "afternoon",
+        "moments": 310,
+        "mean_eligible": 1.0,
+        "multi_rate": 0.0
+      },
+      "rooftop|early_morning": {
+        "location": "rooftop",
+        "time_slot": "early_morning",
+        "moments": 293,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "rooftop|evening": {
+        "location": "rooftop",
+        "time_slot": "evening",
+        "moments": 603,
+        "mean_eligible": 0.72,
+        "multi_rate": 0.0
+      },
+      "rooftop|night": {
+        "location": "rooftop",
+        "time_slot": "night",
+        "moments": 466,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "school_gate|afternoon": {
+        "location": "school_gate",
+        "time_slot": "afternoon",
+        "moments": 3246,
+        "mean_eligible": 1.63,
+        "multi_rate": 0.6356
+      },
+      "school_gate|early_morning": {
+        "location": "school_gate",
+        "time_slot": "early_morning",
+        "moments": 3465,
+        "mean_eligible": 1.0,
+        "multi_rate": 0.0
+      },
+      "school_gate|evening": {
+        "location": "school_gate",
+        "time_slot": "evening",
+        "moments": 6093,
+        "mean_eligible": 1.37,
+        "multi_rate": 0.4041
+      },
+      "school_gate|midday": {
+        "location": "school_gate",
+        "time_slot": "midday",
+        "moments": 11949,
+        "mean_eligible": 0.08,
+        "multi_rate": 0.0
+      },
+      "school_gate|morning": {
+        "location": "school_gate",
+        "time_slot": "morning",
+        "moments": 12674,
+        "mean_eligible": 1.78,
+        "multi_rate": 0.7757
+      },
+      "school_gate|night": {
+        "location": "school_gate",
+        "time_slot": "night",
+        "moments": 5343,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "town_road|afternoon": {
+        "location": "town_road",
+        "time_slot": "afternoon",
+        "moments": 5128,
+        "mean_eligible": 2.76,
+        "multi_rate": 0.9356
+      },
+      "town_road|early_morning": {
+        "location": "town_road",
+        "time_slot": "early_morning",
+        "moments": 1032,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "town_road|evening": {
+        "location": "town_road",
+        "time_slot": "evening",
+        "moments": 10803,
+        "mean_eligible": 2.44,
+        "multi_rate": 0.8426
+      },
+      "town_road|late_night": {
+        "location": "town_road",
+        "time_slot": "late_night",
+        "moments": 3168,
+        "mean_eligible": 0.0,
+        "multi_rate": 0.0
+      },
+      "town_road|night": {
+        "location": "town_road",
+        "time_slot": "night",
+        "moments": 11965,
+        "mean_eligible": 0.41,
+        "multi_rate": 0.0
+      }
+    }
+  },
+  "relationship_ranges": {
+    "ellery->player.attraction": [
+      0,
+      0
+    ],
+    "ellery->player.dependency": [
+      0,
+      0
+    ],
+    "ellery->player.familiarity": [
+      0,
+      5
+    ],
+    "ellery->player.fear": [
+      0,
+      0
+    ],
+    "ellery->player.resentment": [
+      0,
+      2
+    ],
+    "ellery->player.respect": [
+      0,
+      8
+    ],
+    "ellery->player.suspicion": [
+      0,
+      0
+    ],
+    "ellery->player.trust": [
+      0,
+      8
+    ],
+    "iris->noah.attraction": [
+      0,
+      0
+    ],
+    "iris->noah.dependency": [
+      0,
+      0
+    ],
+    "iris->noah.familiarity": [
+      0,
+      2
+    ],
+    "iris->noah.fear": [
+      0,
+      0
+    ],
+    "iris->noah.resentment": [
+      0,
+      0
+    ],
+    "iris->noah.respect": [
+      0,
+      0
+    ],
+    "iris->noah.suspicion": [
+      0,
+      6
+    ],
+    "iris->noah.trust": [
+      0,
+      0
+    ],
+    "iris->player.attraction": [
+      0,
+      22
+    ],
+    "iris->player.dependency": [
+      0,
+      0
+    ],
+    "iris->player.familiarity": [
+      0,
+      46
+    ],
+    "iris->player.fear": [
+      0,
+      0
+    ],
+    "iris->player.resentment": [
+      0,
+      7
+    ],
+    "iris->player.respect": [
+      0,
+      25
+    ],
+    "iris->player.suspicion": [
+      0,
+      4
+    ],
+    "iris->player.trust": [
+      0,
+      49
+    ],
+    "iris->theo.attraction": [
+      0,
+      0
+    ],
+    "iris->theo.dependency": [
+      0,
+      0
+    ],
+    "iris->theo.familiarity": [
+      0,
+      2
+    ],
+    "iris->theo.fear": [
+      0,
+      0
+    ],
+    "iris->theo.resentment": [
+      0,
+      0
+    ],
+    "iris->theo.respect": [
+      0,
+      0
+    ],
+    "iris->theo.suspicion": [
+      0,
+      2
+    ],
+    "iris->theo.trust": [
+      0,
+      0
+    ],
+    "june->mara.attraction": [
+      0,
+      0
+    ],
+    "june->mara.dependency": [
+      0,
+      0
+    ],
+    "june->mara.familiarity": [
+      2,
+      2
+    ],
+    "june->mara.fear": [
+      0,
+      0
+    ],
+    "june->mara.resentment": [
+      0,
+      0
+    ],
+    "june->mara.respect": [
+      0,
+      0
+    ],
+    "june->mara.suspicion": [
+      0,
+      0
+    ],
+    "june->mara.trust": [
+      0,
+      0
+    ],
+    "june->noah.attraction": [
+      0,
+      0
+    ],
+    "june->noah.dependency": [
+      0,
+      0
+    ],
+    "june->noah.familiarity": [
+      0,
+      2
+    ],
+    "june->noah.fear": [
+      0,
+      0
+    ],
+    "june->noah.resentment": [
+      0,
+      2
+    ],
+    "june->noah.respect": [
+      0,
+      1
+    ],
+    "june->noah.suspicion": [
+      0,
+      0
+    ],
+    "june->noah.trust": [
+      0,
+      0
+    ],
+    "june->player.attraction": [
+      0,
+      2
+    ],
+    "june->player.dependency": [
+      0,
+      0
+    ],
+    "june->player.familiarity": [
+      9,
+      42
+    ],
+    "june->player.fear": [
+      0,
+      0
+    ],
+    "june->player.resentment": [
+      0,
+      28
+    ],
+    "june->player.respect": [
+      0,
+      18
+    ],
+    "june->player.suspicion": [
+      0,
+      3
+    ],
+    "june->player.trust": [
+      0,
+      45
+    ],
+    "mara->june.attraction": [
+      0,
+      0
+    ],
+    "mara->june.dependency": [
+      0,
+      0
+    ],
+    "mara->june.familiarity": [
+      0,
+      2
+    ],
+    "mara->june.fear": [
+      0,
+      0
+    ],
+    "mara->june.resentment": [
+      0,
+      3
+    ],
+    "mara->june.respect": [
+      0,
+      0
+    ],
+    "mara->june.suspicion": [
+      0,
+      4
+    ],
+    "mara->june.trust": [
+      0,
+      0
+    ],
+    "mara->noah.attraction": [
+      0,
+      0
+    ],
+    "mara->noah.dependency": [
+      0,
+      0
+    ],
+    "mara->noah.familiarity": [
+      0,
+      0
+    ],
+    "mara->noah.fear": [
+      0,
+      0
+    ],
+    "mara->noah.resentment": [
+      3,
+      3
+    ],
+    "mara->noah.respect": [
+      0,
+      0
+    ],
+    "mara->noah.suspicion": [
+      0,
+      0
+    ],
+    "mara->noah.trust": [
+      0,
+      0
+    ],
+    "mara->player.attraction": [
+      0,
+      0
+    ],
+    "mara->player.dependency": [
+      0,
+      0
+    ],
+    "mara->player.familiarity": [
+      2,
+      27
+    ],
+    "mara->player.fear": [
+      0,
+      0
+    ],
+    "mara->player.resentment": [
+      0,
+      7
+    ],
+    "mara->player.respect": [
+      0,
+      22
+    ],
+    "mara->player.suspicion": [
+      0,
+      12
+    ],
+    "mara->player.trust": [
+      0,
+      25
+    ],
+    "mara->theo.attraction": [
+      0,
+      0
+    ],
+    "mara->theo.dependency": [
+      0,
+      0
+    ],
+    "mara->theo.familiarity": [
+      0,
+      0
+    ],
+    "mara->theo.fear": [
+      0,
+      0
+    ],
+    "mara->theo.resentment": [
+      0,
+      0
+    ],
+    "mara->theo.respect": [
+      2,
+      2
+    ],
+    "mara->theo.suspicion": [
+      0,
+      0
+    ],
+    "mara->theo.trust": [
+      0,
+      0
+    ],
+    "noah->iris.attraction": [
+      0,
+      0
+    ],
+    "noah->iris.dependency": [
+      0,
+      0
+    ],
+    "noah->iris.familiarity": [
+      0,
+      0
+    ],
+    "noah->iris.fear": [
+      0,
+      0
+    ],
+    "noah->iris.resentment": [
+      3,
+      3
+    ],
+    "noah->iris.respect": [
+      0,
+      0
+    ],
+    "noah->iris.suspicion": [
+      0,
+      0
+    ],
+    "noah->iris.trust": [
+      0,
+      0
+    ],
+    "noah->june.attraction": [
+      0,
+      0
+    ],
+    "noah->june.dependency": [
+      0,
+      0
+    ],
+    "noah->june.familiarity": [
+      0,
+      0
+    ],
+    "noah->june.fear": [
+      0,
+      0
+    ],
+    "noah->june.resentment": [
+      0,
+      2
+    ],
+    "noah->june.respect": [
+      0,
+      0
+    ],
+    "noah->june.suspicion": [
+      0,
+      1
+    ],
+    "noah->june.trust": [
+      0,
+      0
+    ],
+    "noah->mara.attraction": [
+      0,
+      0
+    ],
+    "noah->mara.dependency": [
+      0,
+      0
+    ],
+    "noah->mara.familiarity": [
+      0,
+      0
+    ],
+    "noah->mara.fear": [
+      0,
+      0
+    ],
+    "noah->mara.resentment": [
+      0,
+      0
+    ],
+    "noah->mara.respect": [
+      3,
+      3
+    ],
+    "noah->mara.suspicion": [
+      0,
+      0
+    ],
+    "noah->mara.trust": [
+      0,
+      0
+    ],
+    "noah->player.attraction": [
+      0,
+      0
+    ],
+    "noah->player.dependency": [
+      0,
+      6
+    ],
+    "noah->player.familiarity": [
+      0,
+      31
+    ],
+    "noah->player.fear": [
+      0,
+      0
+    ],
+    "noah->player.resentment": [
+      0,
+      9
+    ],
+    "noah->player.respect": [
+      0,
+      20
+    ],
+    "noah->player.suspicion": [
+      0,
+      5
+    ],
+    "noah->player.trust": [
+      0,
+      20
+    ],
+    "player->ellery.attraction": [
+      0,
+      0
+    ],
+    "player->ellery.dependency": [
+      0,
+      0
+    ],
+    "player->ellery.familiarity": [
+      0,
+      0
+    ],
+    "player->ellery.fear": [
+      0,
+      0
+    ],
+    "player->ellery.resentment": [
+      0,
+      0
+    ],
+    "player->ellery.respect": [
+      0,
+      0
+    ],
+    "player->ellery.suspicion": [
+      0,
+      3
+    ],
+    "player->ellery.trust": [
+      0,
+      0
+    ],
+    "player->iris.attraction": [
+      0,
+      0
+    ],
+    "player->iris.dependency": [
+      0,
+      0
+    ],
+    "player->iris.familiarity": [
+      0,
+      0
+    ],
+    "player->iris.fear": [
+      0,
+      0
+    ],
+    "player->iris.resentment": [
+      0,
+      0
+    ],
+    "player->iris.respect": [
+      0,
+      0
+    ],
+    "player->iris.suspicion": [
+      0,
+      0
+    ],
+    "player->iris.trust": [
+      0,
+      4
+    ],
+    "player->june.attraction": [
+      0,
+      0
+    ],
+    "player->june.dependency": [
+      0,
+      0
+    ],
+    "player->june.familiarity": [
+      0,
+      3
+    ],
+    "player->june.fear": [
+      0,
+      0
+    ],
+    "player->june.resentment": [
+      0,
+      0
+    ],
+    "player->june.respect": [
+      0,
+      13
+    ],
+    "player->june.suspicion": [
+      0,
+      0
+    ],
+    "player->june.trust": [
+      0,
+      17
+    ],
+    "player->mara.attraction": [
+      0,
+      0
+    ],
+    "player->mara.dependency": [
+      0,
+      0
+    ],
+    "player->mara.familiarity": [
+      0,
+      0
+    ],
+    "player->mara.fear": [
+      0,
+      0
+    ],
+    "player->mara.resentment": [
+      0,
+      0
+    ],
+    "player->mara.respect": [
+      0,
+      9
+    ],
+    "player->mara.suspicion": [
+      0,
+      3
+    ],
+    "player->mara.trust": [
+      0,
+      6
+    ],
+    "player->noah.attraction": [
+      0,
+      0
+    ],
+    "player->noah.dependency": [
+      0,
+      0
+    ],
+    "player->noah.familiarity": [
+      0,
+      0
+    ],
+    "player->noah.fear": [
+      0,
+      0
+    ],
+    "player->noah.resentment": [
+      0,
+      0
+    ],
+    "player->noah.respect": [
+      0,
+      0
+    ],
+    "player->noah.suspicion": [
+      0,
+      3
+    ],
+    "player->noah.trust": [
+      0,
+      0
+    ],
+    "player->theo.attraction": [
+      0,
+      0
+    ],
+    "player->theo.dependency": [
+      0,
+      0
+    ],
+    "player->theo.familiarity": [
+      0,
+      0
+    ],
+    "player->theo.fear": [
+      0,
+      0
+    ],
+    "player->theo.resentment": [
+      0,
+      0
+    ],
+    "player->theo.respect": [
+      0,
+      0
+    ],
+    "player->theo.suspicion": [
+      0,
+      0
+    ],
+    "player->theo.trust": [
+      0,
+      0
+    ],
+    "theo->iris.attraction": [
+      0,
+      0
+    ],
+    "theo->iris.dependency": [
+      0,
+      0
+    ],
+    "theo->iris.familiarity": [
+      0,
+      0
+    ],
+    "theo->iris.fear": [
+      0,
+      0
+    ],
+    "theo->iris.resentment": [
+      0,
+      0
+    ],
+    "theo->iris.respect": [
+      2,
+      2
+    ],
+    "theo->iris.suspicion": [
+      0,
+      0
+    ],
+    "theo->iris.trust": [
+      0,
+      0
+    ],
+    "theo->june.attraction": [
+      0,
+      0
+    ],
+    "theo->june.dependency": [
+      0,
+      0
+    ],
+    "theo->june.familiarity": [
+      0,
+      0
+    ],
+    "theo->june.fear": [
+      0,
+      0
+    ],
+    "theo->june.resentment": [
+      0,
+      0
+    ],
+    "theo->june.respect": [
+      2,
+      2
+    ],
+    "theo->june.suspicion": [
+      0,
+      0
+    ],
+    "theo->june.trust": [
+      0,
+      0
+    ],
+    "theo->mara.attraction": [
+      0,
+      0
+    ],
+    "theo->mara.dependency": [
+      0,
+      0
+    ],
+    "theo->mara.familiarity": [
+      0,
+      0
+    ],
+    "theo->mara.fear": [
+      0,
+      0
+    ],
+    "theo->mara.resentment": [
+      0,
+      0
+    ],
+    "theo->mara.respect": [
+      3,
+      3
+    ],
+    "theo->mara.suspicion": [
+      0,
+      0
+    ],
+    "theo->mara.trust": [
+      0,
+      0
+    ],
+    "theo->player.attraction": [
+      0,
+      2
+    ],
+    "theo->player.dependency": [
+      0,
+      3
+    ],
+    "theo->player.familiarity": [
+      2,
+      43
+    ],
+    "theo->player.fear": [
+      0,
+      0
+    ],
+    "theo->player.resentment": [
+      0,
+      12
+    ],
+    "theo->player.respect": [
+      0,
+      27
+    ],
+    "theo->player.suspicion": [
+      0,
+      2
+    ],
+    "theo->player.trust": [
+      0,
+      28
+    ]
+  }
+}

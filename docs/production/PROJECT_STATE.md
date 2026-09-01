@@ -1,24 +1,33 @@
 # Project state
 
-**Read this before starting work.** Last updated: 2026-08-31 (Milestone 3).
+**Read this before starting work.** Last updated: 2026-08-31 (Milestone 4).
 
 ## Summary
 
-Milestone 3 complete. Fifty-one storylets, a structured first week, a calendar,
-and two long-standing authoring hazards removed. Every quality gate is green.
+Milestone 4 complete. Fifty-eight storylets, every one of the previous fifty-one
+read as prose and classified, and the first Act 1 draft that is worth putting in
+front of a person.
 
-The milestone was asked whether September 32 is **interesting to play for a
-week**, and it answers yes with a qualification. Three simulated first weeks
-share 37% of their scenes and differ on the rest: who the player spent time
-with, what they promised, what they learned, and which reading of the evidence
-they lean toward. The week has a shape — arrival, routine, connection,
-inconsistency, doubt, consequence, contradiction — and it ends holding two
-records that do not agree and no explanation that covers both.
+The milestone revised more than it expanded, which was the instruction: eighteen
+scenes revised, one cut, eight added. Reading all fifty-one turned up two things
+no individual scene shows.
 
-The qualification is that this is a first draft of a first week, marked
-`ACT1_DRAFT` and not `CANON`. Green gates are not finished prose.
+**Relationships were write-only.** Fifty-one storylets wrote to eight axes and
+not one line of prose anywhere read one back. A player could take Iris's trust
+from nought to forty-one and no sentence in the game would differ. Nine scenes
+now behave differently depending on how somebody has come to see the player.
 
-[`MILESTONE_3_ACT_1.md`](MILESTONE_3_ACT_1.md).
+**Half of all forty-two menus were the same three choices.** Three trait sets —
+be warm, be nosy, be quiet — accounted for 21 of 42, and 38 of 42 menus had
+exactly three options. That is a personality slider, not agency.
+
+Both are recorded in
+[`ACT_1_EDITORIAL_AUDIT.md`](../narrative-design/ACT_1_EDITORIAL_AUDIT.md), and
+both are now held by tests.
+
+Green gates say the machinery is sound. They say nothing about the dialogue.
+Thirteen scenes are queued for a person:
+[`HUMAN_ACT1_REVIEW.md`](HUMAN_ACT1_REVIEW.md).
 
 ## Engine
 
@@ -58,10 +67,10 @@ a photograph, a promise, an ending note. Marked PROTOTYPE / NON-FINAL in-game.
 
 | Gate | Result |
 | --- | --- |
-| `uv run pytest` | **222 passed** |
+| `uv run pytest` | **236 passed** |
 | `uv run ruff check .` | **clean** |
 | `uv run ruff format --check .` | **clean** |
-| `uv run mypy` | **clean, 71 files, strict** |
+| `uv run mypy` | **clean, 72 files, strict** |
 | `s32 validate` | **0 errors, 0 warnings**, 9 info |
 | `s32 renpy lint` | **clean** |
 | `s32 renpy test` | **16/16 testcases passed** |
@@ -72,7 +81,7 @@ a photograph, a promise, an ending note. Marked PROTOTYPE / NON-FINAL in-game.
 
 | | |
 | --- | --- |
-| Storylets | 51 |
+| Storylets | 58 (15 `prototype`, 43 `draft`, 0 `active`) |
 | Anchors | 5 |
 | Characters | 6 (5 with art) |
 | Locations | 9 |
@@ -165,13 +174,26 @@ content used it, not merely ambiguous.
 Credits generation no longer reads the wall clock, and a test rejects any clock
 reintroduced into that module.
 
-**Art is now the largest unaddressed risk, and has been for three milestones.**
-Ms. Ellery has appeared on screen for the first time and had to be written
-without a sprite. The class photograph — the object the entire premise turns on
-— does not exist and is `image_placeholder` in the document viewer. Neither is
-solvable by downloading another character pack, by generating anything, or by
-substituting a photograph of real people, and placeholders working is not the
-same as the problem being handled. `ART_GAP_ANALYSIS.md`.
+**Art is the largest risk, and it is now a plan rather than a note.**
+[`ART_PRODUCTION_PLAN.md`](ART_PRODUCTION_PLAN.md) tiers eleven gaps and names
+the route for each. Three are `P0`/`P1` and all three need a commission: the
+class photograph (the object the premise turns on, currently an
+`image_placeholder`), Ms. Ellery (written off-sprite twice now), and any
+male-presenting sprite (the cast is one presentation *because of asset
+availability*, which is not a design decision and must not become one by
+default). Two briefs are written and are detailed enough to commission from:
+[`CLASS_PHOTO_ART_BRIEF.md`](CLASS_PHOTO_ART_BRIEF.md) and
+[`CHARACTER_ART_BRIEF.md`](CHARACTER_ART_BRIEF.md).
+
+The placeholder policy gained the rule it was missing: **a missing sprite may
+not change the writing.** It had been silently violated — Milestone 3 moved
+Ellery off-stage because there was no sprite for her — and that is the moment an
+art gap stops being a visual problem.
+
+**Green tests are not good prose, and the distinction is now explicit.**
+`uv run pytest` proves state coherence, reference integrity and reachability. It
+proves nothing about dialogue, romance, humour or pacing. Nothing in the game is
+marked `active`, and nothing should be until a person has read it.
 
 ## Blocked
 

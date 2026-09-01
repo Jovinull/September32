@@ -12,7 +12,7 @@
 # each missing file becomes a labelled placeholder. See the helpers in
 # game/engine/00_s32_engine.rpy.
 
-# Generated 2026-08-30T23:44:27+00:00
+# Generated 2026-09-01T00:04:01+00:00
 
 init offset = -1
 
@@ -356,6 +356,25 @@ transform s32_right:
     xalign 0.82
     yalign 1.0
 
+# Four-up, for the group scenes. Separate transforms rather than a computed
+# offset because a scene should be able to say where somebody is standing, and
+# because moving one person is a line the writer can read.
+transform s32_quad_a:
+    xalign 0.08
+    yalign 1.0
+
+transform s32_quad_b:
+    xalign 0.36
+    yalign 1.0
+
+transform s32_quad_c:
+    xalign 0.64
+    yalign 1.0
+
+transform s32_quad_d:
+    xalign 0.92
+    yalign 1.0
+
 
 # Backgrounds, keyed by location id so a scene names a place, not a file.
 
@@ -369,6 +388,11 @@ image bg classroom_2b day_alt = s32_bg("images/vendor/backgrounds/bg_school_clas
 image bg classroom_2b evening = s32_bg("images/vendor/backgrounds/bg_school_classroom_a_evening.webp", "bg classroom_2b evening")
 image bg classroom_2b night = s32_bg("images/vendor/backgrounds/bg_school_classroom_a_night.webp", "bg classroom_2b night")
 image bg classroom_2b = s32_bg("images/vendor/backgrounds/bg_school_classroom_a_day.webp", "bg classroom_2b")
+image bg common_room day = s32_bg("images/vendor/backgrounds/bg_school_clubroom_b_day.webp", "bg common_room day")
+image bg common_room day_alt = s32_bg("images/vendor/backgrounds/bg_school_clubroom_b_day_alt.webp", "bg common_room day_alt")
+image bg common_room evening = s32_bg("images/vendor/backgrounds/bg_school_clubroom_b_evening.webp", "bg common_room evening")
+image bg common_room night = s32_bg("images/vendor/backgrounds/bg_school_clubroom_b_night.webp", "bg common_room night")
+image bg common_room = s32_bg("images/vendor/backgrounds/bg_school_clubroom_b_day.webp", "bg common_room")
 image bg courtyard day = s32_bg("images/vendor/backgrounds/bg_school_a_s1_day.png", "bg courtyard day")
 image bg courtyard evening = s32_bg("images/vendor/backgrounds/bg_school_a_s1_evening.png", "bg courtyard evening")
 image bg courtyard = s32_bg("images/vendor/backgrounds/bg_school_a_s1_day.png", "bg courtyard")

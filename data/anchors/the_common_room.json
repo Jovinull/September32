@@ -1,0 +1,33 @@
+{
+  "id": "the_common_room",
+  "label": "s32_anchor_the_common_room",
+  "title": "The Common Room",
+  "order": 3,
+  "phase": "normal",
+  "requirements": [
+    "anchor_done(first_shift)",
+    "day >= 3"
+  ],
+  "effects": [
+    "event(the_common_room)",
+    "anchor_done(the_common_room)"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel june->player.familiarity += 3",
+      "rel noah->player.familiarity += 3"
+    ],
+    [
+      "trait curious += 1",
+      "rel theo->player.respect += 3",
+      "rel june->player.familiarity += 2"
+    ],
+    [
+      "trait reserved += 1",
+      "rel mara->player.respect += 3",
+      "rel theo->player.familiarity += 2"
+    ]
+  ],
+  "summary": "Day 3, CONNECTION. Four people in one room and the player is not the subject of any of it, which is the point: the week's first evidence that these people have a life running whether or not you are in it. No mystery content at all. Mandatory because a player who has spent three days alone in the archive has not met the cast, and the rest of Act 1 assumes they have."
+}

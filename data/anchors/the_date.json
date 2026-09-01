@@ -2,18 +2,17 @@
   "id": "the_date",
   "label": "s32_anchor_the_date",
   "title": "The Date",
-  "order": 3,
+  "order": 5,
   "phase": "odd",
   "requirements": [
-    "anchor_done(first_shift)",
-    "knows(old_photo_exists)",
-    "day >= 2"
+    "anchor_done(the_undated_column)",
+    "day >= 6"
   ],
   "effects": [
+    "know(old_photo_exists, the_box_you_went_back_to)",
     "know(photo_dated_sept_32, back_of_the_photo)",
     "event(the_date)",
-    "anchor_done(the_date)",
-    "phase = odd"
+    "anchor_done(the_date)"
   ],
-  "summary": "PROVISIONAL. The first thing that does not fit. Deliberately small: a stamp, read twice. The phase advances here and not before."
+  "summary": "End of Act 1, CONTRADICTION. The second record, and the one that does not have a tidy explanation next to the first. Deliberately does NOT advance the phase: unsettling is the second and third thing and belongs to Act 2, so the week ends inside odd, holding two documents and no account that covers both. Grants old_photo_exists as well, since old_photo_glimpse reaches 98% of runs and an anchor cannot depend on that; the prose branches on whether the player found the box themselves."
 }

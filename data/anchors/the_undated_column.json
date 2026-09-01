@@ -1,0 +1,19 @@
+{
+  "id": "the_undated_column",
+  "label": "s32_anchor_the_undated_column",
+  "title": "The Column With No Date",
+  "order": 4,
+  "phase": "odd",
+  "requirements": [
+    "anchor_done(the_common_room)",
+    "flag archive_visits >= 1",
+    "day >= 4"
+  ],
+  "effects": [
+    "know(attendance_sheet_anomaly, the_column_itself)",
+    "event(the_undated_column)",
+    "anchor_done(the_undated_column)",
+    "phase = odd"
+  ],
+  "summary": "Day 4, INCONSISTENCY, and the phase turns here. Singular, and it has an ordinary explanation everyone reaches for: somebody forgot to write the date. Grants the fact rather than requiring it, because an anchor is mandatory content and theo_ledger_question reaches only about five runs in six; the prose branches on whether the player already knew."
+}

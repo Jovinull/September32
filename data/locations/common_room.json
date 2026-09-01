@@ -1,0 +1,11 @@
+{
+  "id": "common_room",
+  "display_name": "The Common Room",
+  "area": "residence",
+  "indoor": true,
+  "background": "bg_school_clubroom_b",
+  "tags": [
+    "social",
+    "rest"
+  ]
+}

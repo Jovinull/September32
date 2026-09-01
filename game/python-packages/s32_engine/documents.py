@@ -58,13 +58,28 @@ BLOCK_KINDS: tuple[BlockKind, ...] = (
     "image_placeholder",
 )
 
-DocumentType = Literal["catalogue_record", "ledger_page", "photograph_card", "letter", "clipping"]
+#: What kind of object a document is. Drives presentation -- the viewer picks a
+#: paper stock and a layout from it -- and nothing else, so adding one is a
+#: presentation decision rather than a model change.
+DocumentType = Literal[
+    "catalogue_record",
+    "ledger_page",
+    "photograph_card",
+    "letter",
+    "clipping",
+    "works_docket",
+    "transfer_card",
+    "student_notice",
+]
 DOCUMENT_TYPES: tuple[DocumentType, ...] = (
     "catalogue_record",
     "ledger_page",
     "photograph_card",
     "letter",
     "clipping",
+    "works_docket",
+    "transfer_card",
+    "student_notice",
 )
 
 

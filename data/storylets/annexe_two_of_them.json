@@ -1,0 +1,53 @@
+{
+  "id": "annexe_two_of_them",
+  "label": "s32_st_annexe_two_of_them",
+  "title": "Not Your Story Yet",
+  "category": "investigation",
+  "status": "prototype",
+  "characters": [
+    "iris",
+    "noah"
+  ],
+  "location": "hallway_east",
+  "time_slots": [
+    "afternoon"
+  ],
+  "tags": [
+    "investigation",
+    "friendship",
+    "character"
+  ],
+  "priority": 40,
+  "weight": 1.3,
+  "requirements": [
+    "knows(noah_is_writing_about_the_archive)",
+    "seen(archive_intro)"
+  ],
+  "effects": [
+    "rel iris->player.familiarity += 1",
+    "rel noah->player.familiarity += 1"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel iris->player.trust += 5",
+      "rel noah->player.resentment += 4",
+      "rel noah->iris.resentment += 3"
+    ],
+    [
+      "trait direct += 1",
+      "rel noah->player.trust += 5",
+      "rel iris->player.suspicion += 4",
+      "rel iris->noah.suspicion += 3"
+    ],
+    [
+      "trait reserved += 1",
+      "rel iris->player.respect += 3",
+      "rel noah->player.respect += 3",
+      "rel iris->noah.familiarity += 2"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Group scene, and the milestone's sharpest fork. Noah wants the archive in the paper; Iris will not have it. Both are right about something. Taking a side costs a real edge, and the two NPC-to-NPC axes move in opposite directions depending which."
+}

@@ -1,0 +1,23 @@
+{
+  "id": "dorm_bathroom_queue",
+  "label": "s32_st_dorm_bathroom_queue",
+  "title": "Third in the Queue",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "dorm_room",
+  "time_slots": [
+    "early_morning"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 20,
+  "weight": 2.2,
+  "requirements": [],
+  "effects": [],
+  "cooldown": 1,
+  "repeat_policy": "repeatable",
+  "summary": "The fifty-first storylet, added after measurement rather than in the plan. dorm_early_start was carrying 13% of everything played in the game on its own, because the residence at that hour had exactly one scene and the player wakes up there every day of a fourteen-day run. This is its competition, and nothing else."
+}

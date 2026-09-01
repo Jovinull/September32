@@ -41,7 +41,10 @@ screen s32_document(document_id):
 
     $ _doc = s32_library_documents.documents[document_id]
     $ _page = _doc.pages[page]
-    $ _stock = "doc_card" if _doc.type == "photograph_card" else "doc_paper"
+    # A student notice is not archive paper: it came off a corkboard and should
+    # not look like it was accessioned. The card stock is the mount a
+    # photograph is fixed to.
+    $ _stock = "doc_card" if _doc.type in ("photograph_card", "student_notice") else "doc_paper"
 
     add "#100e0c"
 

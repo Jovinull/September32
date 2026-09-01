@@ -1,0 +1,55 @@
+{
+  "id": "june_reads_it_flat",
+  "label": "s32_st_june_reads_it_flat",
+  "title": "The Reasonable Reading",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "june"
+  ],
+  "location": "common_room",
+  "time_slots": [
+    "evening",
+    "night"
+  ],
+  "tags": [
+    "mystery",
+    "character",
+    "friendship"
+  ],
+  "priority": 60,
+  "weight": 1.5,
+  "phases": [
+    "odd",
+    "unsettling",
+    "impossible"
+  ],
+  "requirements": [
+    "knows(attendance_sheet_anomaly)",
+    "anchor_done(the_common_room)"
+  ],
+  "effects": [
+    "rel june->player.familiarity += 1"
+  ],
+  "outcomes": [
+    [
+      "trait skeptical += 1",
+      "rel june->player.trust += 5",
+      "rel player->june.respect += 5",
+      "npc_stance(june, attendance_sheet_anomaly, disproven)"
+    ],
+    [
+      "trait curious += 1",
+      "rel june->player.familiarity += 3",
+      "rel june->player.suspicion += 3"
+    ],
+    [
+      "trait gentle += 1",
+      "rel june->player.trust += 3",
+      "rel player->june.trust += 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Day 5, DOUBT. June gives the ordinary explanation, and it is a good one, and rule R5 says the player must never feel stupid for holding it. Written so that agreeing with her is the more intelligent-sounding option, because the alternative is a game that punishes scepticism. The player-side knowledge is deliberately NOT disproved by any branch: agreeing with June is expressed by the trait and the relationship, not by deleting a fact other content is gated on."
+}

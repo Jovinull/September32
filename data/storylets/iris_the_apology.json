@@ -1,0 +1,49 @@
+{
+  "id": "iris_the_apology",
+  "label": "s32_st_iris_the_apology",
+  "title": "She Takes It Out of Your Hands",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "iris"
+  ],
+  "location": "archive_room",
+  "time_slots": [
+    "morning",
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "character",
+    "archive"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [
+    "seen(archive_intro)"
+  ],
+  "effects": [
+    "rel iris->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel iris->player.trust += 5",
+      "rel iris->player.attraction += 2"
+    ],
+    [
+      "trait curious += 1",
+      "rel iris->player.respect += 3",
+      "know(iris_keeps_a_second_index, she_almost_said_it)"
+    ],
+    [
+      "trait direct += 1",
+      "rel iris->player.resentment += 3",
+      "rel iris->player.respect += 2"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Iris's second non-mystery scene, and the one that shows her stated boundary from the inside: she takes an object out of your hands and apologises, and means the apology and not the taking. Nothing is discovered. The object is a paperweight."
+}

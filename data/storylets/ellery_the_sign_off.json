@@ -1,0 +1,46 @@
+{
+  "id": "ellery_the_sign_off",
+  "label": "s32_st_ellery_the_sign_off",
+  "title": "Countersigned",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "ellery"
+  ],
+  "location": "archive_room",
+  "time_slots": [
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "archive"
+  ],
+  "priority": 40,
+  "weight": 1.0,
+  "requirements": [
+    "flag archive_visits >= 1",
+    "day >= 3"
+  ],
+  "effects": [
+    "rel ellery->player.familiarity += 3"
+  ],
+  "outcomes": [
+    [
+      "trait direct += 1",
+      "rel ellery->player.respect += 4"
+    ],
+    [
+      "trait gentle += 1",
+      "rel ellery->player.trust += 4"
+    ],
+    [
+      "trait curious += 1",
+      "rel ellery->player.respect += 2",
+      "know(annexe_is_locked, the_office_has_no_key)"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Ms. Ellery exists and has never appeared. Canon is explicit that she is not a conspiracy -- she is a person with a filing system and a job -- so her first scene is her doing the job: countersigning a week of boxes and being mildly pleased the column adds up. ART GAP: no sprite, so she plays as a labelled placeholder, which is the honest state of the production."
+}

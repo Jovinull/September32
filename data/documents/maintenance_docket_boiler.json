@@ -1,0 +1,75 @@
+{
+  "id": "maintenance_docket_boiler",
+  "type": "works_docket",
+  "title": "Works docket — boiler, east wing",
+  "archive_reference": "NF/ARC/MNT/0042",
+  "fictional_source": "Northfield School Archive, maintenance file",
+  "source_location": "archive_room",
+  "tags": [
+    "archive",
+    "school"
+  ],
+  "unlock_conditions": [
+    "flag archive_visits >= 1"
+  ],
+  "view_effects": [],
+  "summary": "Completely mundane, and that is its entire function. The player has so far opened three documents and two of them mattered, which is a hit rate that teaches the wrong lesson: that opening a document is how you find things. This one is a boiler service in 1987. It grants nothing, implies nothing, and is not foreshadowing.",
+  "pages": [
+    {
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "WORKS DOCKET"
+        },
+        {
+          "kind": "field",
+          "label": "Job",
+          "text": "0042"
+        },
+        {
+          "kind": "field",
+          "label": "Location",
+          "text": "East wing — boiler house"
+        },
+        {
+          "kind": "field",
+          "label": "Contractor",
+          "text": "H. Dunlop & Son"
+        },
+        {
+          "kind": "field",
+          "label": "Date",
+          "text": "3 November 1987"
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "text",
+          "text": "Annual service. Descaled feed. Replaced gauge glass (cracked). Pressure relief tested, satisfactory. Advised on lagging to the run above the corridor ceiling — not in this contract."
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "field",
+          "label": "Hours",
+          "text": "3.5"
+        },
+        {
+          "kind": "field",
+          "label": "Parts",
+          "text": "Gauge glass, 1 no."
+        },
+        {
+          "kind": "stamp",
+          "text": "PAID"
+        },
+        {
+          "kind": "note",
+          "text": "lagging done 1991 see 0311 — file kept together"
+        }
+      ]
+    }
+  ]
+}

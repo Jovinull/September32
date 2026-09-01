@@ -1,0 +1,49 @@
+{
+  "id": "theo_admits_it",
+  "label": "s32_st_theo_admits_it",
+  "title": "Wrong About the Crate",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "theo"
+  ],
+  "location": "common_room",
+  "time_slots": [
+    "evening",
+    "night"
+  ],
+  "tags": [
+    "character",
+    "friendship",
+    "school"
+  ],
+  "priority": 60,
+  "weight": 1.4,
+  "requirements": [
+    "flag theo_lost_something >= 1",
+    "rel theo->player.trust >= 8"
+  ],
+  "effects": [
+    "know(theo_lost_the_annexe_key, he_finally_said_it)"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel theo->player.trust += 6",
+      "rel theo->player.dependency += 3"
+    ],
+    [
+      "trait direct += 1",
+      "rel theo->player.respect += 5",
+      "rel theo->player.familiarity += 2"
+    ],
+    [
+      "trait sarcastic += 1",
+      "rel theo->player.resentment += 5",
+      "rel theo->player.trust -= 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Callback. Theo is wrong about something small, safely, in front of somebody who does not make it a lesson -- which the character bible says is what he needs and what he has never had. The player can decline to give it to him; that branch is written to cost something. Threshold lowered from 12 to 8 after measurement: 12 is the midpoint of the reachable range and, combined with the flag, put the payoff in one run in ten. A callback nobody sees is not a callback."
+}

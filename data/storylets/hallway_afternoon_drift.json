@@ -1,0 +1,23 @@
+{
+  "id": "hallway_afternoon_drift",
+  "label": "s32_st_hallway_afternoon_drift",
+  "title": "Between Lessons",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "hallway_east",
+  "time_slots": [
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 20,
+  "weight": 2.0,
+  "requirements": [],
+  "effects": [],
+  "cooldown": 1,
+  "repeat_policy": "repeatable",
+  "summary": "22,600 afternoon visits against two authored scenes, the thinnest active cell on the map. Texture only: the corridor between the last lesson and whatever the player has decided to do with the evening."
+}

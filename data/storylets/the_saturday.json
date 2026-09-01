@@ -1,0 +1,50 @@
+{
+  "id": "the_saturday",
+  "label": "s32_st_the_saturday",
+  "title": "Saturday",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "june"
+  ],
+  "location": "school_gate",
+  "time_slots": [
+    "morning",
+    "midday"
+  ],
+  "tags": [
+    "friendship",
+    "character",
+    "slice_of_life"
+  ],
+  "priority": 80,
+  "weight": 1.5,
+  "requirements": [
+    "commitment(saturday_with_june) == active"
+  ],
+  "effects": [],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "fulfil(saturday_with_june)",
+      "rel june->player.trust += 6",
+      "rel player->june.trust += 4"
+    ],
+    [
+      "trait curious += 1",
+      "break(saturday_with_june)",
+      "rel june->player.resentment += 6",
+      "rel june->player.trust -= 3",
+      "know(annexe_is_locked, you_went_and_looked)"
+    ],
+    [
+      "trait direct += 1",
+      "fulfil(saturday_with_june)",
+      "rel june->player.familiarity += 5",
+      "rel june->player.respect += 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "The appointment, and the milestone's clearest commitment-versus-opportunity situation: the annexe is open on a Saturday and June is at the gate at the same time. URGENT because a promise falling due is what that band is for. Both branches are written to cost something real."
+}

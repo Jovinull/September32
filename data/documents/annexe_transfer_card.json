@@ -1,0 +1,76 @@
+{
+  "id": "annexe_transfer_card",
+  "type": "transfer_card",
+  "title": "Transfer card — bound volumes to annexe",
+  "archive_reference": "NF/ARC/TRF/0117",
+  "fictional_source": "Northfield School Archive, transfer file",
+  "source_location": "archive_room",
+  "tags": [
+    "archive",
+    "investigation"
+  ],
+  "unlock_conditions": [
+    "knows(bound_volumes_were_moved)"
+  ],
+  "view_effects": [],
+  "summary": "The paperwork behind the notice in the glass case. It says what moved and roughly when, and it does not say who has the key, because the card has a field for that and the field is blank. Grants nothing: a blank field is not a discovery, it is an absence, and the player is allowed to decide whether it is interesting.",
+  "pages": [
+    {
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "ARCHIVE TRANSFER"
+        },
+        {
+          "kind": "field",
+          "label": "Card",
+          "text": "0117"
+        },
+        {
+          "kind": "field",
+          "label": "From",
+          "text": "Library, lower reading room"
+        },
+        {
+          "kind": "field",
+          "label": "To",
+          "text": "Annexe (east corridor)"
+        },
+        {
+          "kind": "field",
+          "label": "Authorised",
+          "text": "M. Ellery"
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "text",
+          "text": "Bound vols: The Northfield Chronicle (school paper), incomplete run. Parish magazine, bound by year. Governors' Minutes, bound, restricted. Two map chests. Chairs (12)."
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "field",
+          "label": "Boxes",
+          "text": "not counted at transfer"
+        },
+        {
+          "kind": "field",
+          "label": "Key held by",
+          "text": ""
+        },
+        {
+          "kind": "field",
+          "label": "Reviewed",
+          "text": ""
+        },
+        {
+          "kind": "note",
+          "text": "for review at next inventory"
+        }
+      ]
+    }
+  ]
+}

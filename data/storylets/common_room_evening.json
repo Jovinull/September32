@@ -1,0 +1,26 @@
+{
+  "id": "common_room_evening",
+  "label": "s32_st_common_room_evening",
+  "title": "The Sofa Nobody Sits On",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "common_room",
+  "time_slots": [
+    "evening",
+    "night"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 20,
+  "weight": 2.2,
+  "requirements": [
+    "anchor_done(the_common_room)"
+  ],
+  "effects": [],
+  "cooldown": 1,
+  "repeat_policy": "repeatable",
+  "summary": "The common room when it is quiet, which is most of the time. Variants are alternatives rather than stages -- any of them can be first."
+}

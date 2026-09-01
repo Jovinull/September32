@@ -1,0 +1,28 @@
+{
+  "id": "common_room_kettle",
+  "label": "s32_st_common_room_kettle",
+  "title": "The Kettle Question",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "common_room",
+  "time_slots": [
+    "early_morning",
+    "morning",
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 20,
+  "weight": 1.8,
+  "requirements": [
+    "anchor_done(the_common_room)"
+  ],
+  "effects": [],
+  "cooldown": 2,
+  "repeat_policy": "cooldown",
+  "summary": "The common room in daylight, which is a different room. Two variants. Extended to early morning after measurement: the residence at that hour had one scene covering every morning of a fourteen-day run, which is the shape of the Milestone 1 courtyard problem repeating."
+}

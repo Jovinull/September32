@@ -1,0 +1,52 @@
+{
+  "id": "courtyard_the_bench",
+  "label": "s32_st_courtyard_the_bench",
+  "title": "From Here",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "mara",
+    "noah"
+  ],
+  "location": "courtyard",
+  "time_slots": [
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "friendship",
+    "character"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [
+    "seen(mara_reads_the_room)",
+    "seen(noah_asks_for_access)"
+  ],
+  "effects": [
+    "rel mara->player.familiarity += 1",
+    "rel noah->player.familiarity += 1"
+  ],
+  "outcomes": [
+    [
+      "trait direct += 1",
+      "rel noah->player.respect += 4",
+      "rel mara->noah.resentment += 3"
+    ],
+    [
+      "trait gentle += 1",
+      "rel mara->player.trust += 4",
+      "rel noah->mara.respect += 3"
+    ],
+    [
+      "trait curious += 1",
+      "rel mara->player.respect += 3",
+      "rel noah->player.familiarity += 3",
+      "know(school_history_skips_a_year, noah_had_heard_it_too)"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Group scene. Mara and Noah, who have never shared a scene, on the bench in the back row of the photograph -- which nobody mentions, because neither of them has seen it. What they disagree about is whether being from somewhere qualifies you to write about it."
+}

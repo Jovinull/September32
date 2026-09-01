@@ -1,0 +1,47 @@
+{
+  "id": "noah_the_sports_report",
+  "label": "s32_st_noah_the_sports_report",
+  "title": "Two Hundred Words",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "noah"
+  ],
+  "location": "classroom_2b",
+  "time_slots": [
+    "afternoon",
+    "evening"
+  ],
+  "tags": [
+    "slice_of_life",
+    "character",
+    "school"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [
+    "seen(noah_asks_for_access)"
+  ],
+  "effects": [
+    "rel noah->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel noah->player.trust += 4",
+      "rel noah->player.dependency += 2"
+    ],
+    [
+      "trait direct += 1",
+      "rel noah->player.respect += 4"
+    ],
+    [
+      "trait skeptical += 1",
+      "rel noah->player.resentment += 3",
+      "rel noah->player.respect += 2"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Noah's non-mystery scene. He has to file 200 words on a fixture he did not watch and would rather do it properly. Wanting to have printed something that mattered, applied to a netball result -- which is the honest version of him, before it becomes a problem."
+}

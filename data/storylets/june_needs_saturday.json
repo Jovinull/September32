@@ -1,0 +1,48 @@
+{
+  "id": "june_needs_saturday",
+  "label": "s32_st_june_needs_saturday",
+  "title": "Saturday, Then",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "june"
+  ],
+  "location": "courtyard",
+  "time_slots": [
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "friendship",
+    "character",
+    "slice_of_life"
+  ],
+  "priority": 40,
+  "weight": 1.3,
+  "requirements": [
+    "seen(hallway_after_bell)",
+    "rel june->player.familiarity >= 8"
+  ],
+  "effects": [
+    "rel june->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "commit(saturday_with_june, june, 2, 50)",
+      "rel june->player.trust += 3"
+    ],
+    [
+      "trait direct += 1",
+      "commit(saturday_with_june, june, 2, 50)",
+      "rel june->player.respect += 3"
+    ],
+    [
+      "trait reserved += 1",
+      "rel june->player.resentment += 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Makes a promise the player will have to keep or break. Deliberately for a thing that is not important: a lift into town and an afternoon. The point of a commitment is not that it is momentous, it is that it is somewhere else at the same time as something the player wants."
+}

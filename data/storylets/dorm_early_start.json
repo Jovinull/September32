@@ -1,0 +1,23 @@
+{
+  "id": "dorm_early_start",
+  "label": "s32_st_dorm_early_start",
+  "title": "Before the Bell",
+  "category": "ambient",
+  "status": "prototype",
+  "characters": [],
+  "location": "dorm_room",
+  "time_slots": [
+    "early_morning"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 20,
+  "weight": 2.5,
+  "requirements": [],
+  "effects": [],
+  "cooldown": 1,
+  "repeat_policy": "repeatable",
+  "summary": "The single largest empty cell in the simulation: 34,000 visits in 5000 runs with nothing authored, because the player wakes up here. Three variants of getting up, which is a scene nobody had written. No state, no discovery."
+}

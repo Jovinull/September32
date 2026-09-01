@@ -1,0 +1,23 @@
+{
+  "id": "gate_going_out",
+  "label": "s32_st_gate_going_out",
+  "title": "Signing Out",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [],
+  "location": "school_gate",
+  "time_slots": [
+    "evening"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [],
+  "effects": [],
+  "cooldown": 3,
+  "repeat_policy": "cooldown",
+  "summary": "8,300 evening visits at the gate with nothing authored. The sign-out book, which is the school's only actual bureaucracy the player has to touch, and which is funnier than it sounds."
+}

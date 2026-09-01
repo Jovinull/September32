@@ -1,0 +1,49 @@
+{
+  "id": "iris_the_second_box",
+  "label": "s32_st_iris_the_second_box",
+  "title": "The Second Shoebox",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "iris"
+  ],
+  "location": "archive_room",
+  "time_slots": [
+    "afternoon",
+    "evening"
+  ],
+  "tags": [
+    "character",
+    "archive",
+    "friendship"
+  ],
+  "priority": 60,
+  "weight": 1.4,
+  "requirements": [
+    "knows(iris_keeps_a_second_index)",
+    "rel iris->player.trust >= 14"
+  ],
+  "effects": [
+    "rel iris->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel iris->player.trust += 6",
+      "rel iris->player.attraction += 4",
+      "rel player->iris.trust += 4"
+    ],
+    [
+      "trait curious += 1",
+      "rel iris->player.respect += 5",
+      "rel iris->player.trust += 2"
+    ],
+    [
+      "trait reserved += 1",
+      "rel iris->player.familiarity += 4"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Callback to archive_iris_index, and the payoff for the one thing Iris has never described to anyone as anything but a quirk. She does not explain why it matters. What she needs is not to be believed -- it is to be accompanied -- and the scene is careful not to say so. Threshold lowered from 20 to 14 for the same reason as theo_admits_it."
+}

@@ -1,0 +1,79 @@
+{
+  "id": "student_notice_rota",
+  "type": "student_notice",
+  "title": "Kitchen rota — residence, Michaelmas",
+  "archive_reference": "not accessioned",
+  "fictional_source": "The corkboard by the common room door",
+  "source_location": "common_room",
+  "tags": [
+    "school"
+  ],
+  "unlock_conditions": [
+    "anchor_done(the_common_room)"
+  ],
+  "view_effects": [],
+  "summary": "The second mundane one, and the only document in the game that is not from the archive. It is a piece of paper on a corkboard with four people's handwriting on it, and it is here because the document viewer should be able to hold something that is simply part of living here.",
+  "pages": [
+    {
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "KITCHEN — WHOSE WEEK"
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "field",
+          "label": "Mon",
+          "text": "Priya"
+        },
+        {
+          "kind": "field",
+          "label": "Tue",
+          "text": "Theo"
+        },
+        {
+          "kind": "field",
+          "label": "Wed",
+          "text": "Ade"
+        },
+        {
+          "kind": "field",
+          "label": "Thu",
+          "text": "—"
+        },
+        {
+          "kind": "field",
+          "label": "Fri",
+          "text": "June"
+        },
+        {
+          "kind": "field",
+          "label": "Sat",
+          "text": "Ade (swap)"
+        },
+        {
+          "kind": "field",
+          "label": "Sun",
+          "text": "nobody, it's Sunday"
+        },
+        {
+          "kind": "separator"
+        },
+        {
+          "kind": "text",
+          "text": "THIS IS NOT A KITCHEN. It is a kettle and a sink. Please do not attempt to cook. The toaster is Priya's and she has said yes but she means yes to toast."
+        },
+        {
+          "kind": "note",
+          "text": "Thu is blank because Mara does Thu. Somebody write it down. — J."
+        },
+        {
+          "kind": "note",
+          "text": "done — T."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "annexe_door",
+  "label": "s32_st_annexe_door",
+  "title": "The Annexe",
+  "category": "investigation",
+  "status": "prototype",
+  "characters": [],
+  "location": "hallway_east",
+  "time_slots": [
+    "afternoon",
+    "evening"
+  ],
+  "tags": [
+    "investigation",
+    "archive",
+    "mystery"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "phases": [
+    "odd",
+    "unsettling",
+    "impossible"
+  ],
+  "requirements": [
+    "knows(bound_volumes_were_moved)"
+  ],
+  "effects": [
+    "know(annexe_is_locked, the_door_itself)",
+    "flag annexe_looked_at += 1"
+  ],
+  "outcomes": [
+    [
+      "trait curious += 1",
+      "trait direct += 1"
+    ],
+    [
+      "trait skeptical += 1",
+      "npc_stance(theo, annexe_is_locked, known)"
+    ],
+    [
+      "trait reserved += 1"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "The bound volumes went somewhere and the somewhere has a door. Nothing is behind it in Act 1 and the scene does not pretend otherwise: it is a locked door, an office that does not hold the key, and a lost brass one. What the player gets is a shape, not an answer."
+}

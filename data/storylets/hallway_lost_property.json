@@ -22,7 +22,8 @@
   "requirements": [],
   "effects": [
     "rel theo->player.familiarity += 2",
-    "event(lost_property_crate)"
+    "event(lost_property_crate)",
+    "flag theo_lost_something += 1"
   ],
   "outcomes": [
     [
@@ -36,5 +37,5 @@
   ],
   "cooldown": 4,
   "repeat_policy": "cooldown",
-  "summary": "Theo going through the lost property crate methodically. Comic and small, and it characterises the person who checks things -- which is the same trait that makes him check the ledger."
+  "summary": "Theo going through the lost property crate methodically. Comic and small, and it characterises the person who checks things -- which is the same trait that makes him check the ledger. Sets theo_lost_something, which it always should have: the scene is Theo going through the crate for the brass key, and leaving that only in the prose left archive_theo_returns and theo_admits_it depending on a single other scene."
 }

@@ -1,0 +1,48 @@
+{
+  "id": "theo_the_spreadsheet",
+  "label": "s32_st_theo_the_spreadsheet",
+  "title": "Column J",
+  "category": "conversation",
+  "status": "prototype",
+  "characters": [
+    "theo"
+  ],
+  "location": "common_room",
+  "time_slots": [
+    "evening",
+    "night"
+  ],
+  "tags": [
+    "slice_of_life",
+    "character",
+    "school"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [
+    "anchor_done(the_common_room)"
+  ],
+  "effects": [
+    "rel theo->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait curious += 1",
+      "rel theo->player.trust += 4",
+      "rel theo->player.respect += 2"
+    ],
+    [
+      "trait gentle += 1",
+      "rel theo->player.trust += 3",
+      "rel theo->player.familiarity += 3"
+    ],
+    [
+      "trait direct += 1",
+      "rel theo->player.respect += 4",
+      "rel theo->player.resentment += 2"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Theo's non-mystery scene. His spreadsheet has a column nobody asked for and he is pleased with it. Checking is how he cares; this is the scene where that is charming rather than anxious, which the player needs to see before it is anything else."
+}

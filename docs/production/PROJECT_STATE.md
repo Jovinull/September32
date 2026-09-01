@@ -345,44 +345,41 @@ Classified, because the classes are starting to be informative.
 
 ## Next milestone
 
-**Recommended: Milestone 4 — Act 1 depth, not Act 1 breadth.**
+**Recommended: Milestone 5 — human playtest prep and Act 1 polish.**
 
-Milestone 3 was asked not to choose until the data existed. It does, and it
-points at depth rather than at more storylets:
+Act 1 now deserves a real human playtest, which was Milestone 4's bar and is the
+reason not to scale yet. The density metrics do not call for more scenes — every
+one improved in a milestone that cut one — and the prose has not been validated
+by a person.
 
-- Density is no longer the constraint. 28.2% contested tiers against a 20–30%
-  target, reached without touching the algorithm. Another twenty ambient scenes
-  would move that by very little.
-- Structure holds. Five anchors fire in 100% of runs, seven days have a shape,
-  and three profiles share 37% of a week.
-- What is thin is **character**. Every one of the five has exactly one scene
-  whose conflict is not the archive, and every one of their `core wound`s is
-  still `IDEA`. The cast is likeable and none of them has cost the player
-  anything yet.
+Milestone 5 would be:
 
-So: fewer, longer, harder scenes, not more of them. Concretely —
+1. **A playtest build** somebody can actually run, with the asset bootstrap
+   documented for a machine that has never had them.
+2. **Lightweight feedback instrumentation** — where they stopped, what they
+   reread, which scenes they skipped. Not telemetry; a notes file and a seed.
+3. **Save compatibility**, because a playtest that invalidates its own saves
+   collects one session per person.
+4. **The bugs a real player finds in the first twenty minutes**, which are never
+   the bugs a simulator finds in five thousand runs.
+5. **Art replacement in `ART_PRODUCTION_PLAN.md` order**, if a budget appears:
+   the class photograph unblocks the premise on its own.
 
-1. **A second and third beat per character**, including at least one where
-   liking someone and doing the right thing come apart.
-2. **The rooftop**, the only location with a single storylet, and the one place
-   the game has that is not institutional.
-3. **Day 8 onward.** Act 1 ends inside `odd` holding two records; `unsettling`
-   is the second and third thing, and it needs somewhere to happen.
+Explicitly **not** recommended:
 
-Explicitly **not** recommended yet:
-
-- **Scaling to 80–100 storylets.** The measurements do not support it, and the
-  first week is a draft nobody has read aloud.
-- **Touching the selection algorithm.** Three milestones of pressure and it has
-  not needed changing. [ADR-0002](../decisions/ADR-0002-storylet-architecture.md)
+- **Scaling to 80–100 storylets.** Four milestones have improved the numbers;
+  none has confirmed that anybody enjoys reading the result.
+- **Touching the selection algorithm.** Unchanged since Milestone 1, under four
+  milestones of pressure. [ADR-0002](../decisions/ADR-0002-storylet-architecture.md)
   is where that decision lives if it ever does.
 
-Standing, and independent of the choice:
+Standing:
 
-- The art gap. The class photograph does not exist and Ms. Ellery has now been
-  written around rather than written for. This is a production risk that three
-  milestones of working placeholders have not reduced.
+- The thirteen scenes in [`HUMAN_ACT1_REVIEW.md`](HUMAN_ACT1_REVIEW.md), about
+  forty minutes of reading, with a specific question each.
 - The items in [`HUMAN_ART_REVIEW.md`](HUMAN_ART_REVIEW.md), ten minutes.
-- The reading list in
-  [`MILESTONE_3_ACT_1.md`](MILESTONE_3_ACT_1.md#human-narrative-review-needed),
-  rather longer.
+- The rooftop, still the only location in the game with one storylet in it.
+
+If the human review comes back negative on "would a player care about these
+characters", the correct response is another pass on the named scenes — not more
+scenes.

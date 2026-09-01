@@ -22,6 +22,11 @@ every sentence.
 | **Mara** | Flat declaratives and a pause you are meant to notice. Says "here" instead of naming the place. |
 | **June** | Fluent, quick, finished sentences. Answers the easy half of a question and moves on. |
 | **Noah** | Talks through the gap where you would have replied. Writes better than he speaks. |
+| **You** | Four words out loud, wry on the page. Counts things without deciding to. |
+
+The sixth row was missing until Milestone 4, which is how five voices got
+carefully separated while the one present in every line of narration was written
+by instinct. Full page: [`PROTAGONIST.md`](PROTAGONIST.md).
 
 ---
 

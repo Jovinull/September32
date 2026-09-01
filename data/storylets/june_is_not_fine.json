@@ -1,0 +1,48 @@
+{
+  "id": "june_is_not_fine",
+  "label": "s32_st_june_is_not_fine",
+  "title": "A Bad Evening, Fully Managed",
+  "category": "conversation",
+  "status": "draft",
+  "characters": [
+    "june"
+  ],
+  "location": "courtyard",
+  "time_slots": [
+    "afternoon",
+    "evening"
+  ],
+  "tags": [
+    "slice_of_life",
+    "character",
+    "friendship"
+  ],
+  "priority": 40,
+  "weight": 1.3,
+  "requirements": [
+    "rel june->player.familiarity >= 10"
+  ],
+  "effects": [
+    "rel june->player.familiarity += 1"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel june->player.trust += 6",
+      "rel player->june.trust += 4"
+    ],
+    [
+      "trait reserved += 1",
+      "rel june->player.respect += 4",
+      "rel june->player.familiarity += 2"
+    ],
+    [
+      "trait direct += 1",
+      "rel june->player.resentment += 4",
+      "rel player->june.respect += 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "June on the receiving end. Her three earlier scenes all show her handling something for somebody else; the bible says she deflects with charm so smoothly that nobody notices being deflected, and the game had never put the player in a position to notice. Nothing here is her wound. It is one ordinary bad afternoon, competently hidden."
+}

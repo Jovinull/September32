@@ -1,0 +1,323 @@
+
+========================================================================
+CURIOUS  —  seed 1234, 8 days, 37 scenes
+========================================================================
+
+  DAY 1
+    * Arrival  (arrival)
+        mara->player.familiarity = 3
+        mara->player.respect = 2
+    The Glass Case  (gate_noticeboard)
+        knows bound_volumes_were_moved = known
+    * First Shift in the Archive  (first_shift)
+        iris->player.attraction = 2
+        iris->player.trust = 5
+    The Crate  (hallway_lost_property)
+        theo->player.familiarity 2 -> 5
+    Your Room, After  (dorm_message)
+        june->player.trust = 4
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 2
+    Before the Bell  (dorm_early_start)
+    A Favour, in the Courtyard  (june_the_favour)
+        june->player.respect = 3
+        promise june_favour = active
+    Between Lessons  (hallway_afternoon_drift)
+    Through the Wall  (dorm_corridor_noise)
+    The Last One Is Twenty Past  (town_road_last_bus)
+
+  DAY 3
+    * The Common Room  (the_common_room)
+        june->player.familiarity 5 -> 8
+        noah->player.familiarity = 3
+    Before the Bell  (dorm_early_start)
+    The Booklet They Give You  (june_welcome_pack)
+        june->player.familiarity 11 -> 14
+        knows school_history_skips_a_year = known
+    Two Reasonable People  (archive_theo_returns)
+        iris->player.familiarity 1 -> 3
+        theo->iris.respect = 2
+        theo->player.trust = 3
+    Courtyard, Between Things  (courtyard_small_talk)
+    Column J  (theo_the_spreadsheet)
+        theo->player.resentment = 2
+        theo->player.respect = 4
+
+  DAY 4
+    * The Column With No Date  (the_undated_column)
+        knows attendance_sheet_anomaly = known
+    Before the Bell  (dorm_early_start)
+    The Archive Room  (archive_intro)
+    The Annexe  (annexe_door)
+
+  DAY 5
+    Third in the Queue  (dorm_bathroom_queue)
+    Box Seventeen  (old_photo_glimpse)
+        iris->player.trust 7 -> 10
+        knows photo_dated_sept_32 = suspected
+    The Crate  (hallway_lost_property)
+        theo->player.respect 4 -> 6
+    Between Lessons  (hallway_afternoon_drift)
+    The Reasonable Reading  (june_reads_it_flat)
+        june->player.trust 4 -> 7
+        player->june.trust = 3
+    The Sofa Nobody Sits On  (common_room_evening)
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 6
+    * The Date  (the_date)
+        knows photo_dated_sept_32: suspected -> known
+    Chairs Still Up  (classroom_before_bell)
+    Out in the Light  (iris_outside)
+        iris->player.respect = 3
+    Noah Wants Twenty Minutes  (noah_asks_for_access)
+        noah->player.resentment = 2
+        noah->player.respect = 4
+    Courtyard, Between Things  (courtyard_small_talk)
+    The Rota  (june_the_kitchen)
+        june->player.respect 3 -> 6
+        player->june.familiarity = 3
+    Your Room, After  (dorm_message)
+        june->player.trust 7 -> 11
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 7
+    Before the Gate Is Open  (gate_early_arrival)
+    The Glass Case  (gate_noticeboard)
+    She Takes It Out of Your Hands  (iris_the_apology)
+        iris->player.resentment = 3
+        iris->player.respect 3 -> 5
+    A Message After Class  (message_after_class)
+        theo->player.familiarity 12 -> 14
+    What the Ledger Says  (theo_ledger_question)
+        theo->player.respect 9 -> 11
+
+  ENDED THE WEEK WITH
+    phase        odd
+    knows        annexe_is_locked, attendance_sheet_anomaly, bound_volumes_were_moved, noah_is_writing_about_the_archive, old_photo_exists, photo_dated_sept_32, school_history_skips_a_year
+    relationships
+        iris->player familiarity=16 trust=10
+        june->player familiarity=18 trust=11
+        mara->player familiarity=3 respect=2
+        noah->player familiarity=8 respect=4
+        player->june trust=3 familiarity=3
+        theo->iris respect=2
+        theo->player familiarity=14 respect=11
+    traits       curious=9, direct=5, empathetic=1, gentle=6, reserved=3, skeptical=2
+    commitments  {'expired': 1, 'fulfilled': 1}
+
+========================================================================
+ROMANTIC  —  seed 1234, 8 days, 32 scenes
+========================================================================
+
+  DAY 1
+    * Arrival  (arrival)
+        mara->player.familiarity = 3
+        mara->player.respect = 2
+    The Glass Case  (gate_noticeboard)
+    * First Shift in the Archive  (first_shift)
+        iris->player.attraction = 2
+        iris->player.trust = 5
+    The Crate  (hallway_lost_property)
+        theo->player.familiarity 2 -> 5
+    Your Room, After  (dorm_message)
+        june->player.trust = 4
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 2
+    Before the Bell  (dorm_early_start)
+    A Favour, in the Courtyard  (june_the_favour)
+        june->player.familiarity 5 -> 9
+        promise june_favour = active
+    Courtyard, Between Things  (courtyard_small_talk)
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 3
+    * The Common Room  (the_common_room)
+        june->player.familiarity 9 -> 12
+        noah->player.familiarity = 3
+    Before the Bell  (dorm_early_start)
+    The Booklet They Give You  (june_welcome_pack)
+        june->player.attraction = 2
+        june->player.familiarity 15 -> 19
+    Two Reasonable People  (archive_theo_returns)
+        iris->player.respect = 2
+        iris->theo.familiarity = 2
+        theo->player.respect = 2
+    Your Room, After  (dorm_message)
+        iris->player.familiarity 1 -> 3
+        iris->player.trust 5 -> 7
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 4
+    * The Column With No Date  (the_undated_column)
+        knows attendance_sheet_anomaly = known
+    Chairs Still Up  (classroom_before_bell)
+        june->player.familiarity 19 -> 21
+    Courtyard, Between Things  (courtyard_small_talk)
+    Through the Wall  (dorm_corridor_noise)
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 5
+    Third in the Queue  (dorm_bathroom_queue)
+    Two People Who Do Not Get On  (courtyard_lunch_table)
+        june->noah.respect = 1
+        june->player.trust 4 -> 7
+        noah->june.resentment = 2
+    The Crate  (hallway_lost_property)
+        theo->player.familiarity 8 -> 11
+    The Reasonable Reading  (june_reads_it_flat)
+        june->player.trust 7 -> 10
+        player->june.trust = 3
+    Column J  (theo_the_spreadsheet)
+        theo->player.familiarity 13 -> 16
+        theo->player.trust = 3
+
+  DAY 6
+    * The Date  (the_date)
+        knows old_photo_exists = known
+        knows photo_dated_sept_32 = known
+    Before the Bell  (dorm_early_start)
+    Courtyard, Between Things  (courtyard_small_talk)
+    The Kettle Question  (common_room_kettle)
+    The Rota  (june_the_kitchen)
+        june->player.trust 10 -> 14
+        player->june.trust 3 -> 9
+    The Sofa Nobody Sits On  (common_room_evening)
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 7
+    Before the Gate Is Open  (gate_early_arrival)
+    The Glass Case  (gate_noticeboard)
+    Between Lessons  (hallway_afternoon_drift)
+
+  ENDED THE WEEK WITH
+    phase        odd
+    knows        attendance_sheet_anomaly, old_photo_exists, photo_dated_sept_32
+    relationships
+        iris->player trust=7 familiarity=3
+        iris->theo familiarity=2
+        june->noah respect=1
+        june->player familiarity=27 trust=14
+        mara->player familiarity=3 respect=2
+        noah->june resentment=2
+        noah->player familiarity=5
+        player->june trust=9
+        theo->player familiarity=16 trust=3
+    traits       curious=2, empathetic=1, gentle=13, reserved=2
+    commitments  {'expired': 1}
+
+========================================================================
+ALTRUISTIC  —  seed 1234, 8 days, 33 scenes
+========================================================================
+
+  DAY 1
+    * Arrival  (arrival)
+        mara->player.familiarity = 3
+        mara->player.respect = 2
+    The Glass Case  (gate_noticeboard)
+    * First Shift in the Archive  (first_shift)
+        iris->player.attraction = 2
+        iris->player.trust = 5
+    The Crate  (hallway_lost_property)
+        theo->player.familiarity 2 -> 5
+    Your Room, After  (dorm_message)
+        june->player.trust = 4
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 2
+    Before the Bell  (dorm_early_start)
+    A Favour, in the Courtyard  (june_the_favour)
+        june->player.familiarity 5 -> 9
+        promise june_favour = active
+    Courtyard, Between Things  (courtyard_small_talk)
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 3
+    * The Common Room  (the_common_room)
+        june->player.familiarity 9 -> 12
+        noah->player.familiarity = 3
+    Before the Bell  (dorm_early_start)
+    The Booklet They Give You  (june_welcome_pack)
+        june->player.respect = 2
+        knows school_history_skips_a_year = known
+    The Kettle Question  (common_room_kettle)
+    Column J  (theo_the_spreadsheet)
+        theo->player.respect = 2
+        theo->player.trust = 4
+    The Sofa Nobody Sits On  (common_room_evening)
+
+  DAY 4
+    * The Column With No Date  (the_undated_column)
+        knows attendance_sheet_anomaly = known
+    Third in the Queue  (dorm_bathroom_queue)
+    Who Is Talking to Whom  (mara_reads_the_room)
+        mara->player.trust = 3
+        mara->theo.respect = 2
+    Mid-Sentence  (hallway_after_bell)
+        june->player.trust 4 -> 7
+        mara->june.familiarity = 2
+
+  DAY 5
+    Third in the Queue  (dorm_bathroom_queue)
+    The Crate  (hallway_lost_property)
+        theo->player.respect 2 -> 4
+    Between Lessons  (hallway_afternoon_drift)
+    The Reasonable Reading  (june_reads_it_flat)
+        june->player.trust 7 -> 12
+        player->june.respect = 5
+    The Sofa Nobody Sits On  (common_room_evening)
+
+  DAY 6
+    * The Date  (the_date)
+        knows old_photo_exists = known
+        knows photo_dated_sept_32 = known
+    Before the Bell  (dorm_early_start)
+    Saturday, Then  (june_needs_saturday)
+        june->player.trust 12 -> 15
+        promise saturday_with_june = active
+    Courtyard, Between Things  (courtyard_small_talk)
+    Your Room, After  (dorm_message)
+        june->player.trust 15 -> 19
+    The Building Has Gone Quiet  (dorm_late_night)
+
+  DAY 7
+    Before the Bell  (dorm_early_start)
+    Passing Theo in the Hall  (hallway_encounter)
+    A Message After Class  (message_after_class)
+        theo->player.familiarity 14 -> 16
+    The Road Into Town  (mara_older_story)
+        knows photo_is_a_forgery = suspected
+        mara->player.respect 2 -> 5
+        mara->player.trust 3 -> 8
+    The Long Way  (mara_the_long_way)
+        mara->player.trust 8 -> 12
+        player->mara.trust = 6
+    The Last One Is Twenty Past  (town_road_last_bus)
+
+  ENDED THE WEEK WITH
+    phase        odd
+    knows        attendance_sheet_anomaly, mara_knows_the_older_story, old_photo_exists, photo_dated_sept_32, school_history_skips_a_year
+    relationships
+        iris->player trust=5 attraction=2
+        june->player trust=19 familiarity=19
+        mara->june familiarity=2
+        mara->player familiarity=14 trust=12
+        mara->theo respect=2
+        noah->player familiarity=3
+        player->june respect=5
+        player->mara trust=6
+        theo->player familiarity=16 trust=4
+    traits       curious=4, direct=1, empathetic=1, gentle=10, reserved=1, skeptical=2
+    commitments  {'expired': 1, 'active': 2}
+
+========================================================================
+HOW MUCH OF THE WEEK WAS THE SAME
+========================================================================
+  scenes every profile played : 13
+  scenes at least one played  : 35
+  shared fraction             : 37%
+  only curious       : annexe_door, archive_intro, iris_outside, iris_the_apology, noah_asks_for_access, old_photo_glimpse, theo_ledger_question
+  only romantic      : courtyard_lunch_table
+  only altruistic    : hallway_after_bell, hallway_encounter, june_needs_saturday, mara_older_story, mara_reads_the_room, mara_the_long_way

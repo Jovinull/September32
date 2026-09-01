@@ -29,12 +29,9 @@
     [
       "trait gentle += 1",
       "event(took_down_a_notice)"
-    ],
-    [
-      "trait direct += 1"
     ]
   ],
   "cooldown": 3,
   "repeat_policy": "cooldown",
-  "summary": "Lost property, a folded club, and a laminated notice that the paper's bound volumes went into storage. The boring explanation for Noah's missing run, arriving on paper rather than from a person, so R5's sceptical reading stays available."
+  "summary": "Lost property, a folded club, and a laminated notice that the paper's bound volumes went into storage. The boring explanation for Noah's missing run, arriving on paper rather than from a person, so R5's sceptical reading stays available. Third option cut in Milestone 4: `Walk on.` was one line, no state and no characterisation, and its presence made the other two look like a quiz."
 }

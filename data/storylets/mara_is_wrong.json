@@ -1,0 +1,47 @@
+{
+  "id": "mara_is_wrong",
+  "label": "s32_st_mara_is_wrong",
+  "title": "The One She Got Wrong",
+  "category": "conversation",
+  "status": "draft",
+  "characters": [
+    "mara"
+  ],
+  "location": "hallway_east",
+  "time_slots": [
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "character",
+    "friendship"
+  ],
+  "priority": 40,
+  "weight": 1.3,
+  "requirements": [
+    "seen(mara_reads_the_room)"
+  ],
+  "effects": [
+    "rel mara->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel mara->player.trust += 5",
+      "rel player->mara.respect += 3"
+    ],
+    [
+      "trait direct += 1",
+      "rel mara->player.respect += 4",
+      "rel mara->player.resentment += 4"
+    ],
+    [
+      "trait reserved += 1",
+      "rel mara->player.familiarity += 3",
+      "rel player->mara.suspicion += 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "The most important thing missing from Mara. She reads people accurately and the game had never once shown her reading one wrong, which turns her confidence into a mechanic instead of a trait. Here she is confident, specific, and wrong, and the player decides whether she finds out. The three things her bible separates -- what she knows, what she thinks she knows, what she says she knows -- come apart in one scene."
+}

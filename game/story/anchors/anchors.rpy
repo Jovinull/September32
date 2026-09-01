@@ -207,31 +207,43 @@ label s32_anchor_the_common_room:
 
     narrator "June is halfway through a story you have arrived too late for and is not going to recap."
 
-    c_june "— and he still had the tray. That's the part. He had walked the entire length of the corridor and he still had the tray."
+    c_june "— and he still had the tray. That's the part. He had walked the entire length of the corridor and he still had the —"
 
     c_noah "Was it his tray?"
 
-    c_june "It was nobody's tray, Noah. That's why it's funny."
+    c_june "Noah."
+
+    c_noah "It's a fair question."
+
+    c_june "It was nobody's tray. That is the entire joke and you have now had it explained to you."
 
     show theo school_summer neutral at s32_quad_d with dissolve
 
-    narrator "Theo is at the table by the window doing something to a spreadsheet on a laptop that makes a noise when it thinks."
+    narrator "Theo is at the table by the window and has not looked up. The laptop makes a noise when it thinks and it has been thinking for some time."
 
     c_theo "It's a bit funny."
+
+    narrator "Nobody had asked him."
 
     c_june "Thank you, Theo."
 
     c_theo "I said a bit."
 
-    narrator "Somewhere behind you a kettle finishes and nobody claims it."
+    narrator "June and Noah are already onto something else, which is a teacher, and neither of them is going to acknowledge that Theo joined the conversation. This does not appear to be unkindness. It appears to be a thing that has been agreed."
 
     show mara school_summer neutral at s32_quad_a with dissolve
 
-    c_mara "That's mine."
+    narrator "A kettle finishes somewhere behind you and Mara is already up before it has finished clicking."
 
-    narrator "Mara collects it, makes three cups without asking anyone anything, and hands two of them out correctly."
+    c_noah "— no, but that's the thing about the second half, they didn't even —"
+
+    c_june "It was one lesson, Noah."
+
+    narrator "Mara makes three cups without asking anybody anything, hands two of them out correctly, and puts the third down beside Theo's laptop without a word. Theo moves it four inches to the left without looking, which is the two of them having a conversation."
 
     c_noah "How do you know how everyone takes it."
+
+    narrator "It takes her long enough to answer that June has started a different sentence and stopped."
 
     c_mara "I've been here since I was eleven."
 

@@ -1,0 +1,46 @@
+{
+  "id": "noah_takes_a_call",
+  "label": "s32_st_noah_takes_a_call",
+  "title": "Two Minutes Outside",
+  "category": "conversation",
+  "status": "draft",
+  "characters": [
+    "noah"
+  ],
+  "location": "school_gate",
+  "time_slots": [
+    "evening"
+  ],
+  "tags": [
+    "slice_of_life",
+    "character"
+  ],
+  "priority": 40,
+  "weight": 1.2,
+  "requirements": [
+    "seen(noah_asks_for_access)"
+  ],
+  "effects": [
+    "rel noah->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel noah->player.trust += 5",
+      "rel noah->player.dependency += 2"
+    ],
+    [
+      "trait reserved += 1",
+      "rel noah->player.respect += 3",
+      "rel noah->player.familiarity += 2"
+    ],
+    [
+      "trait curious += 1",
+      "rel noah->player.suspicion += 4",
+      "rel player->noah.suspicion += 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "The second reading of Noah, given a scene: that he is avoiding something entirely unrelated to the archive. All three readings must survive Act 1, and until now the only evidence for this one was its absence. Deliberately unresolved -- the call is about home, the player learns nothing specific, and the scene does not decide whether it matters."
+}

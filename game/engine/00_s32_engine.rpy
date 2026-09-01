@@ -254,6 +254,57 @@ init python:
         source, target = s32_relationships.parse_pair(pair)
         return s32_relationships.get(S32State, source, target, axis)
 
+    def stance(who):
+        """Return how ``who`` currently reads the player, as a word.
+
+        Scenes need to ask a human question -- "is she comfortable with me?" --
+        and until Milestone 4 no scene asked one at all. Fifty-one storylets
+        wrote to eight axes and nothing ever read them back, which is the
+        difference between building a relationship and accumulating a variable.
+
+        Deliberately coarse. A scene that needs the exact number can call
+        `rel_get`; what most scenes need is which of a few versions of
+        themselves to be, and three or four versions is as many as anyone can
+        write well.
+
+            distant       barely know you, or actively cooled
+            wary          they know you and are holding something back
+            comfortable   the ordinary good case
+            close         trusted, and it took the whole week
+
+        `wary` is not a milder `distant`. It is the interesting one: somebody
+        who knows you well and does not trust you reads completely differently
+        from somebody who has not decided yet, and it is the state the eight
+        axes exist to make possible.
+
+        See docs/narrative-design/RELATIONSHIP_SEMANTICS.md.
+        """
+        pair = "{}->player".format(who)
+        trust = rel_get(pair, "trust")
+        familiarity = rel_get(pair, "familiarity")
+        against = max(rel_get(pair, "suspicion"), rel_get(pair, "resentment"))
+
+        if against >= 4 and against * 2 >= trust:
+            return "wary"
+        if trust >= 18 and familiarity >= 12:
+            return "close"
+        if familiarity >= 8 or trust >= 8:
+            return "comfortable"
+        return "distant"
+
+    def regards(who, axis, at_least):
+        """Return whether ``who`` holds an axis toward the player at a level.
+
+        The explicit form, for the scenes that want one axis rather than a
+        summary: `regards("theo", "respect", 10)`.
+        """
+        return rel_get("{}->player".format(who), axis) >= at_least
+
+    def player_regards(who, axis, at_least):
+        """The other direction, for the rarer case where the player's own view
+        of somebody is what a scene turns on."""
+        return rel_get("player->{}".format(who), axis) >= at_least
+
     def learn(fact_id, source=""):
         """The player now knows something.
 

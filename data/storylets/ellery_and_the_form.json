@@ -1,0 +1,46 @@
+{
+  "id": "ellery_and_the_form",
+  "label": "s32_st_ellery_and_the_form",
+  "title": "There Is a Form",
+  "category": "conversation",
+  "status": "draft",
+  "characters": [
+    "ellery"
+  ],
+  "location": "archive_room",
+  "time_slots": [
+    "morning"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "archive"
+  ],
+  "priority": 40,
+  "weight": 1.1,
+  "requirements": [
+    "seen(ellery_the_sign_off)"
+  ],
+  "effects": [
+    "rel ellery->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait direct += 1",
+      "rel ellery->player.respect += 4",
+      "rel ellery->player.resentment += 2"
+    ],
+    [
+      "trait gentle += 1",
+      "rel ellery->player.trust += 4"
+    ],
+    [
+      "trait skeptical += 1",
+      "rel ellery->player.respect += 2",
+      "rel player->ellery.suspicion += 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Ellery's function, decided: she is the only adult, and what she contributes that no student can is a wall made entirely of reasonable things. She refuses something small, correctly, and cannot be argued out of it because there is nothing wrong with her reasoning. That is a texture the cast cannot produce."
+}

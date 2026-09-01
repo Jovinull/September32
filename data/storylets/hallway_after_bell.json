@@ -31,12 +31,14 @@
     [
       "trait reserved += 1",
       "rel mara->player.respect += 3",
-      "rel june->player.familiarity += 2"
+      "rel june->player.familiarity += 2",
+      "commit(saturday_with_june, june, 3, 50)"
     ],
     [
       "trait gentle += 1",
       "rel june->player.trust += 3",
-      "rel mara->june.familiarity += 2"
+      "rel mara->june.familiarity += 2",
+      "commit(saturday_with_june, june, 3, 50)"
     ],
     [
       "trait direct += 1",
@@ -47,5 +49,5 @@
   ],
   "cooldown": 0,
   "repeat_policy": "once",
-  "summary": "Mara and June stopping mid-conversation when you arrive -- the ordinary version of that, not the sinister one. Asking what it was about is a trade: June's familiarity for Mara's suspicion, not a mistake."
+  "summary": "Group scene, and the origin of the week's promise. The Saturday trip was always in this scene's fiction -- June is negotiating a lift out of Mara when the player walks in -- and Milestone 3 nevertheless wrote a second scene, june_needs_saturday, in which June asks for the same Saturday all over again. That scene is cut and its commitment lives here, where it costs the player something: two of the three branches get them included, and the third gets the whole thing explained to them and leaves them out of it."
 }

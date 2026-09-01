@@ -2,10 +2,13 @@
 #
 # The commitment pair, and the two scenes that belong to the `odd` phase.
 #
-# `june_needs_saturday` and `the_saturday` are the milestone's answer to "A and
-# B are both interesting and I can only do one". The promise is deliberately
-# about nothing important. What makes it a choice is that it is somewhere else
-# at the same time as the annexe.
+# `the_saturday` is the answer to "A and B are both interesting and I can only
+# do one". The promise is deliberately about nothing important. What makes it a
+# choice is that it is somewhere else at the same time as the annexe.
+#
+# The promise is made in `hallway_after_bell`, not in a scene of its own.
+# Milestone 3 wrote one -- June asking for a Saturday that the group scene had
+# already spent three pages arranging -- and Milestone 4 cut it.
 #
 # `june_reads_it_flat` is rule R5 given a scene: the ordinary explanation, made
 # by somebody who is good at arguing, written so that agreeing with her is the
@@ -13,63 +16,6 @@
 # to claim its mystery is earned.
 #
 # docs/canon/PHENOMENON_RULES.md, docs/narrative-design/ACT_1.md
-
-label s32_st_june_needs_saturday:
-
-    scene bg courtyard day with dissolve
-
-    show june school_summer talk at s32_centre with dissolve
-
-    c_june "Saturday. Mara's got the car, we're going into town, there are four of us and one of them is you."
-
-    c_me "Is it?"
-
-    c_june "It is now. You've been here two weeks and you've seen a road and a shop."
-
-    narrator "This is true and is delivered as though it were a diagnosis."
-
-    c_june "Half nine at the gate. It's twenty minutes there, we'll be back by two."
-
-    menu:
-
-        "All right. Half nine.":
-            $ trait("gentle")
-            $ promise("saturday_with_june", "june", 2, 50)
-            $ rel("june->player", "trust", 3)
-
-            c_june "Good. Bring money, the market's cash."
-
-            narrator "She writes it on the back of her hand, which is a filing system Theo would have opinions about, and which has worked for June for two years."
-
-        "Fine, but I'm not carrying anything.":
-            $ trait("direct")
-            $ promise("saturday_with_june", "june", 2, 50)
-            $ rel("june->player", "respect", 3)
-
-            c_june "You'll carry one thing."
-
-            c_me "One thing."
-
-            c_june "One thing, and it won't be heavy, and you'll offer before we get to the car park because you'll feel bad."
-
-            narrator "She is entirely correct about this and you both know it before the sentence has finished."
-
-        "I've got the archive on Saturday.":
-            $ trait("reserved")
-            $ rel("june->player", "resentment", 3)
-
-            c_june "The archive is on Saturday because you put it on Saturday."
-
-            c_me "It's four hours."
-
-            c_june "It's four hours you chose. That's fine. That's a real answer."
-
-            narrator "It is, from June, both genuinely fine and slightly cooler than the temperature the conversation started at, and she is talking to somebody else within about forty seconds."
-
-    hide june with dissolve
-
-    return
-
 
 label s32_st_the_saturday:
 
@@ -83,7 +29,32 @@ label s32_st_the_saturday:
 
     show june school_summer talk at s32_centre with dissolve
 
-    c_june "You're early. That's suspicious."
+    $ _june = stance("june")
+
+    if _june == "wary":
+
+        # She has been let down before -- the favour, or a message left until
+        # morning -- and she is being pleasant about it, which from June is the
+        # tell rather than the reassurance.
+        show june school_summer neutral
+
+        c_june "You came."
+
+        c_me "I said I would."
+
+        c_june "You did say that."
+
+        narrator "It is said warmly and it is a receipt, and both of those are true at once."
+
+    elif _june == "close":
+
+        c_june "You're early. That's suspicious."
+
+        narrator "She has kept the good seat. She has not mentioned keeping the good seat and is not going to."
+
+    else:
+
+        c_june "You're early. That's suspicious."
 
     menu:
 
@@ -159,7 +130,19 @@ label s32_st_june_reads_it_flat:
 
     show june school_summer neutral at s32_centre with dissolve
 
-    narrator "You tell her about the column, because it is the sort of thing you tell somebody, and because you have been carrying it for two days."
+    $ _june = stance("june")
+
+    if _june == "wary":
+
+        narrator "You tell her about the column because there is nobody else in the room, which is not the same reason you would have told her on Tuesday, and she can hear the difference."
+
+    elif _june == "close":
+
+        narrator "You tell her about the column, because she is the person you tell things to now, and you have been carrying it for two days waiting for her to be somewhere."
+
+    else:
+
+        narrator "You tell her about the column, because it is the sort of thing you tell somebody, and because you have been carrying it for two days."
 
     show june school_summer talk
 
@@ -183,7 +166,18 @@ label s32_st_june_reads_it_flat:
 
     c_june "Then they came back and did it from the class list and didn't put the date on, because they already knew what day it was. Nobody writes the date for themselves. You write it for the person in forty years."
 
-    narrator "This is a genuinely good argument and it takes about eleven seconds and she has not raised her voice once."
+    if player_regards("june", "respect", 5):
+
+        # The player has watched her organise a birthday nobody else noticed.
+        # That is why this argument lands, and the scene should say so without
+        # saying so.
+        narrator "This is a genuinely good argument and it takes about eleven seconds and she has not raised her voice once."
+
+        narrator "You have watched her do this before, with a rota and four minutes, and it worked then too."
+
+    else:
+
+        narrator "This is a genuinely good argument and it takes about eleven seconds and she has not raised her voice once."
 
     menu:
 
@@ -270,7 +264,7 @@ label s32_st_annexe_door:
 
             narrator "You mention it to Theo the same evening. He listens, asks two questions about the paint, and writes something down, and does not say the thing you can see him deciding not to say."
 
-        "Leave it.":
+        "Go back to the boxes you do have keys for.":
             $ trait("reserved")
 
             narrator "It is a locked cupboard with paper in it. You have a locked cupboard with paper in it at the other end of the building, and you have keys to that one, and you have got through about a fortieth of it."

@@ -42,6 +42,33 @@ label s32_st_dorm_late_night:
 
         narrator "But it faces the window, and you did it, and the room is about eleven per cent yours now instead of nought."
 
+    # Played about nine times in a fourteen-day run, which makes it the largest
+    # single block of repeated text in the game and therefore the best place to
+    # put something that is not repeated. The coda is the week, not the room.
+    python:
+        _friends = [
+            who for who in ("june", "iris", "mara", "theo", "noah")
+            if stance(who) == "close"
+        ]
+        _owed = [
+            record["id"] for record in S32State["commitments"]
+            if record["status"] == "active"
+        ]
+
+    if _owed:
+
+        narrator "You are asleep in about four minutes. The last thing you think about is a thing you have said you will do, which is a new development and not an unpleasant one."
+
+    elif _friends:
+
+        $ _name = s32_library.characters[s32_rng().choice(_friends)].display_name
+
+        narrator "Downstairs a door goes. Somewhere in the building [_name] is also awake, or is not, and you have no way of knowing and find that you have wondered."
+
+    else:
+
+        narrator "The building makes its noise. You are the only person in it you can account for, and that is fine for now, and you notice yourself adding the {i}for now{/i}."
+
     return
 
 
@@ -98,11 +125,6 @@ label s32_st_town_road_shops:
             narrator "One is a rota for the school in a hand that has given up halfway: gates at seven, hall at seven, boiler Mondays. It is pinned up here because this is where the caretaker actually reads things."
 
             narrator "It is the least secret document you have ever looked at twice."
-
-        "Keep walking.":
-            $ trait("reserved")
-
-            narrator "You have no money and no reason. The road carries on and so do you."
 
     return
 

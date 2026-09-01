@@ -143,7 +143,21 @@ label s32_st_archive_theo_returns:
 
     c_iris "Both. That's the whole point of me."
 
-    narrator "It is not an argument yet. It is two people being precise at each other, both correctly, which is the stage immediately before an argument."
+    # The one place an NPC-to-NPC edge is visible to the player. `iris->theo`
+    # suspicion comes from this scene's own first branch on a previous run, and
+    # from `annexe_two_of_them`; `theo->iris` respect comes from the common
+    # room. The player did not make either of these and can see both.
+    if rel_get("iris->theo", "suspicion") >= 3:
+
+        narrator "It is not an argument yet, and it is not the first time. They have the specific efficiency of two people who have already had the general version and are now doing the particular one."
+
+    elif rel_get("theo->iris", "respect") >= 3:
+
+        narrator "It is not an argument. It is two people being precise at each other, both correctly, and Theo is being careful in a way he is not careful with anyone else in this building."
+
+    else:
+
+        narrator "It is not an argument yet. It is two people being precise at each other, both correctly, which is the stage immediately before an argument."
 
     c_theo "It's a brass key. It opens the annexe cupboard and I'm supposed to have it and I don't."
 

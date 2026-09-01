@@ -48,13 +48,17 @@ def _director(real_library) -> NarrativeDirector:
 def test_the_library_has_not_quietly_doubled(real_library):
     """A checkpoint, not a target.
 
-    Milestone 1 pinned this at fifteen, Milestone 2 at thirty and Milestone 3
-    at about fifty, and the number moving is always meant to be a decision
-    somebody made. A range rather than an equality because the point is to
-    notice a library that grew by forty scenes nobody reviewed, not to fail a
-    build over the fifty-second.
+    Milestone 1 pinned this at fifteen, Milestone 2 at thirty, Milestone 3 at
+    about fifty and Milestone 4 at about sixty, and the number moving is always
+    meant to be a decision somebody made. A range rather than an equality
+    because the point is to notice a library that grew by forty scenes nobody
+    reviewed, not to fail a build over the sixty-sixth.
+
+    Milestone 4 is the first in which the number went *down* as well as up: one
+    scene was cut, which is the reason the range has a floor rather than only a
+    ceiling.
     """
-    assert 48 <= len(real_library.storylets) <= 55
+    assert 56 <= len(real_library.storylets) <= 65
 
 
 def test_all_eight_new_storylets_exist(real_library):

@@ -25,16 +25,22 @@
     "event(theo_asked_to_meet)"
   ],
   "repeat_policy": "once",
-  "summary": "Theo asks to compare the photo against the ledger tomorrow. Exercises: commitments, and the causality they enable when the player skips it.",
+  "summary": "The note in the pigeonhole, and the promise it creates. Rewritten in Milestone 4: it used to offer two options that both meant \"keep the note\", which is not a choice. The decision is now the one the note asks for -- whether to bring him the photograph -- and theo_ledger_question reads it a day later.",
   "outcomes": [
     [
-      "trait curious += 1",
+      "trait direct += 1",
+      "rel theo->player.familiarity += 2",
+      "flag bringing_the_photo += 1"
+    ],
+    [
+      "trait skeptical += 1",
+      "rel theo->player.respect += 2",
       "rel theo->player.familiarity += 2"
     ],
     [
-      "trait sarcastic += 1",
-      "rel theo->player.respect -= 1",
-      "rel theo->player.familiarity += 2"
+      "trait gentle += 1",
+      "rel iris->player.trust += 3",
+      "rel theo->player.resentment += 2"
     ]
   ]
 }

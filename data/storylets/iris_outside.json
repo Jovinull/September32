@@ -37,10 +37,11 @@
     ],
     [
       "trait reserved += 1",
-      "rel iris->player.familiarity += 1"
+      "rel iris->player.familiarity += 1",
+      "rel iris->player.respect += 2"
     ]
   ],
   "cooldown": 0,
   "repeat_policy": "once",
-  "summary": "Iris out of the archive, eating lunch at ten past eleven because that is when the room is quiet. Iris was the most-encountered character in the game and had one storylet of her own."
+  "summary": "Iris out of the archive, eating lunch at ten past eleven because that is when the room is quiet. Iris was the most-encountered character in the game and had one storylet of her own. Third option rewritten in Milestone 4: it used to be declining the scene. It is now sitting down and deliberately not raising the thing she has just told you, which is a choice about tact rather than about attendance."
 }

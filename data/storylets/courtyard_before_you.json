@@ -1,0 +1,27 @@
+{
+  "id": "courtyard_before_you",
+  "label": "s32_st_courtyard_before_you",
+  "title": "A Joke From Before You Got Here",
+  "category": "ambient",
+  "status": "draft",
+  "characters": [],
+  "location": "courtyard",
+  "time_slots": [
+    "morning",
+    "midday"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school",
+    "friendship"
+  ],
+  "priority": 20,
+  "weight": 1.6,
+  "requirements": [
+    "anchor_done(the_common_room)"
+  ],
+  "effects": [],
+  "cooldown": 2,
+  "repeat_policy": "cooldown",
+  "summary": "The protagonist walked into a community that already existed. Three variants of a running joke, a grudge or an arrangement that predates them by years and is not explained. No state, no menu: the whole point is that the player is outside it and nobody is going to catch them up."
+}

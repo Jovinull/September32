@@ -74,11 +74,6 @@ label s32_st_gate_noticeboard:
 
             narrator "Underneath it there is an older one, and underneath that, one older still. Nobody has ever taken one down. You put the two old ones in your bag as well."
 
-        "Walk on.":
-            $ trait("direct")
-
-            narrator "It is a noticeboard. You have read one."
-
     return
 
 
@@ -135,10 +130,10 @@ label s32_st_gate_waiting:
 
             narrator "That is either a joke or it is not, and he does not give you enough to decide."
 
-        "Leave him to it.":
+        "Say something ordinary and go through the gate.":
             $ trait("reserved")
 
-            narrator "You say something ordinary and go through the gate."
+            narrator "You ask whether the bus was late. He says it was not. That is the whole of it."
 
             narrator "When you look back from the corner he is still there with the bag open, doing it again from the start, in the same order."
 

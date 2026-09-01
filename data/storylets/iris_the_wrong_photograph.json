@@ -1,0 +1,47 @@
+{
+  "id": "iris_the_wrong_photograph",
+  "label": "s32_st_iris_the_wrong_photograph",
+  "title": "Not For the Archive",
+  "category": "conversation",
+  "status": "draft",
+  "characters": [
+    "iris"
+  ],
+  "location": "courtyard",
+  "time_slots": [
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "character",
+    "friendship"
+  ],
+  "priority": 40,
+  "weight": 1.3,
+  "requirements": [
+    "seen(archive_intro)"
+  ],
+  "effects": [
+    "rel iris->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait curious += 1",
+      "rel iris->player.trust += 4",
+      "rel iris->player.attraction += 3"
+    ],
+    [
+      "trait gentle += 1",
+      "rel iris->player.familiarity += 4"
+    ],
+    [
+      "trait direct += 1",
+      "rel iris->player.respect += 3",
+      "rel iris->player.resentment += 2"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Iris away from the archive, and the audit's clearest gap: every one of her scenes happened in or about the room, which makes her the girl from the photograph rather than a person. Here she photographs something with no archival value whatsoever, badly, for reasons she will not state. Nothing in it touches the mystery and nothing in it may."
+}

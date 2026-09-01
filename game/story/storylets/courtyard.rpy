@@ -177,12 +177,16 @@ label s32_st_iris_outside:
 
             c_iris "Ask me in November. In November the wall's no good and I have to eat in the room and then it is a bit much."
 
-        "Leave her to her eleven o'clock.":
+        "Sit down, and don't say anything about the eleven o'clock.":
             $ trait("reserved")
+            $ rel("iris->player", "familiarity", 1)
+            $ rel("iris->player", "respect", 2)
 
-            narrator "You lift a hand and keep walking, and she lifts hers, and the whole exchange takes under two seconds and costs nobody anything."
+            narrator "You sit on the wall and ask her about the shepherd's pie, which is not a subject and is not meant to be."
 
-            narrator "It occurs to you afterwards that she chose a wall in the middle of the courtyard rather than anywhere actually private, and that people who want to be entirely alone do not generally do that."
+            narrator "She takes it, gratefully and obviously, and talks about the shepherd's pie for four minutes."
+
+            narrator "It occurs to you afterwards that she chose a wall in the middle of the courtyard rather than anywhere actually private, and that people who want to be entirely alone do not generally do that. You do not raise it. That was the whole choice."
 
     hide iris with dissolve
 

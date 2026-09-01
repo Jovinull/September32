@@ -15,10 +15,17 @@
 # docs/narrative-design/ACT_1.md, docs/characters/
 
 label s32_st_mara_the_long_way:
+    # Reached on `mara->player.familiarity >= 6`, which she gives out cheaply.
+    # Trust and suspicion she does not: pressing her about the town on the road
+    # adds four suspicion and costs a point of trust, and this is the scene
+    # where that shows. She still takes the long way. She just does not offer
+    # anything on it.
 
     scene bg town_road day with dissolve
 
     show mara school_summer neutral at s32_centre with dissolve
+
+    $ _mara = stance("mara")
 
     narrator "Mara turns left at the junction, which is not the way back."
 
@@ -46,7 +53,15 @@ label s32_st_mara_the_long_way:
 
     c_mara "About a year. You'll know when it happens. You'll come past and he won't get up, and you'll feel worse about it than you expect to."
 
-    narrator "You walk the rest of it. It takes eleven minutes longer than the short way and neither of you says very much, and it is not uncomfortable."
+    if _mara == "wary":
+
+        narrator "You walk the rest of it. It takes eleven minutes longer than the short way and she names four more things without being asked about any of them, and does not once say anything about herself."
+
+        narrator "It is a good walk. It is also, you notice about halfway, a tour of things rather than a conversation, and you are fairly sure she could keep this up for an hour."
+
+    else:
+
+        narrator "You walk the rest of it. It takes eleven minutes longer than the short way and neither of you says very much, and it is not uncomfortable."
 
     menu:
 
@@ -61,9 +76,17 @@ label s32_st_mara_the_long_way:
 
             c_mara "..."
 
-            c_mara "No."
+            if _mara == "wary":
 
-            narrator "She says it and keeps walking and does not appear to want anything done with it, and you find you have stopped reading her as cold, which took a fortnight less than you would have guessed."
+                c_mara "I go this way sometimes."
+
+                narrator "Which is not a no, and is as close to one as she is willing to be, and she looks at the hedge for the next thirty seconds."
+
+            else:
+
+                c_mara "No."
+
+                narrator "She says it and keeps walking and does not appear to want anything done with it, and you find you have stopped reading her as cold, which took a fortnight less than you would have guessed."
 
         "Why does everyone here explain things by not explaining them?":
             $ trait("curious")

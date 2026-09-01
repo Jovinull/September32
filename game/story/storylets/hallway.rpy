@@ -91,6 +91,7 @@ label s32_st_hallway_after_bell:
             $ trait("reserved")
             $ rel("mara->player", "respect", 3)
             $ rel("june->player", "familiarity", 2)
+            $ promise("saturday_with_june", "june", 3, 50)
 
             narrator "You lean on the rail. June makes the case twice more, in slightly different words, and Mara lets both versions finish."
 
@@ -100,12 +101,17 @@ label s32_st_hallway_after_bell:
 
             c_mara "It's an ask."
 
-            narrator "June takes it as a yes. Mara looks at you on the way past, briefly, and you have the strong sense that the look was about being watched rather than about being helped."
+            narrator "June takes it as a yes, and then turns round and includes you in it in the same movement, without asking whether you wanted including."
+
+            c_june "Saturday, then. Half nine at the gate, all four of us."
+
+            narrator "Mara looks at you on the way past, briefly, and you have the strong sense that the look was about being watched rather than about being helped."
 
         "Sounds like she's already said no twice.":
             $ trait("gentle")
             $ rel("june->player", "trust", 3)
             $ rel("mara->june", "familiarity", 2)
+            $ promise("saturday_with_june", "june", 3, 50)
 
             c_june "She has not said no once, is the thing."
 
@@ -118,6 +124,10 @@ label s32_st_hallway_after_bell:
             c_june "I don't have a face."
 
             c_mara "You've got several."
+
+            c_june "Saturday. Half nine at the gate. You're coming, you've been here two weeks and you've seen a road and a shop."
+
+            narrator "This is true and is delivered as though it were a diagnosis."
 
         "What were you talking about?":
             $ trait("direct")
@@ -136,6 +146,10 @@ label s32_st_hallway_after_bell:
             c_june "She's fine. She does that."
 
             narrator "Which is the entire explanation anybody offers about Mara, and it is offered in the same tone every time, and it explains nothing."
+
+            c_june "We're going into town Saturday, by the way. I'd say come, but I'm going to have to un-ask her about the car first."
+
+            narrator "She says it pleasantly. The invitation does not survive the sentence it arrived in, and both of you notice."
 
     hide mara with dissolve
     hide june with dissolve

@@ -1,0 +1,25 @@
+{
+  "id": "classroom_the_lesson",
+  "label": "s32_st_classroom_the_lesson",
+  "title": "Fourth Period",
+  "category": "ambient",
+  "status": "draft",
+  "characters": [],
+  "location": "classroom_2b",
+  "time_slots": [
+    "morning",
+    "midday",
+    "afternoon"
+  ],
+  "tags": [
+    "slice_of_life",
+    "school"
+  ],
+  "priority": 20,
+  "weight": 1.8,
+  "requirements": [],
+  "effects": [],
+  "cooldown": 2,
+  "repeat_policy": "cooldown",
+  "summary": "The game is set at a school and had no lessons in it. Three variants of being taught something, which is what the protagonist ostensibly does all day and which the player had never once seen. Builds the routine the later phases are going to break."
+}

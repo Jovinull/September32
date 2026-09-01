@@ -1,0 +1,46 @@
+{
+  "id": "theo_the_quiz",
+  "label": "s32_st_theo_the_quiz",
+  "title": "Round Four Is Always Music",
+  "category": "conversation",
+  "status": "draft",
+  "characters": [
+    "theo"
+  ],
+  "location": "common_room",
+  "time_slots": [
+    "evening"
+  ],
+  "tags": [
+    "slice_of_life",
+    "character",
+    "friendship"
+  ],
+  "priority": 40,
+  "weight": 1.3,
+  "requirements": [
+    "anchor_done(the_common_room)"
+  ],
+  "effects": [
+    "rel theo->player.familiarity += 2"
+  ],
+  "outcomes": [
+    [
+      "trait gentle += 1",
+      "rel theo->player.trust += 4",
+      "rel theo->player.attraction += 2"
+    ],
+    [
+      "trait direct += 1",
+      "rel theo->player.respect += 4"
+    ],
+    [
+      "trait sarcastic += 1",
+      "rel theo->player.resentment += 3",
+      "rel theo->player.familiarity += 3"
+    ]
+  ],
+  "cooldown": 0,
+  "repeat_policy": "once",
+  "summary": "Theo with an ego, which the audit found he did not have. Every scene so far showed him being methodical about something that mattered; this one shows him being competitive about something that does not, and embarrassed to be caught caring. A rationalist with no vanity is a device."
+}

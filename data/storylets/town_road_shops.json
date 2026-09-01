@@ -26,12 +26,9 @@
     [
       "trait curious += 1",
       "know(caretaker_opens_at_seven, the_shop_window)"
-    ],
-    [
-      "trait reserved += 1"
     ]
   ],
   "cooldown": 3,
   "repeat_policy": "cooldown",
-  "summary": "The parade of four shops; one sells everything and the others have opinions about that. Mara is deliberately NOT in the characters list so the scene stays eligible when she is not around -- the town should exist without her."
+  "summary": "The parade of four shops; one sells everything and the others have opinions about that. Mara is deliberately NOT in the characters list so the scene stays eligible when she is not around -- the town should exist without her. Third option cut in Milestone 4 for the same reason as gate_noticeboard's."
 }

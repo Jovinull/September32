@@ -23,13 +23,19 @@ label s32_st_common_room_three_way:
 
     c_mara "I do Thursday."
 
-    c_june "You do Thursday because nobody does Thursday. That's not the rota working, that's you working."
+    c_june "You do Thursday because nobody does Thursday. That's not the rota working, that's —"
 
     show mara school_summer neutral_blush
 
     c_mara "It gets done."
 
+    c_june "— that's you working."
+
+    narrator "They arrive at the ends of their sentences about a second apart and neither of them acknowledges the collision."
+
     c_theo "It gets done by one person out of seven, which is a failure of the rota that presents as a success of the kitchen."
+
+    narrator "He says this to the rota rather than to anybody, in the manner of somebody logging a defect."
 
     c_june "Thank you, Theo."
 
@@ -37,7 +43,7 @@ label s32_st_common_room_three_way:
 
     c_june "I know. It's unsettling."
 
-    narrator "This has clearly happened before, in some form, more than once. What is new is that Mara has stopped saying anything, and June has not noticed, and Theo has."
+    narrator "This has happened before, in some form, more than once. What is new is that Mara has stopped saying anything, and June has not noticed, and Theo has — and Theo, having noticed, has gone back to the laptop, because noticing is where his repertoire ends."
 
     show june school_summer neutral
 
@@ -47,7 +53,7 @@ label s32_st_common_room_three_way:
 
     c_june "Then we'll do it again in November."
 
-    c_mara "..."
+    narrator "Mara does not answer that. She reads the annotations, all three colours, top to bottom, which takes about as long as an answer would have."
 
     menu:
 
@@ -309,14 +315,46 @@ label s32_st_courtyard_the_bench:
 
 
 label s32_st_iris_the_second_box:
+    # Multidimensional relationship reading. Reaching this scene at all needs
+    # `iris->player.trust >= 14`, so she is not distant -- but trust and
+    # suspicion are independent axes and the content can produce both at once:
+    # telling Noah about the photograph costs trust and `annexe_two_of_them`
+    # adds suspicion, so "she trusts you and is watching you" is a real state
+    # rather than a hypothetical one.
+    #
+    # `wary` here is not a colder version of the scene. It is the same
+    # invitation, extended by somebody who has decided to extend it anyway,
+    # which is a different and harder thing for her to do.
 
     scene bg archive_room evening with dissolve
 
     show iris school_summer neutral at s32_centre with dissolve
 
-    narrator "There is a second shoebox on the desk with the lid off."
+    $ _iris = stance("iris")
 
-    c_iris "I started it."
+    if _iris == "wary":
+
+        show iris school_summer concerned
+
+        narrator "There is a second shoebox on the desk with the lid off, and she does not move it toward you, and she does not move it away."
+
+        c_iris "I started it."
+
+        narrator "She has been deciding whether to show you this. You can see the shape of the deciding in how deliberately she is not looking up."
+
+    elif regards("iris", "attraction", 6):
+
+        narrator "There is a second shoebox on the desk with the lid off, and a second chair, which was not there on Tuesday."
+
+        c_iris "I started it."
+
+        narrator "She says it to the box. She has been waiting to say it since about four o'clock, and the chair is the part she will not be mentioning."
+
+    else:
+
+        narrator "There is a second shoebox on the desk with the lid off."
+
+        c_iris "I started it."
 
     narrator "There are four cards in it. Each one is a box number, a rough description, and a date range with a question mark after it."
 
@@ -350,7 +388,13 @@ label s32_st_iris_the_second_box:
 
             c_iris "It's a tin. Good."
 
-            narrator "You do eleven more. It is the least interesting hour of the week and you would do it again."
+            if _iris == "wary":
+
+                narrator "You do eleven more. She checks two of yours, early on, and does not check any after that, and neither of you says anything about the checking."
+
+            else:
+
+                narrator "You do eleven more. It is the least interesting hour of the week and you would do it again."
 
         "What goes on the card that isn't in the record?":
             $ trait("curious")
@@ -385,12 +429,27 @@ label s32_st_iris_the_second_box:
 
 
 label s32_st_theo_admits_it:
+    # Reached on `theo->player.trust >= 8`. What varies is resentment, which
+    # `theo_the_spreadsheet` adds if the player told him a script could do his
+    # job in a weekend -- and being told he is overthinking it is the one thing
+    # his bible names as landing. He tells you either way. High trust plus
+    # resentment is a person confiding in somebody they have not forgiven.
 
     scene bg common_room night with dissolve
 
     show theo school_summer neutral at s32_centre with dissolve
 
     narrator "Theo is not doing anything, which is the most alarming thing he has done all week."
+
+    if regards("theo", "resentment", 4):
+
+        c_theo "I'm telling you this because you'll be unbearable about it if you find out on your own."
+
+        c_me "That's not why."
+
+        c_theo "..."
+
+        c_theo "No."
 
     c_theo "It's the annexe key."
 

@@ -639,9 +639,12 @@ No new narrative subsystem. The calendar reuses `WorldState`, `commitments` and
 
 ## Git
 
-Seven commits this milestone, on `main`, local only.
+Eight commits this milestone, on `main`, local only.
 
 ```
+7e5c82d  docs: record milestone three, and what the first week measured
+3fca495  tools: read a simulated first week, and fix a report of zeros
+016d491  content: pass the new prose for tics, and stop one scene unteaching a fact
 9138307  feat: add the calendar, as a view of the run rather than a copy of it
 d43077f  content: write the first week, and give the cast lives outside the archive
 461e314  docs: define the first week, and give it the anchors it needs
@@ -649,7 +652,9 @@ d43077f  content: write the first week, and give the cast lives outside the arch
 7e26fe1  fix: make relationship direction explicit, and correct 114 backwards edges
 ```
 
-(plus the two milestone-closing commits that carry the docs and this report.)
+The two preflight fixes are the two oldest, each on its own, before any content
+moved. Tests ship with the feature they cover rather than in a commit of their
+own, which is why there is no `test:` commit.
 
 Working tree clean. **Nothing pushed. No co-authors. No history rewritten.**
 

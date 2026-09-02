@@ -103,6 +103,21 @@ def _build_parser() -> argparse.ArgumentParser:
 
     _add_assets(sub)
     _add_renpy(sub)
+    _add_playtest(sub)
+
+    build = sub.add_parser("build", help="produce a distributable playtest build")
+    build.add_argument(
+        "--packages",
+        nargs="*",
+        default=["pc"],
+        help="Ren'Py package names (pc, linux, mac, market). Default: pc",
+    )
+    build.add_argument(
+        "--prepare-only",
+        action="store_true",
+        help="mirror content and write the build stamp, but do not run Ren'Py",
+    )
+    build.set_defaults(handler=_cmd_build)
     return parser
 
 
@@ -144,6 +159,21 @@ def _add_assets(sub: SubParsers) -> None:
     sheets = asub.add_parser("sheets", help="build contact sheets")
     sheets.add_argument("--out", type=Path, help="output directory")
     sheets.set_defaults(handler=_cmd_assets_sheets)
+
+
+def _add_playtest(sub: SubParsers) -> None:
+    """Add the ``s32 playtest ...`` subtree."""
+    playtest_cmd = sub.add_parser("playtest", help="work with returned playtest reports")
+    psub = playtest_cmd.add_subparsers(dest="playtest_command")
+
+    summarize = psub.add_parser("summarize", help="aggregate reports a tester sent back")
+    summarize.add_argument(
+        "path",
+        nargs="?",
+        default="playtests/raw",
+        help="a report file, or a directory to search (default: playtests/raw)",
+    )
+    summarize.set_defaults(handler=_cmd_playtest_summarize)
 
 
 def _add_renpy(sub: SubParsers) -> None:
@@ -711,6 +741,77 @@ def _cmd_renpy_test(args: argparse.Namespace) -> int:
             print(result.stdout[-3000:])
     print(f"\n{len(cases) - failures}/{len(cases)} testcases passed.")
     return 1 if failures else 0
+
+
+def _cmd_playtest_summarize(args: argparse.Namespace) -> int:
+    from s32tools.playtest_summary import load, render
+
+    target = Path(args.path)
+    if not target.exists():
+        print(f"nothing at {target}")
+        print("Reports go in playtests/raw/<session-code>/. See docs/playtest/WAVE_1_PLAN.md.")
+        return 1
+
+    aggregate = load(target)
+    print(render(aggregate))
+    return 1 if aggregate.rejected and not aggregate.reports else 0
+
+
+def _cmd_build(args: argparse.Namespace) -> int:
+    from s32_engine.version import GAME_VERSION
+    from s32tools import build as build_module
+    from s32tools.renpy_sdk import headless_env, run
+
+    commit = build_module.commit_hash()
+
+    if not build_module.working_tree_is_clean():
+        # A warning rather than a refusal. Refusing would make it impossible to
+        # test the build pipeline while working on it, which is when it is most
+        # likely to be wrong.
+        print("WARNING  the working tree is dirty; this build is not reproducible")
+        print("         from its own commit hash." + chr(10))
+
+    copied = build_module.mirror_content()
+    stamp = build_module.write_stamp(GAME_VERSION, commit)
+    print(f"content    {copied} files mirrored into game/data/")
+    print(f"stamp      {stamp.relative_to(paths.repo_root())}")
+    print(f"version    {GAME_VERSION}")
+    print(f"build id   {build_module.build_id(commit)}")
+    print(f"commit     {commit}")
+
+    if args.prepare_only:
+        return 0
+
+    info = _sdk_or_fail()
+    if info is None:
+        return 1
+
+    print(chr(10) + f"building   {', '.join(args.packages)} ...")
+    result = run(
+        info,
+        paths.repo_root(),
+        "distribute",
+        *[arg for package in args.packages for arg in ("--package", package)],
+        timeout=3600,
+        extra_env=headless_env(),
+    )
+    if result.returncode != 0:
+        print(result.stdout[-4000:])
+        print(result.stderr[-2000:])
+        return result.returncode
+
+    produced = build_module.artifacts(paths.repo_root() / build_module.DIST_DIRNAME, GAME_VERSION)
+    if not produced:
+        print("Ren'Py reported success but produced nothing in dist/.")
+        return 1
+
+    print("")
+    for artifact in produced:
+        print(f"  {artifact.path.name}")
+        print(f"      {artifact.megabytes:.1f} MB")
+        print(f"      sha256 {artifact.sha256}")
+    print(chr(10) + "Record these in docs/production/PLAYTEST_BUILD.md before sending.")
+    return 0
 
 
 def _cmd_renpy_run(_args: argparse.Namespace) -> int:

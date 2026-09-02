@@ -152,9 +152,31 @@ uv run s32 assets sheets        # contact sheets
 
 ```bash
 uv run s32 renpy lint
-uv run s32 renpy test           # six smoke testcases
+uv run s32 renpy test           # every testcase under game/testcases/
+uv run s32 renpy test act1_golden   # a whole week, played by Ren'Py
 uv run s32 renpy run
 ```
+
+`act1_golden` is the only regression test that runs the *prose*. Everything else
+about a scene is checked without executing it, so until Milestone 5 a NameError
+inside a storylet would have reached a player before it reached anybody else.
+
+### Playtest
+
+```bash
+uv run s32 build                # a distributable Act 1 playtest build
+uv run s32 build --prepare-only # mirror content and stamp, no Ren'Py
+uv run s32 playtest summarize   # aggregate reports testers sent back
+uv run python scripts/playtime.py   # how long a playthrough actually is
+```
+
+`build` mirrors `data/` into the game tree, stamps the build with its version
+and commit, and runs Ren'Py's distributor. See
+[`docs/production/PLAYTEST_BUILD.md`](docs/production/PLAYTEST_BUILD.md) for the
+checklist that has to pass before a build is sent to anybody.
+
+`summarize` counts and lists. It does not interpret free text, and no tooling in
+this repository sends a tester's words anywhere.
 
 ### Quality
 

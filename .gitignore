@@ -51,6 +51,20 @@ game/gui/vendor/
 .cache/
 assets/.downloads/
 
+# --- Build outputs ----------------------------------------------------------
+# `s32 build` mirrors data/ into the game tree and stamps the build with its own
+# commit. Both are generated: a committed copy of the content would be loaded in
+# preference to the real one (the engine checks the game directory first) and a
+# committed stamp would name the commit that contains it, which cannot be true.
+game/data/
+game/build_stamp.json
+
+# --- Playtest feedback ------------------------------------------------------
+# What real people wrote. Never in version control, and there is no automation
+# that could put it there. Synthetic material for the tests lives in
+# tests/fixtures/playtests/ and is marked SYNTHETIC.
+playtests/raw/
+
 # --- Ren'Py runtime output --------------------------------------------------
 # Written next to the project when the game or lint runs.
 /log.txt

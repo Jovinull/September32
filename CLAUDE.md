@@ -69,6 +69,28 @@ hypothetical, it happened during the bootstrap.
 `docs/characters/`. Then `s32 assets images` to regenerate the Ren'Py image
 definitions.
 
+## Handing it to a person
+
+The playtest build is the one artefact in this project that leaves the machine.
+
+```bash
+uv run s32 build
+```
+
+Three things it does that Ren'Py's `distribute` does not, each of which fails
+silently if it stops happening: it mirrors `data/` into `game/data/` (a built
+game with no content loads zero storylets and does not crash), it writes
+`game/build_stamp.json` so a bug report can name the build, and it relies on the
+exclusions in `options.rpy` to keep the repository out of the archive — the base
+directory Ren'Py scans is this repo, and its own rules end with a catch-all.
+
+**First match wins** in `build.classify`, and the scanner does not descend into
+a directory it has excluded. Write `docs/`, never `docs/**`: the `**` form
+leaves the directory itself unmatched and ships an empty folder.
+
+`docs/production/PLAYTEST_BUILD.md` has the checklist. The item that matters is
+unpacking the archive somewhere else entirely and running it there.
+
 ## Things that will bite
 
 **Ren'Py `define` runs before any import.** `game/options.rpy` holds a literal
@@ -87,7 +109,20 @@ launch once.
 **Randomness goes through `s32_engine.rng.Rng`.** Never `random` — its state is
 outside the save, so rolling back and replaying gives a different answer.
 
-**Storylet ids are permanent** once a storylet is `active`. They appear in saves.
+**Storylet ids are permanent** once a storylet is `active`. They appear in saves
+— and, since Milestone 5, in playtest reports. Renaming one during a wave
+silently breaks the comparison between two testers.
+
+**The playtest recorder lives in `persistent`, not in the run state.** It has to
+survive quitting, and it must *not* be rolled back: what a tester did includes
+the parts they took back. Every recorder goes through `s32_pt_run()`, which is
+where consent is checked, so a new one cannot forget to.
+
+**Record state, not call sites.** `s32_pt_commitments()` reads
+`S32State["commitments"]` rather than hooking `promise()`, because a storylet's
+declared `commit(...)` effect never goes near that verb. The first version
+hooked the verb and reported runs with a commitment in the state and none in
+the report.
 
 ## The hard rules
 
@@ -101,6 +136,17 @@ From `AGENTS.md`, repeated because they are the ones with consequences:
   this reason.
 - **Never commit third-party binaries.**
 - **Never push, release, or publish** without being asked.
+
+## When a scene will not fire in the game rather than in the tools
+
+The simulator never opens a `.rpy`. `renpy lint` never runs one. For four
+milestones that meant the prose was checked by nothing, and the game's `start`
+label played six time slots and stopped — three of the five anchors had never
+fired outside the simulator while every gate was green.
+
+`game/story/act1.rpy` is the loop that plays the week, and
+`uv run s32 renpy test act1_golden` plays it end to end in about thirteen
+seconds. It is the only test that executes a scene.
 
 ## When a scene will not fire
 

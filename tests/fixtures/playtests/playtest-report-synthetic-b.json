@@ -1,0 +1,66 @@
+{
+  "build": {
+    "build_id": "synthetic",
+    "commit": "0000000000000000000000000000000000000000",
+    "game_version": "0.2.0-playtest.1",
+    "playtest_report_schema_version": 1,
+    "save_schema_version": 3
+  },
+  "consent": true,
+  "note": "SYNTHETIC -- generated for the test suite. Not a real tester.",
+  "playtest_report_schema_version": 1,
+  "runs": [
+    {
+      "active_seconds": 5880,
+      "anchors": [
+        "arrival",
+        "first_shift",
+        "the_common_room",
+        "the_undated_column",
+        "the_date"
+      ],
+      "archive_reopens": 0,
+      "calendar_opens": 0,
+      "choices": [
+        "archive_intro.2.say-nothing",
+        "travel.rooftop",
+        "annexe_two_of_them.2.let-them-work-it-out",
+        "mara_is_wrong.0.correct-her"
+      ],
+      "commitments_broken": [
+        "saturday_with_june"
+      ],
+      "commitments_kept": [],
+      "commitments_made": [
+        "saturday_with_june"
+      ],
+      "completed": true,
+      "days_reached": 7,
+      "documents": [
+        "accession_record",
+        "attendance_sheet"
+      ],
+      "first_completed": true,
+      "index": 1,
+      "journal_opens": 2,
+      "loads": 0,
+      "scenes": [
+        "arrival",
+        "first_shift",
+        "archive_intro",
+        "classroom_before_bell",
+        "the_common_room",
+        "noah_takes_a_call",
+        "mara_is_wrong",
+        "the_undated_column",
+        "june_is_not_fine",
+        "hallway_after_bell",
+        "annexe_two_of_them",
+        "courtyard_small_talk",
+        "the_date"
+      ],
+      "seed": 55501
+    }
+  ],
+  "session_code": "S32-SYNTHB"
+}

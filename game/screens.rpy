@@ -328,7 +328,7 @@ screen navigation():
         ## September 32: the clue journal, in-game only. Scaffold — see
         ## game/screens/journal.rpy.
         if not main_menu:
-            textbutton _("Journal") action ShowMenu("s32_journal")
+            textbutton _("Journal") action [Function(s32_pt_screen, "journal"), ShowMenu("s32_journal")]
 
             ## The archive index: everything the player has been able to look
             ## at properly, reopenable at any time.
@@ -336,7 +336,7 @@ screen navigation():
 
             ## The calendar: a view of where the run is, what the protagonist
             ## has done and what they have promised. game/screens/calendar.rpy
-            textbutton _("Calendar") action ShowMenu("s32_calendar")
+            textbutton _("Calendar") action [Function(s32_pt_screen, "calendar"), ShowMenu("s32_calendar")]
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
@@ -389,7 +389,15 @@ screen main_menu():
             text "[config.name!t]":
                 style "main_menu_title"
 
-            text "[config.version]":
+            ## September 32: what this build is, discreetly and without
+            ## looking like a debug build. A tester who opens the game a week
+            ## after receiving it should be able to see at a glance that it is
+            ## the private Act 1 test, and which one.
+            text _("Act 1 — private playtest"):
+                style "main_menu_playtest"
+
+            $ _s32_build_line = s32_build_line()
+            text "[_s32_build_line]":
                 style "main_menu_version"
 
 
@@ -398,12 +406,16 @@ style main_menu_vbox is vbox
 style main_menu_text is gui_text
 style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
+style main_menu_playtest is main_menu_text
 
 style main_menu_frame:
     xsize gui.scale(280)
     yfill True
 
     background "gui/overlay/main_menu.png"
+
+style main_menu_playtest:
+    color "#e8c98a"
 
 style main_menu_vbox:
     xalign 1.0

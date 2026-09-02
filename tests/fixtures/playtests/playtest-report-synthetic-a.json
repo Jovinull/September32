@@ -1,0 +1,105 @@
+{
+  "build": {
+    "build_id": "synthetic",
+    "commit": "0000000000000000000000000000000000000000",
+    "game_version": "0.2.0-playtest.1",
+    "playtest_report_schema_version": 1,
+    "save_schema_version": 3
+  },
+  "consent": true,
+  "note": "SYNTHETIC -- generated for the test suite. Not a real tester.",
+  "playtest_report_schema_version": 1,
+  "runs": [
+    {
+      "active_seconds": 4620,
+      "anchors": [
+        "arrival",
+        "first_shift",
+        "the_common_room",
+        "the_undated_column",
+        "the_date"
+      ],
+      "archive_reopens": 1,
+      "calendar_opens": 3,
+      "choices": [
+        "archive_intro.0.have-a-look",
+        "travel.courtyard",
+        "the_common_room.1.let-june-finish",
+        "iris_the_second_box.0.take-the-lid-off"
+      ],
+      "commitments_broken": [],
+      "commitments_kept": [
+        "saturday_with_june"
+      ],
+      "commitments_made": [
+        "saturday_with_june"
+      ],
+      "completed": true,
+      "days_reached": 7,
+      "documents": [
+        "accession_record",
+        "catalogue_card",
+        "attendance_sheet",
+        "accession_record"
+      ],
+      "first_completed": true,
+      "index": 1,
+      "journal_opens": 1,
+      "loads": 1,
+      "scenes": [
+        "arrival",
+        "first_shift",
+        "archive_intro",
+        "old_photo_glimpse",
+        "courtyard_small_talk",
+        "the_common_room",
+        "june_reads_it_flat",
+        "mara_the_long_way",
+        "the_undated_column",
+        "iris_the_second_box",
+        "theo_the_quiz",
+        "dorm_late_night",
+        "courtyard_small_talk",
+        "the_date"
+      ],
+      "seed": 918273
+    },
+    {
+      "active_seconds": 1800,
+      "anchors": [
+        "arrival",
+        "first_shift",
+        "the_common_room"
+      ],
+      "archive_reopens": 0,
+      "calendar_opens": 0,
+      "choices": [
+        "archive_intro.1.get-on-with-it"
+      ],
+      "commitments_broken": [],
+      "commitments_kept": [],
+      "commitments_made": [],
+      "completed": true,
+      "days_reached": 7,
+      "documents": [
+        "accession_record"
+      ],
+      "first_completed": false,
+      "index": 2,
+      "journal_opens": 0,
+      "loads": 0,
+      "scenes": [
+        "arrival",
+        "first_shift",
+        "archive_intro",
+        "old_photo_glimpse",
+        "courtyard_small_talk",
+        "the_common_room",
+        "june_reads_it_flat",
+        "mara_the_long_way"
+      ],
+      "seed": 918273
+    }
+  ],
+  "session_code": "S32-SYNTHA"
+}

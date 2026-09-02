@@ -14,11 +14,11 @@ label after_load:
 
 label splashscreen:
     # Deliberately minimal. A splash is time taken from the player; this one
-    # only states what the build is, because shipping a prototype that does not
-    # say it is a prototype is how prototypes get reviewed as games.
+    # only states what the build is, because shipping an unfinished game that
+    # does not say so is how unfinished games get reviewed as finished ones.
     scene black
     with Pause(0.2)
-    show text "{size=+4}September 32{/size}\n{size=-8}prototype build — not final content{/size}" with dissolve
+    show text "{size=+4}September 32{/size}\n{size=-8}Act 1 — private playtest — some art is temporary{/size}" with dissolve
     with Pause(1.6)
     hide text with dissolve
     with Pause(0.3)

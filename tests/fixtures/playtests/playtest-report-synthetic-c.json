@@ -1,0 +1,51 @@
+{
+  "build": {
+    "build_id": "synthetic",
+    "commit": "0000000000000000000000000000000000000000",
+    "game_version": "0.2.0-playtest.1",
+    "playtest_report_schema_version": 1,
+    "save_schema_version": 3
+  },
+  "consent": true,
+  "note": "SYNTHETIC -- generated for the test suite. Not a real tester.",
+  "playtest_report_schema_version": 1,
+  "runs": [
+    {
+      "active_seconds": 1440,
+      "anchors": [
+        "arrival",
+        "first_shift",
+        "the_common_room",
+        "the_undated_column"
+      ],
+      "archive_reopens": 0,
+      "calendar_opens": 0,
+      "choices": [
+        "archive_intro.0.have-a-look"
+      ],
+      "commitments_broken": [],
+      "commitments_kept": [],
+      "commitments_made": [],
+      "completed": false,
+      "days_reached": 4,
+      "documents": [
+        "accession_record"
+      ],
+      "first_completed": false,
+      "index": 1,
+      "journal_opens": 0,
+      "loads": 0,
+      "scenes": [
+        "arrival",
+        "first_shift",
+        "archive_intro",
+        "old_photo_glimpse",
+        "the_common_room",
+        "the_undated_column",
+        "ellery_and_the_form"
+      ],
+      "seed": 771
+    }
+  ],
+  "session_code": "S32-SYNTHC"
+}

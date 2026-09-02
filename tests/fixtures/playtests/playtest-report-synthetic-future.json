@@ -1,0 +1,14 @@
+{
+  "build": {
+    "build_id": "synthetic",
+    "commit": "0000000000000000000000000000000000000000",
+    "game_version": "0.2.0-playtest.1",
+    "playtest_report_schema_version": 1,
+    "save_schema_version": 3
+  },
+  "consent": true,
+  "note": "SYNTHETIC -- a report from a schema this build cannot read.",
+  "playtest_report_schema_version": 99,
+  "runs": [],
+  "session_code": "S32-SYNTHX"
+}

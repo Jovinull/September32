@@ -193,6 +193,7 @@ init python:
         if changes:
             s32_devlog.block("archive", "first reading of {}".format(document_id), changes)
 
+        s32_pt_document(document_id)
         renpy.call_screen("s32_document", document_id=document_id)
         return True
 

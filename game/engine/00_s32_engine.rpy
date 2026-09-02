@@ -152,6 +152,8 @@ init python:
         s32_meta.start_run(meta)
         s32_set_meta(meta)
 
+        s32_pt_start_run(seed)
+
         s32_devlog.log("run", "new run, seed={}".format(seed))
         return S32State
 
@@ -164,6 +166,8 @@ init python:
         from a *newer* build, which genuinely cannot be read.
         """
         global S32State
+
+        s32_pt_load()
 
         S32State = s32_state.migrate_state(S32State)
         added = s32_state.sync_with_library(S32State, s32_library)
@@ -474,6 +478,37 @@ init python:
         if config.developer and changes:
             s32_devlog.block("narrative", "{} effects".format(storylet.id), changes)
         return changes
+
+    def s32_ready_anchor():
+        """Return the id of the anchor that should fire now, or None.
+
+        Anchors are strictly ordered and mandatory, so this is asked before the
+        director is asked for anything else: an anchor that is ready outranks
+        every storylet in the game by definition rather than by priority.
+        """
+        pending = s32_director.next_anchor(S32State, s32_rng())
+        if pending is None:
+            return None
+        anchor_id, ready = pending
+        return anchor_id if ready else None
+
+    def s32_anchor_label(anchor_id):
+        """Return the Ren'Py label for an anchor."""
+        return s32_library.anchors[anchor_id].label
+
+    def s32_place_name(location_id):
+        """Return a location's display name, for the travel menu."""
+        place = s32_library.locations.get(location_id)
+        return place.display_name if place else location_id
+
+    def s32_weekday():
+        """Return the name of the weekday the run is currently on.
+
+        A label, not a computed date. See s32_engine/calendar.py: nothing in
+        this game parses a date, which is what lets a September with
+        thirty-two days in it stay representable.
+        """
+        return s32_calendar_module.weekday_of(S32State["world"]["calendar_day"])
 
     def s32_explain(storylet_id):
         """Return the full eligibility trace for one storylet, as text.

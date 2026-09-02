@@ -12,6 +12,7 @@
 testcase calendar_opens_and_closes:
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -37,6 +38,7 @@ testcase calendar_shows_today_from_world_state:
     # player has no way to tell which.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -63,6 +65,7 @@ testcase calendar_walks_with_the_keyboard:
     # selection clamps to the month rather than wrapping.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -106,6 +109,7 @@ testcase calendar_shows_a_promise_and_hides_the_future:
     # and never from the content library.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -149,6 +153,7 @@ testcase calendar_survives_rollback:
     # would fail if somebody ever cached the month view into the save.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 

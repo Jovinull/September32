@@ -13,6 +13,7 @@ testcase archive_opens_and_closes:
     # nothing else — which is exactly what it is for.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -40,6 +41,7 @@ testcase archive_pages_with_the_keyboard:
     # should never need the mouse to read something.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -54,7 +56,13 @@ testcase archive_pages_with_the_keyboard:
     pause 0.4
 
     # ... and on to the photograph.
+    # The week loop offers a travel menu at the turn of the afternoon and the
+    # evening, and where the clock lands after archive_intro depends on the
+    # scene. Staying put keeps this test about the viewer.
     advance until screen "choice" timeout 40.0
+    if "Stay where you are.":
+        click "Stay where you are."
+        advance until screen "choice" timeout 40.0
     click "Put it in the maybe pile."
 
     advance until screen "s32_document" timeout 40.0
@@ -79,6 +87,7 @@ testcase archive_effects_apply_once:
     # document twice must not grant its effects twice.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -116,6 +125,7 @@ testcase archive_index_hides_locked_documents:
     # needs the photograph; at the start of a run the player has nothing.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -142,6 +152,7 @@ testcase archive_survives_rollback:
     # it must unwind it — including the knowledge it granted.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 

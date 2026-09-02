@@ -42,6 +42,7 @@ testcase smoke_start_and_choose:
     # clicks through proves the game does not crash, not that it works.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -77,6 +78,7 @@ testcase smoke_director_runs:
     # it — and if someone changes a priority, this fails and says so.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -96,7 +98,14 @@ testcase smoke_director_runs:
 
     # Second: the photograph, gated on having seen the first. It produces the
     # catalogue card, which also has to be closed.
+    # The week loop offers a travel menu at the turn of the afternoon and the
+    # evening, and where the clock lands after archive_intro depends on the
+    # scene. Staying put keeps this test about the director's priority chain,
+    # which is what it is for.
     advance until screen "choice" timeout 30.0
+    if "Stay where you are.":
+        click "Stay where you are."
+        advance until screen "choice" timeout 30.0
     click "Put it in the maybe pile."
 
     advance until screen "s32_document" timeout 30.0
@@ -119,6 +128,7 @@ testcase smoke_rollback:
     # really does unwind, not just the text.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -154,6 +164,7 @@ testcase smoke_debug_screens:
     # state-shape change that nothing else notices.
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -178,6 +189,7 @@ testcase smoke_debug_screens:
 # Ren'Py runs `testcase default` when `renpy . test` is given no name.
 testcase default:
     $ _test.transition_timeout = 0.05
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
     advance until screen "choice"

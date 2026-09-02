@@ -7,6 +7,7 @@
 testcase smoke_journal:
     $ _test.transition_timeout = 0.05
 
+    $ persistent.s32_playtest_consent = False
     click "Start"
     pause 1.0
 
@@ -25,7 +26,14 @@ testcase smoke_journal:
     click "Close"
     pause 0.4
 
+    # The week loop offers a travel menu at the turn of the afternoon and the
+    # evening, and where the clock lands after archive_intro depends on the
+    # scene. Staying put keeps this test about the director's priority chain,
+    # which is what it is for.
     advance until screen "choice" timeout 40.0
+    if "Stay where you are.":
+        click "Stay where you are."
+        advance until screen "choice" timeout 40.0
     click "Put it in the maybe pile."
 
     # The photograph's catalogue card.

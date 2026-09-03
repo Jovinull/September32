@@ -133,6 +133,23 @@ def test_the_tester_documents_exist():
         assert len(path.read_text(encoding="utf-8")) > 500, f"{name} is a stub"
 
 
+def test_no_compiled_python_ships(options):
+    """A `.pyc` embeds the absolute path of the file it was compiled from.
+
+    On a developer's machine that is a home directory with a name in it, which
+    is exactly the sort of thing the report's privacy check refuses to write
+    and which was quietly going into the archive beside it.
+    """
+    rules = _classified(options)
+    assert rules.get("**/__pycache__/**") is None
+    assert rules.get("**.pyc") is None
+
+
+def test_the_archive_names_the_build(options):
+    """A tester should know which build they have from the file name alone."""
+    assert 'build.directory_name = "September32-Act1-Playtest-"' in options
+
+
 def test_the_testcases_do_not_ship(options):
     """`game/testcases/` holds the harness that answers menus for the golden path.
 
@@ -194,6 +211,55 @@ def test_the_mirror_carries_the_whole_library(tmp_path, monkeypatch):
     assert len(mirrored.anchors) == len(real.anchors)
     assert len(mirrored.characters) == len(real.characters)
     assert len(mirrored.locations) == len(real.locations)
+
+
+def test_an_empty_library_is_loud():
+    """The silent failure, made loud.
+
+    A built game with no content loads zero storylets, selects nothing, and
+    raises nothing. The first person to notice would be a tester, halfway
+    through a week that never starts.
+    """
+    bridge = (paths.game_dir() / "engine" / "00_s32_engine.rpy").read_text(encoding="utf-8")
+    assert "if not s32_library.storylets:" in bridge
+    assert "no content was loaded" in bridge
+
+
+def test_the_built_game_can_read_content_out_of_an_archive():
+    """`Path.is_dir` is False for a directory inside a Ren'Py archive.
+
+    That is how the first playtest build reached a fresh install and failed on
+    its own content, with a stack trace, before the main menu. The seam that
+    fixes it keeps the engine dependency-free, which is the property that lets
+    the same loader run in the headless simulator.
+    """
+    from s32_engine.definitions import load_library_from
+    from s32_engine.documents import load_documents_from
+
+    files = {
+        f"{path.parent.name}/{path.name}": path.read_text(encoding="utf-8")
+        for path in sorted(paths.data_dir().rglob("*.json"))
+    }
+    assert len(load_library_from(files).storylets) == len(load_library(paths.data_dir()).storylets)
+    assert load_documents_from(files).documents
+
+    bridge = (paths.game_dir() / "engine" / "00_s32_engine.rpy").read_text(encoding="utf-8")
+    assert "renpy.list_files()" in bridge
+
+
+def test_no_shipped_script_imports_a_launcher_only_module():
+    """`gui7` lives in the SDK and is not part of a distribution.
+
+    An unguarded import crashed the second playtest build before the main
+    menu. The guard is why a build gets unpacked somewhere else and run there.
+    """
+    for path in sorted(paths.game_dir().rglob("*.rpy")):
+        if "testcases" in path.parts:
+            continue
+        text = path.read_text(encoding="utf-8")
+        if "gui7" not in text:
+            continue
+        assert 'os.path.isdir(os.path.join(_launcher, "gui7"))' in text, path.name
 
 
 def test_the_engine_looks_in_the_game_directory_first():

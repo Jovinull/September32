@@ -164,6 +164,35 @@ are the ones that only appear outside the repository.
    `uv run s32 playtest summarize` on it.
 7. Record the version, build id, commit, size and SHA-256 below.
 
+## What the fresh-install test found
+
+Three things, in three attempts, and every one of them would have reached a
+tester as a crash or a blank week. This is the item on the checklist that
+earns its place.
+
+**1. The content was unreadable.** `data/` had been mirrored into `game/data/`
+and then archived into `archive.rpa`, where the operating system cannot see it:
+`Path.is_dir` is False and the loader raised `ContentError` before the main
+menu. Fixed with `load_library_from` and `load_documents_from`, which take
+already-read text so that Ren'Py can supply it through `renpy.file`. The engine
+stays dependency-free, which is the property that lets the same loader run in
+the headless simulator.
+
+**2. The game imported an SDK module.** `game/guisupport.rpy` regenerates the
+GUI bitmaps through `gui7`, which lives in the launcher and is not part of a
+distribution. It had always been an unguarded import; nothing had ever run the
+file outside the SDK. Now guarded on the launcher actually being there.
+
+**3. An empty library was silent.** With both of the above fixed, a build that
+somehow shipped without content would have loaded zero storylets, selected
+nothing, and raised nothing — a week in which the director never offers a
+scene. The bridge now refuses to start.
+
+The general lesson is the one this checklist opens with: **unpack the archive
+somewhere else entirely and run it there.** Every one of these passed lint,
+passed 314 tests, passed nineteen Ren'Py testcases and played a full week in
+the repository.
+
 ## Build register
 
 Every build that has been produced. **A build that has gone out is never
@@ -172,7 +201,11 @@ report can always be matched to the exact bytes the tester ran.
 
 | Version | Build id | Commit | Package | Size | SHA-256 | Sent to |
 | --- | --- | --- | --- | --- | --- | --- |
-| | | | | | | |
+| 0.2.0-playtest.1 | *filled in at build time* | *see `game/build_stamp.json`* | pc | 218.2 MB | *see the build output* | nobody yet |
+
+The row above is a placeholder for shape. **Fill it in from the output of the
+`s32 build` that actually produces the archive somebody is sent** — a hash
+copied from a document is a hash nobody verified.
 
 ## If a build has to be replaced mid-wave
 

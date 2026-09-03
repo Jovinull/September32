@@ -54,37 +54,58 @@ def load_library(data_root: str | Path) -> ContentLibrary:
     if not root.is_dir():
         raise ContentError(f"data directory not found: {root}")
 
+    files = {
+        f"{path.parent.name}/{path.name}": path.read_text(encoding="utf-8")
+        for path in sorted(root.rglob("*.json"))
+    }
+    return load_library_from(files)
+
+
+def load_library_from(files: dict[str, str]) -> ContentLibrary:
+    """Build a library from already-read files, keyed ``"<kind>/<name>.json"``.
+
+    The seam exists for exactly one caller. A built game keeps its content
+    inside a Ren'Py archive, where the operating system cannot see it and
+    ``Path.is_dir`` is therefore False -- which is how the first playtest build
+    reached a fresh install and failed on its own content. Ren'Py can read
+    those files perfectly well; it just cannot hand over a directory.
+
+    Putting the seam here rather than teaching the loader about Ren'Py keeps
+    the engine dependency-free, which is the property that lets the same code
+    run in the headless simulator.
+    """
     return ContentLibrary(
-        characters={c.id: c for c in _load_all(root / "characters", _character)},
-        locations={loc.id: loc for loc in _load_all(root / "locations", _location)},
-        knowledge={k.id: k for k in _load_all(root / "knowledge", _knowledge)},
-        items={i.id: i for i in _load_all(root / "items", _item)},
-        storylets={s.id: s for s in _load_all(root / STORYLET_DIR, _storylet)},
-        anchors={a.id: a for a in _load_all(root / ANCHOR_DIR, _anchor)},
+        characters={c.id: c for c in _load_all(files, "characters", _character)},
+        locations={loc.id: loc for loc in _load_all(files, "locations", _location)},
+        knowledge={k.id: k for k in _load_all(files, "knowledge", _knowledge)},
+        items={i.id: i for i in _load_all(files, "items", _item)},
+        storylets={s.id: s for s in _load_all(files, STORYLET_DIR, _storylet)},
+        anchors={a.id: a for a in _load_all(files, ANCHOR_DIR, _anchor)},
     )
 
 
-def _load_all(directory: Path, build: Any) -> list[Any]:
-    """Load and build every ``*.json`` file in a directory, sorted by name."""
-    if not directory.is_dir():
-        return []
-
-    seen: dict[str, Path] = {}
+def _load_all(files: dict[str, str], kind: str, build: Any) -> list[Any]:
+    """Build every entity of one kind, in filename order."""
+    prefix = f"{kind}/"
+    seen: dict[str, str] = {}
     result: list[Any] = []
-    for path in sorted(directory.rglob("*.json")):
+    for name in sorted(files):
+        if not name.startswith(prefix):
+            continue
+        path = Path(name)
         try:
-            raw = json.loads(path.read_text(encoding="utf-8"))
+            raw = json.loads(files[name])
         except json.JSONDecodeError as exc:
-            raise ContentError(f"{path}: invalid JSON: {exc}") from exc
+            raise ContentError(f"{name}: invalid JSON: {exc}") from exc
         if not isinstance(raw, dict):
-            raise ContentError(f"{path}: expected a JSON object at the top level")
+            raise ContentError(f"{name}: expected a JSON object at the top level")
 
         entity = build(raw, path)
         if entity.id in seen:
             raise ContentError(
-                f"duplicate id {entity.id!r}: defined in {seen[entity.id]} and again in {path}"
+                f"duplicate id {entity.id!r}: defined in {seen[entity.id]} and again in {name}"
             )
-        seen[entity.id] = path
+        seen[entity.id] = name
         result.append(entity)
     return result
 

@@ -160,16 +160,33 @@ def load_documents(data_root: str | Path) -> DocumentLibrary:
     if not directory.is_dir():
         return DocumentLibrary()
 
-    documents: dict[str, DocumentDef] = {}
-    for path in sorted(directory.rglob("*.json")):
-        try:
-            raw = json.loads(path.read_text(encoding="utf-8"))
-        except json.JSONDecodeError as exc:
-            raise ContentError(f"{path}: invalid JSON: {exc}") from exc
+    return load_documents_from(
+        {
+            f"documents/{path.name}": path.read_text(encoding="utf-8")
+            for path in sorted(directory.rglob("*.json"))
+        }
+    )
 
-        document = _document(raw, path)
+
+def load_documents_from(files: dict[str, str]) -> DocumentLibrary:
+    """Build the document library from already-read files.
+
+    The same seam as :func:`s32_engine.definitions.load_library_from`, and for
+    the same reason: a built game keeps its content inside a Ren'Py archive,
+    where there is no directory for the operating system to open.
+    """
+    documents: dict[str, DocumentDef] = {}
+    for name in sorted(files):
+        if not name.startswith("documents/"):
+            continue
+        try:
+            raw = json.loads(files[name])
+        except json.JSONDecodeError as exc:
+            raise ContentError(f"{name}: invalid JSON: {exc}") from exc
+
+        document = _document(raw, Path(name))
         if document.id in documents:
-            raise ContentError(f"duplicate document id {document.id!r} in {path}")
+            raise ContentError(f"duplicate document id {document.id!r} in {name}")
         documents[document.id] = document
     return DocumentLibrary(documents=documents)
 

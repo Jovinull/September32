@@ -64,11 +64,10 @@ init python:
 init 1 python:
 
     def _s32_data_dir():
-        """Return the directory holding authored content JSON.
+        """Return the directory holding authored content JSON, or None.
 
-        In development the repository's `data/` sits beside `game/`. In a built
-        game there is no repository, so the content is mirrored into
-        `game/data/` by the build step. Checking both keeps one code path.
+        In development the repository's `data/` sits beside `game/` and the
+        engine can read it straight off the disk.
         """
         candidates = [
             os.path.join(config.gamedir, "data"),
@@ -77,17 +76,56 @@ init 1 python:
         for path in candidates:
             if os.path.isdir(path):
                 return path
-        return candidates[0]
+        return None
+
+    def _s32_content_files():
+        """Return every content file as text, read through Ren'Py.
+
+        A built game keeps `data/` inside `archive.rpa`, where the operating
+        system cannot see it: `os.path.isdir` is False and the loader raises.
+        That is how the first playtest build reached a fresh install and failed
+        on its own content, with a stack trace, before the main menu.
+
+        Ren'Py can read those files perfectly well -- it simply cannot hand
+        over a directory -- so the content is read here and passed to the
+        engine as text. The engine stays dependency-free, which is the property
+        that lets the same loader run in the headless simulator.
+        """
+        files = {}
+        for name in renpy.list_files():
+            parts = name.split("/")
+            if len(parts) == 3 and parts[0] == "data" and name.endswith(".json"):
+                with renpy.file(name) as handle:
+                    files["{}/{}".format(parts[1], parts[2])] = handle.read().decode("utf-8")
+        return files
 
     # The content library is static for the life of the process and is NOT part
     # of the save. Rebuilding it every launch is what lets content be edited
     # without invalidating existing saves.
-    s32_library = s32_definitions.load_library(_s32_data_dir())
-    s32_director = NarrativeDirector(s32_library)
+    #
+    # Documents load alongside the storylets and are static in the same way.
+    # What the player has READ is run state; what exists is not.
+    _s32_data = _s32_data_dir()
+    if _s32_data is not None:
+        s32_library = s32_definitions.load_library(_s32_data)
+        s32_library_documents = s32_documents.load_documents(_s32_data)
+    else:
+        _s32_files = _s32_content_files()
+        s32_library = s32_definitions.load_library_from(_s32_files)
+        s32_library_documents = s32_documents.load_documents_from(_s32_files)
 
-    # Documents load alongside the storylets and are static for the process in
-    # the same way. What the player has READ is run state; what exists is not.
-    s32_library_documents = s32_documents.load_documents(_s32_data_dir())
+    # A library with nothing in it is the silent failure this whole path exists
+    # to prevent: the director selects nothing, the week is empty, no exception
+    # is raised anywhere, and the first person to notice is a tester. Loud is
+    # the only acceptable behaviour.
+    if not s32_library.storylets:
+        raise Exception(
+            "no content was loaded. In development, data/ should sit beside "
+            "game/. In a built game it is mirrored into game/data/ by "
+            "`s32 build` -- see docs/production/PLAYTEST_BUILD.md."
+        )
+
+    s32_director = NarrativeDirector(s32_library)
 
     s32_devlog.log(
         "content",

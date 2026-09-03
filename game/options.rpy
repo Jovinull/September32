@@ -104,11 +104,25 @@ init python:
     ## Development-only material is excluded from every distribution. The
     ## classify rules run in order, first match wins.
 
+    ## What the archive and its top-level folder are called. A tester should be
+    ## able to tell from the file name alone which build they were sent, six
+    ## weeks after they were sent it. The executable keeps the short name.
+    build.directory_name = "September32-Act1-Playtest-" + config.version
+    build.executable_name = "September32"
+
     build.classify("**~", None)
     build.classify("**.bak", None)
     build.classify("**/.**", None)
     build.classify("**/#**", None)
     build.classify("**/thumbs.db", None)
+
+    ## Compiled Python caches. Not merely noise: a .pyc embeds the absolute
+    ## path of the source file it was compiled from, which on a developer's
+    ## machine is a home directory with a name in it. Ren'Py compiles the
+    ## engine package itself at first run, so shipping these gains nothing
+    ## either.
+    build.classify("**/__pycache__/**", None)
+    build.classify("**.pyc", None)
 
     ## Documentation the player should receive alongside the game. The licence
     ## notices are not optional: several bundled components require them.

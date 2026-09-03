@@ -787,10 +787,20 @@ def _cmd_build(args: argparse.Namespace) -> int:
         return 1
 
     print(chr(10) + f"building   {', '.join(args.packages)} ...")
+
+    # `distribute` is a *launcher* command, not one the SDK shim answers on its
+    # own: Ren'Py is asked to run its own launcher project, and the project to
+    # package is an argument to that. Running it against the game directly gives
+    # "Command distribute is unknown", which reads like a version problem and is
+    # not one.
     result = run(
         info,
-        paths.repo_root(),
+        info.root / "launcher",
         "distribute",
+        str(paths.repo_root()),
+        "--destination",
+        str(paths.repo_root() / build_module.DIST_DIRNAME),
+        "--no-update",
         *[arg for package in args.packages for arg in ("--package", package)],
         timeout=3600,
         extra_env=headless_env(),

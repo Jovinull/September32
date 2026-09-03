@@ -365,6 +365,44 @@ the repository build (`act1_golden`) against the same code, and the built
 archive is verified to start, load its content and reach the main menu. That
 gap is real and is named rather than papered over.
 
+## Performance and accessibility
+
+Both asked for a check rather than a project, and both got one.
+
+**Startup**, measured from the built game on a machine that had never run it —
+Intel Iris Xe, `gl2` renderer, 1920x1080:
+
+| | |
+| --- | --- |
+| Loading script | 173 ms |
+| Running init code | 139 ms |
+| Interface start | 268 ms |
+| To the main menu | well under two seconds |
+
+Scene transitions, the calendar, the document viewer and save/load are
+exercised by nineteen Ren'Py testcases at a 0.05 s transition timeout, and none
+of them waits. A full week plays in fourteen seconds under skipping. That is
+the extent of it: §82 asks for a quick check and not a benchmark.
+
+**Accessibility** — `tests/test_accessibility.py`, twenty-six checks.
+
+Every colour a player can read is computed against the background it actually
+sits on, translucent panels flattened first, and held to WCAG AA. All seventeen
+pass, and all seventeen clear the stricter 4.5:1 body-text bar rather than
+leaning on the large-text exemption — the tightest is the calendar's muted grey
+at 5.29:1. The contrast maths is itself checked against two anchors from the
+specification, because a checker that is subtly wrong passes everything.
+
+The engine affordances are held as configuration: skipping available,
+auto-forward present and not instant, dialogue history 250 lines deep and
+reachable, help and preferences reachable, self-voicing not disabled, every
+screen this project wrote closable from the keyboard, and the playtest screens
+answerable with real buttons rather than hotspots.
+
+`act1_the_reading_affordances_work` then checks the one thing configuration
+cannot: that history actually fills during the new director-driven loop, which
+depends on the prose going through `narrator` rather than being drawn.
+
 **Exceptions reaching a tester**: none in the golden path. That is now a claim
 with a test behind it: `act1_golden` executes every scene the director serves
 across a full week, and until this milestone no test executed any scene at all.
@@ -375,8 +413,8 @@ across a full week, and until this milestone no test executed any scene at all.
 
 | | |
 | --- | --- |
-| `uv run pytest` | 317 passed (was 236) |
-| `uv run s32 renpy test` | 19/19 testcases (was 16/16) |
+| `uv run pytest` | 343 passed (was 236) |
+| `uv run s32 renpy test` | 20/20 testcases (was 16/16) |
 | `uv run python scripts/check.py` | 11/11 gates |
 
 New tests, and only what was needed:
@@ -393,7 +431,9 @@ New tests, and only what was needed:
   §61 checklist run headlessly, and the act completing for every profile.
 - `tests/test_playtest_summary.py` — 12. Counting, refusing, and not
   interpreting.
-- `game/testcases/act1.rpy` — 3 Ren'Py testcases, including the golden path,
+- `tests/test_accessibility.py` — 26. Contrast computed against real
+  backgrounds, and the reading affordances not switched off.
+- `game/testcases/act1.rpy` — 4 Ren'Py testcases, including the golden path,
   which plays a full week in fourteen seconds.
 
 The count is not the point and was not aimed at. What each of these holds is a

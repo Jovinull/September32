@@ -162,7 +162,9 @@ are the ones that only appear outside the repository.
    reach the end of the act, generate a report.
 6. Open `playtest-report.json` and read it. Then run
    `uv run s32 playtest summarize` on it.
-7. Record the version, build id, commit, size and SHA-256 below.
+7. Read `log.txt` next to the game. Startup should be under two seconds and
+   there should be no `errors.txt` or `traceback.txt` beside it.
+8. Record the version, build id, commit, size and SHA-256 below.
 
 ## What the fresh-install test found
 
@@ -190,7 +192,7 @@ scene. The bridge now refuses to start.
 
 The general lesson is the one this checklist opens with: **unpack the archive
 somewhere else entirely and run it there.** Every one of these passed lint,
-passed 317 tests, passed nineteen Ren'Py testcases and played a full week in
+passed 343 tests, passed twenty Ren'Py testcases and played a full week in
 the repository.
 
 ## Build register

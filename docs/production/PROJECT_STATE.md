@@ -73,13 +73,13 @@ was built from. `docs/production/PLAYTEST_BUILD.md`.
 
 | Gate | Result |
 | --- | --- |
-| `uv run pytest` | **317 passed** |
+| `uv run pytest` | **343 passed** |
 | `uv run ruff check .` | **clean** |
 | `uv run ruff format --check .` | **clean** |
 | `uv run mypy` | **clean, 79 files, strict** |
 | `s32 validate` | **0 errors, 0 warnings**, 9 info |
 | `s32 renpy lint` | **clean** |
-| `s32 renpy test` | **19/19 testcases passed**, including a full Act 1 |
+| `s32 renpy test` | **20/20 testcases passed**, including a full Act 1 |
 | `s32 simulate --runs 5000` | **58/58 storylets reachable, 0 dead ends, 5/5 anchors in 100% of runs** |
 | `s32 doctor` | **0 failures, 0 warnings** |
 

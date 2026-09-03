@@ -174,3 +174,52 @@ testcase act1_the_debug_inspectors_are_developer_only:
     assert eval ("s32_storylets" in config.keymap)
 
     exit
+
+
+testcase act1_the_reading_affordances_work:
+    # §85. Not an accessibility suite -- a check that the things a reader
+    # needs still work after this milestone rewired the main loop.
+    #
+    # Configuration is asserted in tests/test_accessibility.py, which is cheap
+    # and runs on every commit, and the stock history, preferences and help
+    # screens are Ren'Py's own and unmodified. What only a real run can show is
+    # that dialogue history actually fills up, which depends on the prose going
+    # through `narrator` rather than being drawn -- and the director-driven
+    # loop is new enough to be worth checking.
+
+    $ _test.transition_timeout = 0.05
+    $ persistent.s32_playtest_consent = False
+    $ preferences.skip_unseen = True
+
+    run Function(s32_test_autochoice, True)
+    run Function(s32_test_fast_documents, True)
+
+    click "Start"
+    pause 1.0
+
+    skip fast
+    pause until eval (S32State["world"]["day"] >= 3) timeout 400.0
+
+    $ config.skipping = None
+    pause 0.5
+
+    # Two days of a week is far more than a screenful, and a player who missed
+    # a line has to be able to go back and find it.
+    assert eval (len(_history_list) >= 20)
+    assert eval (config.history_length >= 100)
+
+    # Auto-forward is a real preference and toggling it does not throw.
+    run Preference("auto-forward", "enable")
+    pause 0.5
+    assert eval (preferences.afm_enable)
+    run Preference("auto-forward", "disable")
+    pause 0.4
+    assert eval (not preferences.afm_enable)
+
+    # Text speed likewise. A tester who finds the default too fast must be
+    # able to slow it down rather than give up.
+    run Preference("text speed", 30)
+    pause 0.4
+    assert eval (preferences.text_cps == 30)
+
+    exit

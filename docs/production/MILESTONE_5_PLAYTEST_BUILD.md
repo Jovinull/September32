@@ -51,14 +51,16 @@ the loop is the newest place the selection algorithm could start to leak into.
 | | |
 | --- | --- |
 | Version | `0.2.0-playtest.1` |
-| Build id | derived from the commit, first eight characters |
-| Commit | recorded in `game/build_stamp.json` and shown on the main menu |
-| Platform | Windows (`pc`), which also produces the Linux payload |
-| Archive | `dist/September32-Act1-Playtest-0.2.0-playtest.1-pc.zip` |
+| Build id | `8e3098b0` |
+| Commit | `8e3098b0bad39ff27fb7219eda785bda18764fd0` |
+| Platform | `pc` — Windows and Linux in one archive |
+| Archive | `September32-Act1-Playtest-0.2.0-playtest.1-pc.zip` |
+| Size | 218.2 MB compressed, 294 MB unpacked |
+| SHA-256 | `dcbdf336c57cd8341eaed292f507a31239081a46b92a05b2e4a46d2b9198b62b` |
+| Sent to | nobody |
 
-The register — size, SHA-256, who received which build — lives in
-[`PLAYTEST_BUILD.md`](PLAYTEST_BUILD.md) and is filled in at the moment a build
-is produced, not here.
+Built from a clean tree. The register lives in
+[`PLAYTEST_BUILD.md`](PLAYTEST_BUILD.md) and is where the next row goes.
 
 **On the version.** The brief suggested `0.0.5-playtest.1`. Not used: it sorts
 *before* the `0.1.0-prototype` it succeeds, and a version that goes backwards is
@@ -348,7 +350,20 @@ resolve, and polishing before the wave replaces the evidence with a guess.
 | Consent | pass — asked once, declining deletes and the game still plays |
 | Credits | pass — generated from the manifest, no wall clock |
 | Licences | pass — `s32 assets verify` |
-| Fresh install | see below |
+| Fresh install | pass — unpacked outside the repository and run there |
+
+**Fresh install.** The archive was unpacked into a directory outside the
+repository and launched there. Init completes, no `errors.txt`, no
+`traceback.txt`, and the build reports its own version and commit. Since the
+empty-library guard landed, init completing *is* the proof that the
+fifty-eight storylets were read out of `archive.rpa` rather than merely looked
+for.
+
+What this does not cover: a full playthrough of the **distributed** archive.
+A distribution contains no test harness, so the week is played end to end in
+the repository build (`act1_golden`) against the same code, and the built
+archive is verified to start, load its content and reach the main menu. That
+gap is real and is named rather than papered over.
 
 **Exceptions reaching a tester**: none in the golden path. That is now a claim
 with a test behind it: `act1_golden` executes every scene the director serves

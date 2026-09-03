@@ -199,13 +199,18 @@ Every build that has been produced. **A build that has gone out is never
 modified in place**: a correction is a new row and a new version, so that a bug
 report can always be matched to the exact bytes the tester ran.
 
-| Version | Build id | Commit | Package | Size | SHA-256 | Sent to |
-| --- | --- | --- | --- | --- | --- | --- |
-| 0.2.0-playtest.1 | *filled in at build time* | *see `game/build_stamp.json`* | pc | 218.2 MB | *see the build output* | nobody yet |
+| Version | Build id | Commit | Package | Archive | Unpacked | SHA-256 | Sent to |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.2.0-playtest.1 | `8e3098b0` | `8e3098b0bad39ff27fb7219eda785bda18764fd0` | pc (Windows + Linux) | 218.2 MB | 294 MB | `dcbdf336c57cd8341eaed292f507a31239081a46b92a05b2e4a46d2b9198b62b` | **nobody yet** |
 
-The row above is a placeholder for shape. **Fill it in from the output of the
-`s32 build` that actually produces the archive somebody is sent** — a hash
-copied from a document is a hash nobody verified.
+Built from a clean tree at `8e3098b0`, unpacked outside the repository and run
+there. Init completed with no `errors.txt` and no `traceback.txt`, which since
+the empty-library guard means the fifty-eight storylets were read out of
+`archive.rpa` and not merely looked for.
+
+**Fill the next row in from the output of the `s32 build` that actually
+produces the archive somebody is sent.** A hash copied from a document is a
+hash nobody verified.
 
 ## If a build has to be replaced mid-wave
 

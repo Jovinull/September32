@@ -51,12 +51,12 @@ the loop is the newest place the selection algorithm could start to leak into.
 | | |
 | --- | --- |
 | Version | `0.2.0-playtest.1` |
-| Build id | `8e3098b0` |
-| Commit | `8e3098b0bad39ff27fb7219eda785bda18764fd0` |
+| Build id | `22bfc14d` |
+| Commit | `22bfc14d1b86f205ea1c92ac685413971090a368` |
 | Platform | `pc` — Windows and Linux in one archive |
 | Archive | `September32-Act1-Playtest-0.2.0-playtest.1-pc.zip` |
 | Size | 218.2 MB compressed, 294 MB unpacked |
-| SHA-256 | `dcbdf336c57cd8341eaed292f507a31239081a46b92a05b2e4a46d2b9198b62b` |
+| SHA-256 | `409f734261832a4c47bbfe9e4adcfcae1736f747ac616e7c82e1f2f5cd6ba1f0` |
 | Sent to | nobody |
 
 Built from a clean tree. The register lives in

@@ -203,12 +203,19 @@ report can always be matched to the exact bytes the tester ran.
 
 | Version | Build id | Commit | Package | Archive | Unpacked | SHA-256 | Sent to |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0.2.0-playtest.1 | `8e3098b0` | `8e3098b0bad39ff27fb7219eda785bda18764fd0` | pc (Windows + Linux) | 218.2 MB | 294 MB | `dcbdf336c57cd8341eaed292f507a31239081a46b92a05b2e4a46d2b9198b62b` | **nobody yet** |
+| 0.2.0-playtest.1 | `22bfc14d` | `22bfc14d1b86f205ea1c92ac685413971090a368` | pc (Windows + Linux) | 218.2 MB | 294 MB | `409f734261832a4c47bbfe9e4adcfcae1736f747ac616e7c82e1f2f5cd6ba1f0` | **nobody yet** |
+| ~~0.2.0-playtest.1~~ | ~~`8e3098b0`~~ | ~~`8e3098b0bad3…`~~ | pc | 218.2 MB | 294 MB | ~~`dcbdf336c57cd834…`~~ | superseded, never sent |
 
-Built from a clean tree at `8e3098b0`, unpacked outside the repository and run
+Built from a clean tree at `22bfc14d`, unpacked outside the repository and run
 there. Init completed with no `errors.txt` and no `traceback.txt`, which since
 the empty-library guard means the fifty-eight storylets were read out of
-`archive.rpa` and not merely looked for.
+`archive.rpa` and not merely looked for. Startup: script 101 ms, init 86 ms,
+interface 577 ms.
+
+The superseded row is kept rather than deleted. It never left the machine, but
+a register that quietly loses rows is a register nobody can use to work out
+which bytes a bug report came from — and both builds carry the same version
+string, which is exactly the situation the build id exists for.
 
 **Fill the next row in from the output of the `s32 build` that actually
 produces the archive somebody is sent.** A hash copied from a document is a

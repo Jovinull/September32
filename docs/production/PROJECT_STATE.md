@@ -1,33 +1,31 @@
 # Project state
 
-**Read this before starting work.** Last updated: 2026-08-31 (Milestone 4).
+**Read this before starting work.** Last updated: 2026-09-01 (Milestone 5).
 
 ## Summary
 
-Milestone 4 complete. Fifty-eight storylets, every one of the previous fifty-one
-read as prose and classified, and the first Act 1 draft that is worth putting in
-front of a person.
+Milestone 5 complete. There is a playtest build, and it can be handed to a
+person with one sentence of briefing.
 
-The milestone revised more than it expanded, which was the instruction: eighteen
-scenes revised, one cut, eight added. Reading all fifty-one turned up two things
-no individual scene shows.
+Preparing it turned up the largest gap five milestones of green gates had
+hidden. **Act 1 was not playable.** The game's `start` label ran six time slots
+on the first day and stopped with a line saying it was a prototype, so three of
+the five anchors — the common room, the undated column, and the date itself —
+had never once fired outside the headless simulator. Fifty-eight storylets and a
+seven-day structure were reachable on paper and unreachable in the game, and
+every gate was green the whole time. `game/story/act1.rpy` is the loop that
+fixes it, and `act1_golden` is the first regression test in this project that
+executes a scene.
 
-**Relationships were write-only.** Fifty-one storylets wrote to eight axes and
-not one line of prose anywhere read one back. A player could take Iris's trust
-from nought to forty-one and no sentence in the game would differ. Nine scenes
-now behave differently depending on how somebody has come to see the player.
+The rest of the milestone is the apparatus around a private wave: a build that
+carries its own content and names its own commit, a local and consented playtest
+report, nineteen written hypotheses, two questionnaires, and the templates for
+reading what comes back.
 
-**Half of all forty-two menus were the same three choices.** Three trait sets —
-be warm, be nosy, be quiet — accounted for 21 of 42, and 38 of 42 menus had
-exactly three options. That is a personality slider, not agency.
+**No content was written.** Fifty-eight storylets before, fifty-eight after.
+That was the instruction and it was the right one.
 
-Both are recorded in
-[`ACT_1_EDITORIAL_AUDIT.md`](../narrative-design/ACT_1_EDITORIAL_AUDIT.md), and
-both are now held by tests.
-
-Green gates say the machinery is sound. They say nothing about the dialogue.
-Thirteen scenes are queued for a person:
-[`HUMAN_ACT1_REVIEW.md`](HUMAN_ACT1_REVIEW.md).
+The next unknown is human, and nothing in this repository can reduce it further.
 
 ## Engine
 
@@ -55,33 +53,41 @@ importable by both Ren'Py and the headless tooling.
 - Save migration and cross-run `persistent` meta scaffolding.
 
 **Tooling** — `s32` CLI: `doctor`, `validate`, `schemas`, `simulate`,
-`coverage`, `graph`, `explain`, `report`, `assets *`, `renpy *`.
+`coverage`, `graph`, `explain`, `report`, `assets *`, `renpy *`, `build`,
+`playtest summarize`.
 
 **Assets** — 11 packs fetched from official sources, hashed, licence evidence
 recorded, processed and installed. 968 files in the game tree.
 
-**The slice** — arrival, first shift in the archive, director-driven storylets,
-a photograph, a promise, an ending note. Marked PROTOTYPE / NON-FINAL in-game.
+**Act 1, playable end to end** — `game/story/act1.rpy`. Anchors first, then the
+director, and the player chooses where to be three times a day and whenever the
+room empties. It runs until `the_date` fires, which is the end of the act and
+the only ending this build has. A median playthrough is 46 scenes and 12,750
+spoken words: an hour to an hour and a half. `uv run python scripts/playtime.py`.
+
+**A playtest build** — `uv run s32 build`. Mirrors the content into the game
+tree, stamps itself with its version and commit, and excludes the repository it
+was built from. `docs/production/PLAYTEST_BUILD.md`.
 
 ## Verified, with numbers
 
 | Gate | Result |
 | --- | --- |
-| `uv run pytest` | **236 passed** |
+| `uv run pytest` | **312 passed** |
 | `uv run ruff check .` | **clean** |
 | `uv run ruff format --check .` | **clean** |
-| `uv run mypy` | **clean, 72 files, strict** |
+| `uv run mypy` | **clean, 79 files, strict** |
 | `s32 validate` | **0 errors, 0 warnings**, 9 info |
 | `s32 renpy lint` | **clean** |
-| `s32 renpy test` | **16/16 testcases passed** |
-| `s32 simulate --runs 5000` | **51/51 storylets reachable, 0 dead ends, 5/5 anchors in 100% of runs** |
+| `s32 renpy test` | **19/19 testcases passed**, including a full Act 1 |
+| `s32 simulate --runs 5000` | **58/58 storylets reachable, 0 dead ends, 5/5 anchors in 100% of runs** |
 | `s32 doctor` | **0 failures, 0 warnings** |
 
 ## Content
 
 | | |
 | --- | --- |
-| Storylets | 58 (15 `prototype`, 43 `draft`, 0 `active`) |
+| Storylets | 58 (15 `prototype`, 43 `draft`, 0 `active`) — unchanged, deliberately |
 | Anchors | 5 |
 | Characters | 6 (5 with art) |
 | Locations | 9 |
@@ -89,17 +95,17 @@ a photograph, a promise, an ending note. Marked PROTOTYPE / NON-FINAL in-game.
 | Documents | 6 |
 | Items | 3 |
 
-Unique scenes in an average run: **38.0**, from 13.6 at Milestone 1 and 5.9 at
-the bootstrap. The single most played scene takes **13.1%** of everything
+Unique scenes in an average run: **41.0**, from 13.6 at Milestone 1 and 5.9 at
+the bootstrap. The single most played scene takes **12.7%** of everything
 played, down from 19.1% and from 71.7% at the start. Thirty-seven of the 63
 (location, time slot) cells are live; the rest are classified in
 [`CELL_MAP.md`](../narrative-design/CELL_MAP.md) rather than treated as gaps.
 
 ## Known gaps
 
-**Content density is no longer the binding constraint.** Fifty-one storylets;
-the director is choosing between two or more in 40.5% of moments, and the top
-priority tier holds two or more in **28.2%** — the Milestone 2 target of 30%,
+**Content density is no longer the binding constraint.** Fifty-eight storylets;
+the director is choosing between two or more in 45.2% of moments, and the top
+priority tier holds two or more in **34.9%** — the Milestone 2 target of 30%,
 essentially reached, without the selection algorithm changing. Milestone 2's
 largest single gap, `dorm_room` in the early morning, is filled, and filling it
 was worth thirteen points on its own. What remains thin is the **rooftop**: one
@@ -112,10 +118,6 @@ club room; the class photograph does not exist. See `ART_GAP_ANALYSIS.md`.
 
 **Audio.** Five tracks. Nothing for investigation, romance, or the later phases.
 No sound effects.
-
-**UI.** Kenney scaffolding. The archive document viewer is **built** — three
-documents, real text on deterministic generated paper, keyboard paging, effects
-applied exactly once and unwound by rollback. The calendar is still unbuilt.
 
 **Assets are not versioned, by design (ADR-0003).** A clone is 2.7 MB and has
 none of them; the same checkout on a working machine is around 1.1 GB. The game
@@ -194,6 +196,18 @@ art gap stops being a visual problem.
 `uv run pytest` proves state coherence, reference integrity and reachability. It
 proves nothing about dialogue, romance, humour or pacing. Nothing in the game is
 marked `active`, and nothing should be until a person has read it.
+
+**The playtest apparatus is built and unused.** A local, consented report; a
+session code; nineteen written hypotheses; two questionnaires; a scene review
+guide; and the templates for reading a wave. `docs/playtest/`. Nothing has been
+sent to anybody and no tester has been approached — §66 of the brief says
+prepare, not recruit.
+
+**Nothing in the recorder reaches the network, and that is now checked across
+the whole game tree** rather than only the engine package.
+`tests/test_playtest_privacy.py`. `docs/legal/PRIVACY.md` has been rewritten to
+say, in specifics, what a consenting tester's report contains — which is what
+that document's own "if this ever changes" section demanded.
 
 ## Blocked
 
@@ -343,43 +357,99 @@ Classified, because the classes are starting to be informative.
     `player->iris`. A report that shows zeros where there is data is worse than
     no report.
 
+## Bugs found during Milestone 5
+
+The most expensive one this project has had, and it was found by trying to give
+the game to somebody rather than by any tool.
+
+23. **`REACH` — Act 1 was not playable.** The game's `start` label called two
+    anchors, ran six time slots, and stopped on a line saying it was a
+    prototype. The other three anchors — the common room, the undated column,
+    and the date the whole act is named for — had never fired outside the
+    headless simulator. Fifty-eight storylets and a seven-day structure were
+    reachable on paper and unreachable in the game.
+
+    Every gate was green throughout, and each of them was answering a question
+    that was not this one. `s32 validate` reads storylet metadata. `renpy lint`
+    reads images and labels. The simulator plays five thousand runs of the
+    *definitions* and never opens a `.rpy`. The testcases played the first two
+    scenes. Nothing anywhere asked whether the game reaches its own ending.
+
+    Fixed by `game/story/act1.rpy`, and held by `act1_golden`, which plays a
+    full week in Ren'Py in about thirteen seconds.
+
+24. **`TOOLING` — the golden path stalled at the first junction.** The travel
+    menu called `renpy.display_menu` directly rather than going through the
+    store's `menu`, so the harness that answers menus never saw it. The test
+    did not fail: it ran for ten minutes and timed out, which is the sort of
+    thing a test that never finishes does not tell you. Fixed with a seam,
+    `s32_ask_where`.
+
+25. **`DATA` — the report undercounted promises.** `s32_pt_commitment` was
+    hooked to the `promise()` verb, and there are two ways to make a promise:
+    a storylet's declared `commit(...)` effect goes through the effects engine
+    instead. The golden path duly produced a run with a commitment in its state
+    and none in its report. Now read from `S32State["commitments"]`, which is
+    authoritative for every path.
+
+26. **`DESIGN` — every installation would have played the same week.** The run
+    seed was derived from the number of runs played, so every tester's first
+    playthrough was seed 17. Their choices would still have diverged, but the
+    random contribution to divergence would have been exactly zero across the
+    whole wave — and H06 is the hypothesis that measures divergence. Now
+    derived from a per-installation number generated once; the seed is recorded
+    in the report, so a bug is still reproducible exactly.
+
+27. **`DOCS` — the privacy policy had become untrue.** `PRIVACY.md` said
+    "nothing observes a real session", which stopped being true the moment a
+    consented report existed. Its own "if this ever changes" section prescribes
+    rewriting the document first, in specifics, before any code — which is what
+    was done, a little late.
+
 ## Next milestone
 
-**Recommended: Milestone 5 — human playtest prep and Act 1 polish.**
+**None. Deliberately.**
 
-Act 1 now deserves a real human playtest, which was Milestone 4's bar and is the
-reason not to scale yet. The density metrics do not call for more scenes — every
-one improved in a milestone that cut one — and the prose has not been validated
-by a person.
+No content milestone should be defined before real human feedback exists. The
+next step is chosen from questionnaires, playtest reports, bug reports and a
+person's reading of them — and choosing it now would defeat the point of
+collecting them.
 
-Milestone 5 would be:
+Candidate directions, none preferred: a character rewrite, choice and callback
+revision, mystery pacing, a Day 7 rewrite, UI revision, escalating the art
+priority, Act 2 planning, or a second wave asked a sharper question.
 
-1. **A playtest build** somebody can actually run, with the asset bootstrap
-   documented for a machine that has never had them.
-2. **Lightweight feedback instrumentation** — where they stopped, what they
-   reread, which scenes they skipped. Not telemetry; a notes file and a seed.
-3. **Save compatibility**, because a playtest that invalidates its own saves
-   collects one session per person.
-4. **The bugs a real player finds in the first twenty minutes**, which are never
-   the bugs a simulator finds in five thousand runs.
-5. **Art replacement in `ART_PRODUCTION_PLAN.md` order**, if a budget appears:
-   the class photograph unblocks the premise on its own.
+What happens next is a wave. `docs/playtest/WAVE_1_PLAN.md`: five to eight
+people, two to three regular visual-novel readers, two to three casual ones, one
+or two technical testers. No recruitment has happened and none should happen
+automatically.
+
+The decision rules that must not be reinvented after the results arrive:
+
+- **`noah_takes_a_call`.** If most testers who saw it name it as their reason
+  for suspecting Noah, cut it. Do not soften it — softening produces a different
+  scene and destroys the comparison. Written down in
+  `docs/playtest/SCENE_REVIEW_GUIDE.md` §12 before any tester saw it.
+- **The class photograph.** A clear majority saying the placeholder blunted the
+  ending moves `P0` to the front of the commission queue. Anything less does
+  not.
+- **Ms. Ellery's sprite.** Whether her absence reads as a stylistic choice or as
+  a gap decides whether the character-art brief is `P1` or `P0`.
 
 Explicitly **not** recommended:
 
-- **Scaling to 80–100 storylets.** Four milestones have improved the numbers;
-  none has confirmed that anybody enjoys reading the result.
-- **Touching the selection algorithm.** Unchanged since Milestone 1, under four
+- **Scaling to 80–100 storylets.** Five milestones have improved the numbers.
+  None has confirmed that anybody enjoys reading the result.
+- **Touching the selection algorithm.** Unchanged since Milestone 1, under five
   milestones of pressure. [ADR-0002](../decisions/ADR-0002-storylet-architecture.md)
   is where that decision lives if it ever does.
+- **Polishing what is being tested.** `noah_takes_a_call`, the jokes, and the
+  romance are all uncertain on purpose. Rewriting them before the wave would
+  replace the evidence with a guess.
 
-Standing:
+Standing, and still unread by a person:
 
 - The thirteen scenes in [`HUMAN_ACT1_REVIEW.md`](HUMAN_ACT1_REVIEW.md), about
-  forty minutes of reading, with a specific question each.
+  forty minutes.
 - The items in [`HUMAN_ART_REVIEW.md`](HUMAN_ART_REVIEW.md), ten minutes.
 - The rooftop, still the only location in the game with one storylet in it.
-
-If the human review comes back negative on "would a player care about these
-characters", the correct response is another pass on the named scenes — not more
-scenes.

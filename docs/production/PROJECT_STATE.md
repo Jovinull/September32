@@ -73,7 +73,7 @@ was built from. `docs/production/PLAYTEST_BUILD.md`.
 
 | Gate | Result |
 | --- | --- |
-| `uv run pytest` | **312 passed** |
+| `uv run pytest` | **317 passed** |
 | `uv run ruff check .` | **clean** |
 | `uv run ruff format --check .` | **clean** |
 | `uv run mypy` | **clean, 79 files, strict** |

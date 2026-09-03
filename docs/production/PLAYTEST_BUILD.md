@@ -190,7 +190,7 @@ scene. The bridge now refuses to start.
 
 The general lesson is the one this checklist opens with: **unpack the archive
 somewhere else entirely and run it there.** Every one of these passed lint,
-passed 314 tests, passed nineteen Ren'Py testcases and played a full week in
+passed 317 tests, passed nineteen Ren'Py testcases and played a full week in
 the repository.
 
 ## Build register

@@ -375,7 +375,7 @@ across a full week, and until this milestone no test executed any scene at all.
 
 | | |
 | --- | --- |
-| `uv run pytest` | 312 passed (was 236) |
+| `uv run pytest` | 317 passed (was 236) |
 | `uv run s32 renpy test` | 19/19 testcases (was 16/16) |
 | `uv run python scripts/check.py` | 11/11 gates |
 
@@ -385,7 +385,7 @@ New tests, and only what was needed:
   tree, the privacy check poisoned one pattern at a time, schema validation,
   session-code stability, determinism, and that fixtures can never be mistaken
   for people.
-- `tests/test_playtest_build.py` — 21. Every top-level entry accounted for,
+- `tests/test_playtest_build.py` — 26. Every top-level entry accounted for,
   exclusion form, classification order, content mirroring, stamp round-trip,
   developer-only inspectors, no internal marker in a readable line, one
   language.

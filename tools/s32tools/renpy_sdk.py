@@ -14,6 +14,7 @@ from __future__ import annotations
 import os
 import platform
 import shutil
+import stat
 import subprocess
 import sys
 import urllib.request
@@ -22,7 +23,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 #: Pinned Ren'Py version. Verified as the current stable release on the official
-#: site on 2026-08-30 (https://www.renpy.org/latest.html). Nightlies are never
+#: site on 2026-10-23 (https://www.renpy.org/latest.html). Nightlies are never
 #: used. See docs/research/RESEARCH_LOG.md.
 RENPY_VERSION = "8.5.3"
 
@@ -35,7 +36,7 @@ BASE_URL = f"https://www.renpy.org/dl/{RENPY_VERSION}"
 SDK_ARCHIVE = f"renpy-{RENPY_VERSION}-sdk.zip"
 
 #: SHA-256 of the SDK archive, observed on download from the official host on
-#: 2026-08-30. `s32 renpy install` refuses to unpack an archive that does not
+#: 2026-10-23. `s32 renpy install` refuses to unpack an archive that does not
 #: match, so a corrupted or substituted download cannot reach the project.
 SDK_SHA256 = "ff57648f9c04f27e381c48af6d8e3ee3cdec296bed4d3831f47f09b0a71b505e"
 
@@ -114,13 +115,13 @@ def install(destination: Path, *, force: bool = False) -> tuple[SdkInfo | None, 
         which case ``message`` explains what to do by hand -- the rest of the
         toolchain works without the SDK, so this must never be fatal.
     """
-    existing = locate(destination)
-    if existing is not None and not force:
-        return existing, f"already installed at {existing.root}"
-
     destination.mkdir(parents=True, exist_ok=True)
     archive = destination / SDK_ARCHIVE
     url = f"{BASE_URL}/{SDK_ARCHIVE}"
+
+    existing = locate(destination)
+    if existing is not None and not force and not archive.exists():
+        return existing, f"already installed at {existing.root} (no cached archive to inspect)"
 
     if not archive.exists() or force:
         try:
@@ -148,20 +149,46 @@ def install(destination: Path, *, force: bool = False) -> tuple[SdkInfo | None, 
             "Refusing to unpack. Delete the file and retry, or verify the pin."
         )
 
+    if existing is not None and not force:
+        with zipfile.ZipFile(archive) as zf:
+            _restore_executable_bits(zf, destination)
+        return existing, f"already installed at {existing.root}; executable modes checked"
+
     with zipfile.ZipFile(archive) as zf:
         zf.extractall(destination)
+        _restore_executable_bits(zf, destination)
 
-    # The zip does not carry the executable bit on POSIX.
     info = locate(destination)
-    if info is not None and platform.system() != "Windows":
-        info.launcher.chmod(0o755)
-        for helper in (info.root / "lib").rglob("python*"):
-            if helper.is_file():
-                helper.chmod(0o755)
 
     if info is None:
         return None, f"unpacked {archive.name} but no launcher was found under {destination}"
     return info, f"installed {info.version} at {info.root} (sha256 {observed})"
+
+
+def _restore_executable_bits(archive: zipfile.ZipFile, destination: Path) -> None:
+    """Restore only executable modes recorded in the verified SDK zip.
+
+    Python's ``zipfile.extractall`` does not restore Unix permission bits. The
+    Ren'Py launcher invokes ``lib/py3-linux-x86_64/renpy`` directly, so losing
+    that member's executable bit makes a cached SDK fail with ``Permission
+    denied``. The official archive carries the intended mode in each member's
+    Unix ``external_attr``; restore that narrow bit only, on POSIX systems.
+    """
+    if os.name == "nt":
+        return
+    for member in archive.infolist():
+        recorded_mode = member.external_attr >> 16
+        if not stat.S_ISREG(recorded_mode):
+            continue
+        if not recorded_mode & (stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH):
+            continue
+        if member.is_dir():
+            continue
+        target = destination / member.filename
+        if target.is_file():
+            current_mode = target.stat().st_mode
+            executable_bits = recorded_mode & (stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+            target.chmod(current_mode | executable_bits)
 
 
 def command(info: SdkInfo, *args: str) -> list[str]:

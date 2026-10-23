@@ -31,10 +31,10 @@ jobs:
     name: Code and content
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v10
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
@@ -69,7 +69,7 @@ jobs:
         run: uv run s32 validate
 
       - name: Asset licensing
-        run: uv run s32 assets verify
+        run: uv run s32 assets verify --catalog
 
       # Fails if any storylet is unreachable or any run dead-ends.
       - name: Narrative reachability
@@ -77,7 +77,7 @@ jobs:
 
       - name: Upload reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: narrative-reports
           path: tools/reports/
@@ -86,14 +86,11 @@ jobs:
   renpy:
     name: Ren'Py lint and testcases
     runs-on: ubuntu-latest
-    # Not required for a merge: it depends on an upstream download, and a
-    # renpy.org outage should not block a documentation fix.
-    continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v10
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
@@ -104,17 +101,17 @@ jobs:
       - name: Sync dependencies
         run: uv sync --locked
 
-      # Keyed on the pinned version, so a version bump invalidates the cache
-      # rather than silently testing against the old SDK.
+      # The v2 cache key invalidates SDKs extracted before executable modes
+      # were restored from the official ZIP metadata.
       - name: Cache the Ren'Py SDK
-        id: renpy-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .tools/renpy
-          key: renpy-8.5.3-${{ runner.os }}
+          key: renpy-8.5.3-sdk-v2-${{ runner.os }}
 
-      - name: Install the Ren'Py SDK
-        if: steps.renpy-cache.outputs.cache-hit != 'true'
+      # Run on cache hits too: the installer verifies the pinned archive and
+      # repairs only executable bits marked in that archive.
+      - name: Install or repair the Ren'Py SDK
         run: uv run s32 renpy install
 
       # Ren'Py initialises SDL even for `lint`. The dummy drivers are what let it

@@ -25,8 +25,7 @@ PLAYTEST_REPORT_SCHEMA_VERSION: Final = 1
 
 #: Human-facing build version of the game, surfaced in saves and bug reports.
 #:
-#: 0.2.0-playtest.1 is the first build meant for somebody outside the project.
-#: The suggested 0.0.5-playtest.1 was not used because it sorts *before* the
-#: 0.1.0-prototype it succeeds, and a version that goes backwards is a version
-#: nobody can reason about. See docs/production/PLAYTEST_BUILD.md.
-GAME_VERSION: Final = "0.2.0-playtest.1"
+#: .1 was the first private Act 1 candidate. .2 is the re-entry candidate after
+#: CI, SDK installation and build validation fixes. See
+#: docs/production/PLAYTEST_BUILD.md.
+GAME_VERSION: Final = "0.2.0-playtest.2"

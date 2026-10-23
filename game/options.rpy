@@ -13,7 +13,7 @@ define gui.show_name = True
 ## `init python` block runs, so the engine cannot be imported here; the literal
 ## is kept honest by tests/test_version_consistency.py instead, which fails CI
 ## if the two drift.
-define config.version = "0.2.0-playtest.1"
+define config.version = "0.2.0-playtest.2"
 
 ## The About text a tester reads. It has to do two jobs at once: say plainly
 ## that this is a private test of Act 1, and not read as a debug build. See

@@ -6,22 +6,23 @@ true before one is sent.
 ## Version
 
 ```
-0.2.0-playtest.1
+0.2.0-playtest.2
 ```
 
 The milestone brief suggested `0.0.5-playtest.1`. It is not what was used,
 because it sorts *before* the `0.1.0-prototype` it succeeds, and a version that
 goes backwards is one nobody can reason about six months later. `0.2.0` keeps
-the project's existing convention — semver with a prerelease tag — and
-`playtest.1` is the counter that increments if a second build has to go out
-during the wave.
+the project's existing convention — semver with a prerelease tag. The first
+private candidate was `0.2.0-playtest.1`; this re-entry candidate is
+`0.2.0-playtest.2`.
 
 `s32_engine.version.GAME_VERSION` is the source of truth.
 `game/options.rpy` restates it as a literal because Ren'Py evaluates `define`
 before any import can run, and `tests/test_content_and_tooling.py` fails if the
 two drift.
 
-Any correction after a build has been sent is `0.2.0-playtest.2`. **A build that
+Any correction after a build has been sent is a new version, currently expected
+to be `0.2.0-playtest.3`. **A build that
 has gone out is never modified in place.**
 
 ## Making one
@@ -74,7 +75,7 @@ a leak.
 ## What the tester receives
 
 ```
-September32-Act1-Playtest-0.2.0-playtest.1-pc/
+September32-Act1-Playtest-0.2.0-playtest.2-pc/
     September32.exe
     lib/
     game/
@@ -100,7 +101,7 @@ The vendor archives matter most. The Potat0Master licence forbids
 redistributing the files in the form they were downloaded or in a modified form,
 so the packs may only ship as part of the game. `assets/` is excluded, the
 processed derivatives live under `game/images/vendor/` and go into the archive,
-and `s32 assets verify` is one of the eleven gates.
+and `s32 assets verify --installed` is one of the local full-environment gates.
 
 `game/testcases/` is the other one worth naming. It holds the harness that
 answers menus automatically for the golden path, and that harness is only safe
@@ -203,7 +204,7 @@ report can always be matched to the exact bytes the tester ran.
 
 | Version | Build id | Commit | Package | Archive | Unpacked | SHA-256 | Sent to |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0.2.0-playtest.1 | `22bfc14d` | `22bfc14d1b86f205ea1c92ac685413971090a368` | pc (Windows + Linux) | 218.2 MB | 294 MB | `409f734261832a4c47bbfe9e4adcfcae1736f747ac616e7c82e1f2f5cd6ba1f0` | **nobody yet** |
+| 0.2.0-playtest.1 | `22bfc14d` | `22bfc14d1b86f205ea1c92ac685413971090a368` | pc (Windows + Linux) | 218.2 MB | 294 MB | `409f734261832a4c47bbfe9e4adcfcae1736f747ac616e7c82e1f2f5cd6ba1f0` | nobody |
 | ~~0.2.0-playtest.1~~ | ~~`8e3098b0`~~ | ~~`8e3098b0bad3…`~~ | pc | 218.2 MB | 294 MB | ~~`dcbdf336c57cd834…`~~ | superseded, never sent |
 
 Built from a clean tree at `22bfc14d`, unpacked outside the repository and run
@@ -223,7 +224,7 @@ hash nobody verified.
 
 ## If a build has to be replaced mid-wave
 
-1. Fix, commit, bump to `playtest.2`.
+1. Fix, commit, bump to the next playtest version.
 2. Rebuild and re-run the checklist in full. Not the parts that seem relevant —
    the whole thing.
 3. Add a row above and mark the old one superseded.

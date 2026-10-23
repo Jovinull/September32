@@ -48,7 +48,8 @@ catch most mistakes:
 separately, because they have different answers.
 
 **"Royalty-free" is not a licence.** It is a payment model.
-`s32 assets verify` fails if it appears in `license_name`.
+`s32 assets verify --catalog` fails if it appears in `license_name`. Use
+`--installed` to check local archive hashes and installed game files as well.
 
 ## AI
 

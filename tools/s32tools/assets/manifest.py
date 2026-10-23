@@ -18,6 +18,7 @@ terms on a stated date, and ``assets/evidence/<id>/`` holds what they read.
 
 from __future__ import annotations
 
+import re
 import tomllib
 from dataclasses import dataclass, field
 from datetime import date
@@ -43,6 +44,40 @@ REQUIRED_FIELDS = (
     "modification_allowed",
     "redistribution_allowed",
     "attribution_required",
+)
+
+_REQUIRED_STRING_FIELDS = frozenset(
+    {
+        "name",
+        "author",
+        "type",
+        "source_page",
+        "license_name",
+        "license_source",
+        "license_verified",
+    }
+)
+_REQUIRED_BOOLEAN_FIELDS = frozenset(
+    {"commercial_use", "modification_allowed", "redistribution_allowed", "attribution_required"}
+)
+_OPTIONAL_STRING_FIELDS = frozenset(
+    {
+        "download_source",
+        "retrieved_at",
+        "required_credit",
+        "ai_related_terms",
+        "original_archive_name",
+        "license_summary",
+        "status",
+        "notes",
+        "evidence_dir",
+    }
+)
+_OPTIONAL_STRING_LIST_FIELDS = frozenset({"files_imported", "processed_files", "transformations"})
+_OPTIONAL_BOOLEAN_FIELDS = frozenset({"credit_optional"})
+_SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+_ASSET_TYPES = frozenset(
+    {"character", "background", "music", "sfx", "ui", "prop", "font", "software"}
 )
 
 
@@ -161,6 +196,45 @@ def load(path: Path) -> Manifest:
         missing = [f for f in REQUIRED_FIELDS if f not in payload]
         if missing:
             raise ValueError(f"asset {asset_id!r}: missing required field(s): {', '.join(missing)}")
+        malformed = [
+            field_name
+            for field_name in _REQUIRED_STRING_FIELDS
+            if not isinstance(payload[field_name], str)
+        ]
+        malformed.extend(
+            field_name
+            for field_name in _REQUIRED_BOOLEAN_FIELDS
+            if not isinstance(payload[field_name], bool)
+        )
+        malformed.extend(
+            field_name
+            for field_name in _OPTIONAL_STRING_FIELDS
+            if field_name in payload and not isinstance(payload[field_name], str)
+        )
+        malformed.extend(
+            field_name
+            for field_name in _OPTIONAL_STRING_LIST_FIELDS
+            if field_name in payload
+            and (
+                not isinstance(payload[field_name], list)
+                or any(not isinstance(value, str) for value in payload[field_name])
+            )
+        )
+        malformed.extend(
+            field_name
+            for field_name in _OPTIONAL_BOOLEAN_FIELDS
+            if field_name in payload and not isinstance(payload[field_name], bool)
+        )
+        if malformed:
+            raise ValueError(
+                f"asset {asset_id!r}: field(s) have the wrong type: {', '.join(sorted(malformed))}"
+            )
+        if payload["type"] not in _ASSET_TYPES:
+            raise ValueError(f"asset {asset_id!r}: unknown type {payload['type']!r}")
+        if payload.get("status", "pending") not in {"pending", "downloaded", "installed"}:
+            raise ValueError(
+                f"asset {asset_id!r}: unknown acquisition status {payload['status']!r}"
+            )
         try:
             date.fromisoformat(str(payload["license_verified"]))
         except ValueError as exc:
@@ -177,10 +251,10 @@ def load(path: Path) -> Manifest:
             license_name=payload["license_name"],
             license_source=payload["license_source"],
             license_verified=str(payload["license_verified"]),
-            commercial_use=bool(payload["commercial_use"]),
-            modification_allowed=bool(payload["modification_allowed"]),
-            redistribution_allowed=bool(payload["redistribution_allowed"]),
-            attribution_required=bool(payload["attribution_required"]),
+            commercial_use=payload["commercial_use"],
+            modification_allowed=payload["modification_allowed"],
+            redistribution_allowed=payload["redistribution_allowed"],
+            attribution_required=payload["attribution_required"],
             download_source=payload.get("download_source", ""),
             retrieved_at=payload.get("retrieved_at", ""),
             required_credit=payload.get("required_credit", ""),
@@ -191,7 +265,7 @@ def load(path: Path) -> Manifest:
             processed_files=list(payload.get("processed_files", [])),
             transformations=list(payload.get("transformations", [])),
             license_summary=payload.get("license_summary", ""),
-            credit_optional=bool(payload.get("credit_optional", False)),
+            credit_optional=payload.get("credit_optional", False),
             status=payload.get("status", "pending"),
             notes=payload.get("notes", ""),
             evidence_dir=payload.get("evidence_dir", f"assets/evidence/{asset_id}"),
@@ -208,6 +282,7 @@ def check(manifest: Manifest, evidence_root: Path) -> list[str]:
     """
     problems: list[str] = []
     for asset_id, entry in sorted(manifest.entries.items()):
+        problems.extend(_check_recorded_metadata(asset_id, entry))
         evidence = evidence_root / asset_id
         if not evidence.is_dir():
             problems.append(f"{asset_id}: no evidence directory at {evidence}")
@@ -223,8 +298,8 @@ def check(manifest: Manifest, evidence_root: Path) -> list[str]:
                 f"{asset_id}: license_name {entry.license_name!r} is a payment model, not a "
                 "licence; record the concrete terms"
             )
-        if entry.installed and not entry.original_sha256:
-            problems.append(f"{asset_id}: installed but no original_sha256 recorded")
+        if entry.installed and not entry.original_archive_name:
+            problems.append(f"{asset_id}: installed but no original_archive_name recorded")
         if entry.installed and not entry.retrieved_at:
             problems.append(f"{asset_id}: installed but no retrieved_at recorded")
         if not entry.commercial_use:
@@ -237,4 +312,37 @@ def check(manifest: Manifest, evidence_root: Path) -> list[str]:
                 f"{asset_id}: ai_related_terms mentions a prohibition; review against "
                 "docs/legal/AI_AND_ASSETS_POLICY.md before use"
             )
+    return problems
+
+
+def _check_recorded_metadata(asset_id: str, entry: AssetEntry) -> list[str]:
+    """Check recorded source URLs and archive identity without reading binaries."""
+    problems: list[str] = []
+    for field_name, value in (
+        ("name", entry.name),
+        ("author", entry.author),
+        ("license_name", entry.license_name),
+        ("license_verified", entry.license_verified),
+    ):
+        if not value.strip():
+            problems.append(f"{asset_id}: {field_name} must not be empty")
+    for field_name, url in (
+        ("source_page", entry.source_page),
+        ("license_source", entry.license_source),
+    ):
+        if not url.startswith("https://"):
+            problems.append(f"{asset_id}: {field_name} must be an HTTPS source URL")
+    if entry.original_sha256 and not _SHA256_RE.fullmatch(entry.original_sha256):
+        problems.append(f"{asset_id}: original_sha256 must be 64 lowercase hexadecimal digits")
+    if bool(entry.original_sha256) != bool(entry.original_archive_name):
+        problems.append(
+            f"{asset_id}: original_archive_name and original_sha256 must be recorded together"
+        )
+    if entry.status in {"downloaded", "installed"} and not entry.original_sha256:
+        problems.append(f"{asset_id}: {entry.status} but no original archive hash is recorded")
+    if (
+        entry.original_archive_name
+        and Path(entry.original_archive_name).name != entry.original_archive_name
+    ):
+        problems.append(f"{asset_id}: original_archive_name must be a filename, not a path")
     return problems

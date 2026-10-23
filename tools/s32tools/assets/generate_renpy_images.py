@@ -22,7 +22,6 @@ there is exactly one transform per character, derived from measured metadata.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import UTC, datetime
 from pathlib import Path
 
 from s32_engine.types import ContentLibrary
@@ -106,8 +105,6 @@ def generate(
         "# so a checkout with no assets installed still lints, tests and runs —",
         "# each missing file becomes a labelled placeholder. See the helpers in",
         "# game/engine/00_s32_engine.rpy.",
-        "",
-        f"# Generated {datetime.now(UTC).isoformat(timespec='seconds')}",
         "",
         "init offset = -1",
         "",
@@ -204,6 +201,25 @@ def _sprite_transforms(library: ContentLibrary, defined: list[str]) -> list[str]
         "",
         "transform s32_right:",
         "    xalign 0.82",
+        "    yalign 1.0",
+        "",
+        "# Four-up, for the group scenes. Separate transforms rather than a computed",
+        "# offset because a scene should be able to say where somebody is standing, and",
+        "# because moving one person is a line the writer can read.",
+        "transform s32_quad_a:",
+        "    xalign 0.08",
+        "    yalign 1.0",
+        "",
+        "transform s32_quad_b:",
+        "    xalign 0.36",
+        "    yalign 1.0",
+        "",
+        "transform s32_quad_c:",
+        "    xalign 0.64",
+        "    yalign 1.0",
+        "",
+        "transform s32_quad_d:",
+        "    xalign 0.92",
         "    yalign 1.0",
         "",
     ]

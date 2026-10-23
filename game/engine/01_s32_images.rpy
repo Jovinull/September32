@@ -12,8 +12,6 @@
 # each missing file becomes a labelled placeholder. See the helpers in
 # game/engine/00_s32_engine.rpy.
 
-# Generated 2026-09-01T00:04:01+00:00
-
 init offset = -1
 
 # Iris — played by asset `kohaku`

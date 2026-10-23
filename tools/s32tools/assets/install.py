@@ -19,6 +19,7 @@ lives in the import log this module writes.
 from __future__ import annotations
 
 import json
+import shutil
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -180,7 +181,25 @@ def install_all(
     *,
     to_game: bool = True,
 ) -> InstallReport:
-    """Process every named pack and optionally copy the result into the game."""
+    """Rebuild generated asset outputs from the named packs only.
+
+    ``processed_root`` and the game vendor folders are generated caches. Clear
+    them before processing so assets from a previously evaluated or rejected
+    pack cannot survive a later approved install and enter a build.
+    """
+    for folder in set(KIND_DIRS.values()):
+        target = processed_root / folder
+        if target.is_dir():
+            shutil.rmtree(target)
+    if to_game:
+        # Clear deepest first because font assets live under gui/vendor/fonts.
+        for folder in sorted(
+            set(GAME_DIRS.values()), key=lambda item: item.count("/"), reverse=True
+        ):
+            target = game_root / folder
+            if target.is_dir():
+                shutil.rmtree(target)
+
     report = InstallReport()
     for asset_id in asset_ids:
         if not (vendor_root / asset_id).is_dir():

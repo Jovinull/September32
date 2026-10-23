@@ -137,7 +137,7 @@ def _check_assets() -> list[Check]:
                 "asset licensing",
                 "fail",
                 f"{len(problems)} problem(s): {problems[0]}",
-                "s32 assets verify",
+                "s32 assets verify --catalog",
             )
         )
     else:

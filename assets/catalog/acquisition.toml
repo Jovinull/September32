@@ -1,7 +1,7 @@
 # GENERATED FILE — do not edit by hand.
 #
-# Written by `s32 assets verify` and `s32 assets import`. Holds only what
-# tooling discovers: archive hashes, acquisition timestamps, and which files
+# Written by `s32 assets fetch` and `s32 assets install`. Holds archive hashes,
+# timestamps, status, and which files were imported.
 # were imported. The licence facts live in assets.toml, which no tool writes.
 #
 # This file IS committed. It is how the repository records exactly which

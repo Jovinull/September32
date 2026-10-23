@@ -16,7 +16,7 @@ answers.
 ### "Royalty-free" is not a licence
 
 It is a payment model: you pay once, or nothing, rather than per use. It says
-nothing about redistribution. `s32 assets verify` **fails** if `license_name` is
+nothing about redistribution. `s32 assets verify --catalog` **fails** if `license_name` is
 "royalty-free", "royalty free" or "free" — the concrete terms have to be recorded
 instead.
 
@@ -62,7 +62,7 @@ Everything under `assets/vendor/`, `assets/processed/`, `game/images/vendor/`,
    record is only evidence once a human has confirmed it matches the page.
 7. `s32 assets install` — extract, process, copy into the game.
 8. `s32 assets credits` — regenerate every credit surface.
-9. `s32 assets verify` — hygiene check.
+9. `s32 assets verify --catalog` — catalogue, evidence and repository hygiene.
 
 ## Manual downloads
 
@@ -93,16 +93,33 @@ impersonating a browser, and backs off politely on rate limiting.
 
 ## Verification
 
-`s32 assets verify` checks:
+Verification has two explicit modes because CI and a fresh clone do not contain
+third-party binaries:
+
+`s32 assets verify --catalog` checks the committed repository record without
+requiring downloads:
 
 - Every entry has an evidence directory containing `LICENSE_EVIDENCE.md`.
 - Every entry with `attribution_required` has non-empty `required_credit`.
 - No entry uses a payment model as a licence name.
+- Required fields, permission booleans, source URLs and recorded SHA-256 values
+  have valid types and formats.
+- No third-party files are tracked under the download, vendor or processed
+  asset paths.
+- Any entry whose `ai_related_terms` mentions a prohibition, for human review.
+
+`s32 assets verify --installed` runs those checks and also checks the local
+installation:
+
 - Every installed entry has a SHA-256 and an acquisition timestamp.
 - Every downloaded archive still hashes to what the manifest records — a
   mismatch means the file on disk is **not** the one that was reviewed, and it
   says so in those words.
-- Any entry whose `ai_related_terms` mentions a prohibition, for human review.
+- Every recorded processed output and its game copy exist and contain the same
+  bytes.
+
+CI runs `--catalog`; a developer who has run `s32 assets fetch`, `install` and
+`images` runs `--installed` for local completeness.
 
 ## Three licences, never conflated
 

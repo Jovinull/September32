@@ -45,7 +45,7 @@ GATES: list[Gate] = [
     Gate("schemas up to date", ["uv", "run", "s32", "schemas", "--check"]),
     Gate("credits up to date", ["uv", "run", "s32", "assets", "credits", "--check"]),
     Gate("content validation", ["uv", "run", "s32", "validate"]),
-    Gate("asset licensing", ["uv", "run", "s32", "assets", "verify"]),
+    Gate("asset licensing", ["uv", "run", "s32", "assets", "verify", "--catalog"]),
     Gate(
         "ren'py lint",
         ["uv", "run", "s32", "renpy", "lint"],

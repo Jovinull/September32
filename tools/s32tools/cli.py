@@ -136,7 +136,16 @@ def _add_assets(sub: SubParsers) -> None:
     install.add_argument("--no-game", action="store_true", help="stop after assets/processed")
     install.set_defaults(handler=_cmd_assets_install)
 
-    verify = asub.add_parser("verify", help="check hashes, evidence and licence hygiene")
+    verify = asub.add_parser("verify", help="verify the catalogue or local installed assets")
+    verify_mode = verify.add_mutually_exclusive_group(required=True)
+    verify_mode.add_argument(
+        "--catalog",
+        action="store_true",
+        help="licensing, evidence, metadata and repository hygiene",
+    )
+    verify_mode.add_argument(
+        "--installed", action="store_true", help="also verify local archives and installed files"
+    )
     verify.set_defaults(handler=_cmd_assets_verify)
 
     credits_cmd = asub.add_parser("credits", help="regenerate all credit surfaces")
@@ -486,6 +495,8 @@ def _record_new_downloads() -> list[str]:
 def _cmd_assets_install(args: argparse.Namespace) -> int:
     from s32tools.assets.import_pack import extract_downloads
     from s32tools.assets.install import counts_by_kind, install_all, write_log
+    from s32tools.assets.sources import ALL_SOURCES
+    from s32tools.assets.verify import mark_installed
 
     # Record any archive that is on disk but not yet in the acquisition log.
     # This is what makes a manual download a first-class citizen: however the
@@ -502,14 +513,19 @@ def _cmd_assets_install(args: argparse.Namespace) -> int:
     if extracted:
         print()
 
-    asset_ids = (
-        sorted(p.name for p in paths.vendor_dir().iterdir() if p.is_dir())
+    approved_ids = {source.id for source in ALL_SOURCES}
+    vendor_ids = (
+        {p.name for p in paths.vendor_dir().iterdir() if p.is_dir()}
         if paths.vendor_dir().is_dir()
-        else []
+        else set()
     )
+    asset_ids = sorted(approved_ids & vendor_ids)
+    ignored_count = len(vendor_ids - approved_ids)
+    if ignored_count:
+        print(f"ignoring {ignored_count} local pack folder(s) outside the configured sources")
     if not asset_ids:
-        print("nothing to install.")
-        print("  assets/.downloads/ is empty — run `s32 assets fetch` first,")
+        print("nothing approved to install.")
+        print("  run `s32 assets fetch` first,")
         print("  or follow the MANUAL DOWNLOAD REQUIRED instructions it printed.")
         return 1
 
@@ -525,18 +541,26 @@ def _cmd_assets_install(args: argparse.Namespace) -> int:
         if result.unmapped:
             print(f"{'':<26} unmapped: {', '.join(result.unmapped[:5])}")
     write_log(report, paths.catalog_path().parent / "import_log.json")
+    mark_installed(paths.catalog_path().parent, set(report.processed))
     print(f"\nprocessed: {counts_by_kind(paths.processed_dir())}")
     if not args.no_game:
         print(f"copied into game/: {report.copied_to_game} files")
     return 0
 
 
-def _cmd_assets_verify(_args: argparse.Namespace) -> int:
-    from s32tools.assets.verify import verify_all
+def _cmd_assets_verify(args: argparse.Namespace) -> int:
+    from s32tools.assets.verify import verify_catalog, verify_installed
 
-    manifest, problems = verify_all(
-        paths.catalog_path(), paths.evidence_dir(), paths.downloads_dir()
-    )
+    if args.catalog:
+        manifest, problems = verify_catalog(
+            paths.catalog_path(), paths.evidence_dir(), paths.repo_root()
+        )
+        mode = "catalogue, licensing evidence and repository hygiene"
+    else:
+        manifest, problems = verify_installed(
+            paths.catalog_path(), paths.evidence_dir(), paths.downloads_dir(), paths.repo_root()
+        )
+        mode = "catalogue, downloaded archives and installed assets"
     print(f"{len(manifest.entries)} manifest entries")
     for asset_id, entry in sorted(manifest.entries.items()):
         redistributable = "repo-safe" if entry.redistributable_in_repo else "LOCAL ONLY"
@@ -546,7 +570,7 @@ def _cmd_assets_verify(_args: argparse.Namespace) -> int:
         for problem in problems:
             print(f"  - {problem}")
         return 1
-    print("\nAll entries have evidence, terms and matching hashes.")
+    print(f"\nAll {mode} checks passed.")
     return 0
 
 

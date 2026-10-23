@@ -610,7 +610,8 @@ init python:
 # useless noise and a permanently red CI job.
 #
 # A release build must NOT ship placeholders. `s32 doctor` reports how many
-# would be substituted, and `s32 assets verify --release` fails on any.
+# would be substituted; this private playtest candidate documents its remaining
+# placeholders and is checked against the current art gap list.
 # ---------------------------------------------------------------------------
 
 init offset = -5

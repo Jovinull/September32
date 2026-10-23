@@ -99,7 +99,7 @@ it tells a developer to go elsewhere, and this one did.
 
 Every asset carries an `ai_related_terms` field in the manifest, quoting what the
 source page said and when it was read, plus the evidence file in
-`assets/evidence/<id>/`. `s32 assets verify` flags any entry whose AI terms
+`assets/evidence/<id>/`. `s32 assets verify --catalog` flags any entry whose AI terms
 mention a prohibition, so it gets a human decision rather than a default.
 
 ## 8. Disclosure

@@ -9,7 +9,17 @@ from pathlib import Path
 
 import pytest
 
-from s32tools.renpy_sdk import _restore_executable_bits
+from s32tools.renpy_sdk import _restore_executable_bits, headless_env
+
+
+def test_headless_env_keeps_the_display_driver_under_xvfb(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr("s32tools.renpy_sdk.platform.system", lambda: "Linux")
+    monkeypatch.delenv("DISPLAY", raising=False)
+
+    assert headless_env() == {"SDL_VIDEODRIVER": "dummy", "SDL_AUDIODRIVER": "dummy"}
+
+    monkeypatch.setenv("DISPLAY", ":99")
+    assert headless_env() == {}
 
 
 @pytest.mark.skipif(os.name == "nt", reason="POSIX executable bits are the regression")

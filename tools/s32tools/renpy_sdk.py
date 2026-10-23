@@ -232,10 +232,11 @@ def headless_env() -> dict[str, str]:
     """Return environment variables that let Ren'Py run without a display.
 
     Ren'Py still initialises SDL even for ``lint``. On a headless Linux runner
-    the dummy drivers are what stop it from failing at startup; on Windows and
-    macOS they are unnecessary and are not set.
+    without an X server, the dummy drivers stop it from failing at startup. If
+    ``DISPLAY`` is set (for example by ``xvfb-run``), keep SDL's real video
+    driver so Ren'Py can create the GL context needed by screen testcases.
     """
-    if platform.system() == "Linux":
+    if platform.system() == "Linux" and not os.environ.get("DISPLAY"):
         return {"SDL_VIDEODRIVER": "dummy", "SDL_AUDIODRIVER": "dummy"}
     return {}
 

@@ -2,13 +2,11 @@
 
 > September has thirty days. Your school has records of one more.
 
-A visual novel in early development. A student arrives at a small residential
-school and is assigned to digitising the archive — photographs, yearbooks,
-ledgers, decades of administrative sediment. The job is tedious, the people doing
-it are interesting, and for a while that is the whole game.
-
-**This repository is infrastructure and a vertical slice, not a game.** The
-scenes present exist to exercise the systems.
+A visual novel in early development, with a complete private Act 1 playtest
+draft. A student arrives at a small residential school and is assigned to
+digitising the archive: photographs, yearbooks, ledgers, decades of
+administrative sediment. The job is tedious, the people doing it are
+interesting, and for a while that is the whole game.
 
 ---
 
@@ -18,6 +16,7 @@ scenes present exist to exercise the systems.
 | --- | --- |
 | **Engine** | Ren'Py 8.5.3, 1920×1080, Windows / Linux / macOS |
 | **Narrative architecture** | Quality-based narrative: storylets, anchors, a director |
+| **Act 1 draft** | Complete private playtest draft; current counts and status in [PROJECT_STATE](docs/production/PROJECT_STATE.md) |
 | **Toolchain** | Python 3.12, uv, Ruff, mypy, pytest |
 | **Tooling** | Validation, static reachability analysis, headless simulation, coverage, graph export, asset pipeline with licence tracking |
 
@@ -49,7 +48,7 @@ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ### 2. Set up the toolchain
 
 ```bash
-uv sync
+uv sync --locked
 ```
 
 That is the whole Python setup. Everything below runs through `uv run s32`.
@@ -75,10 +74,10 @@ Automatic, from each creator's own page. No account, no mirrors, no scraping
 around anything — `fetch` uses the public download flow and verifies every file
 against the SHA-256 recorded in `assets/catalog/acquisition.toml`.
 
-**The game runs without any of this.** Every missing image becomes a labelled
+**The game runs without third-party assets.** Every missing image becomes a labelled
 `MISSING ASSET` placeholder, missing music is silent, and missing fonts fall
-back to a bundled face. Lint and all six testcases pass in that state, which is
-also how CI runs.
+back to a bundled face. Lint and every discovered Ren'Py testcase pass in that
+state, which is also how CI runs.
 
 **If a download fails** — a page moved, a pack went behind a purchase — `fetch`
 prints the exact page, the exact file to pick and where to save it, then carries
@@ -86,23 +85,15 @@ on with the rest. Drop the file in `assets/.downloads/<asset id>/` and run
 `s32 assets install`: it records the hash and proceeds exactly as if it had been
 fetched.
 
-### 5. Check everything
+### 5. Check the checkout
 
 ```bash
 uv run s32 doctor
 ```
 
-```
-[  ok  ] python                     3.12.10 on Windows
-[  ok  ] ren'py sdk                 8.5.3.26051504
-[  ok  ] content                    15 storylets, 3 anchors, 6 characters, 9 facts, 8 locations, 3 items
-[  ok  ] content validation         no findings
-[  ok  ] asset manifest             12 entries, 11 installed
-[  ok  ] asset licensing            evidence and terms recorded for every entry
-[  ok  ] installed assets           audio: 6, background: 282, character: 720, ...
-[  ok  ] credits                    CREDITS, NOTICES, game credits all current
-[  ok  ] json schemas               generated schemas match the engine's enums
-```
+`doctor` reports current content counts, SDK state and asset completeness. In a
+fresh assetless clone it reports that placeholders will be used; install assets
+only when you want the complete local art and audio.
 
 ### 6. Play it
 
@@ -140,7 +131,8 @@ maintainable — it found three real content bugs during the bootstrap.
 ```bash
 uv run s32 assets fetch [--group characters|backgrounds|cc0|audio|fonts]
 uv run s32 assets install
-uv run s32 assets verify        # hashes, evidence, licence hygiene
+uv run s32 assets verify --catalog   # licences, evidence, metadata, repo hygiene
+uv run s32 assets verify --installed # also local archive hashes and installed files
 uv run s32 assets credits       # regenerate CREDITS, NOTICES, in-game credits
 uv run s32 assets evidence      # regenerate per-asset licence evidence
 uv run s32 assets images        # regenerate Ren'Py image definitions
@@ -202,7 +194,7 @@ game/
   testcases/                    Ren'Py smoke tests
 data/                           authored content as JSON, plus generated schemas
 tools/s32tools/                 the dev toolchain behind `s32`
-tests/                          131 tests
+tests/                          engine, content and tooling regression checks
 docs/                           canon, characters, style, decisions, legal
 assets/catalog/                 the licence record (binaries are NOT committed)
 ```

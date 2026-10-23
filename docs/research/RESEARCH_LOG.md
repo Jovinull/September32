@@ -188,6 +188,60 @@ record of a check, not advice. `docs/references/literature/PUBLIC_DOMAIN.md`.
 
 ---
 
+## 2026-10-23 — Re-entry: SDK, assets and CI maintenance
+
+**Question.** Did the pinned toolchain or any external asset source change during
+the pause, and can the repository still bootstrap from a clean checkout?
+
+**Sources.** [Ren'Py stable page](https://www.renpy.org/latest.html); the eleven
+creator/project pages and the Adobe releases listed below; official GitHub
+release pages for [checkout](https://github.com/actions/checkout/releases),
+[setup-uv](https://github.com/astral-sh/setup-uv/releases),
+[cache](https://github.com/actions/cache), and
+[upload-artifact](https://github.com/actions/upload-artifact/releases).
+
+**Finding.** Ren'Py 8.5.3 is still the current stable release. A clean clone
+downloaded the pinned SDK and all eleven external asset archives; every archive
+SHA-256 matched `assets/catalog/acquisition.toml`, with the recorded filenames
+and expected archive structures. Installation produced the recorded processed
+files and game copies. The creator terms and recorded permission fields still
+match: Potat0Master's pages permit commercial game use and modification but
+forbid redistributing the archive files; Kenney's two packs remain CC0; Adobe's
+two font releases remain SIL OFL 1.1. No source or licence record needed a
+change. The pinned Python tooling and `uv.lock` also remain unchanged.
+
+| Pack | Current source | Result |
+| --- | --- | --- |
+| `pm_char_a01` | [Potat0Master A01](https://potat0master.itch.io/free-characters-for-visual-novels-set-a01) | reachable; filename and SHA match; custom terms unchanged |
+| `pm_char_a02` | [Potat0Master A02](https://potat0master.itch.io/characters-set-a02) | reachable; filename and SHA match; custom terms unchanged |
+| `pm_bg_school_1` | [School Mini Pack 1](https://potat0master.itch.io/free-visual-novel-backgrounds-school-mini-pack-1) | reachable; filename and SHA match; custom terms unchanged |
+| `pm_bg_school_2` | [School Mini Pack 2](https://potat0master.itch.io/free-visual-novel-backgrounds-school-mini-pack-2) | reachable; filename and SHA match; custom terms unchanged |
+| `pm_bg_starter_1` | [Starter Pack](https://potat0master.itch.io/free-visual-novel-backgrounds-starter-pack) | reachable; filename and SHA match; custom terms unchanged |
+| `pm_bg_personal_rooms_1` | [Personal Rooms Pack 1](https://potat0master.itch.io/free-visual-novel-backgrounds-personal-rooms-pack-1) | reachable; filename and SHA match; custom terms unchanged |
+| `pm_bgm_1` | [BGM Pack 1](https://potat0master.itch.io/free-background-music-for-visual-novels-bgm-pack-1) | reachable; filename and SHA match; custom terms unchanged |
+| `kenney_generic_items` | [Kenney Generic Items](https://kenney.nl/assets/generic-items) | reachable; filename and SHA match; CC0 unchanged |
+| `kenney_ui_pack` | [Kenney UI Pack](https://kenney.nl/assets/ui-pack) | reachable; filename and SHA match; CC0 unchanged |
+| `source_sans_3` | [Source Sans 3 3.052R](https://github.com/adobe-fonts/source-sans/releases/tag/3.052R) | reachable; filename and SHA match; OFL 1.1 unchanged |
+| `source_serif_4` | [Source Serif 4 4.005R](https://github.com/adobe-fonts/source-serif/releases/tag/4.005R) | reachable; filename and SHA match; OFL 1.1 unchanged |
+
+The verified stable action lines are checkout v7.0.1, setup-uv v10.3.2,
+cache v6 and upload-artifact v7.0.2. CI moves to their maintained major lines;
+no Python or game dependency was upgraded. The SDK ZIP records Unix executable
+modes for its launcher and helper binaries; Python `zipfile.extractall()` does
+not restore them, so the installer now restores only the executable bits listed
+in the checksum-verified archive and checks cached SDKs on every CI run. The
+clean asset bootstrap also showed that `s32 assets images` overwrote four group
+stage transforms and embedded the current timestamp in a tracked file. The
+generator now owns those transforms and produces the same output on repeat runs.
+
+**Decision.** Keep Ren'Py 8.5.3 and all Python dependency pins. Separate
+assetless catalogue verification from local installed-asset verification, and
+preserve SDK executable modes from the official ZIP metadata.
+**Confidence.** `CONFIRMED` — source pages were opened, archives fetched from the
+configured sources and hashed, and SDK archive metadata inspected on 2026-10-23.
+
+---
+
 ## Open
 
 **`purp`.** One Potat0Master expression token whose meaning cannot be determined

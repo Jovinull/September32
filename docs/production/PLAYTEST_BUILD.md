@@ -204,8 +204,24 @@ report can always be matched to the exact bytes the tester ran.
 
 | Version | Build id | Commit | Package | Archive | Unpacked | SHA-256 | Sent to |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.2.0-playtest.2 | `4fcc10c0` | `4fcc10c03807ad0aa4f4df1ddb1decf2e2ac259b` | pc (Windows + Linux) | 212,805,287 bytes (202.9 MiB) | 288,190,440 bytes (274.8 MiB) | `76c503f4f270380825001cab4b6d4c46c3ad3ab961c451566f87c86baf15b581` | nobody |
 | 0.2.0-playtest.1 | `22bfc14d` | `22bfc14d1b86f205ea1c92ac685413971090a368` | pc (Windows + Linux) | 218.2 MB | 294 MB | `409f734261832a4c47bbfe9e4adcfcae1736f747ac616e7c82e1f2f5cd6ba1f0` | nobody |
 | ~~0.2.0-playtest.1~~ | ~~`8e3098b0`~~ | ~~`8e3098b0bad3…`~~ | pc | 218.2 MB | 294 MB | ~~`dcbdf336c57cd834…`~~ | superseded, never sent |
+
+The `.2` row records the archive produced by `s32 build` from the commit in
+that row. The actual ZIP's SHA-256 was recomputed before extraction. It
+contains 1,418 files (288,190,440 uncompressed bytes); extracted contents
+matched every archive member. The Windows executable reached Ren'Py interface
+startup from a clean profile. On the packaged RPA, `act1_golden` passed with
+19/19 assertions; its generated report passed the project validator and
+summarizer. The report records save schema 3 and report schema 1 with the
+version, build id and full commit hash. A separate packaged UI smoke wrote a
+save slot and loaded it from the Load screen. The full development checkout
+passed 19/19 release-applicable testcases under a temporary QA overlay. The
+full development checkout remains the source of record for all 20 discovered
+testcases because the remaining inspector assertion intentionally requires
+developer mode, which is disabled in this release build. The temporary harness
+is absent from the ZIP.
 
 Built from a clean tree at `22bfc14d`, unpacked outside the repository and run
 there. Init completed with no `errors.txt` and no `traceback.txt`, which since

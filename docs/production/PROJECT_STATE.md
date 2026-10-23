@@ -1,6 +1,62 @@
 # Project state
 
-**Read this before starting work.** Last updated: 2026-09-01 (Milestone 5).
+**Read this before starting work.** Last updated: 2026-10-23 (Milestone 5.1 re-entry).
+
+## Milestone 5.1 — re-entry and Wave 0 candidate
+
+**Status: ready for Felipe's developer Wave 0.** The starting checkout was
+`main` at `452bcd2294a41347ac7ebf291762d856c688a9e2`, with a clean working tree.
+The re-entry audit began 50 days after that commit and 52 days after the
+Milestone 5 state entry below. No storylet, choice, document, character, anchor,
+or narrative selection code changed: 58 storylets before and after.
+
+**Bootstrap and assets.** A fresh Linux clone bootstrapped with `uv sync
+--locked`, installed the pinned Ren'Py 8.5.3 SDK, and passed the complete local
+11-gate check without third-party assets. A separate fresh Windows clone ran
+the documented bootstrap, installed the SDK, fetched all eleven approved asset
+packs from their configured sources, and passed archive hashes, install,
+generated image, installed-asset verification and full `doctor` checks. All
+recorded source hashes and licence terms still match; see the 2026-10-23 entry
+in [`RESEARCH_LOG.md`](../research/RESEARCH_LOG.md).
+
+**CI recovery.** Asset verification now separates repository catalogue checks
+from local archive and installation checks. The Ren'Py installer restores only
+executable bits recorded in the checksum-verified SDK ZIP and repairs cached
+SDKs on CI runs. The workflow uses maintained action major versions and keeps
+assets out of CI. Local assetless CI equivalent: **PASS, 11/11 gates**. GitHub
+Actions remote: **NOT RE-RUN**; this work was not pushed.
+
+**Re-entry baseline.** `pytest`: 354 passed. Ren'Py lint: clean; development
+suite: 20/20. `s32 validate`: 0 errors and 0 warnings. The 5,000-run baseline
+with seed 1234 still reaches 58/58 storylets, has zero dead ends, and reaches
+all five anchors in every run. Nine-profile divergence remains 9/9 distinct,
+with 0/36 profile pairs sharing aggregate plays. Playtime remains a median of
+46 scenes and 12,750 spoken words (35–59 scenes; 8,650–15,971 words). The
+assetless doctor reports missing assets as placeholders; after local install,
+`doctor` reports 0 failures and 0 warnings.
+
+**Candidate.** `0.2.0-playtest.2`, build id `4fcc10c0`, was built from source
+commit `4fcc10c03807ad0aa4f4df1ddb1decf2e2ac259b`. Its ZIP is registered below
+in [`PLAYTEST_BUILD.md`](PLAYTEST_BUILD.md). The archive was extracted outside
+the repository, its Windows executable started with a fresh save directory,
+and the Ren'Py log reached interface startup without `errors.txt` or
+`traceback.txt`. `act1_golden` passed against the packaged RPA content; it
+reached the Act 1 ending and generated a valid, privacy-checked report, which
+`s32 playtest summarize` read successfully. The report carries version, build
+id, commit, save schema 3 and report schema 1. A separate packaged-build UI
+smoke saved a slot and loaded it from the Load screen. The 20 discovered Ren'Py
+testcases pass in the fresh development clone; the packaged release has
+developer mode off, so the development-only inspector assertion is
+source-suite-only.
+
+**Still pending.** No human has played Act 1. The first natural, unaided run
+belongs to Felipe. Existing art concerns remain: P0 class photograph; P1
+Ms. Ellery sprite and compatible male-presenting sprite. No external tester has
+been recruited, no Wave 1 has started, and the candidate was sent to nobody.
+
+**Remote CI: NOT RE-RUN. Local equivalent: PASS. Push: NO.**
+
+---
 
 ## Summary
 

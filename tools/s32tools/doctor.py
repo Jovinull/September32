@@ -125,9 +125,13 @@ def _check_assets() -> list[Check]:
     except ValueError as exc:
         return [Check("asset manifest", "fail", str(exc))]
 
-    installed = sum(1 for e in manifest.entries.values() if e.installed)
+    acquired = sum(1 for e in manifest.entries.values() if e.status in {"downloaded", "installed"})
     checks.append(
-        Check("asset manifest", "ok", f"{len(manifest.entries)} entries, {installed} installed")
+        Check(
+            "asset manifest",
+            "ok",
+            f"{len(manifest.entries)} entries, {acquired} acquisition records",
+        )
     )
 
     problems = check(manifest, paths.evidence_dir())
